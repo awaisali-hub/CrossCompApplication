@@ -34,6 +34,7 @@
 
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_below="@+id/appbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,32 +65,66 @@
                 android:layout_height="wrap_content"
                 android:text="Feb 2021"/>
 
-            <TextView
-                android:id="@+id/userScore"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:textSize="85sp"
-                android:textStyle="bold"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="150.5"/>
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:weightSum="3">
+                <TextView
+                    android:id="@+id/userScore"
+                    android:textColor="@color/black"
+                    android:textSize="85sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="133.0"
+                    android:layout_weight="2"
+                    android:textAlignment="textEnd"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight="1">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/200"
+                        android:gravity="top"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/scoreStatus"
+                    android:background="@drawable/servicenameitems"
+                    android:backgroundTint="@color/green"
+                    android:textColor="@color/white"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Current"
+                    android:textAlignment="center"
+                    android:padding="@dimen/_5sdp"
+                    android:textSize="@dimen/_16sdp"
+                    />
+            </LinearLayout>
+
+
 
 
             <TextView
-                android:background="@drawable/servicenameitems"
-                android:backgroundTint="@color/green"
-                android:textColor="@color/white"
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Current"
-                android:textAlignment="center"
-                android:padding="@dimen/_5sdp"
-                android:textSize="@dimen/_16sdp"
-                />
-
-            <TextView
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_8sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -171,14 +206,34 @@
 
         </LinearLayout>
 
-
-    <androidx.viewpager.widget.ViewPager
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_below="@+id/linear_layoutMainOne"
-        android:id="@+id/viewpager"
+    <LinearLayout
+        android:id="@+id/mainLinearForStatus"
+        android:layout_below="@+id/appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp">
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_height="@dimen/_410sdp"
+        android:orientation="vertical">
+        <androidx.viewpager.widget.ViewPager
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_below="@+id/appbar_layout"
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+    <com.jjoe64.graphview.GraphView
+        android:layout_below="@+id/mainLinearForStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/graph" />
+
+
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:visibility="gone"
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <LinearLayout
             android:visibility="gone"
             android:layout_width="match_parent"

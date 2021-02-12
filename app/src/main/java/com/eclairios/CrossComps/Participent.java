@@ -10,12 +10,24 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.Fragment.SwipeAdapter;
 import com.github.clans.fab.FloatingActionButton;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,13 +44,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.Annotation;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Participent extends AppCompatActivity {
 
+    public static TextView scoreStatus;
     String json_string;
     JSONObject jsonObject;
     JSONArray jsonArray;
@@ -47,11 +62,23 @@ public class Participent extends AppCompatActivity {
     String str_userName, str_userAgeGender,str_userAddress,str_userScore,strUserRemarks,newDateString,str_scoreExpireDate,serviceID;
 
     ViewPager viewpager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participent);
 
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, 133),
+                new DataPoint(1, 118.2),
+                new DataPoint(2, 160),
+                new DataPoint(3, 120),
+//                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
+
+        scoreStatus = findViewById(R.id.scoreStatus);
 
         viewpager = findViewById(R.id.viewpager);
         viewpager.setOffscreenPageLimit(1);
@@ -60,10 +87,55 @@ public class Participent extends AppCompatActivity {
         viewpager.setCurrentItem(1);
 
 
+
+        //////////////////////////
+
+        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int arg0) {
+                // TODO Auto-generated method stub
+
+                Log.e("nmz", "onPageSelected: "+(arg0));
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+                scoreStatus.setAnimation(animation);
+                userScore = findViewById(R.id.userScore);
+                if(arg0 == 1 || arg0 == 2){
+
+                    scoreStatus.setVisibility(View.VISIBLE);
+                    scoreStatus.setText("Current");
+                    userScore.setText("133.0");
+
+                }else{
+                    Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
+                    scoreStatus.setAnimation(animation1);
+                    scoreStatus.setVisibility(View.GONE);
+                    userScore.setText("118.2");
+                }
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+                // TODO Auto-generated method stub
+
+                System.out.println("onPageScrolled");
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int num) {
+                // TODO Auto-generated method stub
+
+
+            }
+        });
+
+        ////////////////////////////
+
+
         userName = findViewById(R.id.userNAME);
         userAgeGender = findViewById(R.id.userAgeGender);
         userAddress = findViewById(R.id.userAddress);
-        userScore = findViewById(R.id.userScore);
+
         userScoreRemarks = findViewById(R.id.userRemarks);
         userScoreDate = findViewById(R.id.userScoreDate);
         scoreExpireDate = findViewById(R.id.userScoreExpireDate);
@@ -154,4 +226,6 @@ public class Participent extends AppCompatActivity {
         finishAffinity();
         finish();
     }
+
+
 }
