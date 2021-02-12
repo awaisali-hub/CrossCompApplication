@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShowTimeRangeForEventActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        tools:ignore="MissingConstraints">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:text=" Next Three Dates"
+                android:textColor="@color/white"
+                android:textSize="20sp">
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_below="@+id/appbar_layout"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:padding="10dp"
+        android:layout_margin="8dp"
+        android:elevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp">
+            <TextView
+                android:backgroundTint="@color/green"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/servicenameitems"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="09:00 am - 01:00 pm"
+                android:textColor="@color/white"
+                android:textSize="33sp"
+                >
+            </TextView>
+            <TextView
+                android:layout_marginTop="@dimen/_20sdp"
+                android:backgroundTint="@color/green"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/servicenameitems"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="04:00 pm - 08:00 pm"
+                android:textColor="@color/white"
+                android:textSize="33sp">
+            </TextView>
+            <TextView
+                android:layout_marginTop="@dimen/_20sdp"
+
+                android:backgroundTint="@color/green"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/servicenameitems"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="05:00 pm - 09:00 pm"
+                android:textColor="@color/white"
+                android:textSize="33sp">
+            </TextView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

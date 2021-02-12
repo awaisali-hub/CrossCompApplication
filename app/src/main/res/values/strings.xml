@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">CrossComp</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="string_resource_name"><![CDATA[<b> Table </b>]]> </string>
+    <string name="string_resource_namee"><![CDATA[<b> Graph </b>]]> </string>
+    <string name="basic"><![CDATA[<b> Basic </b>]]> </string>
+    <string name="advance"><![CDATA[<b> Advanced </b>]]> </string>
+    <string-array name="planets_array">
+        <item>Select user type</item>
+        <item>Coordinator</item>
+        <item>Participant</item>
+        <item>Director</item>
+    </string-array>
+    <string name="title_activity_scores">Scores</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="blank">Fragment</string>
+    <string name="welcomeText">Thanks for signing-up!
+        Participate in your first
+        CrossComps for Free!
+        Select a local
+        Service Provide
+        listed below</string>
+    <string name="notes_usert_string">Arrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuoArrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuoArrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuoArrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuous physical activity.Arrive early and ready to participate in strenuo</string>
+    <string name="select_a_day_time_range"><![CDATA[Select a Day & Time-Range:]]></string>
+    <string name="select_a_day_date"><![CDATA[Select a Day & Date:]]></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

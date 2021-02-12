@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CrossCompTeams">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="My CrossComp Teams!"
+                android:textSize="20sp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:textColor="@color/white">
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <LinearLayout
+        android:layout_below="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/recyclee"
+            android:layout_below="@id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="270dp">
+        </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:id="@+id/btn_team"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/recyclee"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/green"
+            android:text="Join a Team"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:onClick="JoinTeam"/>
+        <TextView
+            android:background="@drawable/res"
+            android:id="@+id/btn_newteam"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/btn_team"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/green"
+            android:text="Form a new Team"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:onClick="New_Team_Form"/>
+        <TextView
+            android:background="@drawable/res"
+            android:id="@+id/btn_inviteteam"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_below="@id/btn_newteam"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="25dp"
+            android:padding="@dimen/_5sdp"
+            android:text="Invite Other to Join Your Team"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|bottom"
+            android:paddingBottom="20dp"
+            >
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@color/blue"
+                android:backgroundTint="@color/green"
+                android:contentDescription="Home"
+                android:onClick="Home"
+                android:src="@drawable/home_ic"
+                app:tint="@null" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

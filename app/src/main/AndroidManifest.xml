@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.eclairios.CrossComps">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-feature android:name="android.hardware.location.network" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <permission
+        android:name="com.example.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Task"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ShowTimeRangeForEventActivity"></activity>
+        <activity android:name=".ShowDateForReservationActivity" />
+        <activity android:name=".EventCrossCompActivity" />
+        <activity android:name=".EventDetailActivity" />
+        <activity android:name=".UpdateProfileActivity" />
+        <activity android:name=".Location_challengeActivity" />
+        <activity android:name=".Team_challengeActivity" />
+        <activity android:name=".Individual_challengeActivity" />
+        <activity android:name=".Adapter.ServiceName" />
+        <activity android:name=".ShowAllTeams" />
+        <activity android:name=".CoordinatorServicePage" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".OneServiceCard" />
+        <activity android:name=".MorePages" />
+        <activity android:name=".Profile" />
+        <activity android:name=".Services" />
+        <activity android:name=".Challenge" />
+        <activity android:name=".TeamScore" />
+        <activity android:name=".CrossCompTeams" />
+        <activity android:name=".Scores" />
+        <activity android:name=".Participent" />
+        <activity android:name=".CrossComp" />
+        <activity android:name=".Dashboard" />
+        <activity android:name=".Registration" />
+        <activity android:name=".MainActivity" />
+    </application>
+
+</manifest>
