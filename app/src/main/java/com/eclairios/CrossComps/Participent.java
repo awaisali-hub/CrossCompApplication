@@ -5,13 +5,19 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +69,8 @@ public class Participent extends AppCompatActivity {
 
     ViewPager viewpager;
 
+    Button reservationButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +97,17 @@ public class Participent extends AppCompatActivity {
 
 
         //////////////////////////
+
+        reservationButton = findViewById(R.id.reservationButton);
+
+
+
+        String boldText = "Make a Reservation\n";
+        String normalText = "for your next CrossComps";
+        SpannableString str = new SpannableString(boldText + normalText);
+        str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        reservationButton.setText(str);
+        ////////////////////////////
 
         viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 

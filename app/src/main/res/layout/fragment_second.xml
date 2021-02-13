@@ -43,6 +43,28 @@
                 android:text="Feb 2021"/>
 
             <LinearLayout
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/scoreStatus"
+                    android:background="@drawable/servicenameitems"
+                    android:backgroundTint="@color/yellow"
+                    android:textColor="@color/black"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Status: Current"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:padding="@dimen/_5sdp"
+                    android:textSize="@dimen/_16sdp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -77,67 +99,120 @@
             </LinearLayout>
 
 
+
+
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal">
                 <TextView
-                    android:id="@+id/scoreStatus"
-                    android:background="@drawable/servicenameitems"
-                    android:backgroundTint="@color/green"
-                    android:textColor="@color/white"
-                    android:layout_width="@dimen/_150sdp"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Current"
-                    android:textAlignment="center"
-                    android:padding="@dimen/_5sdp"
-                    android:textSize="@dimen/_16sdp"
+                    android:text="840 "
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/_18sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="meters (A)"
+                    android:layout_gravity="center"
+                    android:textSize="19sp"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="126 "
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/_18sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="squats (B)"
+                    android:layout_gravity="center"
+                    android:textSize="19sp"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="63 "
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/_18sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="leg-raises (A)"
+                    android:layout_gravity="center"
+                    android:textSize="19sp"
+                    android:textColor="@color/black"
                     />
             </LinearLayout>
 
 
 
-
-            <TextView
-                android:layout_marginTop="@dimen/_12sdp"
-                android:padding="@dimen/_8sdp"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="840 meters (A)"
-                android:layout_gravity="center"
-                android:textSize="@dimen/_18sdp"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
-            <TextView
-                android:padding="@dimen/_8sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="126 squats (B)"
-                android:layout_gravity="center"
-                android:textSize="@dimen/_18sdp"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
-            <TextView
-                android:padding="@dimen/_8sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="63 leg-raises (A)"
-                android:layout_gravity="center"
-                android:textSize="@dimen/_18sdp"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/push_ups"
-                android:padding="@dimen/_8sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="31 push-ups (C)"
-                android:layout_gravity="center"
-                android:textSize="@dimen/_18sdp"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/push_ups"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="31 "
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/_18sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="push-ups (C)"
+                    android:layout_gravity="center"
+                    android:textSize="19sp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
 
 
             <TextView

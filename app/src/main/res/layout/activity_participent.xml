@@ -210,7 +210,7 @@
         android:id="@+id/mainLinearForStatus"
         android:layout_below="@+id/appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_410sdp"
+        android:layout_height="@dimen/_380sdp"
         android:orientation="vertical">
         <androidx.viewpager.widget.ViewPager
             android:layout_marginTop="@dimen/_7sdp"
@@ -220,7 +220,12 @@
             android:layout_height="match_parent"/>
 
     </LinearLayout>
+
+
+
+
     <com.jjoe64.graphview.GraphView
+        android:visibility="gone"
         android:layout_below="@+id/mainLinearForStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -642,5 +647,31 @@
     </com.github.clans.fab.FloatingActionMenu>
 
 
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/mainLinearForStatus"
+        android:layout_gravity="bottom">
+        <androidx.appcompat.widget.AppCompatButton
+            android:padding="@dimen/_8sdp"
+            android:ems="10"
+            android:layout_gravity="bottom"
+            android:id="@+id/reservationButton"
+            android:layout_marginTop="5sp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.appcompat.widget.AppCompatButton>
+
+
+    </LinearLayout>
 
 </RelativeLayout>

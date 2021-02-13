@@ -22,4 +22,6 @@
     <color name="button_colour">#70a843</color>
     <color name="primary_colour">#0081c2</color>
     <color name="grey">#DCDCDC</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="orange">#FFA500</color>
 </resources>

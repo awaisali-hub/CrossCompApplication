@@ -1,14 +1,21 @@
 package com.eclairios.CrossComps.Fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.eclairios.CrossComps.R;
+import com.github.mikephil.charting.utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,10 +64,28 @@ public class SecondFragment extends Fragment {
         }
     }
 
+    TextView statusTextView,score;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        View view = inflater.inflate(R.layout.fragment_second, container, false);
+        statusTextView = view.findViewById(R.id.scoreStatus);
+        score =view.findViewById(R.id.userScore);
+
+        String text="133.0";
+        SpannableString content = new SpannableString(text);
+        content.setSpan(new UnderlineSpan(), 0, text.length(), 0);
+        score.setText(content);
+
+//        String s= "Status: Current";
+//        SpannableString ss1=  new SpannableString(s);
+//        ss1.setSpan(new RelativeSizeSpan(1.5f), 8,15, 0); // set size
+////        ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, 5, 0);// set color
+//        statusTextView.setText(ss1);
+
+
+
+        return view;
     }
 }
