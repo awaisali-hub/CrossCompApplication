@@ -102,11 +102,11 @@ public class Participent extends AppCompatActivity {
 
 
 
-        String boldText = "Make a Reservation\n";
-        String normalText = "for your next CrossComps";
-        SpannableString str = new SpannableString(boldText + normalText);
-        str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        reservationButton.setText(str);
+//        String boldText = "Make a Reservation\n";
+//        String normalText = "for your next CrossComps";
+//        SpannableString str = new SpannableString(boldText + normalText);
+//        str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        reservationButton.setText(str);
         ////////////////////////////
 
         viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

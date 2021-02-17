@@ -19,17 +19,7 @@
             android:id="@+id/linear_layoutMainOne"
             >
 
-            <TextView
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20sdp"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Adrian Cox"
-                android:textStyle="bold">
 
-            </TextView>
             <TextView
                 android:id="@+id/userScoreDate"
                 android:paddingStart="50dp"
@@ -57,7 +47,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Status: Current"
-                    android:textStyle="bold"
                     android:textAlignment="center"
                     android:padding="@dimen/_5sdp"
                     android:textSize="@dimen/_16sdp"
@@ -78,17 +67,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="133.0"
-                    android:layout_weight="2"
-                    android:textAlignment="textEnd"/>
+                    android:layout_weight="3"
+                    android:textAlignment="center"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
                     android:layout_weight="1">
                     <TextView
+                        android:visibility="gone"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_20sdp"
                         android:textStyle="bold"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="/200"
@@ -99,10 +90,14 @@
             </LinearLayout>
 
 
-
-
-
-
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="@dimen/_3sdp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/_18sdp"-->
+<!--                android:textStyle="bold" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -124,7 +119,17 @@
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="meters (A)"
+                    android:text="meters"
+                    android:layout_gravity="center"
+                    android:textSize="19sp"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(A)"
                     android:layout_gravity="center"
                     android:textSize="19sp"
                     android:textColor="@color/black"
@@ -151,7 +156,17 @@
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="squats (B)"
+                    android:text="squats"
+                    android:layout_gravity="center"
+                    android:textSize="19sp"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(B)"
                     android:layout_gravity="center"
                     android:textSize="19sp"
                     android:textColor="@color/black"
@@ -178,11 +193,22 @@
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="leg-raises (A)"
+                    android:text="leg-raises"
                     android:layout_gravity="center"
                     android:textSize="19sp"
                     android:textColor="@color/black"
                     />
+                <TextView
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(C)"
+                    android:layout_gravity="center"
+                    android:textSize="19sp"
+                    android:textColor="@color/black"
+                    />
+
             </LinearLayout>
 
 
@@ -208,10 +234,20 @@
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="push-ups (C)"
+                    android:text="push-ups"
                     android:layout_gravity="center"
                     android:textSize="19sp"
                     android:textColor="@color/black" />
+                <TextView
+                    android:paddingRight="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(D)"
+                    android:layout_gravity="center"
+                    android:textSize="19sp"
+                    android:textColor="@color/black"
+                    />
             </LinearLayout>
 
 
@@ -257,111 +293,10 @@
             </TextView>
 
         </LinearLayout>
-        <LinearLayout
-            android:background="@color/blue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/arrow_back_score"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_marginRight="@dimen/_30sdp"
-                />
-            <LinearLayout
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/_8sdp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dec/2020\n(32.50)"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="120"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="130"
-                    android:textAlignment="center"
-                    android:textColor="@color/blue"
-                    android:layout_gravity="center"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="123"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    />
-
-                <TextView
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="118.25"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    />
-
-            </LinearLayout>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/arrow_forward_score"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:layout_marginLeft="@dimen/_30sdp"
-                />
         </LinearLayout>
-    </LinearLayout>
+
 
 
     <ImageView
@@ -372,14 +307,6 @@
         android:layout_marginLeft="@dimen/_5sdp"/>
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="@dimen/_18sdp"
-        android:textStyle="bold"
-        android:padding="@dimen/_10sdp"
-        android:textColor="@color/white"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

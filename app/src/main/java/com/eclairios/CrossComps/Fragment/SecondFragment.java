@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -12,6 +14,7 @@ import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eclairios.CrossComps.R;
@@ -72,6 +75,7 @@ public class SecondFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_second, container, false);
         statusTextView = view.findViewById(R.id.scoreStatus);
         score =view.findViewById(R.id.userScore);
+        ImageView back_senFragment = view.findViewById(R.id.back_senFragment);
 
         String text="133.0";
         SpannableString content = new SpannableString(text);
@@ -84,7 +88,21 @@ public class SecondFragment extends Fragment {
 ////        ss1.setSpan(new ForegroundColorSpan(Color.RED), 0, 5, 0);// set color
 //        statusTextView.setText(ss1);
 
-
+//back_senFragment.setOnClickListener(new View.OnClickListener() {
+//    @Override
+//    public void onClick(View v) {
+//        FirstFragment firstFragment = new FirstFragment();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//
+//// Replace whatever is in the fragment_container view with this fragment,
+//// and add the transaction to the back stack if needed
+//        transaction.replace(R.id.fragment_container, newFragment);
+//        transaction.addToBackStack(null);
+//
+//// Commit the transaction
+//        transaction.commit();
+//    }
+//});
 
         return view;
     }

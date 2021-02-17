@@ -210,17 +210,63 @@
         android:id="@+id/mainLinearForStatus"
         android:layout_below="@+id/appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_380sdp"
+        android:layout_height="@dimen/_340sdp"
         android:orientation="vertical">
+
+        <TextView
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20sdp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adrian Cox"
+            android:textStyle="bold">
+
+        </TextView>
+
         <androidx.viewpager.widget.ViewPager
-            android:layout_marginTop="@dimen/_7sdp"
-            android:layout_below="@+id/appbar_layout"
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appbar_layout" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_below="@+id/mainLinearForStatus"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:id="@+id/ArrowButtonLayout">
+
+        <ImageView
+            android:id="@+id/back_senFragment"
+            android:layout_marginEnd="@dimen/_65sdp"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_back_score"
+            android:layout_gravity="start"
+            />
+
+
+        <ImageView
+            android:layout_marginStart="@dimen/_65sdp"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_forward_score"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_30sdp"
+            />
+
+    </LinearLayout>
 
 
 
@@ -652,18 +698,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/mainLinearForStatus"
+        android:layout_below="@+id/ArrowButtonLayout"
         android:layout_gravity="bottom">
         <androidx.appcompat.widget.AppCompatButton
+            android:text="Make a Reservation\n for your next CrossComps"
             android:padding="@dimen/_8sdp"
             android:ems="10"
+            android:textSize="15dp"
+            android:textAllCaps="false"
             android:layout_gravity="bottom"
             android:id="@+id/reservationButton"
-            android:layout_marginTop="5sp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:gravity="center"
-            android:textSize="16sp"
+
             android:backgroundTint="@color/green"
             android:textColor="@color/white"
             android:background="@drawable/res"
