@@ -27,6 +27,7 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String rememberEmail = preferences.getString("Email123","");
         String rememberPassword = preferences.getString("Password123","");

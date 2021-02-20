@@ -25,11 +25,11 @@
                 android:paddingEnd="50dp"
                 android:textColor="@color/black"
                 android:gravity="center"
-                android:textSize="19sp"
+                android:textSize="21sp"
                 android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="March 2021"/>
+                android:text="Feb 2021"/>
             <LinearLayout
                 android:layout_marginTop="@dimen/_6sdp"
                 android:layout_width="match_parent"

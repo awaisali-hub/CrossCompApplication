@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Teams.AllTeamCategoryActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="My CrossComp Teams"
+                android:textSize="20sp"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold">
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <ScrollView
+        android:layout_below="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/MyHomeTeam"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/appbar_layout"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/green"
+                android:text="My Home Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:onClick="TeamsPostalCode"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fundraisingTeam"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/MyHomeTeam"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/green"
+                android:text="My Fundraising Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:onClick="MoveToFundTeam"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:drawableRight="@drawable/edit_icon_pen"
+                android:paddingRight="@dimen/_20sdp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/MyHomeTeam"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/green"
+                android:text="My World Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:drawableRight="@drawable/edit_icon_pen"
+                android:paddingRight="@dimen/_20sdp"
+                android:id="@+id/worldTeam"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/MyHomeTeam"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/green"
+                android:text="My Church Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:onClick="MoveToMYChurchTeam"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:drawableRight="@drawable/edit_icon_pen"
+                android:paddingRight="@dimen/_20sdp"
+                android:paddingLeft="@dimen/_20sdp"
+                android:id="@+id/team1"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/worldTeam"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/green"
+                android:text="My Junior High School Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/team2"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team1"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/blue"
+                android:text="My High School Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+
+                android:id="@+id/team3"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team2"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/blue"
+                android:text="My College/University Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/team4"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team3"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/blue"
+                android:text="My Graduating Class Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/team5"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team4"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/blue"
+                android:text="My Company Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/team6"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team5"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/blue"
+                android:text="My Profession Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/team7"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team6"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/blue"
+                android:text="My Gym Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/team8"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team7"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/blue"
+                android:text="My Partner Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/team9"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team8"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/blue"
+                android:text="My Family Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/team10"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team9"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/blue"
+                android:text="My Friends Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

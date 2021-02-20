@@ -6,56 +6,28 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
 import com.eclairios.CrossComps.Fragment.SwipeAdapter;
-import com.github.clans.fab.FloatingActionButton;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.text.Annotation;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class Participent extends AppCompatActivity {
 
@@ -101,12 +73,13 @@ public class Participent extends AppCompatActivity {
         reservationButton = findViewById(R.id.reservationButton);
 
 
+        String boldText = "Make a Reservation\n";
+        String normalText = "for your next CrossComps";
+        SpannableString str = new SpannableString(boldText + normalText);
+        str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        str.setSpan(new RelativeSizeSpan(1.4f), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        reservationButton.setText(str);
 
-//        String boldText = "Make a Reservation\n";
-//        String normalText = "for your next CrossComps";
-//        SpannableString str = new SpannableString(boldText + normalText);
-//        str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        reservationButton.setText(str);
         ////////////////////////////
 
         viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -212,7 +185,7 @@ public class Participent extends AppCompatActivity {
     }
 
     public void moveToTeams(View view) {
-        startActivity(new Intent(Participent.this,CrossCompTeams.class));
+        startActivity(new Intent(Participent.this, AllTeamCategoryActivity.class));
     }
 
     public void moveToChallenge(View view) {
@@ -223,7 +196,7 @@ public class Participent extends AppCompatActivity {
 
         Log.e("serviceIDChallenges", "moveToChallenge: "+serviceID);
 
-        Intent intent = new Intent(Participent.this,Challenge.class);
+        Intent intent = new Intent(Participent.this, ChallengeScreen0Activity.class);
         startActivity(intent);
     }
 
@@ -247,4 +220,17 @@ public class Participent extends AppCompatActivity {
     }
 
 
+    public void SwipeRightFragment(View view) {
+        viewpager.setOffscreenPageLimit(1);
+        SwipeAdapter swipeAdapter= new SwipeAdapter(getSupportFragmentManager());
+        viewpager.setAdapter(swipeAdapter);
+        viewpager.setCurrentItem(2);
+    }
+
+    public void MoveToLeftFragment(View view) {
+        viewpager.setOffscreenPageLimit(1);
+        SwipeAdapter swipeAdapter= new SwipeAdapter(getSupportFragmentManager());
+        viewpager.setAdapter(swipeAdapter);
+        viewpager.setCurrentItem(0);
+    }
 }

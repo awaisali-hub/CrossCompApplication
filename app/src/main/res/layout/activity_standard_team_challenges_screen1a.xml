@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Challenges.StandardTeamChallengesScreen1aActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue">
+
+            <TextView
+                android:id="@+id/userNAME"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:text="My CrossComp Challenges\n Team - Standard"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:textColor="@color/actionbar_text_colour"
+                android:textStyle="bold"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_below="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/team1"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_below="@+id/worldTeam"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:text="My State Team Challenges"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:onClick="MoveToCitySelection"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/team2"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_below="@+id/team1"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/blue"
+            android:text="My County Team Challenges"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/team3"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_below="@+id/team2"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/blue"
+            android:text="My City Team Challenges"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/team4"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_below="@+id/team3"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/blue"
+            android:text="My Fundraising Team Challenges"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/team5"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_below="@+id/worldTeam"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/blue"
+            android:text="My Gym Team Challenges"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:onClick="MoveToCitySelection"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/team6"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_below="@+id/team1"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/blue"
+            android:text="My Church Team Challenges"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/team7"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_below="@+id/team2"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/blue"
+            android:text="My Company Team Challenges"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/team8"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_below="@+id/team3"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/blue"
+            android:text="My Occupation Team Challenges"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_below="@+id/team3"
+            android:background="@drawable/res"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            android:text="My CrossComp Challenges"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
