@@ -6,22 +6,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.preference.PreferenceManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -45,24 +52,15 @@ import java.util.List;
 import java.util.Locale;
 
 
+public class Registration extends AppCompatActivity {
 
-public class Registration extends AppCompatActivity{
-
-
-    private FusedLocationProviderClient fusedLocationProviderClient;
-
-    EditText firstName, lastName, phone, email, password, postalCode, promoterName, address, age;
-    Spinner userType;
-    Button signUp;
-    TextView signInText;
-    RadioGroup gender;
-
-    ProgressDialog progressDialog;
-    String lat;
-    String lng;
-    String GENDER;
-
-    Button signUpButton, signInBtn;
+    private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
+    private EditText firstName, lastName, phone, email, password;
+    private ProgressDialog progressDialog;
+    private String lat, lng, MainAddress;
+    private Button signUpButton, signInBtn;
+    private int keyDel = 0;
+    private CheckBox rememberMe;
 
 
     @Override
@@ -70,82 +68,74 @@ public class Registration extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    Registration.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    11
-            );
-        } else {
-            getCurrentLocation();
-        }
-
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         phone = findViewById(R.id.phoneNumber);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        postalCode = findViewById(R.id.postalCode);
-        promoterName = findViewById(R.id.promoterName);
-        userType = (Spinner) findViewById(R.id.userType);
-        address = findViewById(R.id.address);
-        //  gender = findViewById(R.id.gender);
-        age = findViewById(R.id.age);
-
-        signUp = findViewById(R.id.signUpButton);
-        signInText = findViewById(R.id.signInText);
-
-        gender = (RadioGroup) findViewById(R.id.radioGender);
         signUpButton = findViewById(R.id.signUpButton);
         signInBtn = findViewById(R.id.signInBtn);
+        rememberMe = findViewById(R.id.rememberMe);
 
-        gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                phone.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if (keyCode == KeyEvent.KEYCODE_DEL)
+                            keyDel = 1;
+                        return false;
+                    }
+                });
+
+                if (keyDel == 0) {
+                    int len = phone.getText().length();
+                    if(len == 3) {
+                        phone.setText(phone.getText() + "-");
+                        phone.setSelection(phone.getText().length());
+                    }else if(len == 8){
+                        phone.setText(phone.getText() + "-");
+                        phone.setSelection(phone.getText().length());
+                    }
+                } else {
+                    keyDel = 0;
+                }
+            }
 
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
+            public void afterTextChanged(Editable arg0) {
                 // TODO Auto-generated method stub
-                int childCount = group.getChildCount();
-                String gender = null;
-                for (int x = 0; x < childCount; x++) {
-                    RadioButton btn = (RadioButton) group.getChildAt(x);
+            }
 
-
-                    if (btn.getId() == R.id.radioMale) {
-                        btn.setText("Male");
-                    } else {
-                        btn.setText("Female");
-                    }
-                    if (btn.getId() == checkedId) {
-
-                        gender = btn.getText().toString();// here gender will contain M or F.
-
-                    }
-
-                }
-                GENDER = gender;
-                Log.e("Gender", gender);
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
             }
         });
 
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-//                R.array.planets_array, android.R.layout.simple_spinner_item);
-//
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        userType.setAdapter(adapter);
 
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+                    PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{
+                                android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_CODE_LOCATION_PERMISSION);
+                return;
+            }
+        }
+        getCurrentLocation();
 
 
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Registration.this, MainActivity.class));
+                Intent intent = new Intent(Registration.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
             }
         });
 
@@ -157,203 +147,76 @@ public class Registration extends AppCompatActivity{
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                String strAddress = address.getText().toString();
-
-
-                GeoLocation geoLocation = new GeoLocation();
-                geoLocation.getAddress(strAddress, getApplicationContext(), new GeoHandler());
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        registration();
-                    }
-                }, 1500);
+                registration();
             }
         });
 
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String rememberEmail = preferences.getString("Email","");
+        String rememberPassword = preferences.getString("Password","");
 
-
-        if (ActivityCompat.checkSelfPermission(Registration.this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-
-            GetLocation();
-        } else {
-            ActivityCompat.requestPermissions(Registration.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-        }
-
-    }
-
-    private void GetLocation() {
-
-        Log.e("LocationTest", "GetLocation: ");
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            requestPermission();
-        }else{
-
-            fusedLocationProviderClient.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            Log.e("LocationTest", "GetLocation: "+location);
-                            // Got last known location. In some rare situations this can be null.
-                            if (location != null) {
-                                try {
-                                    Geocoder geocoder = new Geocoder(Registration.this, Locale.getDefault());
-                                    List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-                                    Log.e("LatLNG", "onComplete: "+addresses.get(0).getLatitude());
-                                    Log.e("LatLNG", "onComplete: "+addresses.get(0).getLongitude());
-                                    Log.e("LatLNG", "onComplete: "+addresses.get(0).getCountryName());
-                                    Log.e("LatLNG", "onComplete: "+addresses.get(0).getLocality());
-                                    Log.e("LatLNG", "onComplete: "+addresses.get(0).getAddressLine(0));
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    });
-
-//            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-//                @Override
-//                public void onComplete(@NonNull Task<Location> task) {
-//                    Location location = task.getResult();
-//                    Log.e("LocationTest", "GetLocation: "+location);
-//
-//                    if(location != null){
-//
-//                        try {
-//                            Geocoder geocoder = new Geocoder(Registration.this, Locale.getDefault());
-//                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-//                            Log.e("LatLNG", "onComplete: "+addresses.get(0).getLatitude());
-//                            Log.e("LatLNG", "onComplete: "+addresses.get(0).getLongitude());
-//                            Log.e("LatLNG", "onComplete: "+addresses.get(0).getCountryName());
-//                            Log.e("LatLNG", "onComplete: "+addresses.get(0).getLocality());
-//                            Log.e("LatLNG", "onComplete: "+addresses.get(0).getAddressLine(0));
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//            });
-        }
-
-
-
-    }
-
-    private void getLatLng() {
-    }
-
-    private class GeoHandler extends Handler {
-
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            String address;
-            switch (msg.what){
-                case 1:
-                    Bundle bundle = msg.getData();
-                    address = bundle.getString("address");
-                    break;
-                default:
-                    address = null;
-            }
-
-            if(address!=null){
-                String[] result = address.split(",");
-                lat = result[0];
-                lng =result[1];
-
-                Log.e("jjudffdu", "handleMessage: "+address );
-                Log.e("jdsdjdj", "handleMessage: "+lat );
-                Log.e("ddhdhdh", "handleMessage: "+lng );
-            }else{
-             //   Toast.makeText(Registration.this, "All fields are required!", Toast.LENGTH_SHORT).show();
-            }
+        if(rememberEmail != null && rememberPassword!=null){
+            email.setText(rememberEmail);
+            password.setText(rememberPassword);
 
         }
+
     }
+
+
     private void registration() {
 
-              String strFirstName = firstName.getText().toString();
-              String strLastName = lastName.getText().toString();
-              String strPhone = phone.getText().toString();
-              String strEmail = email.getText().toString();
-              String strPassword = password.getText().toString();
-              String strPostalCode = postalCode.getText().toString();
-              String strPromoterName = promoterName.getText().toString();
+        String strFirstName = firstName.getText().toString();
+        String strLastName = lastName.getText().toString();
+        String strPhone = phone.getText().toString();
+        String strEmail = email.getText().toString();
+        String strPassword = password.getText().toString();
 
-     //         String strUserType = userType.getSelectedItem().toString();
-              String strAddress = address.getText().toString();
-              String strGender = GENDER;
-              String strAge = age.getText().toString();
+        String method = "register";
 
-
-              String method = "register";
-
-        if(TextUtils.isEmpty(strFirstName) && TextUtils.isEmpty(strLastName) && TextUtils.isEmpty(strPhone) &&
-                TextUtils.isEmpty(strEmail) && TextUtils.isEmpty(strPassword) && TextUtils.isEmpty(strPostalCode) &&
-                TextUtils.isEmpty(strPromoterName)){
+        if (TextUtils.isEmpty(strFirstName) && TextUtils.isEmpty(strLastName) && TextUtils.isEmpty(strPhone) &&
+                TextUtils.isEmpty(strEmail) && TextUtils.isEmpty(strPassword)) {
             progressDialog.dismiss();
             Toast.makeText(Registration.this, "All fields are required!", Toast.LENGTH_SHORT).show();
 
-        }
-//        else if(strUserType.contains("Select user type")){
-//            Toast.makeText(this, "Please select user type", Toast.LENGTH_SHORT).show();
-//
-//        }
-        else if(strPassword.length() < 6){
+        } else if (strPassword.length() < 6) {
             progressDialog.dismiss();
             Toast.makeText(Registration.this, "Password must have 6 characters", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
 
 
-            Log.e("hffhhfh", "registration: "+lat);
-            Log.e("hffhhfh", "registration: "+lng);
+            SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(Registration.this);
+            SharedPreferences.Editor Editor = Preferences.edit();
+            if(rememberMe.isChecked()){
+                Editor.putString("Email",strEmail);
+                Editor.putString("Password",strPassword);
+                Editor.putString("Email123",strEmail);
+                Editor.putString("Password123",strPassword);
+
+            }else{
+                Editor.putString("Email","");
+                Editor.putString("Password","");
+            }
+            Editor.apply();
 
             BackgroundTask backgroundTask = new BackgroundTask(Registration.this);
-            backgroundTask.execute(method,strFirstName,strLastName,strPhone,strEmail,strPassword,strPostalCode,strPromoterName,"Participant",
-                                          lat,lng,strAddress,"","");
+            backgroundTask.execute(method, strFirstName, strLastName, strPhone, strEmail, strPassword, lat, lng, MainAddress);
 
-
-//            backgroundTask.execute(method,strFirstName,strLastName,strPhone,strEmail,strPassword,strPostalCode,strPromoterName,strUserType,
-//                    lat,lng,strAddress,strGender,strAge);
         }
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        getLatLng();
-
-
-    }
-
-
-    private void requestPermission() {
-        ActivityCompat.requestPermissions(Registration.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},111);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 11 && grantResults.length > 0) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getCurrentLocation();
-            } else {
-                Toast.makeText(this, "Give Access", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
     private void getCurrentLocation() {
+        Log.e("simpleTest", "getCurrentLocation: " );
 
         LocationRequest locationRequest = new LocationRequest();
         locationRequest.setInterval(10000);
         locationRequest.setFastestInterval(3000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -363,25 +226,76 @@ public class Registration extends AppCompatActivity{
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        LocationServices.getFusedLocationProviderClient(Registration.this)
-                .requestLocationUpdates(locationRequest, new LocationCallback() {
+        LocationServices.getFusedLocationProviderClient(Registration.this).requestLocationUpdates(locationRequest, new LocationCallback() {
                     @Override
                     public void onLocationResult(LocationResult locationResult) {
                         super.onLocationResult(locationResult);
                         LocationServices.getFusedLocationProviderClient(Registration.this)
                                 .removeLocationUpdates(this);
-                        if(locationRequest!=null && locationResult.getLocations().size()>0){
-                            int latestLocationIndex = locationResult.getLocations().size()-1;
-                            double latitude =
-                                    locationResult.getLocations().get(latestLocationIndex).getLatitude();
-                            double Longitude =
-                                    locationResult.getLocations().get(latestLocationIndex).getLongitude();
 
-                            Log.e("Location", "onLocationResult: "+latitude  +"\n" +Longitude );
+
+                        Log.e("simpleTest", "getCurrentLocation: "+locationResult);
+
+                        if(locationResult != null && locationResult.getLocations().size() > 0){
+                            int latestLocationIndex = locationResult.getLocations().size() - 1;
+
+                            double latitude = locationResult.getLocations().get(latestLocationIndex).getLatitude();
+                            double longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
+
+                            lat = String.valueOf(latitude);
+                            lng = String.valueOf(longitude);
+
+                            Log.e("latlngssssss", "onLocationResult: "+lat+"\n"+lng );
+
+
+
+
+                            Geocoder geocoder;
+                            List<Address> addresses;
+                            geocoder = new Geocoder(Registration.this, Locale.getDefault());
+
+                            try {
+                                addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                                String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                                String city = addresses.get(0).getLocality();
+                                String state = addresses.get(0).getAdminArea();
+                                String country = addresses.get(0).getCountryName();
+                                String postalCode = addresses.get(0).getPostalCode();
+                                String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+
+
+                                MainAddress = city;
+
+                                Log.e("addressssssss", "onLocationResult: "+ city);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+
+
+
                         }
-
                     }
-                }, Looper.getMainLooper());
+                },
+                Looper.getMainLooper());
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_LOCATION_PERMISSION:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getCurrentLocation();
+                } else {
+                    // Permission Denied
+                    Toast.makeText( this,"Permission Denied!" , Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
 }

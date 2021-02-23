@@ -325,8 +325,8 @@
                 android:textColor="@color/white"
                 android:background="@drawable/res"
                 android:layout_width="match_parent"
-                android:layout_height="45dp">
-            </androidx.appcompat.widget.AppCompatButton>
+                android:layout_height="45dp"/>
+
             <TextView
                 android:visibility="gone"
                 android:id="@+id/signInText"
@@ -361,8 +361,8 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Sign-IN"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            </androidx.appcompat.widget.AppCompatButton>
+                android:layout_height="wrap_content"/>
+
 
         </LinearLayout>
     </RelativeLayout>

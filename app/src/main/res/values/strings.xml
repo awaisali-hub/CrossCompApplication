@@ -13,6 +13,15 @@
         <item>Participant</item>
         <item>Director</item>
     </string-array>
+
+
+    <string-array name="gender">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Both</item>
+    </string-array>
+
     <string name="title_activity_scores">Scores</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="blank">Fragment</string>

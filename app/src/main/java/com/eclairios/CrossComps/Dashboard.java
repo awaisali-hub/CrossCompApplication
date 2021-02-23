@@ -3,13 +3,22 @@ package com.eclairios.CrossComps;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.AdapterHorizontal;
+import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.Model.ModelHorizontal;
 
 import org.json.JSONArray;
@@ -32,20 +41,24 @@ import java.util.ArrayList;
 public class Dashboard extends AppCompatActivity {
     String json_string;
     JSONObject jsonObject;
-    JSONArray jsonArray;
+    JSONArray jsonArray,jsonArray1;
 
     String lat,lng;
 
     RecyclerView recyclerView;
     AdapterHorizontal adapterHorizontal;
     ArrayList<ModelHorizontal> chatitem = new ArrayList<>() ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+
         recyclerView = findViewById(R.id.list);
         adapterHorizontal = new AdapterHorizontal( chatitem,Dashboard.this );
         recyclerView.setAdapter(adapterHorizontal);
+
 
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -53,7 +66,15 @@ public class Dashboard extends AppCompatActivity {
         editor.putString("appVersion","2");
         editor.apply();
 
+
+        try{
+            WaitDialog.showDialog(Dashboard.this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
 
     class BackgroundTask extends AsyncTask<String, Void, String>
     {
@@ -125,46 +146,91 @@ public class Dashboard extends AppCompatActivity {
 
             json_string = result;
 
-            Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
+            if(json_string == null){
+                AlertDialog alertDialog = new AlertDialog.Builder(Dashboard.this).create();
+
+                alertDialog.setTitle("Info");
+                alertDialog.setMessage("No internet connection, Check your network settings and try again.");
+                alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+                alertDialog.setCancelable(false);
+                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+
+                alertDialog.show();
 
 
-            try {
-
-                jsonObject = new JSONObject(json_string);
-                jsonArray = jsonObject.getJSONArray("server_response");
+            }else{
+                Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
 
 
-                int count = 0;
+                try {
 
-                String firstName,lastName,coordinatorId,coordinatorName,address;
-                while(count < jsonArray.length())
-                {
-                    JSONObject JO = jsonArray.getJSONObject(count);
-                    coordinatorId = JO.getString("User_ID");
-                    firstName = JO.getString("First_Name");
-                    lastName = JO.getString("Last_Name");
+                    jsonObject = new JSONObject(json_string);
+                    jsonArray = jsonObject.getJSONArray("server_response");
+                    jsonArray1 = jsonObject.getJSONArray("event");
 
-                    coordinatorName = firstName+" "+lastName;
-                    address = JO.getString("Address");
+                    ////////////////////////////////////////
+                    int count1 = 0;
 
-                    Log.e("jdjdud", "onPostExecute: "+ coordinatorName);
-                    Log.e("jdjdud", "onPostExecute: "+ address);
+                    String eventId,eventName,eventAddress;
+                    while(count1 < jsonArray1.length())
+                    {
+                        JSONObject JO = jsonArray1.getJSONObject(count1);
+                        eventId = JO.getString("Event_ID");
+                        eventName = JO.getString("Event_Name");
+                        eventAddress = JO.getString("Address");
 
-                    ModelHorizontal users = new ModelHorizontal();
-                    users.setCoordinatorID(coordinatorId);
-                    users.setCoordinatorName(coordinatorName);
-                    users.setCoordinatorAddress(address);
+                        Log.e("jdjdud", "onPostExecute: "+ eventName);
+                        Log.e("jdjdud", "onPostExecute: "+ eventAddress);
+
+                        ModelHorizontal users = new ModelHorizontal();
+                        users.setCoordinatorID(eventId);
+                        users.setCoordinatorName(eventName);
+                        users.setCoordinatorAddress(eventAddress);
 
 
-                    chatitem.add(users);
-                    count++;
+                        chatitem.add(users);
+                        count1++;
 
+                    }
+
+
+                    //////////////////////////////////
+                    int count = 0;
+
+                    String serviceId,serviceName,serviceAddress;
+                    while(count < jsonArray.length())
+                    {
+                        JSONObject JO = jsonArray.getJSONObject(count);
+                        serviceId = JO.getString("Service_ID");
+                        serviceName = JO.getString("Service_Name");
+                        serviceAddress = JO.getString("Address");
+
+                        Log.e("jdjdud", "onPostExecute: "+ serviceName);
+                        Log.e("jdjdud", "onPostExecute: "+ serviceAddress);
+
+                        ModelHorizontal users = new ModelHorizontal();
+                        users.setCoordinatorID(serviceId);
+                        users.setCoordinatorName(serviceName);
+                        users.setCoordinatorAddress(serviceAddress);
+
+
+                        chatitem.add(users);
+                        count++;
+
+                    }
+
+                    adapterHorizontal.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-                adapterHorizontal.notifyDataSetChanged();
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+
+
 
         }
     }

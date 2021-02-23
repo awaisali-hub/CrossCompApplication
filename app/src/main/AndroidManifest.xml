@@ -10,8 +10,6 @@
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature android:name="android.hardware.location.network" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <permission
         android:name="com.example.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
@@ -24,7 +22,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Challenges.StandardTeamChallengesScreen1cActivity"></activity>
+        <activity android:name=".Challenges.CustomTeamChallengesScreen1cActivity"></activity>
+        <activity android:name=".Challenges.CustomTeamChallengesScreen1bActivity" />
+        <activity android:name=".Challenges.CustomTeamChallengesScreen1aActivity" />
+        <activity android:name=".Challenges.StandardTeamChallengesScreen1cActivity" />
         <activity android:name=".Challenges.StandardTeamChallengesScreen1bActivity" />
         <activity android:name=".Challenges.StandardTeamChallengesScreen1aActivity" />
         <activity android:name=".Challenges.ChallengeScreen0Activity" />

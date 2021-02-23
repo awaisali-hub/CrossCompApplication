@@ -40,23 +40,13 @@ public class MainActivity extends AppCompatActivity {
             email.setText(rememberEmail);
             password.setText(rememberPassword);
 
-//            if(!rememberMe.isChecked()){
-//                rememberMe.setChecked(true);
-//           //     moveToDashboard();
-//            }
-
         }
-
-//        SignInButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                moveToDashboard();
-//            }
-//        });
     }
 
     public void registerScreen(View view) {
-        startActivity(new Intent(MainActivity.this, Registration.class));
+        Intent intent = new Intent(MainActivity.this, Registration.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     public void moveToDashboard(View view) {

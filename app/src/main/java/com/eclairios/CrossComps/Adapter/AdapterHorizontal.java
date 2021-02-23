@@ -48,20 +48,11 @@ public class AdapterHorizontal extends RecyclerView.Adapter<AdapterHorizontal.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        if(position == 1){
-//            holder.Text11.setText(chatItem.get(position).getCoordinatorName());
-            holder.Text11.setText("Celebrate Client Success");
 
-            holder.Text22.setText(chatItem.get(position).getCoordinatorAddress());
+        WaitDialog.hideDialog();
+        holder.Text11.setText(chatItem.get(position).getCoordinatorName());
+        holder.Text22.setText(chatItem.get(position).getCoordinatorAddress());
 
-//            holder.Text11.setBackground(context.getDrawable(R.drawable.blue_bc));
-//            holder.linearLayoutCard.setBackground(context.getDrawable(R.drawable.blue_bc));
-
-        }else {
-
-            holder.Text11.setText(chatItem.get(position).getCoordinatorName());
-            holder.Text22.setText(chatItem.get(position).getCoordinatorAddress());
-        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,24 +61,15 @@ public class AdapterHorizontal extends RecyclerView.Adapter<AdapterHorizontal.Vi
                     @Override
                     public void run() {
 
-
-                        try{
-                            new WaitDialog(context).show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
+                        Intent intent;
                         if(position == 1){
-                            Intent intent = new Intent(view.getContext(), EventDetailActivity.class);
-                            intent.putExtra("coordinatorName",chatItem.get(position).getCoordinatorName());
-                            intent.putExtra("coordinatorID",chatItem.get(position).getCoordinatorID());
-                            context.startActivity(intent);
+                            intent = new Intent(view.getContext(), EventDetailActivity.class);
                         }else{
-                            Intent intent = new Intent(view.getContext(), CoordinatorServicePage.class);
-                            intent.putExtra("coordinatorName",chatItem.get(position).getCoordinatorName());
-                            intent.putExtra("coordinatorID",chatItem.get(position).getCoordinatorID());
-                            context.startActivity(intent);
+                            intent = new Intent(view.getContext(), CoordinatorServicePage.class);
                         }
+                        intent.putExtra("coordinatorName",chatItem.get(position).getCoordinatorName());
+                        intent.putExtra("coordinatorID",chatItem.get(position).getCoordinatorID());
+                        context.startActivity(intent);
 
                     }
                 }, 1500);

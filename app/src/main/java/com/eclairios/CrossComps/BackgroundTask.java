@@ -79,16 +79,10 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             String strPhone  = params[3];
             String strEmail = params[4];
             String strPassword  = params[5];
-            String strPostalCode  = params[6];
-            String strPromoterName = params[7];
-            String strUserType = params[8];
-            String strLat = params[9];
-            String strLng = params[10];
-            Log.e("hffhhfh", "registration: "+strLat);
-            Log.e("hffhhfh", "registration: "+strLng);
-            String strAddress  = params[11];
-            String strGender  = params[12];
-            String strAge = params[13];
+            String strLat = params[6];
+            String strLng = params[7];
+            String strAddress  = params[8];
+
 
             try {
                 URL url = new URL(reg_url);
@@ -106,14 +100,10 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                         URLEncoder.encode("phone","UTF-8") + "=" + URLEncoder.encode(strPhone,"UTF-8") + "&"+
                         URLEncoder.encode("email","UTF-8") + "=" + URLEncoder.encode(strEmail,"UTF-8") + "&"+
                         URLEncoder.encode("password","UTF-8") + "=" + URLEncoder.encode(strPassword,"UTF-8") + "&"+
-                        URLEncoder.encode("postalCode","UTF-8") + "=" + URLEncoder.encode(strPostalCode,"UTF-8")  + "&"+
-                        URLEncoder.encode("promoterName","UTF-8") + "=" + URLEncoder.encode(strPromoterName,"UTF-8") + "&"+
-                        URLEncoder.encode("userType","UTF-8") + "=" + URLEncoder.encode(strUserType,"UTF-8") + "&"+
+
                         URLEncoder.encode("lat","UTF-8") + "=" + URLEncoder.encode(strLat,"UTF-8") + "&"+
                         URLEncoder.encode("lng","UTF-8") + "=" + URLEncoder.encode(strLng,"UTF-8") + "&"+
-                        URLEncoder.encode("address","UTF-8") + "=" + URLEncoder.encode(strAddress,"UTF-8") + "&"+
-                        URLEncoder.encode("gender","UTF-8") + "=" + URLEncoder.encode(strGender,"UTF-8") + "&"+
-                        URLEncoder.encode("age","UTF-8") + "=" + URLEncoder.encode(strAge,"UTF-8") ;
+                        URLEncoder.encode("address","UTF-8") + "=" + URLEncoder.encode(strAddress,"UTF-8");
 
 
                 bufferedWriter.write(data);

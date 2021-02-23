@@ -19,4 +19,8 @@ public class ChallengeScreen0Activity extends AppCompatActivity {
     public void MoveToStandardChallenge(View view) {
         startActivity(new Intent(ChallengeScreen0Activity.this, StandardTeamChallengesScreen1aActivity.class));
     }
+
+    public void MoveToCustomChallenge(View view) {
+        startActivity(new Intent(ChallengeScreen0Activity.this, CustomTeamChallengesScreen1aActivity.class));
+    }
 }

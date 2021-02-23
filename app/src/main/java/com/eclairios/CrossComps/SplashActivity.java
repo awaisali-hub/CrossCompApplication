@@ -56,11 +56,7 @@ public class SplashActivity extends AppCompatActivity {
                     if(rememberEmail.isEmpty() && rememberPassword.isEmpty()){
                         startActivity(new Intent(SplashActivity.this,MainActivity.class));
                     }else if(rememberEmail != null && rememberPassword !=null && lat != null && lng != null){
-                        try{
-                            new WaitDialog(SplashActivity.this).show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+
                         Intent intent = new Intent(SplashActivity.this,Dashboard.class);
                         intent.putExtra("lat",lat);
                         intent.putExtra("lng",lng);
