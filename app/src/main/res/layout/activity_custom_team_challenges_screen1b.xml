@@ -115,17 +115,25 @@
             android:layout_marginTop="@dimen/_10sdp">
 
             <TextView
-                android:layout_width="@dimen/_170sdp"
+                android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Florida"
                 android:textSize="25sp"
                 android:layout_marginStart="@dimen/_10sdp"/>
             <TextView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:text="(#)"
+                android:textAlignment="textEnd"
+                android:textSize="18sp"
+                />
+            <TextView
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/grey"
-                android:text="(#)84"
+                android:text="84"
                 android:textAlignment="textEnd"
                 android:textSize="18sp"
                 android:layout_marginStart="@dimen/_20sdp"
@@ -147,12 +155,21 @@
             android:layout_marginTop="@dimen/_10sdp">
 
             <TextView
-                android:layout_width="@dimen/_170sdp"
+                android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Texas"
                 android:textSize="25sp"
                 android:layout_marginStart="@dimen/_10sdp"/>
+
+            <TextView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:text="(#)"
+                android:textAlignment="textEnd"
+                android:textSize="18sp"
+                />
             <TextView
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="wrap_content"
@@ -180,12 +197,20 @@
             android:layout_marginTop="@dimen/_10sdp">
 
             <TextView
-                android:layout_width="@dimen/_170sdp"
+                android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blue"
                 android:text="California"
                 android:textSize="25sp"
                 android:layout_marginStart="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:text="(#)"
+                android:textAlignment="textEnd"
+                android:textSize="18sp"
+                />
             <TextView
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="wrap_content"
@@ -212,12 +237,20 @@
             android:layout_marginTop="@dimen/_10sdp">
 
             <TextView
-                android:layout_width="@dimen/_170sdp"
+                android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="New York"
                 android:textSize="25sp"
                 android:layout_marginStart="@dimen/_10sdp"/>
+            <TextView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:text="(#)"
+                android:textAlignment="textEnd"
+                android:textSize="18sp"
+                />
             <TextView
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="wrap_content"
@@ -244,12 +277,21 @@
             android:layout_marginTop="@dimen/_10sdp">
 
             <TextView
-                android:layout_width="@dimen/_170sdp"
+                android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="Arizona"
                 android:textSize="25sp"
                 android:layout_marginStart="@dimen/_10sdp"/>
+
+            <TextView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:text="(#)"
+                android:textAlignment="textEnd"
+                android:textSize="18sp"
+                />
             <TextView
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="wrap_content"
