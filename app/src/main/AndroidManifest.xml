@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Challenges.CustomTeamChallengesScreen1cActivity"></activity>
+        <activity android:name=".Challenges.CustomTeamChallengesScreen1cActivity"/>
         <activity android:name=".Challenges.CustomTeamChallengesScreen1bActivity" />
         <activity android:name=".Challenges.CustomTeamChallengesScreen1aActivity" />
         <activity android:name=".Challenges.StandardTeamChallengesScreen1cActivity" />
@@ -49,7 +49,13 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Participent" />
+        <activity android:name=".Participent">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".OneServiceCard" />
         <activity android:name=".MorePages" />
         <activity android:name=".Profile" />
@@ -59,11 +65,7 @@
         <activity android:name=".CrossCompTeams" />
         <activity android:name=".Scores" />
         <activity android:name=".SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".CrossComp" />
         <activity android:name=".Dashboard" />

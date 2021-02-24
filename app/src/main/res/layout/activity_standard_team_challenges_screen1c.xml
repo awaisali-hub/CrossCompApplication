@@ -48,8 +48,10 @@
             android:text="My State Team Challenge"
             android:layout_gravity="center_horizontal"
             android:textAlignment="center"
-            android:textSize="18sp"
-            android:textColor="@color/black"/>
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:maxLines="1"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -238,7 +240,7 @@
 
 
         <LinearLayout
-            android:layout_marginTop="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
