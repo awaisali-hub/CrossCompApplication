@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/service_facility"
+        android:background="@drawable/servicenameitems"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sundays, 1-4 pm"
+        android:paddingStart="4dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingEnd="@dimen/_4sdp"
+        android:maxLines="1"
+        android:textSize="@dimen/_16sdp"
+        android:layout_margin="8dp"
+        android:textAlignment="center"
+        />
+
+</RelativeLayout>

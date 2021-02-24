@@ -62,17 +62,20 @@ public class AdapterHorizontal extends RecyclerView.Adapter<AdapterHorizontal.Vi
                     public void run() {
 
                         Intent intent;
-                        if(position == 1){
+                        if(chatItem.get(position).getItem_type().equals("event")){
                             intent = new Intent(view.getContext(), EventDetailActivity.class);
+                            intent.putExtra("EventDay",chatItem.get(position).getEvent_day());
+                            intent.putExtra("EventDate",chatItem.get(position).getEvent_date());
                         }else{
                             intent = new Intent(view.getContext(), CoordinatorServicePage.class);
                         }
                         intent.putExtra("coordinatorName",chatItem.get(position).getCoordinatorName());
                         intent.putExtra("coordinatorID",chatItem.get(position).getCoordinatorID());
+                        intent.putExtra("coordinatorAddress",chatItem.get(position).getCoordinatorAddress());
                         context.startActivity(intent);
 
                     }
-                }, 1500);
+                }, 1000);
 
             }
         });

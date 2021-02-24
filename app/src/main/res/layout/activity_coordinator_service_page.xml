@@ -22,7 +22,6 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
                 android:text="Make a Reservation"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -34,7 +33,6 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
                 android:text="for Your CrossComps!"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -43,59 +41,12 @@
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-
-            <androidx.cardview.widget.CardView
-                android:visibility="gone"
-                android:id="@+id/nameCardView"
-                android:layout_below="@+id/appbar_layout"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:elevation="10dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="10dp"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/green"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:padding="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/CoordinatorName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="22sp">
-                    </TextView>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:visibility="gone"
-        android:background="@color/grey"
-        android:padding="10dp"
-        android:layout_below="@id/nameCardView"
-        android:id="@+id/recycleCoordinater"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </androidx.recyclerview.widget.RecyclerView>
-
-
-
     <LinearLayout
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_below="@+id/appbar_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,7 +74,7 @@
                     >
                     <TextView
                         android:layout_weight="1.7"
-                        android:id="@+id/tex1"
+                        android:id="@+id/service_facility_name"
                         android:textSize="24sp"
                         android:textAlignment="center"
                         android:textStyle="bold"
@@ -137,7 +88,7 @@
                     <TextView
                         android:layout_weight="1.3"
                         android:background="@color/white"
-                        android:id="@+id/tex2"
+                        android:id="@+id/service_facility_address"
                         android:textAlignment="center"
                         android:textStyle="bold"
                         android:layout_width="match_parent"
@@ -171,70 +122,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-                    <TextView
-                        android:background="@drawable/servicenameitems"
-                        android:backgroundTint="@color/green"
-                        android:textColor="@color/white"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycleCoordinator"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Sundays, 1-4 pm"
-                        android:padding="@dimen/_5sdp"
-                        android:textSize="@dimen/_16sdp"
-                        android:onClick="SelectNextThreeDays"/>
-                    <TextView
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/servicenameitems"
-                        android:backgroundTint="@color/green"
-                        android:textColor="@color/white"
-                        android:padding="@dimen/_5sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Mondays, 5-7 pm"
-                        android:textSize="@dimen/_16sdp"
-                        android:onClick="SelectNextThreeDays"/>
-                    <TextView
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/servicenameitems"
-                        android:backgroundTint="@color/green"
-                        android:textColor="@color/white"
-                        android:padding="@dimen/_5sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Tuesdays, 8-11 am"
-                        android:textSize="@dimen/_16sdp"
-                        android:onClick="SelectNextThreeDays"/>
-                    <TextView
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/servicenameitems"
-                        android:backgroundTint="@color/green"
-                        android:textColor="@color/white"
-                        android:padding="@dimen/_5sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Wednesdays, 1-9 pm"
-                        android:textSize="@dimen/_16sdp"/>
-                    <TextView
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/servicenameitems"
-                        android:backgroundTint="@color/green"
-                        android:textColor="@color/white"
-                        android:padding="@dimen/_5sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Thursdays, 1-9 pm"
-                        android:textSize="@dimen/_16sdp"
-                        android:onClick="SelectNextThreeDays"/>
-                    <TextView
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/servicenameitems"
-                        android:backgroundTint="@color/green"
-                        android:textColor="@color/white"
-                        android:padding="@dimen/_5sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Fridays, 1-9 pm"
-                        android:textSize="@dimen/_16sdp"
-                        android:onClick="SelectNextThreeDays"/>
+                        android:layout_height="match_parent"/>
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

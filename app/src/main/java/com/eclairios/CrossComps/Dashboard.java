@@ -175,13 +175,19 @@ public class Dashboard extends AppCompatActivity {
                     ////////////////////////////////////////
                     int count1 = 0;
 
-                    String eventId,eventName,eventAddress;
+                    String eventId,eventName,eventAddress,eventDay,eventDate,eventType;
                     while(count1 < jsonArray1.length())
                     {
                         JSONObject JO = jsonArray1.getJSONObject(count1);
                         eventId = JO.getString("Event_ID");
                         eventName = JO.getString("Event_Name");
                         eventAddress = JO.getString("Address");
+                        eventDay = JO.getString("Day");
+                        eventDate = JO.getString("Date");
+                        eventType = JO.getString("Type");
+
+                        Log.e("dateDay", "onPostExecute: "+eventDay+eventDate);
+
 
                         Log.e("jdjdud", "onPostExecute: "+ eventName);
                         Log.e("jdjdud", "onPostExecute: "+ eventAddress);
@@ -190,6 +196,9 @@ public class Dashboard extends AppCompatActivity {
                         users.setCoordinatorID(eventId);
                         users.setCoordinatorName(eventName);
                         users.setCoordinatorAddress(eventAddress);
+                        users.setEvent_day(eventDay);
+                        users.setEvent_date(eventDate);
+                        users.setItem_type(eventType);
 
 
                         chatitem.add(users);
@@ -201,13 +210,14 @@ public class Dashboard extends AppCompatActivity {
                     //////////////////////////////////
                     int count = 0;
 
-                    String serviceId,serviceName,serviceAddress;
+                    String serviceId,serviceName,serviceAddress,serviceType;
                     while(count < jsonArray.length())
                     {
                         JSONObject JO = jsonArray.getJSONObject(count);
                         serviceId = JO.getString("Service_ID");
                         serviceName = JO.getString("Service_Name");
                         serviceAddress = JO.getString("Address");
+                        serviceType = JO.getString("Type");
 
                         Log.e("jdjdud", "onPostExecute: "+ serviceName);
                         Log.e("jdjdud", "onPostExecute: "+ serviceAddress);
@@ -216,8 +226,7 @@ public class Dashboard extends AppCompatActivity {
                         users.setCoordinatorID(serviceId);
                         users.setCoordinatorName(serviceName);
                         users.setCoordinatorAddress(serviceAddress);
-
-
+                        users.setItem_type(serviceType);
                         chatitem.add(users);
                         count++;
 
