@@ -544,7 +544,7 @@ public class CrossComp extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(CrossComp.this,CoordinatorServicePage.class));
+        startActivity(new Intent(CrossComp.this,Dashboard.class));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -555,7 +555,6 @@ public class CrossComp extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.item2:
                 Toast.makeText(this, "Item 2 selected", Toast.LENGTH_SHORT).show();
                 return true;

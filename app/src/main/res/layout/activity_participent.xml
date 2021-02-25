@@ -688,6 +688,7 @@
             fab:fab_colorNormal="@color/green"
             fab:fab_colorPressed="@color/green"
             fab:fab_colorRipple="#99FFFFFF"
+            android:onClick="MoveToTraining"
            />
 
         <com.github.clans.fab.FloatingActionButton

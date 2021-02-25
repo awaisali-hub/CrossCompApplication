@@ -44,13 +44,20 @@ public class AdapterCoordinaterServicePage extends RecyclerView.Adapter<AdapterC
     public void onBindViewHolder(@NonNull AdapterCoordinaterServicePage.ViewHolder holder, int position) {
 
         WaitDialog.hideDialog();
+        Log.e("sizecheck", "getItemCount: "+listCoordinater.get(position).getService_facility_name() );
         holder.serviceDay.setText(listCoordinater.get(position).getService_facility_name());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.MakeAppointment(listCoordinater.get(position).getService_facility_name());
+            }
+        });
 
 
     }
     @Override
     public int getItemCount() {
-        Log.e("sizecheck", "getItemCount: "+listCoordinater.size() );
+
         return listCoordinater.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {

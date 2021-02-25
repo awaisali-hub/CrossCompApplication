@@ -22,7 +22,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Challenges.IndividualTeamChallengesScreen1cActivity"></activity>
+        <activity android:name=".Trainings.TrainingPersonalizedActivity"></activity>
+        <activity android:name=".Trainings.TrainingRecommendationsActivity" />
+        <activity android:name=".Trainings.TrainingMainPageActivity" />
+        <activity android:name=".Challenges.IndividualTeamChallengesScreen1cActivity" />
         <activity android:name=".Challenges.IndividualTeamChallengesScreen1bActivity" />
         <activity android:name=".Challenges.IndividualTeamChallengesScreen1aActivity" />
         <activity android:name=".Challenges.CustomTeamChallengesScreen1cActivity" />
@@ -53,11 +56,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".Participent">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".OneServiceCard" />
         <activity android:name=".MorePages" />
@@ -67,7 +66,13 @@
         <activity android:name=".TeamScore" />
         <activity android:name=".CrossCompTeams" />
         <activity android:name=".Scores" />
-        <activity android:name=".SplashActivity" />
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".CrossComp" />
         <activity android:name=".Dashboard" />
         <activity android:name=".Registration" />

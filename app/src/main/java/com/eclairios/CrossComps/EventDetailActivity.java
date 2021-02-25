@@ -251,6 +251,9 @@ public class EventDetailActivity extends AppCompatActivity {
                     End_Time = JO.getString("End_Time");
 
 
+                    Log.e("EID", "onPostExecute: "+E_ID );
+
+
 
 
                     String _24HourTime = Start_Time;

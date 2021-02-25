@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
 import com.eclairios.CrossComps.Fragment.SwipeAdapter;
 import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
+import com.eclairios.CrossComps.Trainings.TrainingMainPageActivity;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -232,5 +233,9 @@ public class Participent extends AppCompatActivity {
         SwipeAdapter swipeAdapter= new SwipeAdapter(getSupportFragmentManager());
         viewpager.setAdapter(swipeAdapter);
         viewpager.setCurrentItem(0);
+    }
+
+    public void MoveToTraining(View view) {
+        startActivity(new Intent(Participent.this, TrainingMainPageActivity.class));
     }
 }

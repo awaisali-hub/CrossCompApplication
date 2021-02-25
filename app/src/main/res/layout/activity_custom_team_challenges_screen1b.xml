@@ -114,36 +114,37 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_10sdp">
 
+            <LinearLayout
+                android:layout_width="@dimen/_190sdp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Florida"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_30sdp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="(84)"
+                    android:textSize="25sp"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+            </LinearLayout>
+
+
+
             <TextView
-                android:layout_width="@dimen/_150sdp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="Florida"
-                android:textSize="25sp"
-                android:layout_marginStart="@dimen/_10sdp"/>
-            <TextView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:text="(#)"
                 android:textAlignment="textEnd"
-                android:textSize="18sp"
-                />
-            <TextView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:text="84"
-                android:textAlignment="textEnd"
-                android:textSize="18sp"
-                android:layout_marginStart="@dimen/_20sdp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:text="102.5"
                 android:textSize="25sp"
+                android:textStyle="bold"
                 android:layout_marginStart="@dimen/_20sdp"
                 />
         </LinearLayout>
@@ -154,37 +155,37 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_10sdp">
 
-            <TextView
-                android:layout_width="@dimen/_150sdp"
+            <LinearLayout
+                android:layout_width="@dimen/_190sdp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Texas"
-                android:textSize="25sp"
-                android:layout_marginStart="@dimen/_10sdp"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Texas"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_30sdp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="(12)"
+                    android:textSize="25sp"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+            </LinearLayout>
+
+
+
 
             <TextView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:text="(#)"
-                android:textAlignment="textEnd"
-                android:textSize="18sp"
-                />
-            <TextView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:text="12"
-                android:textAlignment="textEnd"
-                android:textSize="18sp"
-                android:layout_marginStart="@dimen/_20sdp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:textAlignment="textEnd"
                 android:text="94.7"
+                android:textStyle="bold"
                 android:textSize="25sp"
                 android:layout_marginStart="@dimen/_20sdp"
                 />
@@ -196,36 +197,36 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_10sdp">
 
-            <TextView
-                android:layout_width="@dimen/_150sdp"
+            <LinearLayout
+                android:layout_width="@dimen/_190sdp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue"
-                android:text="California"
-                android:textSize="25sp"
-                android:layout_marginStart="@dimen/_10sdp"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blue"
+                    android:text="California"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_30sdp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blue"
+                    android:text="(47)"
+                    android:textSize="25sp"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+            </LinearLayout>
+
+
             <TextView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:text="(#)"
-                android:textAlignment="textEnd"
-                android:textSize="18sp"
-                />
-            <TextView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:text="47"
-                android:textAlignment="textEnd"
-                android:textSize="18sp"
-                android:layout_marginStart="@dimen/_20sdp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blue"
                 android:text="93.8"
+                android:textAlignment="textEnd"
                 android:textSize="25sp"
+                android:textStyle="bold"
                 android:layout_marginStart="@dimen/_20sdp"
                 />
         </LinearLayout>
@@ -236,36 +237,36 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_10sdp">
 
-            <TextView
-                android:layout_width="@dimen/_150sdp"
+            <LinearLayout
+                android:layout_width="@dimen/_190sdp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="New York"
-                android:textSize="25sp"
-                android:layout_marginStart="@dimen/_10sdp"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="New York"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_30sdp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="(36)"
+                    android:textSize="25sp"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+            </LinearLayout>
+
+
             <TextView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:text="(#)"
-                android:textAlignment="textEnd"
-                android:textSize="18sp"
-                />
-            <TextView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:textAlignment="textEnd"
-                android:text="36"
-                android:textSize="18sp"
-                android:layout_marginStart="@dimen/_20sdp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="87.6"
+                android:textAlignment="textEnd"
                 android:textSize="25sp"
+                android:textStyle="bold"
                 android:layout_marginStart="@dimen/_20sdp"
                 />
         </LinearLayout>
@@ -276,38 +277,38 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_10sdp">
 
-            <TextView
-                android:layout_width="@dimen/_150sdp"
+             <LinearLayout
+                android:layout_width="@dimen/_190sdp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Arizona"
-                android:textSize="25sp"
-                android:layout_marginStart="@dimen/_10sdp"/>
+                android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/black"
+                     android:text="Arizona"
+                     android:textSize="25sp"
+                     android:textStyle="bold"
+                     android:layout_marginStart="@dimen/_30sdp"/>
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/black"
+                     android:text="(29)"
+                     android:textSize="25sp"
+                     android:layout_marginStart="@dimen/_5sdp"/>
+             </LinearLayout>
+
+
+
 
             <TextView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:text="(#)"
-                android:textAlignment="textEnd"
-                android:textSize="18sp"
-                />
-            <TextView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:textAlignment="textEnd"
-                android:text="29"
-                android:textSize="18sp"
-                android:layout_marginStart="@dimen/_20sdp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:text="84.9"
+                android:textAlignment="textEnd"
                 android:textSize="25sp"
+                android:textStyle="bold"
                 android:layout_marginStart="@dimen/_20sdp"
                 />
         </LinearLayout>
@@ -317,7 +318,7 @@
 
 
         <LinearLayout
-            android:layout_marginTop="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

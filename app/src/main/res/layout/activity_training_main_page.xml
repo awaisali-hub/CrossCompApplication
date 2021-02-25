@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Challenges.ChallengeScreen0Activity">
+    tools:context=".Trainings.TrainingMainPageActivity">
 
 
 
@@ -25,7 +25,7 @@
                 android:layout_height="match_parent"
                 android:textSize="20sp"
                 android:layout_marginEnd="15dp"
-                android:text="My CrossComp Challenges"
+                android:text="My CrossComp Training"
                 android:gravity="center"
                 android:textColor="@color/actionbar_text_colour"
                 android:textStyle="bold"/>
@@ -43,7 +43,7 @@
         >
 
         <androidx.appcompat.widget.AppCompatButton
-            android:text="Team Challenges - Standard"
+            android:text="General Training Recommendations"
             android:padding="@dimen/_8sdp"
             android:elevation="@dimen/_20sdp"
             android:ems="10"
@@ -59,10 +59,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:onClick="MoveToStandardChallenge"/>
+            android:onClick="MoveToRecommendationsTraining"
+            />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:text="Team Challenges - Custom"
+            android:text="Personalized Training Program"
             android:padding="@dimen/_8sdp"
             android:elevation="@dimen/_20sdp"
             android:ems="10"
@@ -78,9 +79,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:onClick="MoveToCustomChallenge"/>
+            android:onClick="MoveToPersonalizedTraining"
+           />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
             android:text="Individual Challenges"
             android:padding="@dimen/_8sdp"
             android:elevation="@dimen/_20sdp"
@@ -97,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:onClick="MoveToIndividualChallenge"/>
+           />
 
     </LinearLayout>
 </RelativeLayout>

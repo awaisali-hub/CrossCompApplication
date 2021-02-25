@@ -46,6 +46,7 @@
             android:layout_below="@+id/worldTeam"
             android:background="@drawable/res"
             android:layout_width="match_parent"
+            android:textAllCaps="false"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
@@ -66,6 +67,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
+            android:textAllCaps="false"
             android:layout_marginBottom="15dp"
             android:backgroundTint="@color/blue"
             android:text="My County Challenges"
@@ -83,6 +85,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
+            android:textAllCaps="false"
             android:layout_marginBottom="15dp"
             android:backgroundTint="@color/blue"
             android:text="My City Challenges"
@@ -101,6 +104,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="15dp"
+            android:textAllCaps="false"
             android:backgroundTint="@color/blue"
             android:text="My Gym Challenges"
             android:textColor="@color/white"
@@ -121,6 +125,7 @@
             android:layout_marginBottom="15dp"
             android:backgroundTint="@color/blue"
             android:text="My Church Challenges"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp"
             />
@@ -139,6 +144,7 @@
             android:backgroundTint="@color/blue"
             android:text="My Company Challenges"
             android:textColor="@color/white"
+            android:textAllCaps="false"
             android:textSize="18sp"
             />
 
@@ -157,6 +163,7 @@
             android:text="My Occupation Challenges"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:textAllCaps="false"
             />
 
         <androidx.appcompat.widget.AppCompatButton
