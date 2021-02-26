@@ -22,8 +22,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.eclairios.CrossComps.Model.ModelCoordinaterServicePage;
 
@@ -56,8 +58,11 @@ public class EventDetailActivity extends AppCompatActivity {
 
     TextView event_name,event_address,eventDetails;
     String Event_ID,EventName,EventAddress,EventDay,EventDate;
+    String Event_Time_ID1,Event_Time_ID2,Event_Time_ID3,E_ID,Send_Event_Time_ID,currentUserID;
 
     RadioButton timeOne,timeTwo,timeThree;
+
+    RadioGroup radioGroup;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,10 +120,8 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     public void EventActivityDetails(View view) {
-
-        new BackgroundTasksLoadData().execute();
         MakeAppointment(Event_ID);
-
+        new BackgroundTasksLoadData().execute();
     }
 
 
@@ -136,7 +139,7 @@ public class EventDetailActivity extends AppCompatActivity {
         builder.setCancelable(true);
         builder.setView(dialogView);
 
-
+        radioGroup = (RadioGroup)dialogView.findViewById(R.id.radio);
         timeOne = dialogView.findViewById(R.id.timeOne);
         timeTwo = dialogView.findViewById(R.id.timeTwo);
         timeThree = dialogView.findViewById(R.id.timeThree);
@@ -146,10 +149,65 @@ public class EventDetailActivity extends AppCompatActivity {
         AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
+
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+
+
+                    switch(checkedId){
+                        case R.id.timeOne:
+                            Send_Event_Time_ID = Event_Time_ID1;
+
+                            Log.e("IDTest", "onCheckedChanged: "+ timeOne.getText() );
+                            Log.e("IDTest", "onCheckedChanged: "+Event_Time_ID1 );
+                            break;
+                        case R.id.timeTwo:
+                            Send_Event_Time_ID = Event_Time_ID2;
+                            Log.e("IDTest", "onCheckedChanged: "+ timeTwo.getText() );
+                            Log.e("IDTest", "onCheckedChanged: "+Event_Time_ID2 );
+                            break;
+                        case R.id.timeThree:
+                            Send_Event_Time_ID = Event_Time_ID3;
+                            Log.e("IDTest", "onCheckedChanged: "+ timeThree.getText() );
+                            Log.e("IDTest", "onCheckedChanged: "+Event_Time_ID3 );
+                            break;
+                    }
+
+
+
+                }
+            });
+
+
+
+
         sendRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(EventDetailActivity.this);
+                currentUserID = preferences.getString("CurrentUserId", "");
+
+                String firstName = preferences.getString("First_Name", "");
+                String lastName = preferences.getString("Last_Name", "");
+
+
+                Log.e("Namesssssss", "onClick: "+firstName );
+                Log.e("Namesssssss", "onClick: "+lastName );
+
+                Log.e("Send_ID", "onCheckedChanged: "+Send_Event_Time_ID );
+                Log.e("Send_ID", "onCheckedChanged: "+currentUserID );
+
+                String method = "Event_Reservation";
+
+                BackgroundTask backgroundTask = new BackgroundTask(EventDetailActivity.this);
+                backgroundTask.execute(method,Send_Event_Time_ID,currentUserID);
+
                 Intent intent = new Intent(EventDetailActivity.this,EventCrossCompActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("CurrentUserID","1");
                 intent.putExtra("coordinatorID","1");
                 intent.putExtra("coordinatorName","1");
@@ -241,7 +299,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 int count = 0;
 
 
-                String E_ID,EVENT_ID,Day,Start_Time,End_Time;
+                String EVENT_ID,Day,Start_Time,End_Time;
                 while(count < jsonArray.length())
                 {
                     JSONObject JO = jsonArray.getJSONObject(count);
@@ -251,7 +309,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     End_Time = JO.getString("End_Time");
 
 
-                    Log.e("EID", "onPostExecute: "+E_ID );
+               //     Log.e("EID", "onPostExecute: "+E_ID );
 
 
 
@@ -275,10 +333,13 @@ public class EventDetailActivity extends AppCompatActivity {
                     final String text = newStartTime.toLowerCase() + " - " + newEndTime.toLowerCase();
                     if(count == 0){
                         timeOne.setText(text);
+                        Event_Time_ID1 = E_ID;
                     }else if(count == 1){
                         timeTwo.setText(text);
+                        Event_Time_ID2 = E_ID;
                     }else if(count == 2){
                         timeThree.setText(text);
+                        Event_Time_ID3 = E_ID;
                     }
 
 
@@ -286,6 +347,11 @@ public class EventDetailActivity extends AppCompatActivity {
 
                 }
 
+                if(timeOne.isChecked()) {
+                    Send_Event_Time_ID = Event_Time_ID1;
+                    Log.e("onesssss", "onCheckedChanged: " + timeOne.getText());
+                    Log.e("onesssss", "onPostExecute: "+Event_Time_ID1);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (ParseException e) {

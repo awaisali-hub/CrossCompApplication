@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/ll_back"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="#EEEEEE">
+
+
+
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/lv_cancel"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:mrl_rippleBackground="@android:color/transparent"
+            app:mrl_rippleColor="#D1D1D1"
+            app:mrl_rippleDuration="200"
+            app:mrl_rippleFadeDuration="75"
+            app:mrl_rippleHover="true"
+            app:mrl_rippleOverlay="true"
+            app:mrl_rippleRoundedCorners="5dp"
+            tools:ignore="MissingClass">
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Cancel"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/primary_colour" />
+
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#CCCCCC" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD" />
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="Personalized"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tv_sub_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="CrossComp Training Program"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/tv_pricetv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20sp"
+                        android:layout_weight="0.2344"
+                        android:text="Grand Total"
+                        android:textColor="@color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.55"
+                        android:gravity="start"
+                        android:text="$10.0"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textSize="22sp"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/linear_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/cardNumberEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="-0.25dp"
+                        android:background="@drawable/res"
+                        android:backgroundTint="@color/grey"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:drawableRight="@drawable/card_img"
+                        android:hint="Card number"
+                        android:inputType="phone"
+                        android:padding="16dp"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="#878787"
+                        android:textSize="14sp"
+                        />
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-0.25dp"
+                        android:orientation="horizontal"
+                        tools:ignore="NegativeMargin"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:weightSum="5">
+
+                        <EditText
+                            android:id="@+id/cardDateEditText"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginRight="-0.25dp"
+                            android:layout_weight="1.6"
+                            android:background="@drawable/res"
+                            android:backgroundTint="@color/grey"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:drawableRight="@drawable/calendar_img"
+                            android:hint="Expire MM"
+                            android:inputType="date"
+                            android:maxLength="2"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="16dp"
+                            android:paddingTop="16dp"
+                            android:textColor="@android:color/black"
+                            android:textColorHint="#878787"
+                            android:textSize="14sp"
+                            tools:ignore="LabelFor,RtlHardcoded" />
+
+                        <View
+                            android:layout_weight=".10"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"/>
+
+                        <EditText
+                            android:id="@+id/cardDateyear"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginRight="-0.25dp"
+                            android:layout_weight="1.6"
+                            android:background="@drawable/res"
+                            android:backgroundTint="@color/grey"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:drawableRight="@drawable/calendar_img"
+                            android:hint="Expire YY"
+                            android:inputType="date"
+                            android:maxLength="2"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="16dp"
+                            android:paddingTop="16dp"
+                            android:textColor="@android:color/black"
+                            android:textColorHint="#878787"
+                            android:textSize="14sp"
+                            tools:ignore="LabelFor,RtlHardcoded" />
+                        <View
+                            android:layout_weight=".10"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"/>
+                        <EditText
+                            android:id="@+id/cardCVCEditText"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginLeft="-0.25dp"
+                            android:layout_weight="1.6"
+                            android:background="@drawable/res"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:backgroundTint="@color/grey"
+                            android:drawableRight="@drawable/lock_img"
+                            android:hint="CVC"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:padding="16dp"
+                            android:textColor="@android:color/black"
+                            android:textColorHint="#878787"
+                            android:textSize="14sp"
+                            tools:ignore="LabelFor,RtlHardcoded" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:orientation="horizontal">
+
+
+
+
+                        <com.balysv.materialripple.MaterialRippleLayout
+                            android:id="@+id/lv_confirm"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:orientation="horizontal"
+                            app:mrl_rippleBackground="@android:color/transparent"
+                            app:mrl_rippleColor="#D1D1D1"
+                            app:mrl_rippleDuration="200"
+                            app:mrl_rippleFadeDuration="75"
+                            app:mrl_rippleHover="true"
+                            app:mrl_rippleOverlay="true"
+                            app:mrl_rippleRoundedCorners="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:background="@drawable/res"
+                                android:text="Pay Now"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:textSize="20sp" />
+
+                        </com.balysv.materialripple.MaterialRippleLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:gravity="center_vertical"
+                            android:textSize="17sp" />
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/visa2" />
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/discover"
+                                 />
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/mastercard" />
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/americanexpress" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:gravity="center_vertical"
+                            android:text=""
+                            android:textSize="17sp" />
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="7"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/ali_pay" />
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/google_pay" />
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/apple_pay" />
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/americanexpress"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/ic_jcb"
+                                 />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

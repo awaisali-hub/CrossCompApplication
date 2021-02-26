@@ -140,16 +140,16 @@ public class Registration extends AppCompatActivity {
 //        });
 
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog = new ProgressDialog(Registration.this);
-                progressDialog.setMessage("Please wait...");
-                progressDialog.show();
-
-                registration();
-            }
-        });
+//        signUpButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                progressDialog = new ProgressDialog(Registration.this);
+//                progressDialog.setMessage("Please wait...");
+//                progressDialog.show();
+//
+//                registration();
+//            }
+//        });
 
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -302,6 +302,14 @@ public class Registration extends AppCompatActivity {
         Intent intent = new Intent(Registration.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    public void Registration(View view) {
+        progressDialog = new ProgressDialog(Registration.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+
+        registration();
     }
 }
 

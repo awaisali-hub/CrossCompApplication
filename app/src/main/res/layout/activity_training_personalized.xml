@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Improve your score by 20 points\nin [2 months], guaranteed!*"
+            android:text="Improve your score by 20 points\nin 8 weeks, guaranteed!*"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Program based on your individual\nscores, needs and\npersonal preferences."
+            android:text="Your personal training program will be\n based on your individual scores, and you\n can progress at your own pace."
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Includes your next CrossComps"
+            android:text="Includes an online fitness consult and\na private chat board with your coach!"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -112,16 +112,18 @@
             android:background="@drawable/res"
             android:text="PURCHASE"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="PaymentActivity"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="*Program extended without charge\nuntil you achieve your fitness goal."
+            android:text="*Your program will be extended at no charge\nuntil you improve your score by 20 points."
             android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textColor="@color/colorRed"
+            android:textSize="14sp"
+            />
 
 
     </LinearLayout>

@@ -41,6 +41,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
     JSONArray jsonArray;
 
     String latt,lngg,CurrentUserID;
+    String First_Name,Last_Name;
 
     Context ctx;
     File file;
@@ -69,6 +70,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         String insertNameTeam_url = "http://edevz.com/cross_comp/team.php";
         String insertIndividualChallenge_url = "http://edevz.com/cross_comp/challenges.php";
         String insertTeamChallenge_url = "http://edevz.com/cross_comp/insertBasicTeamChallenge.php";
+        String request_event_reservation = "http://edevz.com/cross_comp/set_event_reservation.php";
 
         String method = params[0];
 
@@ -501,6 +503,54 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else if(method.equals("Event_Reservation")){
+
+            String eventTimeID = params[1];
+            String userId = params[2];
+
+
+
+            try {
+                URL url = new URL(request_event_reservation);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setReadTimeout(10000);
+                httpURLConnection.setConnectTimeout(10000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+
+                String data = URLEncoder.encode("eventTimeID","UTF-8") + "=" + URLEncoder.encode(eventTimeID,"UTF-8") + "&"+
+                        URLEncoder.encode("userId","UTF-8") + "=" + URLEncoder.encode(userId,"UTF-8");
+
+
+                bufferedWriter.write(data);
+
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
 
@@ -542,6 +592,11 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                                 latt = JO.getString("lat");
                                 lngg = JO.getString("lon");
                                 CurrentUserID = JO.getString("User_ID");
+                                First_Name = JO.getString("First_Name");
+                                Last_Name = JO.getString("Last_Name");
+
+                                Log.e("First_Name", "run: "+First_Name);
+                                Log.e("First_Name", "run: "+Last_Name );
 
                                 count++;
 
@@ -553,6 +608,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("CurrentUserId",CurrentUserID);
+                        editor.putString("First_Name",First_Name);
+                        editor.putString("Last_Name",Last_Name);
                         editor.apply();
 
                         Log.e("sddududu", "run: "+latt+"\n"+lngg );
@@ -595,6 +652,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                                         latt = JO.getString("lat");
                                         lngg = JO.getString("lon");
                                         CurrentUserID = JO.getString("User_ID");
+                                        First_Name = JO.getString("First_Name");
+                                        Last_Name = JO.getString("Last_Name");
+
+
+                                        Log.e("First_Name", "run: "+First_Name);
+                                        Log.e("First_Name", "run: "+Last_Name );
 
                                         count++;
 
@@ -605,7 +668,11 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.putString("CurrentUserId",CurrentUserID);
+                                editor.putString("First_Name",First_Name);
+                                editor.putString("Last_Name",Last_Name);
                                 editor.apply();
+
+
 
                                 Log.e("sddududu", "run: "+latt+"\n"+lngg );
                                 intent = new Intent(ctx,Dashboard.class);
@@ -683,6 +750,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 ctx.startActivity(intent);
             }else if(result.equals("Challenge basicTeam Registration UnSuccess")){
                 Toast.makeText(ctx, "Challenge not send!!! Please Try Again", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Event Reservation Success")){
+                Toast.makeText(ctx, "Event Reservation Success", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Event Reservation UnSuccess")){
+                Toast.makeText(ctx, "Event Reservation UnSuccess", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("You already send Request for this Event")){
+                Toast.makeText(ctx, "You already reserve this Event", Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();
