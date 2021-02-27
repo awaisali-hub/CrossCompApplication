@@ -71,6 +71,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         String insertIndividualChallenge_url = "http://edevz.com/cross_comp/challenges.php";
         String insertTeamChallenge_url = "http://edevz.com/cross_comp/insertBasicTeamChallenge.php";
         String request_event_reservation = "http://edevz.com/cross_comp/set_event_reservation.php";
+        String send_message_url = "http://edevz.com/cross_comp/sendMessage.php";
 
         String method = params[0];
 
@@ -551,6 +552,57 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 e.printStackTrace();
             }
 
+        }else if(method.equals("SendUserMessage")){
+
+            String currentUserID = params[1];
+            String message = params[2];
+//            String receiverID = params[3];
+
+            Log.e("messaggeessss", "doInBackground: "+message );
+
+
+
+            try {
+                URL url = new URL(send_message_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setReadTimeout(10000);
+                httpURLConnection.setConnectTimeout(10000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+
+                String data = URLEncoder.encode("userID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8") + "&"+
+                        URLEncoder.encode("message","UTF-8") + "=" + URLEncoder.encode(message,"UTF-8") + "&"+
+                        URLEncoder.encode("receiverID","UTF-8") + "=" + URLEncoder.encode("1","UTF-8");
+
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
 
@@ -756,6 +808,10 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 Toast.makeText(ctx, "Event Reservation UnSuccess", Toast.LENGTH_SHORT).show();
             }else if(result.equals("You already send Request for this Event")){
                 Toast.makeText(ctx, "You already reserve this Event", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Message Send")){
+                Toast.makeText(ctx, "Message Send", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Message not Send")){
+                Toast.makeText(ctx, "Message not Send", Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();

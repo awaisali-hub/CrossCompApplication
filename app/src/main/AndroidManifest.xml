@@ -26,7 +26,6 @@
         <activity android:name=".Trainings.MyTrainingProgramActivity" />
         <activity android:name=".Trainings.AfterFitnessConsultationActivity" />
         <activity android:name=".Trainings.HelperChatActivity" />
-        <activity android:name=".Trainings.PurchasedTrainingProgramActivity" />
         <activity android:name=".Trainings.TrainingPersonalizedActivity" />
         <activity android:name=".Trainings.TrainingRecommendationsActivity" />
         <activity android:name=".Trainings.TrainingMainPageActivity" />

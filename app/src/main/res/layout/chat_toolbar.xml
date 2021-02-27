@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/blue"
+    >
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="3dp"
+        android:src="@drawable/ic_back_message"
+        android:onClick="backClickHandler"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:visibility="gone"
+        android:id="@+id/profile_image"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:paddingTop="3dp"
+        android:paddingRight="3dp"
+        android:paddingBottom="3dp"
+        android:src="@drawable/ic_users_images"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/userDpName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My CrossComp Coach"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"/>
+    </LinearLayout>
+
+</androidx.appcompat.widget.Toolbar>
