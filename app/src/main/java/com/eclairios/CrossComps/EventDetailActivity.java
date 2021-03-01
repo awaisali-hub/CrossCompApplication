@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.Model.ModelCoordinaterServicePage;
 
 import org.json.JSONArray;
@@ -149,7 +150,11 @@ public class EventDetailActivity extends AppCompatActivity {
         AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
-
+        try{
+            WaitDialog.showDialog(EventDetailActivity.this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -208,10 +213,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(EventDetailActivity.this,EventCrossCompActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("CurrentUserID","1");
-                intent.putExtra("coordinatorID","1");
-                intent.putExtra("coordinatorName","1");
-                intent.putExtra("serviceID","1");
+                intent.putExtra("Send_Event_Time_ID",Send_Event_Time_ID);
+                intent.putExtra("eventName",event_name.getText());
+                intent.putExtra("eventAddress",event_address.getText());
                 startActivity(intent);
             }
         });
@@ -285,6 +289,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
             json_string = result;
 
+
+
             Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
 
 
@@ -346,12 +352,18 @@ public class EventDetailActivity extends AppCompatActivity {
                     count++;
 
                 }
+                try{
+                    WaitDialog.hideDialog();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 if(timeOne.isChecked()) {
                     Send_Event_Time_ID = Event_Time_ID1;
                     Log.e("onesssss", "onCheckedChanged: " + timeOne.getText());
                     Log.e("onesssss", "onPostExecute: "+Event_Time_ID1);
                 }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (ParseException e) {

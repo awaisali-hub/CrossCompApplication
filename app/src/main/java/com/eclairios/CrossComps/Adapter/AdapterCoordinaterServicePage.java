@@ -49,7 +49,7 @@ public class AdapterCoordinaterServicePage extends RecyclerView.Adapter<AdapterC
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.MakeAppointment(listCoordinater.get(position).getService_facility_name());
+                listener.MakeAppointment(listCoordinater.get(position).getService_facility_name(),listCoordinater.get(position).getService_facility_ID());
             }
         });
 

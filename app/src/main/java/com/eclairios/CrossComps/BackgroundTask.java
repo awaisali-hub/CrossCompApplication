@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -71,6 +72,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         String insertIndividualChallenge_url = "http://edevz.com/cross_comp/challenges.php";
         String insertTeamChallenge_url = "http://edevz.com/cross_comp/insertBasicTeamChallenge.php";
         String request_event_reservation = "http://edevz.com/cross_comp/set_event_reservation.php";
+        String request_service_reservation = "http://edevz.com/cross_comp/set_service_reservation.php";
         String send_message_url = "http://edevz.com/cross_comp/sendMessage.php";
 
         String method = params[0];
@@ -552,6 +554,61 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 e.printStackTrace();
             }
 
+        }else if(method.equals("Service_Reservation")){
+
+            String Facility_ID = params[1];
+            String serviceDATE = params[2];
+            String currentUserID = params[3];
+
+
+            try {
+                URL url = new URL(request_service_reservation);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setReadTimeout(10000);
+                httpURLConnection.setConnectTimeout(10000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+
+
+                Log.e("logeeeees", "doInBackground: "+Facility_ID);
+                Log.e("logeeeees", "doInBackground: "+"2021-03-01");
+                Log.e("logeeeees", "doInBackground: "+currentUserID);
+
+
+                String data = URLEncoder.encode("serviceFacilityID","UTF-8") + "=" + URLEncoder.encode(Facility_ID,"UTF-8") + "&"+
+                        URLEncoder.encode("reservationDate","UTF-8") + "=" + URLEncoder.encode(serviceDATE,"UTF-8")  + "&"+
+                        URLEncoder.encode("userId","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8");
+
+
+                bufferedWriter.write(data);
+
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }else if(method.equals("SendUserMessage")){
 
             String currentUserID = params[1];
@@ -812,6 +869,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 Toast.makeText(ctx, "Message Send", Toast.LENGTH_SHORT).show();
             }else if(result.equals("Message not Send")){
                 Toast.makeText(ctx, "Message not Send", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Service Reservation Success")){
+                Toast.makeText(ctx, "Service Reservation Success", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Service Reservation UnSuccess")){
+                Toast.makeText(ctx, "Service Reservation UnSuccess", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("You already send Request for this Service")){
+                Toast.makeText(ctx, "You already send Request for this Service", Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();

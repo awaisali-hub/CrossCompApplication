@@ -2,14 +2,19 @@ package com.eclairios.CrossComps;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +32,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EventCrossCompActivity extends AppCompatActivity {
@@ -36,6 +42,13 @@ public class EventCrossCompActivity extends AppCompatActivity {
     JSONObject jsonObject;
     JSONArray jsonArray,jsonArray1;
 
+    String Send_Event_Time_ID;
+    String eventName;
+    String eventAddress;
+
+
+    TextView event_name_txt,event_address_txt,current_username_txt,event_day_txt,event_date_txt,event_time_txt,instruction_txt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +57,66 @@ public class EventCrossCompActivity extends AppCompatActivity {
 
         appBarLayout = findViewById(R.id.toolbar);
         appBarLayout.inflateMenu(R.menu.menu);
+
+        try{
+            WaitDialog.showDialog(EventCrossCompActivity.this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        event_name_txt = findViewById(R.id.eventNAME);
+        event_address_txt = findViewById(R.id.eventADDRESS);
+        current_username_txt = findViewById(R.id.CurrentUserName);
+        event_day_txt = findViewById(R.id.event_day);
+        event_date_txt = findViewById(R.id.event_date);
+        event_time_txt = findViewById(R.id.event_time);
+        instruction_txt = findViewById(R.id.instructionsText);
+
+
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(EventCrossCompActivity.this);
+
+        String firstName = preferences.getString("First_Name", "");
+        String lastName = preferences.getString("Last_Name", "");
+        current_username_txt.setText(firstName + " "+lastName);
+
+
+
+
+
+
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle!=null){
+            Send_Event_Time_ID = bundle.getString("Send_Event_Time_ID");
+            eventName = bundle.getString("eventName");
+            eventAddress = bundle.getString("eventAddress");
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("Send_Event_Time_ID",Send_Event_Time_ID);
+            editor.putString("eventName",eventName);
+            editor.putString("eventAddress",eventAddress);
+            editor.apply();
+        }else{
+
+            Send_Event_Time_ID = preferences.getString("Send_Event_Time_ID", "");
+            eventName = preferences.getString("eventName", "");
+            eventAddress = preferences.getString("eventAddress", "");
+        }
+
+        Log.e("testingssssss", "onCreate: "+ firstName +" "+lastName);
+        Log.e("testingssssss", "onCreate: "+Send_Event_Time_ID);
+        Log.e("testingssssss", "onCreate: "+ eventName);
+        Log.e("testingssssss", "onCreate: "+ eventAddress);
+
+
+        event_name_txt.setText(eventName);
+        event_address_txt.setText(eventAddress);
+
+
 
         new BackgroundTasksLoadData().execute();
     }
@@ -58,6 +131,7 @@ public class EventCrossCompActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.item2:
+                Log.e("testssssssss", "onOptionsItemSelected: "+"2" );
                 Toast.makeText(this, "Item 2 selected", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item3:
@@ -88,9 +162,12 @@ public class EventCrossCompActivity extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(EventCrossCompActivity.this);
+                String currentUserID = preferences.getString("CurrentUserId", "");
 
-                String data = URLEncoder.encode("event_time_ID","UTF-8") + "=" + URLEncoder.encode("3","UTF-8") +"&"+
-                        URLEncoder.encode("user_ID","UTF-8") + "=" + URLEncoder.encode("4","UTF-8");
+
+                String data = URLEncoder.encode("event_time_ID","UTF-8") + "=" + URLEncoder.encode(Send_Event_Time_ID,"UTF-8") +"&"+
+                        URLEncoder.encode("user_ID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -163,6 +240,16 @@ public class EventCrossCompActivity extends AppCompatActivity {
                     Log.e("testingssssss", "onPostExecute: "+ Start_Time);
                     Log.e("testingssssss", "onPostExecute: "+ End_Time);
 
+                    final String start_time = Start_Time;
+                    final String end_time = End_Time;
+
+                    final SimpleDateFormat sdf = new SimpleDateFormat("H:mm");
+                    final Date dateObj = sdf.parse(start_time);
+                    final Date dateObj1 = sdf.parse(end_time);
+
+
+
+                    event_time_txt.setText(new SimpleDateFormat("K:mm a").format(dateObj).toLowerCase() +"-"+new SimpleDateFormat("K:mm a").format(dateObj1).toLowerCase());
                     count++;
 
                 }
@@ -176,16 +263,27 @@ public class EventCrossCompActivity extends AppCompatActivity {
                     Date = JO.getString("Date");
                     Instruction = JO.getString("Instructions");
 
-                    Log.e("testingssssss", "onPostExecute: "+ Day);
-                    Log.e("testingssssss", "onPostExecute: "+ Date);
-                    Log.e("testingssssss", "onPostExecute: "+ Instruction);
+                    event_day_txt.setText(Day);
+                    instruction_txt.setText(Instruction);
+
+                    String deliveryDate=Date;
+                    SimpleDateFormat dateFormatprev = new SimpleDateFormat("yyyy-MM-dd");
+                    Date d = dateFormatprev.parse(deliveryDate);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+                    String eventDate = dateFormat.format(d);
+
+                    event_date_txt.setText(eventDate);
 
                     count1++;
 
                 }
+                try{
+                    WaitDialog.hideDialog();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-
-            } catch (JSONException e) {
+            } catch (JSONException | ParseException e) {
                 e.printStackTrace();
             }
 

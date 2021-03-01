@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.eclairios.CrossComps.Adapter.AdapterCoordinaterServicePage;
@@ -55,7 +56,7 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
 
     String CoordinatorID,CoordinatorName,CoordinatorAddress;
 
-    String ServiceID;
+    String facilityID;
 
     RecyclerView recyclerCoordinaterService;
     AdapterCoordinaterServicePage adapterCoordinaterServicePage;
@@ -68,6 +69,11 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
 
     RadioButton date1,date2,date3;
 
+    RadioGroup radioGroup;
+
+    String serviceDATE;
+
+    String formatServiceDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,7 +140,7 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
 
 
 
-    public void MakeAppointment(String serviceDay) {
+    public void MakeAppointment(String serviceDay,String Facility_ID) {
 
         Button sendRequestBtn;
         TextView showReservationDay;
@@ -149,6 +155,7 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
 
         sendRequestBtn = dialogView.findViewById(R.id.sendRequest);
         showReservationDay = dialogView.findViewById(R.id.ShowReservationDay);
+        radioGroup = (RadioGroup)dialogView.findViewById(R.id.date_radio_group);
         date1 = dialogView.findViewById(R.id.date1);
         date2 = dialogView.findViewById(R.id.date2);
         date3 = dialogView.findViewById(R.id.date3);
@@ -166,6 +173,8 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
 
         pickFileImage.show();
 
+
+
         pickFileImage.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
@@ -177,14 +186,89 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
             }
         });
 
+
+            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+            {
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+
+
+                    switch(checkedId){
+                        case R.id.date1:
+                            String Date1 = date1.getText().toString();
+                            serviceDATE = Date1;
+                            Log.e("IDTest", "onCheckedChanged: "+ date1.getText() );
+                            Log.e("facilityIDs", "MakeAppointment: "+serviceDATE);
+                            break;
+                        case R.id.date2:
+                            String Date2 = date2.getText().toString();
+                            serviceDATE = Date2;
+                            Log.e("IDTest", "onCheckedChanged: "+ date2.getText() );
+                            Log.e("facilityIDs", "MakeAppointment: "+serviceDATE);
+
+                            break;
+                        case R.id.date3:
+                            String Date3 = date3.getText().toString();
+                            serviceDATE = Date3;
+                            Log.e("IDTest", "onCheckedChanged: "+ date3.getText() );
+                            Log.e("facilityIDs", "MakeAppointment: "+serviceDATE);
+                            break;
+                    }
+
+
+
+                }
+            });
+
+
+        if(date1.isChecked()) {
+
+            String Date1 = date1.getText().toString();
+            serviceDATE = Date1;
+
+            Log.e("IDTest", "onCheckedChanged: " + date1.getText());
+            Log.e("facilityIDs", "MakeAppointment: "+serviceDATE);
+
+        }
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(CoordinatorServicePage.this);
+        String currentUserID = preferences.getString("CurrentUserId", "");
+        Log.e("facilityIDs", "MakeAppointment: "+Facility_ID);
+        Log.e("facilityIDs", "MakeAppointment: "+currentUserID);
+
+
         sendRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                String method = "Service_Reservation";
+
+
+                String strCurrentDate = serviceDATE;
+
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+                Date newDate = null;
+                try {
+                    newDate = format.parse(strCurrentDate);
+                    format = new SimpleDateFormat("yyyy-MM-dd");
+                    formatServiceDate = format.format(newDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                BackgroundTask backgroundTask = new BackgroundTask(CoordinatorServicePage.this);
+                backgroundTask.execute(method,Facility_ID,formatServiceDate,currentUserID);
+
                 Intent intent = new Intent(CoordinatorServicePage.this,CrossComp.class);
-                intent.putExtra("CurrentUserID","1");
-                intent.putExtra("coordinatorID","1");
-                intent.putExtra("coordinatorName","1");
-                intent.putExtra("serviceID","1");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                coordinator_name.setText(CoordinatorName);
+                coordinator_address.setText(CoordinatorAddress);
+                intent.putExtra("serviceName",coordinator_name.getText().toString());
+                intent.putExtra("serviceAddress",coordinator_address.getText().toString());
+                intent.putExtra("FacilityID",Facility_ID);
+                intent.putExtra("formatServiceDate",formatServiceDate);
                 startActivity(intent);
             }
         });
@@ -223,6 +307,8 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
 
             String Day3 = tomorrowAsString1;
             String[] day3 = Day3.split(",");
+
+
 
             date1.setText(day1[1]);
             date2.setText(day2[1]);
@@ -323,7 +409,7 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
 
                 int count = 0;
 
-                String facilityID,Service_ID,Day,Start_Time,End_Time;
+                String Service_ID,Day,Start_Time,End_Time;
                 while(count < jsonArray.length())
                 {
                     JSONObject JO = jsonArray.getJSONObject(count);
@@ -333,7 +419,7 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
                     Start_Time = JO.getString("Start_Time");
                     End_Time = JO.getString("End_Time");
 
-                    Log.e("testtttttt", "onPostExecute: "+facilityID+" ,"+Service_ID+Day+ Start_Time+End_Time);
+                    Log.e("testtttttt", "onPostExecute: "+facilityID);
 
 
 
