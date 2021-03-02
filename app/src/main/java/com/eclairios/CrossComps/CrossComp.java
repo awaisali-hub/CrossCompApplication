@@ -8,13 +8,14 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
@@ -27,12 +28,15 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
+import com.eclairios.CrossComps.Maps.ServiceProviderMapsActivity;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -51,11 +55,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -74,10 +80,21 @@ public class CrossComp extends AppCompatActivity {
 
     String serviceNameStr,serviceAddressStr,FacilityIDStr,formatServiceDate;
 
+
+    Date date;
+    Calendar calendar;
+    String CurrentDay;
+
+    RadioButton date1,date2,date3;
+    RadioGroup radioGroup;
+    String serviceDATE,Facility_ID,S_Reservation_ID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cross_comp);
+
+
 
         try{
             WaitDialog.showDialog(CrossComp.this);
@@ -87,6 +104,13 @@ public class CrossComp extends AppCompatActivity {
 
         appBarLayout = findViewById(R.id.toolbar);
         appBarLayout.inflateMenu(R.menu.menu);
+
+        setActionBar(appBarLayout);
+        getSupportActionBar().hide();
+        getActionBar().setTitle("");
+
+
+
 
         serviceName = findViewById(R.id.serviceNAME);
         serviceAddress = findViewById(R.id.serviceADDRESS);
@@ -132,46 +156,207 @@ public class CrossComp extends AppCompatActivity {
 
         new BackgroundTasksForLoad().execute();
 
-    }
-
-    public void RescheduleAppointment(View view) {
-        ImageButton selectDateDayBtn,selectTimeBtn;
-        Button sendRequestBtn;
-        TextView makeAppointment;
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(CrossComp.this);
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.alert_dialog_for_appointment,null);
-        builder.setCancelable(true);
-        builder.setView(dialogView);
-
-        selectDateDay = dialogView.findViewById(R.id.datePicker);
-        selectTime = dialogView.findViewById(R.id.timePicker);
-
-        selectDateDayBtn = dialogView.findViewById(R.id.selectDate);
-        selectTimeBtn = dialogView.findViewById(R.id.selectTime);
-        sendRequestBtn = dialogView.findViewById(R.id.sendRequest);
-
-        makeAppointment = dialogView.findViewById(R.id.ShowAppointment);
-
-        makeAppointment.setText("Reschedule Appointment");
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(CrossComp.this);
-        String updateDay = preferences.getString("updateDate", "");
-        String updateTime = preferences.getString("updateTime", "");
-        selectDateDay.setText(updateDay);
-        selectTime.setText(updateTime);
-
-
-        AlertDialog pickFileImage = builder.create();
-        pickFileImage.show();
+        calendar = Calendar.getInstance();
+        date = calendar.getTime();
+        CurrentDay = new SimpleDateFormat("EEEE MM-dd-yyyy", Locale.ENGLISH).format(date.getTime());
+        Log.e("loggggsgsgsg", "onCreate: "+CurrentDay );
 
 
     }
+
+
 
     public void Home(View view) {
         startActivity(new Intent(CrossComp.this,Participent.class));
     }
+
+
+
+    public void MakeAppointment(String serviceDay,String Facility_ID) {
+
+        Button sendRequestBtn;
+        TextView showReservationDay;
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(CrossComp.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_change_reservation_facility,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+
+
+        sendRequestBtn = dialogView.findViewById(R.id.sendRequest);
+        showReservationDay = dialogView.findViewById(R.id.ShowReservationDay);
+        radioGroup = (RadioGroup)dialogView.findViewById(R.id.date_radio_group);
+        date1 = dialogView.findViewById(R.id.date1);
+        date2 = dialogView.findViewById(R.id.date2);
+        date3 = dialogView.findViewById(R.id.date3);
+
+
+        String currentString = serviceDay;
+        String[] separated = currentString.split(",");
+
+        NextThreeDates(separated[0]);
+
+        showReservationDay.setText("Which "+separated[0]+"?");
+
+
+        AlertDialog pickFileImage = builder.create();
+
+        pickFileImage.show();
+
+
+
+        pickFileImage.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                calendar = Calendar.getInstance();
+                date = calendar.getTime();
+                CurrentDay = new SimpleDateFormat("EEEE MM-dd-yyyy", Locale.ENGLISH).format(date.getTime());
+                Log.e("loggggsgsgsg", "onCreate: "+CurrentDay );
+
+            }
+        });
+
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+
+
+                switch(checkedId){
+                    case R.id.date1:
+                        String Date1 = date1.getText().toString();
+                        serviceDATE = Date1;
+                        Log.e("IDTest", "onCheckedChanged: "+ date1.getText() );
+                        Log.e("facilityIDs", "MakeAppointment: "+serviceDATE);
+                        break;
+                    case R.id.date2:
+                        String Date2 = date2.getText().toString();
+                        serviceDATE = Date2;
+                        Log.e("IDTest", "onCheckedChanged: "+ date2.getText() );
+                        Log.e("facilityIDs", "MakeAppointment: "+serviceDATE);
+
+                        break;
+                    case R.id.date3:
+                        String Date3 = date3.getText().toString();
+                        serviceDATE = Date3;
+                        Log.e("IDTest", "onCheckedChanged: "+ date3.getText() );
+                        Log.e("facilityIDs", "MakeAppointment: "+serviceDATE);
+                        break;
+                }
+
+
+
+            }
+        });
+
+
+        if(date1.isChecked()) {
+
+            String Date1 = date1.getText().toString();
+            serviceDATE = Date1;
+
+            Log.e("IDTest", "onCheckedChanged: " + date1.getText());
+            Log.e("facilityIDs", "MakeAppointment: "+serviceDATE);
+
+        }
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(CrossComp.this);
+        String currentUserID = preferences.getString("CurrentUserId", "");
+        Log.e("facilityIDs", "MakeAppointment: "+Facility_ID);
+        Log.e("facilityIDs", "MakeAppointment: "+currentUserID);
+
+
+        sendRequestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String method = "Change_Service_Reservation";
+
+
+                String strCurrentDate = serviceDATE;
+
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+                Date newDate = null;
+                try {
+                    newDate = format.parse(strCurrentDate);
+                    format = new SimpleDateFormat("yyyy-MM-dd");
+                    formatServiceDate = format.format(newDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                BackgroundTask backgroundTask = new BackgroundTask(CrossComp.this);
+                backgroundTask.execute(method,Facility_ID,formatServiceDate,currentUserID,S_Reservation_ID);
+
+                Intent intent = new Intent(CrossComp.this,CrossComp.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                intent.putExtra("serviceName",serviceName.getText().toString());
+                intent.putExtra("serviceAddress",serviceAddress.getText().toString());
+                intent.putExtra("FacilityID",Facility_ID);
+                intent.putExtra("formatServiceDate",formatServiceDate);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void NextThreeDates(String serviceDay){
+
+        Date today = calendar.getTime();
+
+        if (CurrentDay.toLowerCase().contains(serviceDay.toLowerCase())) {
+            Log.e("nvbmxzczcxzzv", "onCreate:" + CurrentDay);
+
+            calendar.add(Calendar.DAY_OF_YEAR, 7);
+            Date tomorrow = calendar.getTime();
+            java.text.DateFormat dateFormat = new SimpleDateFormat("EEEE, MM-dd-yyyy");
+
+            String todayAsString = dateFormat.format(today);
+            String tomorrowAsString = dateFormat.format(tomorrow);
+
+            calendar.add(Calendar.DAY_OF_YEAR, 7);
+            Date tomorrow1 = calendar.getTime();
+            DateFormat dateFormat1 = new SimpleDateFormat("EEEE, MM-dd-yyyy");
+
+            String tomorrowAsString1 = dateFormat1.format(tomorrow1);
+
+            Log.e("datesssss", "NextThreeDates: "+todayAsString );
+            Log.e("datesssss", "NextThreeDates: "+tomorrowAsString );
+            Log.e("datesssss", "NextThreeDates: "+tomorrowAsString1 );
+
+
+            String Day1 = todayAsString;
+            String[] day1 = Day1.split(",");
+
+            String Day2 = tomorrowAsString;
+            String[] day2 = Day2.split(",");
+
+            String Day3 = tomorrowAsString1;
+            String[] day3 = Day3.split(",");
+
+
+
+            date1.setText(day1[1]);
+            date2.setText(day2[1]);
+            date3.setText(day3[1]);
+
+
+
+
+        } else {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            date = calendar.getTime();
+            CurrentDay = new SimpleDateFormat("EEEE, MM-dd-yyyy", Locale.ENGLISH).format(date.getTime());
+            NextThreeDates(serviceDay);
+        }
+
+    }
+
 
 
     class BackgroundTasksForLoad extends AsyncTask<String, Void, String>
@@ -263,6 +448,8 @@ public class CrossComp extends AppCompatActivity {
                 while(count < jsonArray.length())
                 {
                     JSONObject JO = jsonArray.getJSONObject(count);
+                    S_Reservation_ID = JO.getString("S_Reservation_ID");
+                    Facility_ID = JO.getString("Facility_ID");
                     Reservation_Date = JO.getString("Reservation_Date");
 
 
@@ -333,24 +520,41 @@ public class CrossComp extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.item2:
-                Toast.makeText(this, "Item 2 selected", Toast.LENGTH_LONG).show();
+            case R.id.map:
+                startActivity(new Intent(CrossComp.this, ServiceProviderMapsActivity.class));
                 return true;
-            case R.id.item3:
-                Toast.makeText(this, "Item 3 selected", Toast.LENGTH_LONG).show();
+            case R.id.change:
+                Toast.makeText(this, "Change", Toast.LENGTH_SHORT).show();
+                MakeAppointment(serviceDay.getText().toString(),Facility_ID);
+                return true;
+            case R.id.cancel:
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                String currentUserID = preferences.getString("CurrentUserId", "");
+
+                String method = "Cancel_service_reservation";
+                BackgroundTask backgroundTask = new BackgroundTask(this);
+                backgroundTask.execute(method,FacilityIDStr,formatServiceDate,currentUserID);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
+
 
 }

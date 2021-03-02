@@ -54,6 +54,8 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        getSupportActionBar().hide();
+
 
         recyclerView = findViewById(R.id.list);
         adapterHorizontal = new AdapterHorizontal( chatitem,Dashboard.this );

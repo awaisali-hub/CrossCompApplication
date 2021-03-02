@@ -53,10 +53,8 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
     JSONArray jsonArray;
 
     TextView coordinator_name,coordinator_address;
-
     String CoordinatorID,CoordinatorName,CoordinatorAddress;
-
-    String facilityID;
+    String facilityID,Service_ID;
 
     RecyclerView recyclerCoordinaterService;
     AdapterCoordinaterServicePage adapterCoordinaterServicePage;
@@ -66,18 +64,17 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
     Calendar calendar;
     String CurrentDay;
 
-
     RadioButton date1,date2,date3;
-
     RadioGroup radioGroup;
-
     String serviceDATE;
-
     String formatServiceDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coordinator_service_page);
+
+        getSupportActionBar().hide();
 
         try{
             WaitDialog.showDialog(this);
@@ -133,10 +130,6 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
 
 
     }
-
-
-
-
 
 
 
@@ -409,7 +402,7 @@ public class CoordinatorServicePage extends AppCompatActivity implements MyInter
 
                 int count = 0;
 
-                String Service_ID,Day,Start_Time,End_Time;
+                String Day,Start_Time,End_Time;
                 while(count < jsonArray.length())
                 {
                     JSONObject JO = jsonArray.getJSONObject(count);

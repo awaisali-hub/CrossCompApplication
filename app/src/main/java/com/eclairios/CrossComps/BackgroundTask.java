@@ -74,6 +74,10 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         String request_event_reservation = "http://edevz.com/cross_comp/set_event_reservation.php";
         String request_service_reservation = "http://edevz.com/cross_comp/set_service_reservation.php";
         String send_message_url = "http://edevz.com/cross_comp/sendMessage.php";
+        String request_cancel_event_reservation_url = "http://edevz.com/cross_comp/cancel_event_reservation.php";
+        String request_cancel_service_reservation_url = "http://edevz.com/cross_comp/cancel_service_reservation.php";
+        String request_change_event_reservation_url = "http://edevz.com/cross_comp/change_event_reservation.php";
+        String request_change_service_reservation_url = "http://edevz.com/cross_comp/change_service_reservation.php";
 
         String method = params[0];
 
@@ -105,7 +109,6 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                         URLEncoder.encode("phone","UTF-8") + "=" + URLEncoder.encode(strPhone,"UTF-8") + "&"+
                         URLEncoder.encode("email","UTF-8") + "=" + URLEncoder.encode(strEmail,"UTF-8") + "&"+
                         URLEncoder.encode("password","UTF-8") + "=" + URLEncoder.encode(strPassword,"UTF-8") + "&"+
-
                         URLEncoder.encode("lat","UTF-8") + "=" + URLEncoder.encode(strLat,"UTF-8") + "&"+
                         URLEncoder.encode("lng","UTF-8") + "=" + URLEncoder.encode(strLng,"UTF-8") + "&"+
                         URLEncoder.encode("address","UTF-8") + "=" + URLEncoder.encode(strAddress,"UTF-8");
@@ -660,8 +663,188 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 e.printStackTrace();
             }
 
-        }
+        }else if (method.equals("Cancel_event_reservation")){
+            String eventTimeID = params[1];
+            String userId  = params[2];
 
+            try {
+                URL url = new URL(request_cancel_event_reservation_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("eventTimeID","UTF-8") + "=" + URLEncoder.encode(eventTimeID,"UTF-8") + "&"+
+                        URLEncoder.encode("userId","UTF-8") + "=" + URLEncoder.encode(userId,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else if (method.equals("Cancel_service_reservation")){
+            String serviceFacilityID = params[1];
+            String reservationDate  = params[2];
+            String userId = params[3];
+
+            try {
+                URL url = new URL(request_cancel_service_reservation_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("serviceFacilityID","UTF-8") + "=" + URLEncoder.encode(serviceFacilityID,"UTF-8") + "&"+
+                        URLEncoder.encode("reservationDate","UTF-8") + "=" + URLEncoder.encode(reservationDate,"UTF-8") + "&"+
+                        URLEncoder.encode("userId","UTF-8") + "=" + URLEncoder.encode(userId,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else if (method.equals("Change_event_reservation")){
+            String eventTimeID = params[1];
+            String userId  = params[2];
+            String E_Reservation_ID = params[3];
+            Log.e("testedddddd", "doInBackground: "+eventTimeID );
+
+            try {
+                URL url = new URL(request_change_event_reservation_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("eventTimeID","UTF-8") + "=" + URLEncoder.encode(eventTimeID,"UTF-8") + "&"+
+                        URLEncoder.encode("userId","UTF-8") + "=" + URLEncoder.encode(userId,"UTF-8") + "&"+
+                        URLEncoder.encode("E_Reservation_ID","UTF-8") + "=" + URLEncoder.encode(E_Reservation_ID,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else if (method.equals("Change_Service_Reservation")){
+            String serviceFacilityID = params[1];
+            String reservationDate  = params[2];
+            String userId = params[3];
+            String S_Reservation_ID = params[4];
+
+            try {
+                URL url = new URL(request_change_service_reservation_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("serviceFacilityID","UTF-8") + "=" + URLEncoder.encode(serviceFacilityID,"UTF-8") + "&"+
+                        URLEncoder.encode("reservationDate","UTF-8") + "=" + URLEncoder.encode(reservationDate,"UTF-8") + "&"+
+                        URLEncoder.encode("userId","UTF-8") + "=" + URLEncoder.encode(userId,"UTF-8") + "&"+
+                        URLEncoder.encode("S_Reservation_ID","UTF-8") + "=" + URLEncoder.encode(S_Reservation_ID,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
 
 
         return null;
@@ -674,6 +857,9 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
+
+
+        Log.e("changeReservation", "onPostExecute: "+result );
 
 
         try{
@@ -875,6 +1061,47 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 Toast.makeText(ctx, "Service Reservation UnSuccess", Toast.LENGTH_SHORT).show();
             }else if(result.equals("You already send Request for this Service")){
                 Toast.makeText(ctx, "You already send Request for this Service", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Event Reservation Cancel")){
+
+                Toast.makeText(ctx, "Event Reservation Cancel", Toast.LENGTH_LONG).show();
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
+                String lat = preferences.getString("lat", "");
+                String lng = preferences.getString("lng", "");
+                Intent intent = new Intent(ctx,Dashboard.class);
+                intent.putExtra("lat",lat);
+                intent.putExtra("lng",lng);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                ctx.startActivity(intent);
+            }else if(result.equals("Event Reservation Cancel Fail")){
+                Toast.makeText(ctx, "Event Reservation Cancel Fail", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Service Reservation Cancel")){
+
+                Toast.makeText(ctx, "Service Reservation Cancel", Toast.LENGTH_LONG).show();
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
+                String lat = preferences.getString("lat", "");
+                String lng = preferences.getString("lng", "");
+                Intent intent = new Intent(ctx,Dashboard.class);
+                intent.putExtra("lat",lat);
+                intent.putExtra("lng",lng);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                ctx.startActivity(intent);
+            }else if(result.equals("Service Reservation Cancel Fail")){
+                Toast.makeText(ctx, "Service Reservation Cancel Fail", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Change Event Reservation")){
+                Toast.makeText(ctx, "Event Reservation Changed", Toast.LENGTH_SHORT).show();
+
+            }else if(result.equals("Change Event Reservation Fail")){
+                Toast.makeText(ctx, "Event Reservation Changed Fail", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("You already Reserve this Event Time")){
+                Toast.makeText(ctx, "You already Reserve this Event Time", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Change Service Reservation")){
+                Toast.makeText(ctx, "Service Reservation Changed", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Change Service Reservation Fail")){
+                Toast.makeText(ctx, "Service Reservation Changed Fail", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("You already Reserve this Service")){
+                Toast.makeText(ctx, "You already Reserve this Service", Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();

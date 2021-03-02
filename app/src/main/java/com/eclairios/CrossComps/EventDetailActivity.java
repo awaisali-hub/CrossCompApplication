@@ -58,7 +58,7 @@ public class EventDetailActivity extends AppCompatActivity {
     JSONArray jsonArray;
 
     TextView event_name,event_address,eventDetails;
-    String Event_ID,EventName,EventAddress,EventDay,EventDate;
+    String Event_ID,EventName,EventAddress,EventDay,EventDate,EVENT_ID;
     String Event_Time_ID1,Event_Time_ID2,Event_Time_ID3,E_ID,Send_Event_Time_ID,currentUserID;
 
     RadioButton timeOne,timeTwo,timeThree;
@@ -69,6 +69,8 @@ public class EventDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
+
+        getSupportActionBar().hide();
 
         event_name = findViewById(R.id.event_name);
         event_address = findViewById(R.id.event_address);
@@ -216,6 +218,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 intent.putExtra("Send_Event_Time_ID",Send_Event_Time_ID);
                 intent.putExtra("eventName",event_name.getText());
                 intent.putExtra("eventAddress",event_address.getText());
+                intent.putExtra("EVENT_ID",EVENT_ID);
                 startActivity(intent);
             }
         });
@@ -305,7 +308,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 int count = 0;
 
 
-                String EVENT_ID,Day,Start_Time,End_Time;
+                String Day,Start_Time,End_Time;
                 while(count < jsonArray.length())
                 {
                     JSONObject JO = jsonArray.getJSONObject(count);

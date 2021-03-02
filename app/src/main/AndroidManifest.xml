@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Trainings.PaymentActivity"></activity>
+        <activity android:name=".Maps.ServiceProviderMapsActivity"></activity>
+        <activity android:name=".Trainings.PaymentActivity" />
         <activity android:name=".Trainings.MyTrainingProgramActivity" />
         <activity android:name=".Trainings.AfterFitnessConsultationActivity" />
         <activity android:name=".Trainings.HelperChatActivity" />
