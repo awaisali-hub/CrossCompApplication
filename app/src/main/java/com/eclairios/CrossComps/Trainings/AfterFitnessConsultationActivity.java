@@ -14,6 +14,7 @@ public class AfterFitnessConsultationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_fitness_consultation);
+        getSupportActionBar().hide();
     }
 
     public void MoveToMyTrainingProgram(View view) {

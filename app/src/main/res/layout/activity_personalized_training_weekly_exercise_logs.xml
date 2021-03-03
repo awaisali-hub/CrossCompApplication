@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Trainings.MyTrainingProgramActivity">
+    tools:context=".Trainings.PersonalizedTrainingWeeklyExerciseLogsActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:textSize="20sp"
                 android:layout_marginEnd="15dp"
-                android:text="My Training Program"
+                android:text="Week #[1]"
                 android:gravity="center"
                 android:textColor="@color/actionbar_text_colour"
                 android:textStyle="bold"/>
@@ -39,90 +39,6 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/weekCount"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Exercise Rx for Adrian Cox / Week #[1]"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Do the exercises listed below"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="1 time per day:"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Walk/Jog 600 meters"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginTop="@dimen/_7sdp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Do 45 squats"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginTop="@dimen/_5sdp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Do 30 leg-raises"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginTop="@dimen/_5sdp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Do 10 push-ups"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginTop="@dimen/_5sdp"/>
-
-        <TextView
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Record your workouts below:"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            />
-
 
         <TableLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -135,52 +51,30 @@
                 android:background="@color/black" />
             <TableRow>
                 <TextView
-                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_column="1"
-                    android:text="Day"
-                    android:padding="3dip"
+                    android:text="3/28"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold"
+                    android:padding="5dip"
                     android:textColor="@color/black"/>
-                <TextView
-                    android:layout_marginStart="@dimen/_60sdp"
-                    android:layout_column="1"
-                    android:text="Yes"
-                    android:padding="3dip"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_marginStart="@dimen/_60sdp"
-                    android:layout_column="1"
-                    android:text="No"
-                    android:padding="3dip"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
-            </TableRow>
-
-            <View
-                android:layout_height="1dip"
-                android:background="@color/black" />
-            <TableRow>
                 <TextView
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_column="1"
                     android:text="Sunday"
-                    android:padding="3dip"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_marginStart="@dimen/_60sdp"
-                    android:layout_column="1"
-                    android:text="X"
-                    android:textAlignment="center"
+                    android:padding="5dip"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:padding="3dip"
                     android:textColor="@color/black"/>
+
                 <TextView
                     android:layout_marginStart="@dimen/_60sdp"
                     android:layout_column="1"
                     android:textAlignment="textStart"
-                    android:textStyle="bold"
-                    android:padding="3dip"
+                    android:text="Record"
+                    android:textSize="18sp"
+                    android:padding="5dip"
                     android:textColor="@color/black"/>
             </TableRow>
 
@@ -190,26 +84,31 @@
                 android:background="@color/black" />
 
             <TableRow>
+                <TextView
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_column="1"
+                    android:textAlignment="center"
+                    android:text="3/29"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="5dip"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_column="1"
                     android:text="Monday"
-                    android:padding="3dip"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_marginStart="@dimen/_60sdp"
-                    android:layout_column="1"
-                    android:textAlignment="center"
+                    android:padding="5dip"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:padding="3dip"
                     android:textColor="@color/black"/>
+
                 <TextView
                     android:layout_marginStart="@dimen/_60sdp"
                     android:layout_column="1"
-                    android:text="X"
+                    android:text="Record"
                     android:textAlignment="textStart"
-                    android:textStyle="bold"
-                    android:padding="3dip"
+                    android:textSize="18sp"
+                    android:padding="5dip"
                     android:textColor="@color/black"/>
             </TableRow>
             <View
@@ -217,26 +116,31 @@
                 android:background="@color/black" />
 
             <TableRow>
+                <TextView
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_column="1"
+                    android:text="3/30"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="5dip"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_column="1"
                     android:text="Tuesday"
-                    android:padding="3dip"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_marginStart="@dimen/_60sdp"
-                    android:layout_column="1"
-                    android:text="X"
-                    android:textAlignment="center"
+                    android:padding="5dip"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:padding="3dip"
                     android:textColor="@color/black"/>
+
                 <TextView
                     android:layout_marginStart="@dimen/_60sdp"
                     android:layout_column="1"
                     android:textAlignment="textStart"
-                    android:textStyle="bold"
-                    android:padding="3dip"
+                    android:text="Record"
+                    android:textSize="18sp"
+                    android:padding="5dip"
                     android:textColor="@color/black"/>
             </TableRow>
             <View
@@ -244,26 +148,31 @@
                 android:background="@color/black" />
 
             <TableRow>
+                <TextView
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_column="1"
+                    android:text="3/31"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="5dip"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_column="1"
                     android:text="Wednesday"
-                    android:padding="3dip"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_marginStart="@dimen/_60sdp"
-                    android:layout_column="1"
-                    android:text="X"
-                    android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:padding="3dip"
+                    android:padding="5dip"
                     android:textColor="@color/black"/>
+
                 <TextView
                     android:layout_marginStart="@dimen/_60sdp"
                     android:layout_column="1"
                     android:textAlignment="textStart"
-                    android:textStyle="bold"
-                    android:padding="3dip"
+                    android:textSize="18sp"
+                    android:text="Record"
+                    android:padding="5dip"
                     android:textColor="@color/black"/>
             </TableRow>
 
@@ -271,26 +180,31 @@
                 android:layout_height="1dip"
                 android:background="@color/black" />
             <TableRow>
+                <TextView
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_column="1"
+                    android:text="4/1"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="5dip"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_column="1"
                     android:text="Thursday"
-                    android:padding="3dip"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_marginStart="@dimen/_60sdp"
-                    android:layout_column="1"
-                    android:text="X"
-                    android:textAlignment="center"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:padding="3dip"
+                    android:padding="5dip"
                     android:textColor="@color/black"/>
+
                 <TextView
                     android:layout_marginStart="@dimen/_60sdp"
                     android:layout_column="1"
+                    android:text="Record"
                     android:textAlignment="textStart"
-                    android:textStyle="bold"
-                    android:padding="3dip"
+                    android:textSize="18sp"
+                    android:padding="5dip"
                     android:textColor="@color/black"/>
             </TableRow>
 
@@ -298,26 +212,31 @@
                 android:layout_height="1dip"
                 android:background="@color/black" />
             <TableRow>
+                <TextView
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_column="1"
+                    android:textAlignment="center"
+                    android:text="4/2"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="5dip"
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_column="1"
                     android:text="Friday"
-                    android:padding="3dip"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_marginStart="@dimen/_60sdp"
-                    android:layout_column="1"
-                    android:textAlignment="center"
+                    android:padding="5dip"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:padding="3dip"
                     android:textColor="@color/black"/>
+
                 <TextView
                     android:layout_marginStart="@dimen/_60sdp"
                     android:layout_column="1"
-                    android:text="X"
+                    android:text="Record"
                     android:textAlignment="textStart"
-                    android:textStyle="bold"
-                    android:padding="3dip"
+                    android:textSize="18sp"
+                    android:padding="5dip"
                     android:textColor="@color/black"/>
             </TableRow>
 
@@ -327,25 +246,109 @@
 
             <TableRow>
                 <TextView
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_column="1"
+                    android:text="4/3"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="5dip"
+                    android:textColor="@color/black"/>
+                <TextView
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_column="1"
                     android:text="Saturday"
-                    android:padding="3dip"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:layout_marginStart="@dimen/_60sdp"
-                    android:layout_column="1"
-                    android:text="X"
-                    android:textAlignment="center"
+                    android:padding="5dip"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:padding="3dip"
                     android:textColor="@color/black"/>
+
                 <TextView
                     android:layout_marginStart="@dimen/_60sdp"
                     android:layout_column="1"
                     android:textAlignment="textStart"
+                    android:text="Record"
+                    android:textSize="18sp"
+                    android:padding="5dip"
+                    android:textColor="@color/black"/>
+            </TableRow>
+            <View
+                android:layout_height="1dip"
+                android:background="@color/black" />
+
+        </TableLayout>
+
+        <TableLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="2"
+            android:layout_marginTop="@dimen/_5sdp">
+            <TableRow>
+                <TextView
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_column="1"
+                    android:text="Total:"
+                    android:textAlignment="center"
+                    android:padding="5dip"
                     android:textStyle="bold"
-                    android:padding="3dip"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_column="1"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:padding="5dip"
+                    android:textColor="@color/black"/>
+            </TableRow>
+
+
+            <View
+                android:layout_height="1dip"
+                android:background="@color/black" />
+
+            <TableRow>
+                <TextView
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_column="1"
+                    android:text="Goal:"
+                    android:textAlignment="center"
+                    android:padding="5dip"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_column="1"
+                    android:text="[6]"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:padding="5dip"
+                    android:textColor="@color/black"/>
+            </TableRow>
+            <View
+                android:layout_height="1dip"
+                android:background="@color/black" />
+            <TableRow>
+
+                <TextView
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_column="1"
+                    android:text="Compliance:"
+                    android:textAlignment="center"
+                    android:padding="5dip"
+                    android:textStyle="bold"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_column="1"
+                    android:text="0%"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:padding="5dip"
                     android:textColor="@color/black"/>
             </TableRow>
             <View
@@ -353,23 +356,12 @@
                 android:background="@color/black" />
         </TableLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/res"
-            android:backgroundTint="@color/blue"
-            android:text="Submit"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:onClick="MoveToWeeklyExerciseLogs"
-            />
+
+
+
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:id="@+id/MoveToScore"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -377,11 +369,10 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/res"
-            android:text="My CrossComp Coach"
+            android:text="Submit"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:onClick="MoveToCoach"
-            />
+                        />
 
 
     </LinearLayout>

@@ -53,6 +53,7 @@ public class HelperChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_helper_chat);
+        getSupportActionBar().hide();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(HelperChatActivity.this);
         currentUserID = preferences.getString("CurrentUserId", "");

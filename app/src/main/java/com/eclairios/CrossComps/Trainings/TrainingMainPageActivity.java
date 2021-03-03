@@ -14,6 +14,7 @@ public class TrainingMainPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training_main_page);
+        getSupportActionBar().hide();
     }
 
     public void MoveToRecommendationsTraining(View view) {

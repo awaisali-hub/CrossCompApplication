@@ -14,6 +14,7 @@ public class TrainingPersonalizedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training_personalized);
+        getSupportActionBar().hide();
     }
 
     public void PaymentActivity(View view) {

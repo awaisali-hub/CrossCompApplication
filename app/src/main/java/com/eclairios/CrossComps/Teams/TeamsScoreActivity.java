@@ -18,6 +18,7 @@ public class TeamsScoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams_score);
+        getSupportActionBar().hide();
     }
 
     public void MoveToFundTeam(View view) {

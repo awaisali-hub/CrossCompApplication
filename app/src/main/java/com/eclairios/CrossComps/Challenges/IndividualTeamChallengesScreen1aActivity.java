@@ -14,6 +14,7 @@ public class IndividualTeamChallengesScreen1aActivity extends AppCompatActivity 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_team_challenges_screen1a);
+        getSupportActionBar().hide();
     }
 
     public void MoveToChallenger(View view) {

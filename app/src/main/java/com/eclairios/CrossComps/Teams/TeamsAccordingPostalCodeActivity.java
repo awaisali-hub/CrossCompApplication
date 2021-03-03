@@ -12,5 +12,6 @@ public class TeamsAccordingPostalCodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teams_according_postal_code);
+        getSupportActionBar().hide();
     }
 }

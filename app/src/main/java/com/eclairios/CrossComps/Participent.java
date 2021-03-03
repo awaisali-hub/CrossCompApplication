@@ -48,6 +48,7 @@ public class Participent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participent);
+        getSupportActionBar().hide();
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {

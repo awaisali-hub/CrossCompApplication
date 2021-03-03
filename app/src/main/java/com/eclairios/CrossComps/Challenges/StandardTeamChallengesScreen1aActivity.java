@@ -14,6 +14,7 @@ public class StandardTeamChallengesScreen1aActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_standard_team_challenges_screen1a);
+        getSupportActionBar().hide();
     }
 
     public void MoveToCitySelection(View view) {

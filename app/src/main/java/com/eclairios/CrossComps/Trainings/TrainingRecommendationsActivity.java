@@ -12,5 +12,6 @@ public class TrainingRecommendationsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training_recommendations);
+        getSupportActionBar().hide();
     }
 }

@@ -12,5 +12,6 @@ public class StandardTeamChallengesScreen1cActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_standard_team_challenges_screen1c);
+        getSupportActionBar().hide();
     }
 }

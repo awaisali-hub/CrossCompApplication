@@ -72,15 +72,17 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginTop="@dimen/_10sdp"
         android:gravity="center"
         android:layout_below="@+id/team3"
         android:background="@drawable/res"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
         android:layout_marginBottom="15dp"
-        android:backgroundTint="@color/blue"
         android:text="My Personalized\n Training Program"
         android:textAlignment="center"
         android:textColor="@color/white"

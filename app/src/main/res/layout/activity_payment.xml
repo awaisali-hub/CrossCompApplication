@@ -74,6 +74,17 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="Adrian Cox"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,22 +130,14 @@
                     android:orientation="horizontal"
                     android:weightSum="1">
 
-                    <TextView
-                        android:id="@+id/tv_pricetv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20sp"
-                        android:layout_weight="0.2344"
-                        android:text="Grand Total"
-                        android:textColor="@color/black"
-                        />
+
 
                     <TextView
                         android:id="@+id/tv_price"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.55"
-                        android:gravity="start"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="$10.0"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textSize="22sp"

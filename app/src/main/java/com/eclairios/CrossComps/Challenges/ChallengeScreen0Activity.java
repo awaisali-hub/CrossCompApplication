@@ -14,6 +14,7 @@ public class ChallengeScreen0Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_screen0);
+        getSupportActionBar().hide();
     }
 
     public void MoveToStandardChallenge(View view) {

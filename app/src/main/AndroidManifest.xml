@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Maps.ServiceProviderMapsActivity"></activity>
+        <activity android:name=".Trainings.PersonalizedTrainingWeeklyExerciseLogsActivity"></activity>
+        <activity android:name=".Maps.ServiceProviderMapsActivity" />
         <activity android:name=".Trainings.PaymentActivity" />
         <activity android:name=".Trainings.MyTrainingProgramActivity" />
         <activity android:name=".Trainings.AfterFitnessConsultationActivity" />
@@ -69,10 +70,10 @@
         <activity android:name=".TeamScore" />
         <activity android:name=".CrossCompTeams" />
         <activity android:name=".Scores" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity"
+            android:theme="@style/AppFullScreenTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

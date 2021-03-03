@@ -12,5 +12,6 @@ public class ServiceProviderMapsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_provider_maps);
+        getSupportActionBar().hide();
     }
 }
