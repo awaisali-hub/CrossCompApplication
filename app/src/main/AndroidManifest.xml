@@ -61,6 +61,10 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDfzZIAt3V2ck7R46NJ3BsbJHpPFPt2rZ0" />
+
         <activity android:name=".Participent" />
         <activity android:name=".OneServiceCard" />
         <activity android:name=".MorePages" />
@@ -81,6 +85,8 @@
         <activity android:name=".Dashboard" />
         <activity android:name=".Registration" />
         <activity android:name=".MainActivity" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 
 </manifest>
