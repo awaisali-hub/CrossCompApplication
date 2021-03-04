@@ -22,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Trainings.PersonalizedTrainingWeeklyExerciseLogsActivity"></activity>
+        <activity android:name=".Trainings.GymPackageActivity"></activity>
+        <activity android:name=".Trainings.CertifiedCrossCompGymPaymentActivity" />
+        <activity android:name=".Trainings.CertifiedCrossCompGymPurchaseActivity" />
+        <activity android:name=".Trainings.GymsMapActivity" />
+        <activity android:name=".Trainings.PersonalizedTrainingWeeklyExerciseLogsActivity" />
         <activity android:name=".Maps.ServiceProviderMapsActivity" />
         <activity android:name=".Trainings.PaymentActivity" />
         <activity android:name=".Trainings.MyTrainingProgramActivity" />
@@ -60,7 +64,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDfzZIAt3V2ck7R46NJ3BsbJHpPFPt2rZ0" />
@@ -74,10 +77,12 @@
         <activity android:name=".TeamScore" />
         <activity android:name=".CrossCompTeams" />
         <activity android:name=".Scores" />
-        <activity android:name=".SplashActivity"
-            android:theme="@style/AppFullScreenTheme" >
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppFullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -86,7 +91,9 @@
         <activity android:name=".Registration" />
         <activity android:name=".MainActivity" />
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

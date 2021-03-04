@@ -1,51 +1,42 @@
-package com.eclairios.CrossComps.Maps;
+package com.eclairios.CrossComps.Trainings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
-import com.eclairios.CrossComps.Model.MapModel;
 import com.eclairios.CrossComps.R;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class ServiceProviderMapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class GymsMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     GoogleMap map;
     private MarkerOptions options = new MarkerOptions();
     private ArrayList<LatLng> latlngs = new ArrayList<>();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service_provider_maps);
+        setContentView(R.layout.activity_gyms_map);
 
         SupportMapFragment mapFragment = SupportMapFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.map_fragment,mapFragment).commit();
+                .add(R.id.gym_map_fragment,mapFragment).commit();
         mapFragment.getMapAsync(this);
-
-
-
-
-
 
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         map = googleMap;
 //        LatLng userLocation = new LatLng(33.6844, 73.0479);
 //        map.addMarker(new MarkerOptions().position(userLocation).title("Islamabad"));
@@ -62,14 +53,15 @@ public class ServiceProviderMapsActivity extends FragmentActivity implements OnM
 
         for (LatLng point : latlngs) {
             options.position(point);
-            options.title("Service 1");
-            options.snippet("service");
+            options.title("Gym 1");
+            options.snippet("gym");
             googleMap.addMarker(options);
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(point));
-
         }
-
 
     }
 
+    public void MoveToGymPurchaseActivity(View view) {
+        startActivity(new Intent(GymsMapActivity.this,CertifiedCrossCompGymPurchaseActivity.class));
+    }
 }

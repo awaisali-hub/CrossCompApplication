@@ -24,4 +24,8 @@ public class TrainingMainPageActivity extends AppCompatActivity {
     public void MoveToPersonalizedTraining(View view) {
         startActivity(new Intent(TrainingMainPageActivity.this,TrainingPersonalizedActivity.class));
     }
+
+    public void MoveToCertifiedGyms(View view) {
+        startActivity(new Intent(TrainingMainPageActivity.this,GymsMapActivity.class));
+    }
 }

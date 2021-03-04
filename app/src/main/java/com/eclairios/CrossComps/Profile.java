@@ -43,6 +43,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        getSupportActionBar().hide();
 
         first_Name = findViewById(R.id.first_Name);
         last_Name = findViewById(R.id.last_Name);

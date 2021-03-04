@@ -170,16 +170,6 @@ public class Participent extends AppCompatActivity {
         }
 
 
-
-
-
-//        userName.setText(str_userName);
-//        userAgeGender.setText(str_userAgeGender);
-//        userAddress.setText(str_userAddress);
-//        userScore.setText(str_userScore);
-//        userScoreRemarks.setText(strUserRemarks);
-//        userScoreDate.setText(newDateString);
-//        scoreExpireDate.setText(str_scoreExpireDate);
     }
 
     public void moveToScore(View view) {
@@ -187,31 +177,29 @@ public class Participent extends AppCompatActivity {
     }
 
     public void moveToTeams(View view) {
-        startActivity(new Intent(Participent.this, AllTeamCategoryActivity.class));
+        Intent intent = new Intent(Participent.this, AllTeamCategoryActivity.class);
+        startActivity(intent);
     }
 
     public void moveToChallenge(View view) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("service_ID_forChallenge",serviceID);
-        editor.apply();
-
-        Log.e("serviceIDChallenges", "moveToChallenge: "+serviceID);
-
         Intent intent = new Intent(Participent.this, ChallengeScreen0Activity.class);
         startActivity(intent);
     }
 
     public void moveToService(View view) {
-        startActivity(new Intent(Participent.this,Services.class));
+        Intent intent = new Intent(Participent.this, Services.class);
+        startActivity(intent);
     }
 
     public void moveToProfile(View view) {
-        startActivity(new Intent(Participent.this,Profile.class));
+        Intent intent = new Intent(Participent.this, Profile.class);
+        startActivity(intent);
     }
 
     public void moveToMorePages(View view) {
-        startActivity(new Intent(Participent.this,MorePages.class));
+        Intent intent = new Intent(Participent.this, MorePages.class);
+        startActivity(intent);
+
     }
 
     @Override
@@ -238,5 +226,16 @@ public class Participent extends AppCompatActivity {
 
     public void MoveToTraining(View view) {
         startActivity(new Intent(Participent.this, TrainingMainPageActivity.class));
+    }
+
+    public void MoveToReservationDashboardActivity(View view) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Participent.this);
+        String lat = preferences.getString("lat", "");
+        String lng = preferences.getString("lng", "");
+        Intent intent = new Intent(Participent.this,Dashboard.class);
+        intent.putExtra("lat",lat);
+        intent.putExtra("lng",lng);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

@@ -63,7 +63,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:text="Personalized Training Program"
+            android:text="Personal Online Training Program"
             android:padding="@dimen/_8sdp"
             android:elevation="@dimen/_20sdp"
             android:ems="10"
@@ -83,8 +83,7 @@
            />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:visibility="gone"
-            android:text="Individual Challenges"
+            android:text="Certified CrossComp Gyms"
             android:padding="@dimen/_8sdp"
             android:elevation="@dimen/_20sdp"
             android:ems="10"
@@ -100,6 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
+            android:onClick="MoveToCertifiedGyms"
            />
 
     </LinearLayout>
