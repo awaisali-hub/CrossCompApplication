@@ -15,13 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.AdapterChallenge;
-import com.eclairios.CrossComps.Adapter.AdapterCoordinaterServicePage;
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.Model.ModelChallenge;
-import com.eclairios.CrossComps.Model.ModelCoordinaterServicePage;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -39,10 +36,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class Basic extends Fragment {
@@ -72,7 +66,7 @@ public class Basic extends Fragment {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),Participent.class));
+                startActivity(new Intent(getContext(), Participent.class));
             }
         });
         makeChallenges.setOnClickListener(new View.OnClickListener() {

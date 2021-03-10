@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.eclairios.CrossComps.Participent;
 import com.eclairios.CrossComps.R;
 
 /**

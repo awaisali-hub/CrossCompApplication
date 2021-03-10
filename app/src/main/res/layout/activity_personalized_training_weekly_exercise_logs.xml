@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:textSize="20sp"
                 android:layout_marginEnd="15dp"
-                android:text="Week #[1]"
+                android:text="My CrossComp Training"
                 android:gravity="center"
                 android:textColor="@color/actionbar_text_colour"
                 android:textStyle="bold"/>
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Exercise Rx for Adrian Cox / Week #[1]"
+            android:text="Exercise Rx for Adrian Cox\n Week #[1]"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -154,7 +154,7 @@
                     android:layout_marginStart="@dimen/_60sdp"
                     android:layout_column="1"
                     android:textAlignment="textStart"
-                    android:text="2 Workouts"
+                    android:text="2 workouts"
                     android:textSize="18sp"
                     android:padding="4dip"
                     android:textColor="@color/blue"
@@ -368,7 +368,7 @@
             android:stretchColumns="2">
             <TableRow>
                 <TextView
-                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_65sdp"
                     android:layout_column="1"
                     android:text="Total:"
                     android:textAlignment="center"
@@ -377,7 +377,7 @@
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
                 <TextView
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_30sdp"
                     android:layout_column="1"
                     android:text="0"
                     android:textAlignment="center"
@@ -393,7 +393,7 @@
 
             <TableRow>
                 <TextView
-                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_65sdp"
                     android:layout_column="1"
                     android:text="Goal:"
                     android:textAlignment="center"
@@ -402,9 +402,9 @@
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
                 <TextView
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_30sdp"
                     android:layout_column="1"
-                    android:text="[6]"
+                    android:text="0%"
                     android:textAlignment="center"
                     android:textSize="20sp"
                     android:padding="3dip"
@@ -413,8 +413,8 @@
             <View
                 android:layout_height="1dip"
                 android:background="@color/black" />
-            <TableRow>
-
+            <TableRow
+                android:visibility="gone">
                 <TextView
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_column="1"
@@ -434,6 +434,7 @@
                     android:textColor="@color/black"/>
             </TableRow>
             <View
+                android:visibility="gone"
                 android:layout_height="1dip"
                 android:background="@color/black" />
         </TableLayout>

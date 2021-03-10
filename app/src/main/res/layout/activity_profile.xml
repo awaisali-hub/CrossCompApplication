@@ -27,8 +27,9 @@
                     android:text="My Profile"
                     android:textSize="20sp"
                     android:layout_gravity="center"
-                    android:textColor="@color/white">
-                </TextView>
+                    android:textColor="@color/white"
+                    android:textStyle="bold"/>
+
 
                 <ImageButton
                     android:layout_gravity="right"
@@ -359,6 +360,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_75sdp">
                 <LinearLayout
+                    android:visibility="gone"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">

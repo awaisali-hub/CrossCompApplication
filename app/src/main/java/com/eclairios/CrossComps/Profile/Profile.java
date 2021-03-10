@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.Profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eclairios.CrossComps.Adapter.AdapterCurrentTeams;
-import com.eclairios.CrossComps.Model.ModelCurrentTeams;
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+import com.eclairios.CrossComps.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,14 +57,11 @@ public class Profile extends AppCompatActivity {
     }
 
     public void ToHome(View view) {
-        startActivity(new Intent(Profile.this,Participent.class));
+        startActivity(new Intent(Profile.this, Participent.class));
     }
 
     public void UpdateProfile(View view) {
-
-        Toast.makeText(this, "Update Profile", Toast.LENGTH_SHORT).show();
-
-
+        startActivity(new Intent(Profile.this, UpdateProfileActivity.class));
     }
 
 

@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +48,7 @@ public class MorePages extends AppCompatActivity {
     }
 
     public void TooHome(View view) {
-        startActivity(new Intent(MorePages.this,Participent.class));
+        startActivity(new Intent(MorePages.this, Participent.class));
 
     }
 

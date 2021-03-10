@@ -15,11 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.AdapterParticepantTeams;
-import com.eclairios.CrossComps.Model.ModelHorizontal;
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.Model.ModelParticipentTeams;
 
 import org.json.JSONArray;
@@ -37,11 +36,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class CrossCompTeams extends AppCompatActivity {
     String json_string;
@@ -72,7 +67,7 @@ public class CrossCompTeams extends AppCompatActivity {
     }
 
     public void Home(View view) {
-        startActivity(new Intent(CrossCompTeams.this,Participent.class));
+        startActivity(new Intent(CrossCompTeams.this, Participent.class));
     }
 
     public void New_Team_Form(View view) {

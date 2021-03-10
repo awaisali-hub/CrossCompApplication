@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.eclairios.CrossComps.Adapter.AdapterParticepantTeams;
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.Model.ModelParticipentTeams;
 
 import org.json.JSONArray;
@@ -52,7 +53,7 @@ public class ShowAllTeams extends AppCompatActivity {
 
     public void Home(View view) {
 
-        startActivity(new Intent(ShowAllTeams.this,Participent.class));
+        startActivity(new Intent(ShowAllTeams.this, Participent.class));
 
     }
 

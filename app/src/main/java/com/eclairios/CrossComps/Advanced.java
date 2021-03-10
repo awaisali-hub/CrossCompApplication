@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.eclairios.CrossComps.Adapter.AdapterAdvanceChallenge;
-import com.eclairios.CrossComps.Adapter.AdapterChallenge;
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.Model.ModelChallenge;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -68,7 +68,7 @@ public class Advanced extends Fragment {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),Participent.class));
+                startActivity(new Intent(getContext(), Participent.class));
             }
         });
 

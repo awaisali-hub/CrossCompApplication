@@ -22,7 +22,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Trainings.GymPackageActivity"></activity>
+        <activity android:name=".AffiliteTeamManager.TeamManagerActivity"></activity>
+        <activity android:name=".CrossCompAffiliate.BecomeCrossCompAffiliateActivity" />
+        <activity android:name=".CrossCompAffiliate.AffiliateDashboardActivity" />
+        <activity android:name=".CrossCompAffiliate.OptiHealthPledgeActivity" />
+        <activity android:name=".CrossCompAffiliate.CrossCompAffiliateAgreementActivity" />
+        <activity android:name=".Profile.UpdateProfileActivity" />
+        <activity android:name=".Trainings.GymPackageActivity" />
         <activity android:name=".Trainings.CertifiedCrossCompGymPaymentActivity" />
         <activity android:name=".Trainings.CertifiedCrossCompGymPurchaseActivity" />
         <activity android:name=".Trainings.GymsMapActivity" />
@@ -53,7 +59,6 @@
         <activity android:name=".ShowDateForReservationActivity" />
         <activity android:name=".EventCrossCompActivity" />
         <activity android:name=".EventDetailActivity" />
-        <activity android:name=".UpdateProfileActivity" />
         <activity android:name=".Location_challengeActivity" />
         <activity android:name=".Team_challengeActivity" />
         <activity android:name=".Individual_challengeActivity" />
@@ -68,10 +73,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDfzZIAt3V2ck7R46NJ3BsbJHpPFPt2rZ0" />
 
-        <activity android:name=".Participent" />
+        <activity android:name=".MainScoreDashboard.Participent" />
         <activity android:name=".OneServiceCard" />
         <activity android:name=".MorePages" />
-        <activity android:name=".Profile" />
+        <activity android:name=".Profile.Profile" />
         <activity android:name=".Services" />
         <activity android:name=".Challenge" />
         <activity android:name=".TeamScore" />

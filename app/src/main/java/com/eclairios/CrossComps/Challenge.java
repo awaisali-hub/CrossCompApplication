@@ -4,11 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 
 import com.eclairios.CrossComps.Adapter.ViewPagerAdapterC;
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.google.android.material.tabs.TabLayout;
 
 public class Challenge extends AppCompatActivity {
@@ -40,6 +39,6 @@ public class Challenge extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(Challenge.this,Participent.class));
+        startActivity(new Intent(Challenge.this, Participent.class));
     }
 }

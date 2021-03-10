@@ -1,14 +1,9 @@
 package com.eclairios.CrossComps.Fragment;
 
-import android.util.Log;
-import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-
-import com.eclairios.CrossComps.Participent;
 
 public class SwipeAdapter extends FragmentStatePagerAdapter {
     public SwipeAdapter(@NonNull FragmentManager fm) {
