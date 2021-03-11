@@ -1,6 +1,7 @@
 package com.eclairios.CrossComps.MainScoreDashboard;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,12 +40,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
+
         return mFragmentList.size();
     }
 
     public void addFrag(Fragment fragment) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add("\u2022");
+
     }
 
     public void removeFrag(int position) {

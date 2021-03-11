@@ -20,4 +20,8 @@ public class AfterFitnessConsultationActivity extends AppCompatActivity {
     public void MoveToMyTrainingProgram(View view) {
         startActivity(new Intent(AfterFitnessConsultationActivity.this,MyTrainingProgramActivity.class));
     }
+
+    public void MoveToWeeklyExerciseLogs(View view) {
+        startActivity(new Intent(AfterFitnessConsultationActivity.this,PersonalizedTrainingWeeklyExerciseLogsActivity.class));
+    }
 }

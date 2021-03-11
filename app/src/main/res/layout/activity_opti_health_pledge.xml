@@ -23,7 +23,7 @@
                 android:layout_height="match_parent"
                 android:textSize="20sp"
                 android:layout_marginEnd="15dp"
-                android:text="The OptiHealth Pledge"
+                android:text="My OptiHealth Pledge"
                 android:gravity="center"
                 android:textColor="@color/actionbar_text_colour"
                 android:textStyle="bold"/>
@@ -47,12 +47,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/appbar_layout"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
                 <TextView
                     android:id="@+id/one"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Now that you know what the OptiHealth Lifestyle is all about,are you ready to commit to creating a culture of optimal health for yourself, your family, and your community?"
+                    android:text="As a CrossComp Affiliate with the OptiHealth\n Network, you are expected to make a personal\n commitment towards developing and\n maintaining a healthy lifestyle.\n\n Please mark all the items below with which\n you agree and intend to apply. Your responses\n are confidential and will not disqualify you from\n becoming a CrossComp Affiliate."
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
@@ -549,15 +550,9 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:onClick="MoveToAffiliateDashboard"
+                    android:layout_marginBottom="@dimen/_20sdp"
                     />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Privacy Policy"
-                    android:layout_below="@+id/MoveToScore"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/blue"/>
             </RelativeLayout>
         </ScrollView>
 

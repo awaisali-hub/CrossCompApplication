@@ -2,17 +2,24 @@ package com.eclairios.CrossComps.MainScoreDashboard;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
 import com.eclairios.CrossComps.CrossCompAffiliate.BecomeCrossCompAffiliateActivity;
 import com.eclairios.CrossComps.CrossCompAffiliate.CrossCompAffiliateAgreementActivity;
 import com.eclairios.CrossComps.Profile.Profile;
@@ -27,19 +34,46 @@ public class FragmentParent  extends Fragment {
     public static View v;
     public static  ViewPagerAdapter adapter;
 
-    com.github.clans.fab.FloatingActionButton gotoProfile,moreBecomeAffiliate,training;
+    com.github.clans.fab.FloatingActionButton gotoProfile,moreBecomeAffiliate,training,challenges,teams;
+
+    Button reservationButton;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_parent, container, false);
-        v=view;
+
 
         gotoProfile = view.findViewById(R.id.profile);
         moreBecomeAffiliate = view.findViewById(R.id.more);
         training = view.findViewById(R.id.training);
+        challenges = view.findViewById(R.id.challenges);
+        teams = view.findViewById(R.id.teams);
 
+        reservationButton = view.findViewById(R.id.reservationButton);
+
+        String boldText = "Make a Reservation\n";
+        String normalText = "for your next CrossComps";
+        SpannableString str = new SpannableString(boldText + normalText);
+        str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        str.setSpan(new RelativeSizeSpan(1.4f), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        reservationButton.setText(str);
+
+
+        teams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToTeams();
+            }
+        });
+
+        challenges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToChallenges();
+            }
+        });
 
         training.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +100,18 @@ public class FragmentParent  extends Fragment {
         return view;
     }
 
+
+
+    private void moveToChallenges() {
+        Intent intent = new Intent(getContext(), ChallengeScreen0Activity.class);
+        startActivity(intent);
+    }
+
+    private void moveToTeams() {
+        Intent intent = new Intent(getContext(), AllTeamCategoryActivity.class);
+        startActivity(intent);
+    }
+
     private void MoveToTraining() {
         Intent intent = new Intent(getContext(), TrainingMainPageActivity.class);
         startActivity(intent);
@@ -87,11 +133,10 @@ public class FragmentParent  extends Fragment {
         adapter = new ViewPagerAdapter(getChildFragmentManager(),getActivity(), viewPager, tabLayout);
         viewPager.setAdapter(adapter);
 
-
-
         tabLayout = (TabLayout) view.findViewById(R.id.my_tab_layout);
         tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
         tabLayout.setupWithViewPager(viewPager, true);
+
     }
 
     int selectedTabPosition;
@@ -104,6 +149,7 @@ public class FragmentParent  extends Fragment {
                 super.onTabSelected(tab);
                 viewPager.setCurrentItem(tab.getPosition());
                 selectedTabPosition = viewPager.getCurrentItem();
+
                 Log.d("Selected", "Selected " + tab.getPosition());
                 Participent.current_card=tab.getPosition();
             }
@@ -114,6 +160,9 @@ public class FragmentParent  extends Fragment {
                 Log.d("Unselected", "Unselected " + tab.getPosition());
             }
         });
+
+
+
 
     }
 
@@ -134,7 +183,7 @@ public class FragmentParent  extends Fragment {
         adapter.addFrag(fragmentChild);
         adapter.notifyDataSetChanged();
 
-        Log.e("testinglogs", "addPage: "+adapter.getCount());
+
 
 
 
@@ -142,9 +191,9 @@ public class FragmentParent  extends Fragment {
             if(adapter!=null) {
                 if (adapter.getCount() > 0) tabLayout.setupWithViewPager(viewPager);
                 setupTabLayout();
+
             }}catch (NullPointerException n){}
           // viewPager.setCurrentItem(adapter.getCount() - 1);
-
 
     }
     public void removeAllPages(){
@@ -163,9 +212,14 @@ public class FragmentParent  extends Fragment {
 
     }
     public void setupTabLayout() {
+
         selectedTabPosition = viewPager.getCurrentItem();
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setCustomView(adapter.getTabView(i));
         }
+
+
     }
+
+
 }

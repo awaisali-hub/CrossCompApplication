@@ -22,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AffiliteTeamManager.TeamManagerActivity"></activity>
+        <activity android:name=".AffiliteTeamManager.UserRequestCoManagersActivity"></activity>
+        <activity android:name=".AffiliteTeamManager.TeamMessageActivity" />
+        <activity android:name=".AffiliteTeamManager.CoManagersActivity" />
+        <activity android:name=".AffiliteTeamManager.HomeTeamActivity" />
+        <activity android:name=".AffiliteTeamManager.TeamManagerActivity" />
         <activity android:name=".CrossCompAffiliate.BecomeCrossCompAffiliateActivity" />
         <activity android:name=".CrossCompAffiliate.AffiliateDashboardActivity" />
         <activity android:name=".CrossCompAffiliate.OptiHealthPledgeActivity" />

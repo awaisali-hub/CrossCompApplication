@@ -5,6 +5,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
+import com.eclairios.CrossComps.CrossComp;
 import com.eclairios.CrossComps.MorePages;
 import com.eclairios.CrossComps.Profile.Profile;
 import com.eclairios.CrossComps.R;
@@ -70,6 +72,8 @@ public class Participent extends AppCompatActivity {
         values = new ArrayList<>();
         fragmentParent = new FragmentParent();
 
+
+
     }
 
     @Override
@@ -114,14 +118,6 @@ public class Participent extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
     }
 
-
-
-
-
-
-
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -144,7 +140,10 @@ public class Participent extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String data = URLEncoder.encode("userID","UTF-8") + "=" + URLEncoder.encode("4","UTF-8"); ;
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Participent.this);
+                String currentUserID = preferences.getString("CurrentUserId", "");
+
+                String data = URLEncoder.encode("userID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8"); ;
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();

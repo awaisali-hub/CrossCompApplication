@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:text="Team Manager"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/green"
             android:textSize="20sp"
             android:textStyle="bold"
             android:onClick="MoveToAgreement"/>
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:text="Judge"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/green"
             android:textSize="20sp"
             android:textStyle="bold"/>
 
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:text="Service Coordinator"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/green"
             android:textSize="20sp"
             android:textStyle="bold"/>
 
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:text="Director"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/green"
             android:textSize="20sp"
             android:textStyle="bold"/>
 

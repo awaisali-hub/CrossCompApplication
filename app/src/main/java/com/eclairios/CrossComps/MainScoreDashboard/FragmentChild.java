@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,6 @@ import com.eclairios.CrossComps.R;
 public class FragmentChild extends Fragment {
     String Score_ID,User_ID,Date,Age,Meters,Squats,leg_raises,PushUps,totalScore;
     TextView tvDate,tvStatus,tvMeters,tvSquats,tvLeg_raises,tvPushUps,tvTotalScore;
-    EditText editText;
 
     @Nullable
     @Override
@@ -39,6 +39,7 @@ public class FragmentChild extends Fragment {
     }
 
     private void getIDs(View view) {
+
         tvDate = (TextView) view.findViewById(R.id.userScoreDate);
         tvStatus = (TextView) view.findViewById(R.id.scoreStatus);
         tvMeters = (TextView) view.findViewById(R.id.meters);

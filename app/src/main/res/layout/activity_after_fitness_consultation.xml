@@ -93,7 +93,7 @@
             android:text="My CrossComp Coach"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:onClick="MoveToMyTrainingProgram"
+            android:onClick="MoveToWeeklyExerciseLogs"
             />
 
 

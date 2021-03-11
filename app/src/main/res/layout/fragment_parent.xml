@@ -219,7 +219,7 @@
             />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/em"
+            android:id="@+id/challenges"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_challenge"
@@ -230,7 +230,7 @@
             fab:fab_colorRipple="#99FFFFFF"
             />
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/em1"
+            android:id="@+id/teams"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/team_icon_floating"
