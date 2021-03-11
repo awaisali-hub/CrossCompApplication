@@ -40,7 +40,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-
         return mFragmentList.size();
     }
 
@@ -60,6 +59,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     public View getTabView(final int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.chat_toolbar, null);
+
 //       TextView tabItemName = (TextView) view.findViewById(R.id.textViewTabItemName);
 //        tabItemName.setText(mFragmentTitleList.get(position));
 //        tabItemName.setTextColor(context.getResources().getColor(android.R.color.background_light));

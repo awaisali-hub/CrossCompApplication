@@ -1,5 +1,8 @@
 package com.eclairios.CrossComps.MainScoreDashboard;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.R;
 
 public class FragmentChild extends Fragment {
@@ -50,12 +54,25 @@ public class FragmentChild extends Fragment {
 
 
         tvDate.setText(Date);
-        tvStatus.setText("Status: "+"Current");
+
         tvMeters.setText(Meters);
         tvSquats.setText(Squats);
         tvLeg_raises.setText(leg_raises);
         tvPushUps.setText(PushUps);
         tvTotalScore.setText(totalScore);
 
+        if(tvDate.getText().equals("2021-02-03")){
+            tvStatus.setText("Status: "+"Expired");
+            tvStatus.setBackgroundDrawable( getResources().getDrawable(R.drawable.servicenameitems) );
+            tvStatus.setBackgroundTintList(getResources().getColorStateList(R.color.colorRed));
+        }else if(tvDate.getText().equals("2021-03-24")){
+            tvStatus.setText("Status: "+"Current");
+            tvStatus.setBackgroundDrawable( getResources().getDrawable(R.drawable.servicenameitems) );
+            tvStatus.setBackgroundTintList(getResources().getColorStateList(R.color.yellow));
+        }else{
+            tvStatus.setText("Status: "+"Expiring");
+            tvStatus.setBackgroundDrawable( getResources().getDrawable(R.drawable.servicenameitems) );
+            tvStatus.setBackgroundTintList(getResources().getColorStateList(R.color.orange));
+        }
     }
 }

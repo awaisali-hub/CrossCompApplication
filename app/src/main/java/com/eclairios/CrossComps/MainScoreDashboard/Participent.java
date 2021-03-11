@@ -6,8 +6,10 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +18,18 @@ import android.widget.TextView;
 
 import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
 import com.eclairios.CrossComps.CrossComp;
+import com.eclairios.CrossComps.CustomLoader.WaitDialog;
+import com.eclairios.CrossComps.Dashboard;
+import com.eclairios.CrossComps.MainActivity;
 import com.eclairios.CrossComps.MorePages;
 import com.eclairios.CrossComps.Profile.Profile;
 import com.eclairios.CrossComps.R;
+import com.eclairios.CrossComps.Registration;
 import com.eclairios.CrossComps.Scores;
 import com.eclairios.CrossComps.Services;
+import com.eclairios.CrossComps.SplashActivity;
 import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,24 +50,10 @@ import java.util.ArrayList;
 
 public class Participent extends AppCompatActivity {
 
-    String eventId,eventName,eventAddress,eventDay,eventDate,eventType;
-    TextView textView;
     ArrayList<String> values;
     FragmentParent fragmentParent;
     public static int current_card;
-
-
-    public static TextView scoreStatus;
-    String json_string;
-    JSONObject jsonObject;
-    JSONArray jsonArray;
-
-    TextView userName,userAgeGender,userAddress,userScore,userScoreRemarks,userScoreDate,scoreExpireDate;
-    String str_userName, str_userAgeGender,str_userAddress,str_userScore,strUserRemarks,newDateString,str_scoreExpireDate,serviceID;
-
-    ViewPager viewpager;
-
-    Button reservationButton;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +62,17 @@ public class Participent extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
+        try{
+            WaitDialog.showDialog(Participent.this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         new BackgroundTask().execute();
         values = new ArrayList<>();
         fragmentParent = new FragmentParent();
 
-
-
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
     }
 
     @Override
@@ -202,6 +201,22 @@ public class Participent extends AppCompatActivity {
                         fragmentParent.addPage(Score_ID,userId,Date,Age,Meters,Squats,Leg_raises,PushUps,Total_Score);
                         count++;
                     }
+
+                    viewPager.setCurrentItem(viewPager.getAdapter().getCount());
+
+
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            try{
+                                WaitDialog.hideDialog();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },500);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

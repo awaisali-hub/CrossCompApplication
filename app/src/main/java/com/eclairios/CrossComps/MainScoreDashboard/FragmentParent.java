@@ -1,14 +1,17 @@
 package com.eclairios.CrossComps.MainScoreDashboard;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.preference.PreferenceManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -18,10 +21,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
+import com.eclairios.CrossComps.CoordinatorServicePage;
 import com.eclairios.CrossComps.CrossCompAffiliate.BecomeCrossCompAffiliateActivity;
 import com.eclairios.CrossComps.CrossCompAffiliate.CrossCompAffiliateAgreementActivity;
+import com.eclairios.CrossComps.Dashboard;
 import com.eclairios.CrossComps.Profile.Profile;
 import com.eclairios.CrossComps.R;
 import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
@@ -37,6 +43,8 @@ public class FragmentParent  extends Fragment {
     com.github.clans.fab.FloatingActionButton gotoProfile,moreBecomeAffiliate,training,challenges,teams;
 
     Button reservationButton;
+    View back_fragment;
+    View next_fragment;
 
     @Nullable
     @Override
@@ -52,6 +60,23 @@ public class FragmentParent  extends Fragment {
         teams = view.findViewById(R.id.teams);
 
         reservationButton = view.findViewById(R.id.reservationButton);
+        back_fragment = view.findViewById(R.id.back_Fragment);
+        next_fragment = view.findViewById(R.id.next_fragment);
+
+
+        back_fragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.arrowScroll(ViewPager.FOCUS_LEFT);
+            }
+        });
+        next_fragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.arrowScroll(ViewPager.FOCUS_RIGHT);
+            }
+        });
+
 
         String boldText = "Make a Reservation\n";
         String normalText = "for your next CrossComps";
@@ -59,6 +84,20 @@ public class FragmentParent  extends Fragment {
         str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         str.setSpan(new RelativeSizeSpan(1.4f), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         reservationButton.setText(str);
+
+        reservationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                String lat = preferences.getString("lat", "");
+                String lng = preferences.getString("lng", "");
+                Intent intent = new Intent(getContext(), Dashboard.class);
+                intent.putExtra("lat",lat);
+                intent.putExtra("lng",lng);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
 
 
         teams.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +136,8 @@ public class FragmentParent  extends Fragment {
 
         getIDs(view);
         setEvents();
+
+
         return view;
     }
 
@@ -143,6 +184,7 @@ public class FragmentParent  extends Fragment {
 
     public void setEvents() {
 
+
         tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -161,12 +203,9 @@ public class FragmentParent  extends Fragment {
             }
         });
 
-
-
-
     }
 
-    public void addPage(String Score_ID,String User_ID,String Date,String Age,String Meters,String Squats,String leg_raises, String PushUps,String totalScore) {
+    public void addPage(String Score_ID,String User_ID,String Date,String Age,String Meters,String Squats,String leg_raises,String PushUps,String totalScore) {
         Bundle bundle = new Bundle();
         bundle.putString("Score_ID", Score_ID);
         bundle.putString("User_ID", User_ID);
@@ -182,10 +221,6 @@ public class FragmentParent  extends Fragment {
         fragmentChild.setArguments(bundle);
         adapter.addFrag(fragmentChild);
         adapter.notifyDataSetChanged();
-
-
-
-
 
         try{
             if(adapter!=null) {
@@ -217,8 +252,6 @@ public class FragmentParent  extends Fragment {
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setCustomView(adapter.getTabView(i));
         }
-
-
     }
 
 

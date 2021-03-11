@@ -88,7 +88,7 @@
         android:background="@color/blue">
 
         <ImageView
-            android:id="@+id/back_senFragment"
+            android:id="@+id/back_Fragment"
             android:padding="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,6 +99,7 @@
 
 
         <ImageView
+            android:id="@+id/next_fragment"
             android:padding="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
