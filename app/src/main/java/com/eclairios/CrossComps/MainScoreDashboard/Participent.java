@@ -207,8 +207,6 @@ public class Participent extends AppCompatActivity {
 
                     viewPager.setCurrentItem(viewPager.getAdapter().getCount());
 
-
-
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {

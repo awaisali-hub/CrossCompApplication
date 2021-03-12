@@ -22,7 +22,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AffiliteTeamManager.UserRequestCoManagersActivity"></activity>
+        <activity android:name=".AffiliteTeamManager.CaptainTeamMembersActivity"></activity>
+        <activity android:name=".AffiliteTeamManager.HomeTeamMemberActivity" />
+        <activity android:name=".AffiliteTeamManager.TeamCaptainActivity" />
+        <activity android:name=".AffiliteTeamManager.UserRequestCoManagersActivity" />
         <activity android:name=".AffiliteTeamManager.TeamMessageActivity" />
         <activity android:name=".AffiliteTeamManager.CoManagersActivity" />
         <activity android:name=".AffiliteTeamManager.HomeTeamActivity" />

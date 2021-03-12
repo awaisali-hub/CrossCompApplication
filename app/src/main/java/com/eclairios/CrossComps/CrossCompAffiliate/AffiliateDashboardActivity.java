@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.eclairios.CrossComps.AffiliteTeamManager.HomeTeamActivity;
+import com.eclairios.CrossComps.AffiliteTeamManager.TeamCaptainActivity;
 import com.eclairios.CrossComps.AffiliteTeamManager.TeamManagerActivity;
 import com.eclairios.CrossComps.R;
 
@@ -19,6 +21,10 @@ public class AffiliateDashboardActivity extends AppCompatActivity {
     }
 
     public void MoveToTeamManager(View view) {
-        startActivity(new Intent(AffiliateDashboardActivity.this, TeamManagerActivity.class));
+        startActivity(new Intent(AffiliateDashboardActivity.this, HomeTeamActivity.class));
+    }
+
+    public void MoveToTeamCaptain(View view) {
+        startActivity(new Intent(AffiliateDashboardActivity.this, TeamCaptainActivity.class));
     }
 }

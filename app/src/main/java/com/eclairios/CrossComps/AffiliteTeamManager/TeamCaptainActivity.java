@@ -8,20 +8,16 @@ import android.view.View;
 
 import com.eclairios.CrossComps.R;
 
-public class HomeTeamActivity extends AppCompatActivity {
+public class TeamCaptainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_team);
+        setContentView(R.layout.activity_team_captain);
         getSupportActionBar().hide();
     }
 
-    public void MoveToCoManagers(View view) {
-        startActivity(new Intent(HomeTeamActivity.this,CoManagersActivity.class));
-    }
-
-    public void MoveToHomeTeamMember(View view) {
-        startActivity(new Intent(HomeTeamActivity.this,HomeTeamMemberActivity.class));
+    public void MoveToCaptainTeamMember(View view) {
+        startActivity(new Intent(TeamCaptainActivity.this,CaptainTeamMembersActivity.class));
     }
 }

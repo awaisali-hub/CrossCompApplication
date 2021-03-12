@@ -145,8 +145,11 @@ public class FragmentParent  extends Fragment {
             }
         });
 
-        getIDs(view);
-        setEvents();
+       try {
+           getIDs(view);
+       }finally {
+           setEvents();
+       }
         return view;
     }
 
@@ -237,7 +240,7 @@ public class FragmentParent  extends Fragment {
                 setupTabLayout();
 
             }}catch (NullPointerException n){}
-          // viewPager.setCurrentItem(adapter.getCount() - 1);
+         //  viewPager.setCurrentItem(adapter.getCount() - 1);
 
     }
     public void removeAllPages(){

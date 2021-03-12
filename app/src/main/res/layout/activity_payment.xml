@@ -129,16 +129,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="1">
-
-
-
                     <TextView
                         android:id="@+id/tv_price"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="$10.0"
+                        android:text="35"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textSize="22sp"
                         android:textColor="@color/black"/>
@@ -304,7 +301,8 @@
                             app:mrl_rippleOverlay="true"
                             app:mrl_rippleRoundedCorners="5dp">
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/payButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
