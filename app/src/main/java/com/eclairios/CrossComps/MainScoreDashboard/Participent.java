@@ -198,7 +198,10 @@ public class Participent extends AppCompatActivity {
                         PushUps = JO.getString("Pushups");
                         Total_Score = JO.getString("Total_Score");
 
-                        fragmentParent.addPage(Score_ID,userId,Date,Age,Meters,Squats,Leg_raises,PushUps,Total_Score);
+                        double number = Double.parseDouble(Total_Score);
+                        String score = String.format("%.1f", number);
+
+                        fragmentParent.addPage(Score_ID,userId,Date,Age,Meters,Squats,Leg_raises,PushUps,score);
                         count++;
                     }
 

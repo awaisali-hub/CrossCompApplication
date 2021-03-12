@@ -21,10 +21,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
 import com.eclairios.CrossComps.CoordinatorServicePage;
+import com.eclairios.CrossComps.CrossComp;
 import com.eclairios.CrossComps.CrossCompAffiliate.BecomeCrossCompAffiliateActivity;
 import com.eclairios.CrossComps.CrossCompAffiliate.CrossCompAffiliateAgreementActivity;
 import com.eclairios.CrossComps.Dashboard;
@@ -40,11 +42,13 @@ public class FragmentParent  extends Fragment {
     public static View v;
     public static  ViewPagerAdapter adapter;
 
-    com.github.clans.fab.FloatingActionButton gotoProfile,moreBecomeAffiliate,training,challenges,teams;
+    private com.github.clans.fab.FloatingActionButton gotoProfile,moreBecomeAffiliate,training,challenges,teams;
 
-    Button reservationButton;
-    View back_fragment;
-    View next_fragment;
+    private Button reservationButton;
+    private View back_fragment;
+    private View next_fragment;
+    private TextView CurrentUsername;
+
 
     @Nullable
     @Override
@@ -62,6 +66,13 @@ public class FragmentParent  extends Fragment {
         reservationButton = view.findViewById(R.id.reservationButton);
         back_fragment = view.findViewById(R.id.back_Fragment);
         next_fragment = view.findViewById(R.id.next_fragment);
+        CurrentUsername = view.findViewById(R.id.currentUserName);
+
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String firstName = preferences.getString("First_Name", "");
+        String lastName = preferences.getString("Last_Name", "");
+        CurrentUsername.setText(firstName + " "+lastName);
 
 
         back_fragment.setOnClickListener(new View.OnClickListener() {
@@ -136,8 +147,6 @@ public class FragmentParent  extends Fragment {
 
         getIDs(view);
         setEvents();
-
-
         return view;
     }
 

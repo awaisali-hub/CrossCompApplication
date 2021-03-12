@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.R;
 
 public class AllTeamCategoryActivity extends AppCompatActivity {
@@ -102,5 +103,12 @@ public class AllTeamCategoryActivity extends AppCompatActivity {
 //        pickFileImage.show();
 
         startActivity(new Intent(AllTeamCategoryActivity.this, MyFundraisingTeamDetailActivity.class));
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(AllTeamCategoryActivity.this, Participent.class));
     }
 }

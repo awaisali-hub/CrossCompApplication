@@ -38,8 +38,6 @@ public class TeamsScoreActivity extends AppCompatActivity {
         Button moveToScore;
         TextView makeAppointment;
 
-
-
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(TeamsScoreActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.alert_dialog_for_postal_team_auto_fill,null);

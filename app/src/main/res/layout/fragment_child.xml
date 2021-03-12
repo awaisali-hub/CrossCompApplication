@@ -89,7 +89,7 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
                 <TextView
-                    android:layout_marginStart="@dimen/_2sdp"
+                    android:paddingStart="@dimen/_5sdp"
                     android:paddingRight="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
                 <TextView
-                    android:layout_marginStart="@dimen/_2sdp"
+                    android:paddingStart="@dimen/_5sdp"
                     android:paddingRight="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
@@ -167,7 +167,7 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
                 <TextView
-                    android:layout_marginStart="@dimen/_2sdp"
+                    android:paddingStart="@dimen/_5sdp"
                     android:paddingRight="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
@@ -209,7 +209,7 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
                 <TextView
-                    android:layout_marginStart="@dimen/_2sdp"
+                    android:paddingStart="@dimen/_5sdp"
                     android:paddingRight="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
