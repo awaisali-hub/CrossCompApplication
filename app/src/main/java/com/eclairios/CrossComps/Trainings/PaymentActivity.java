@@ -143,11 +143,7 @@ public class PaymentActivity extends AppCompatActivity {
 
                 stripe.confirmPayment(this, confirmParams);
 
-                card_number.setText("");
-                cvc.setText("");
-                month.setText("");
-                year.setText("");
-             //   startCheckout();
+
             }
         });
     }
@@ -158,6 +154,15 @@ public class PaymentActivity extends AppCompatActivity {
                 .setMessage(message);
         builder.setPositiveButton("Ok", null);
         builder.create().show();
+
+        card_number.setText("");
+        cvc.setText("");
+        month.setText("");
+        year.setText("");
+
+        startCheckout();
+
+      //  startActivity(new Intent(PaymentActivity.this,HelperChatActivity.class));
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

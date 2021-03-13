@@ -47,7 +47,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class CoordinatorServicePage extends AppCompatActivity implements MyInterface {
+public class       CoordinatorServicePage extends AppCompatActivity implements MyInterface {
     String json_string;
     JSONObject jsonObject;
     JSONArray jsonArray;

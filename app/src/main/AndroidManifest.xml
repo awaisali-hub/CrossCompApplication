@@ -22,7 +22,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AffiliteTeamManager.CaptainTeamMembersActivity"></activity>
+        <activity android:name=".AffiliteTeamManager.MembersScreenOfTeamManagerActivity"></activity>
+        <activity android:name=".AffiliteTeamManager.MembersScreenOfCoManagersActivity" />
+        <activity android:name=".AffiliteTeamManager.MembersScreenOfAffiliatesHomeActivity" />
+        <activity android:name=".AffiliteTeamManager.CoManagerForNewHomeTeamActivity" />
+        <activity android:name=".AffiliteTeamManager.BankAccountNewHomeTeamActivity" />
+        <activity android:name=".AffiliteTeamManager.W9NewHomeTeamActivity" />
+        <activity android:name=".AffiliteTeamManager.EditYourHomeTeamActivity" />
+        <activity android:name=".AffiliteTeamManager.CaptainTeamMembersActivity" />
         <activity android:name=".AffiliteTeamManager.HomeTeamMemberActivity" />
         <activity android:name=".AffiliteTeamManager.TeamCaptainActivity" />
         <activity android:name=".AffiliteTeamManager.UserRequestCoManagersActivity" />

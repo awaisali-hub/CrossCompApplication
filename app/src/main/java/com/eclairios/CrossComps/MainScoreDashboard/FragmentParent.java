@@ -217,16 +217,20 @@ public class FragmentParent  extends Fragment {
 
     }
 
-    public void addPage(String Score_ID,String User_ID,String Date,String Age,String Meters,String Squats,String leg_raises,String PushUps,String totalScore) {
+    public void addPage(String Score_ID,String User_ID,String Date,String Age,String Meters,String MetersGrade,String Squats,String SquatsGrade,String leg_raises,String Leg_raisesGrade,String PushUps,String PushUpsGrade,String totalScore) {
         Bundle bundle = new Bundle();
         bundle.putString("Score_ID", Score_ID);
         bundle.putString("User_ID", User_ID);
         bundle.putString("Date", Date);
         bundle.putString("Age", Age);
         bundle.putString("Meters", Meters);
+        bundle.putString("MetersGrade", MetersGrade);
         bundle.putString("Squats", Squats);
+        bundle.putString("SquatsGrade", SquatsGrade);
         bundle.putString("leg_raises", leg_raises);
+        bundle.putString("Leg_raisesGrade", Leg_raisesGrade);
         bundle.putString("PushUps", PushUps);
+        bundle.putString("PushUpsGrade", PushUpsGrade);
         bundle.putString("totalScore", totalScore);
 
         FragmentChild fragmentChild = new FragmentChild();

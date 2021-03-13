@@ -100,6 +100,7 @@
                     android:textColor="@color/black"
                     />
                 <TextView
+                    android:id="@+id/meters_grades"
                     android:paddingRight="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
@@ -139,6 +140,7 @@
                     android:textColor="@color/black"
                     />
                 <TextView
+                    android:id="@+id/squats_grade"
                     android:paddingRight="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
@@ -178,6 +180,7 @@
                     android:textColor="@color/black"
                     />
                 <TextView
+                    android:id="@+id/leg_raises_grade"
                     android:paddingRight="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
@@ -219,6 +222,7 @@
                     android:textSize="19sp"
                     android:textColor="@color/black" />
                 <TextView
+                    android:id="@+id/push_ups_grade"
                     android:paddingRight="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"

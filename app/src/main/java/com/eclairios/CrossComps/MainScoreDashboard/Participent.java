@@ -184,7 +184,8 @@ public class Participent extends AppCompatActivity {
                     JSONArray     jsonArray = jsonObject.getJSONArray("server_response");
 
                     int count = 0;
-                    String Score_ID,userId,Date,Age,Meters,Squats,Leg_raises,PushUps,Total_Score;
+                    String Score_ID,userId,Date,Age,Meters,MetersGrade,Squats,SquatsGrade,Leg_raises,Leg_raisesGrade,PushUps,PushUpsGrade,Total_Score;
+
                     while(count < jsonArray.length())
                     {
                         JSONObject JO = jsonArray.getJSONObject(count);
@@ -193,15 +194,19 @@ public class Participent extends AppCompatActivity {
                         Date = JO.getString("Date");
                         Age = JO.getString("Age");
                         Meters = JO.getString("Meters");
+                        MetersGrade = JO.getString("Meters_Grade");
                         Squats = JO.getString("Squats");
+                        SquatsGrade = JO.getString("Squats_Grade");
                         Leg_raises = JO.getString("Leg_raises");
+                        Leg_raisesGrade = JO.getString("Leg_raises_Grade");
                         PushUps = JO.getString("Pushups");
+                        PushUpsGrade = JO.getString("Pushup_Grade");
                         Total_Score = JO.getString("Total_Score");
 
                         double number = Double.parseDouble(Total_Score);
                         String score = String.format("%.1f", number);
 
-                        fragmentParent.addPage(Score_ID,userId,Date,Age,Meters,Squats,Leg_raises,PushUps,score);
+                        fragmentParent.addPage(Score_ID,userId,Date,Age,Meters,MetersGrade,Squats,SquatsGrade,Leg_raises,Leg_raisesGrade,PushUps,PushUpsGrade,score);
                         count++;
                     }
 

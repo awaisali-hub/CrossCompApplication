@@ -24,4 +24,24 @@ public class HomeTeamActivity extends AppCompatActivity {
     public void MoveToHomeTeamMember(View view) {
         startActivity(new Intent(HomeTeamActivity.this,HomeTeamMemberActivity.class));
     }
+
+    public void EditHomeTeam(View view) {
+        startActivity(new Intent(HomeTeamActivity.this,EditYourHomeTeamActivity.class));
+    }
+
+    public void MembersScreenOfAffiliatesHomeActivity(View view) {
+        startActivity(new Intent(HomeTeamActivity.this,MembersScreenOfAffiliatesHomeActivity.class));
+    }
+
+    public void MoveToCoManagerHome(View view) {
+        startActivity(new Intent(HomeTeamActivity.this,CoManagerForNewHomeTeamActivity.class));
+    }
+
+    public void MembersScreenOfCoManagers(View view) {
+        startActivity(new Intent(HomeTeamActivity.this,MembersScreenOfCoManagersActivity.class));
+    }
+
+    public void MembersScreenOfTeamManager(View view) {
+        startActivity(new Intent(HomeTeamActivity.this,MembersScreenOfTeamManagerActivity.class));
+    }
 }

@@ -18,7 +18,7 @@ public class StandardTeamChallengesScreen1aActivity extends AppCompatActivity {
     }
 
     public void MoveToCitySelection(View view) {
-      //  startActivity(new Intent(StandardTeamChallengesScreen1aActivity.this,StandardTeamChallengesScreen1bActivity.class));
+       // startActivity(new Intent(StandardTeamChallengesScreen1aActivity.this,StandardTeamChallengesScreen1bActivity.class));
 
         startActivity(new Intent(StandardTeamChallengesScreen1aActivity.this,StandardTeamChallengesScreen1cActivity.class));
     }

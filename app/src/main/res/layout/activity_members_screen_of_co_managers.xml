@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="20sp"
-                android:text="Co-Managers"
+                android:text="Members"
                 android:layout_marginEnd="15dp"
                 android:gravity="center"
                 android:textColor="@color/actionbar_text_colour"
@@ -40,64 +40,58 @@
         android:layout_marginTop="@dimen/_10sdp">
 
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Jill Lastname"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:paddingStart="@dimen/_20sdp"
-            android:paddingEnd="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            />
-        <TextView
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jill Lastname"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:drawableRight="@drawable/message_icon_img"
+                />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kathryn Lastname"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:paddingStart="@dimen/_20sdp"
-            android:paddingEnd="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            />
-        <TextView
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kathryn Lastname"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:drawableRight="@drawable/message_icon_img"
+                />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rick Lastname"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:paddingStart="@dimen/_20sdp"
-            android:paddingEnd="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rick Lastname"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:drawableRight="@drawable/message_icon_img"
+                />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Send a request to be designated as\na Co-Manager of your Home Team:"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:paddingStart="@dimen/_5sdp"
-            android:paddingEnd="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_170sdp"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_horizontal|bottom"
-            android:background="@drawable/res"
-            android:text="Request"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:onClick="RequestForCoManager"
-            />
     </LinearLayout>
 
 

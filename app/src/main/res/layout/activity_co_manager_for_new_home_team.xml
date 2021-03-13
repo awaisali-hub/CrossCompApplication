@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="20sp"
-                android:text="Members"
+                android:text="Co-Managers"
                 android:layout_marginEnd="15dp"
                 android:gravity="center"
                 android:textColor="@color/actionbar_text_colour"
@@ -54,7 +54,18 @@
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_20sdp"
+                android:drawableRight="@drawable/message_icon_img"
                 />
+            <TextView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="wrap_content"
+                android:text="X"
+                android:background="@color/colorRed"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:layout_marginTop="@dimen/_20sdp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,8 +81,18 @@
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-
+                android:drawableRight="@drawable/message_icon_img"
                 />
+            <TextView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="wrap_content"
+                android:text="X"
+                android:background="@color/colorRed"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:layout_marginTop="@dimen/_20sdp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,8 +108,18 @@
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-
+                android:drawableRight="@drawable/message_icon_img"
                 />
+            <TextView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="wrap_content"
+                android:text="X"
+                android:background="@color/colorRed"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:layout_marginTop="@dimen/_20sdp"/>
         </LinearLayout>
 
     </LinearLayout>

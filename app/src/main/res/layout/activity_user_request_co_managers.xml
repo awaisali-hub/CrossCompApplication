@@ -41,35 +41,6 @@
 
 
         <TextView
-            android:id="@+id/one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="BreckenFit"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:paddingStart="@dimen/_50sdp"
-            android:paddingEnd="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fares LastName"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:paddingStart="@dimen/_20sdp"
-            android:paddingEnd="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:onClick="MoveToMessage"
-            />
-
-
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Jill Lastname"
@@ -105,7 +76,30 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:drawableRight="@drawable/message_icon_img"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send a request to be removed as\n   a Co-Manager of your Home Team:"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_170sdp"
+            />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/res"
+            android:text="Request"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:onClick="RequestForCoManager"
+            />
     </LinearLayout>
 
 

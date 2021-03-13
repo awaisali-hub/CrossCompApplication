@@ -29,8 +29,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class FragmentChild extends Fragment {
-    private String Score_ID,User_ID,Dates,Age,Meters,Squats,leg_raises,PushUps,totalScore;
-    private TextView tvDate,tvStatus,tvMeters,tvSquats,tvLeg_raises,tvPushUps,tvTotalScore;
+    private String Score_ID,User_ID,Dates,Age,Meters,MetersGrade,Squats,SquatsGrade,leg_raises,Leg_raisesGrade,PushUps,PushUpsGrade,totalScore;
+    private TextView tvDate,tvStatus,tvMeters,tvMetersGrade,tvSquats,tvSquatsGrade,tvLeg_raises,tvLeg_raisesGrade,tvPushUps,tvPushUpsGrade,tvTotalScore;
     private String Current = "Current";
     private String Expiring = "Expiring";
     private String Expired = "Expired";
@@ -46,9 +46,13 @@ public class FragmentChild extends Fragment {
         Dates = bundle.getString("Date");
         Age = bundle.getString("Age");
         Meters = bundle.getString("Meters");
+        MetersGrade = bundle.getString("MetersGrade");
         Squats = bundle.getString("Squats");
+        SquatsGrade = bundle.getString("SquatsGrade");
         leg_raises = bundle.getString("leg_raises");
+        Leg_raisesGrade = bundle.getString("Leg_raisesGrade");
         PushUps = bundle.getString("PushUps");
+        PushUpsGrade = bundle.getString("PushUpsGrade");
         totalScore = bundle.getString("totalScore");
 
         try {
@@ -65,9 +69,13 @@ public class FragmentChild extends Fragment {
         tvDate = (TextView) view.findViewById(R.id.userScoreDate);
         tvStatus = (TextView) view.findViewById(R.id.scoreStatus);
         tvMeters = (TextView) view.findViewById(R.id.meters);
+        tvMetersGrade = (TextView) view.findViewById(R.id.meters_grades);
         tvSquats = (TextView) view.findViewById(R.id.squats);
+        tvSquatsGrade = (TextView) view.findViewById(R.id.squats_grade);
         tvLeg_raises = (TextView) view.findViewById(R.id.leg_raises);
+        tvLeg_raisesGrade = (TextView) view.findViewById(R.id.leg_raises_grade);
         tvPushUps = (TextView) view.findViewById(R.id.push_ups);
+        tvPushUpsGrade = (TextView) view.findViewById(R.id.push_ups_grade);
         tvTotalScore = (TextView) view.findViewById(R.id.userScore);
 
         DateFormat outputFormat = new SimpleDateFormat("MMM yyyy", Locale.US);
@@ -79,9 +87,13 @@ public class FragmentChild extends Fragment {
 
         tvDate.setText(outputText);
         tvMeters.setText(Meters);
+        tvMetersGrade.setText("("+MetersGrade+")");
         tvSquats.setText(Squats);
+        tvSquatsGrade.setText("("+SquatsGrade+")");
         tvLeg_raises.setText(leg_raises);
+        tvLeg_raisesGrade.setText("("+Leg_raisesGrade+")");
         tvPushUps.setText(PushUps);
+        tvPushUpsGrade.setText("("+PushUpsGrade+")");
         tvTotalScore.setText(totalScore);
         tvTotalScore.setPaintFlags(tvTotalScore.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
