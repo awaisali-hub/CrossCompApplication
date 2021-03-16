@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps.AffiliteTeamManager;
+package com.eclairios.CrossComps.AffiliteTeamCaptain;
 
 import androidx.appcompat.app.AppCompatActivity;
 

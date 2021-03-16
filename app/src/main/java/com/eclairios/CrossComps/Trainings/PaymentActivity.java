@@ -78,9 +78,8 @@ public class PaymentActivity extends AppCompatActivity {
                 getApplicationContext(),
                 Objects.requireNonNull("pk_test_51IQtqIFJ4SzIm78RToLW7aCQbOuMP16WPAtaHnZdedDNWtr5wxEb6TiU7uL0oDMtbVeAPYjkZTQJaXPsLapXjsWd00wHiyDGaj")
         );
+
         startCheckout();
-
-
 
     }
 
@@ -120,16 +119,17 @@ public class PaymentActivity extends AppCompatActivity {
         // Hook up the pay button to the card widget and stripe instance
 
         payButton.setOnClickListener((View view) -> {
-
-
-
             //     CardInputWidget cardInputWidget = findViewById(R.id.cardInputWidget);
             //        PaymentMethodCreateParams params = cardInputWidget.getPaymentMethodCreateParams();
             ////////////////////////////
             CardInputWidget cardInputWidget = new CardInputWidget(this);
-            cardInputWidget.setCardNumber(card_number.getText().toString());
-            cardInputWidget.setCvcCode(cvc.getText().toString());
-            cardInputWidget.setExpiryDate(Integer.parseInt(month.getText().toString()), Integer.parseInt(year.getText().toString()));
+//            cardInputWidget.setCardNumber(card_number.getText().toString());
+//            cardInputWidget.setCvcCode(cvc.getText().toString());
+//            cardInputWidget.setExpiryDate(Integer.parseInt(month.getText().toString()), Integer.parseInt(year.getText().toString()));
+
+            cardInputWidget.setCardNumber("424242424242424242");
+            cardInputWidget.setCvcCode("123");
+            cardInputWidget.setExpiryDate(5, 25);
             cardInputWidget.setPostalCodeRequired(false);
 
             PaymentMethodCreateParams params = cardInputWidget.getPaymentMethodCreateParams();
@@ -155,14 +155,12 @@ public class PaymentActivity extends AppCompatActivity {
         builder.setPositiveButton("Ok", null);
         builder.create().show();
 
-        card_number.setText("");
-        cvc.setText("");
-        month.setText("");
-        year.setText("");
+//        card_number.setText("");
+//        cvc.setText("");
+//        month.setText("");
+//        year.setText("");
 
-        startCheckout();
-
-      //  startActivity(new Intent(PaymentActivity.this,HelperChatActivity.class));
+        startActivity(new Intent(PaymentActivity.this,HelperChatActivity.class));
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

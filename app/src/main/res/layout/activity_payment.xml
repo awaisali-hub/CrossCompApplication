@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="35"
+                        android:text="50"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textSize="22sp"
                         android:textColor="@color/black"/>

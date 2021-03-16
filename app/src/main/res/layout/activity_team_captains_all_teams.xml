@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue">
+
+            <TextView
+                android:id="@+id/userNAME"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:text="Team Captains"
+                android:layout_marginEnd="15dp"
+                android:gravity="center"
+                android:textColor="@color/actionbar_text_colour"
+                android:textStyle="bold"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <LinearLayout
+        android:layout_below="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:gravity="center"
+            android:background="@drawable/res"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:text="BreckenFit Gym"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:gravity="center"
+            android:background="@drawable/res"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:text="Mentone Church"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:onClick="MoveToChurchTeam"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:gravity="center"
+            android:background="@drawable/res"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:text="Sacramento Academy"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:onClick="MoveToChurchNewTeamOrJoin"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:gravity="center"
+            android:background="@drawable/res"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:text="Team 92506"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:gravity="center"
+            android:background="@drawable/res"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:backgroundTint="@color/blue"
+            android:text="My Class Team"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:gravity="center"
+            android:background="@drawable/res"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:backgroundTint="@color/blue"
+            android:text="My Company Team"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:gravity="center"
+            android:background="@drawable/res"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:backgroundTint="@color/blue"
+            android:text="My Family Team"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:gravity="center"
+            android:background="@drawable/res"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:backgroundTint="@color/blue"
+            android:text="My Graduation Team"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+
+    </LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginTop="@dimen/_7sdp"
+        android:id="@+id/MoveToScore"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal|bottom"
+        android:background="@drawable/res"
+        android:backgroundTint="@color/blue"
+        android:text="Dashboard"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/_58sdp"
+        />
+
+</RelativeLayout>

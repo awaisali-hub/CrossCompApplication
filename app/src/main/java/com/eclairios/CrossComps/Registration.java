@@ -266,16 +266,13 @@ public class Registration extends AppCompatActivity {
                                 String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
 
 
+
                                 MainAddress = city;
 
-                                Log.e("addressssssss", "onLocationResult: "+ city);
+                                Log.e("addressssssss", "onLocationResult: "+ state);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
-
-
-
                         }
                     }
                 },

@@ -13,6 +13,9 @@
         android:orientation="vertical"
         android:layout_margin="10dp">
 
+
+
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -20,17 +23,19 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
-            <com.google.android.material.textfield.TextInputEditText
+
+            <AutoCompleteTextView
+                android:id="@+id/postal_code_for_team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:hint="Enter Postal Code"
                 android:paddingStart="30dp"
                 android:inputType="textCapSentences"
-                android:paddingTop="10dp"
+                android:padding="15dp"
                 android:textColorHint="@color/white"
-                android:textSize="14sp">
-            </com.google.android.material.textfield.TextInputEditText>
+                android:textSize="14sp"/>
+
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -40,7 +45,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/city_team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
@@ -60,7 +65,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/county_team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
@@ -80,7 +85,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/conference_team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
@@ -100,7 +105,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/state_team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
@@ -120,7 +125,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/union_team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
@@ -139,7 +144,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="3dp">
         <com.google.android.material.textfield.TextInputEditText
-
+            android:id="@+id/country_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext"
@@ -158,7 +163,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="3dp">
         <com.google.android.material.textfield.TextInputEditText
-
+            android:id="@+id/division_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext"
@@ -177,7 +182,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="3dp">
         <com.google.android.material.textfield.TextInputEditText
-
+            android:id="@+id/world_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext"
@@ -190,14 +195,10 @@
         </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
-
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/MoveToScore"
+        android:id="@+id/saveTeam"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="20sp"
-                android:text="My Church Team"
+                android:text="Members"
                 android:layout_marginEnd="15dp"
                 android:gravity="center"
                 android:textColor="@color/actionbar_text_colour"
@@ -39,94 +39,91 @@
         android:orientation="vertical"
         android:layout_marginTop="@dimen/_10sdp">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:gravity="center"
-            android:background="@drawable/res"
-            android:textAllCaps="false"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="@dimen/_30sdp"
-            android:text="Mentone Church"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:onClick="CategoryTeamAlreadyMember"
-            />
-
-
         <TextView
             android:id="@+id/one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="James Hugo"
-            android:textAlignment="textStart"
+            android:text="Mentone Church"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            android:paddingStart="@dimen/_50sdp"
-            android:paddingEnd="@dimen/_40sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:drawableRight="@drawable/message_icon_img"
-            android:onClick="OpenCoManagersScreenOfTeamCaptain"/>
-
-
+            android:onClick="MembersScreenOfTeamCaptain"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_20sdp">
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/team2"
-                android:gravity="center"
-                android:background="@drawable/res"
-                android:textAllCaps="false"
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="50dp"
-                android:layout_marginStart="30dp"
-                android:text="Co-Captains"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:onClick="MoveToCoCaptions"
-                />
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="4"
-                android:textAlignment="center"
+                android:text="Affiliate Lastname"
+                android:textAlignment="textStart"
                 android:textColor="@color/black"
-                android:layout_gravity="center_vertical"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                tools:ignore="RtlCompat" />
+                android:textSize="24sp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:drawableRight="@drawable/message_icon_img"
+                />
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_20sdp">
-            <androidx.appcompat.widget.AppCompatButton
-                android:gravity="center"
-                android:background="@drawable/res"
-                android:textAllCaps="false"
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="50dp"
-                android:layout_marginStart="30dp"
-                android:text="Members"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:onClick="MoveToCaptainTeamMember"
-                />
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="140"
-                android:textAlignment="center"
+                android:text="Jill Lastname"
+                android:textAlignment="textStart"
                 android:textColor="@color/black"
-                android:layout_gravity="center_vertical"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                tools:ignore="RtlCompat" />
+                android:textSize="24sp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:drawableRight="@drawable/message_icon_img"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kathryn Lastname"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:drawableRight="@drawable/message_icon_img"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rick Lastname"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:drawableRight="@drawable/message_icon_img"
+                />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -142,11 +139,10 @@
         android:layout_gravity="center_horizontal|bottom"
         android:background="@drawable/res"
         android:backgroundTint="@color/blue"
-        android:text="Team Captain"
+        android:text="Team Captains"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_marginBottom="@dimen/_58sdp"
-        android:onClick="MoveToPledge"
         />
 
 </RelativeLayout>

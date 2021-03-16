@@ -40,6 +40,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             return new ViewHolder(view);
         }
     }
+
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
        holder.senderText.setText(message.get(position).getMessage());

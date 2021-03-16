@@ -1,19 +1,17 @@
-package com.eclairios.CrossComps.Trainings;
+package com.eclairios.CrossComps.AffiliteTeamCaptain;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 import com.eclairios.CrossComps.R;
-import com.stripe.android.PaymentConfiguration;
 
-public class CertifiedCrossCompGymPaymentActivity extends AppCompatActivity {
+public class MembersScreenOfTeamCaptainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_certified_cross_comp_gym_payment);
+        setContentView(R.layout.activity_members_screen_of_team_captain);
         getSupportActionBar().hide();
-
     }
 }
