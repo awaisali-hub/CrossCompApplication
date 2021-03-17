@@ -22,7 +22,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AffiliteTeamCaptain.CategoryTeamAlreadyMemberActivity"></activity>
+        <activity android:name=".ServiceCoordinator.CoordinatorRegistration3_4Activity"></activity>
+        <activity android:name=".ServiceCoordinator.CoordinatorRegistration2b_4EventActivity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorServiceOrEventRegistration2a_4Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorServiceOrRegistration1_4Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorServicesScreenActivity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorCheck_InScreen7_7Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorCheck_InScreen6_7Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorCheck_InScreen5_7Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorCheck_InScreen4_7Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorCheck_InScreen3_7Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorCheck_InScreen2_7Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorInformedConsentScreen1b_7Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorMedicalClearanceScreen1a_7Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorCheck_InScreen1_7Activity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorReservationsScreenActivity" />
+        <activity android:name=".ServiceCoordinator.ServiceCoordinatorHomePageActivity" />
+        <activity android:name=".AffiliteTeamCaptain.CategoryTeamAlreadyMemberActivity" />
         <activity android:name=".AffiliteTeamCaptain.MembersScreenOfTeamCaptainActivity" />
         <activity android:name=".AffiliteTeamCaptain.MembersScreenOfCoCaptainsActivity" />
         <activity android:name=".AffiliteTeamCaptain.MembersScreenOfAffiliatesActivity" />
@@ -48,7 +64,8 @@
         <activity android:name=".AffiliteTeamManager.HomeTeamActivity" />
         <activity android:name=".AffiliteTeamManager.TeamManagerActivity" />
         <activity android:name=".CrossCompAffiliate.BecomeCrossCompAffiliateActivity" />
-        <activity android:name=".CrossCompAffiliate.AffiliateDashboardActivity" />
+        <activity android:name=".CrossCompAffiliate.AffiliateDashboardActivity"/>
+
         <activity android:name=".CrossCompAffiliate.OptiHealthPledgeActivity" />
         <activity android:name=".CrossCompAffiliate.CrossCompAffiliateAgreementActivity" />
         <activity android:name=".Profile.UpdateProfileActivity" />

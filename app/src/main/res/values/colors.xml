@@ -25,4 +25,5 @@
     <color name="grey">#DCDCDC</color>
     <color name="yellow">#FFFF00</color>
     <color name="orange">#FFA500</color>
+    <color name="dark_grey">#555555</color>
 </resources>

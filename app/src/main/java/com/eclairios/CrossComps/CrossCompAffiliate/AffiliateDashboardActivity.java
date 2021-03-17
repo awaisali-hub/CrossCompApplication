@@ -10,6 +10,7 @@ import com.eclairios.CrossComps.AffiliteTeamCaptain.TeamCaptainsAllTeamsActivity
 import com.eclairios.CrossComps.AffiliteTeamManager.HomeTeamActivity;
 import com.eclairios.CrossComps.AffiliteTeamCaptain.TeamCaptainActivity;
 import com.eclairios.CrossComps.R;
+import com.eclairios.CrossComps.ServiceCoordinator.ServiceCoordinatorHomePageActivity;
 
 public class AffiliateDashboardActivity extends AppCompatActivity {
 
@@ -27,5 +28,9 @@ public class AffiliateDashboardActivity extends AppCompatActivity {
     public void MoveToTeamCaptain(View view) {
         startActivity(new Intent(AffiliateDashboardActivity.this, TeamCaptainsAllTeamsActivity.class));
 
+    }
+
+    public void ServiceCoordinator(View view) {
+        startActivity(new Intent(AffiliateDashboardActivity.this, ServiceCoordinatorHomePageActivity.class));
     }
 }
