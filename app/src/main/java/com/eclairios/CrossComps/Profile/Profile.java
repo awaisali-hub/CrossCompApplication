@@ -38,7 +38,7 @@ public class Profile extends AppCompatActivity {
     JSONArray jsonArray;
 
     TextView first_Name,last_Name,phone_number,email,postal_code,address,gender,age,promoter;
-
+    String str_first_Name,str_last_Name,str_phone_number,str_email,str_postal_code,str_address,str_gender,str_age,str_promoter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +60,6 @@ public class Profile extends AppCompatActivity {
         startActivity(new Intent(Profile.this, Participent.class));
     }
 
-    public void UpdateProfile(View view) {
-        startActivity(new Intent(Profile.this, UpdateProfileActivity.class));
-    }
 
 
     class BackgroundTasks extends AsyncTask<String, Void, String>
@@ -142,7 +139,7 @@ public class Profile extends AppCompatActivity {
                 jsonArray = jsonObject.getJSONArray("server_response");
 
                 int count =0;
-                String str_first_Name,str_last_Name,str_phone_number,str_email,str_postal_code,str_address,str_gender,str_age,str_promoter;
+
                 while(count < jsonArray.length())
                 {
                     JSONObject JO = jsonArray.getJSONObject(count);
@@ -158,6 +155,8 @@ public class Profile extends AppCompatActivity {
                     str_promoter = JO.getString("Name_Promoter");
 
                     Log.e("profileTest", "onPostExecute: "+ str_first_Name);
+
+
 
 
                     first_Name.setText(str_first_Name);
@@ -176,13 +175,28 @@ public class Profile extends AppCompatActivity {
 
 
 
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
     }
+    public void moveToProfile(View view) {
+        Intent intent = new Intent(Profile.this, UpdateProfileActivity.class);
+        intent.putExtra("str_first_Name", str_first_Name);
+        intent.putExtra("str_last_Name", str_last_Name);
+        intent.putExtra("str_phone_number", str_phone_number);
+        intent.putExtra("str_email", str_email);
+        intent.putExtra("str_postal_code", str_postal_code);
+        intent.putExtra("str_address", str_address);
+        intent.putExtra("str_gender", str_gender);
+        intent.putExtra("str_age", str_age);
+        intent.putExtra("str_promoter", str_promoter);
+        startActivity(intent);
+
+       // startActivity(new Intent(Profile.this, UpdateProfileActivity.class));
+    }
+
 
     @Override
     protected void onStart() {

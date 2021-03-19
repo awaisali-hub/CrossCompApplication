@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/update_profile_images"
-                android:onClick="UpdateProfile"/>
+                android:onClick="UpdateProfileDetail"/>
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -79,12 +79,12 @@
                         </TextView>
                         <EditText
                             android:paddingStart="@dimen/_10sdp"
-                            android:id="@+id/first_Name"
+                            android:id="@+id/first_Namee"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/butten"
                             android:gravity="top"
-                            android:text="Adrian"
+
                             android:maxLines="1"
                             android:textColor="@color/black"
                             android:textSize="28sp"
@@ -121,12 +121,12 @@
 
                         <EditText
                             android:paddingStart="@dimen/_10sdp"
-                            android:id="@+id/last_Name"
+                            android:id="@+id/last_Namee"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/butten"
                             android:gravity="top"
-                            android:text="Cox"
+
                             android:maxLines="1"
                             android:textColor="@color/black"
                             android:textSize="28sp"
@@ -162,13 +162,12 @@
 
                         <EditText
                             android:paddingStart="@dimen/_10sdp"
-                            android:id="@+id/phone_number"
+                            android:id="@+id/phone_numberr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/butten"
                             android:gravity="top"
                             android:textColor="@color/black"
-                            android:text="222-333-4444"
                             android:maxLines="1"
                             android:textSize="28sp"
                             android:padding="5dp">
@@ -201,13 +200,12 @@
 
                         <EditText
                             android:paddingStart="@dimen/_10sdp"
-                            android:id="@+id/email"
+                            android:id="@+id/emaill"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/butten"
                             android:gravity="top"
                             android:maxLines="1"
-                            android:text="adrian564@gmail.com"
                             android:textColor="@color/black"
                             android:textSize="28sp"
                             android:padding="5dp">
@@ -240,14 +238,13 @@
                         </TextView>
                         <EditText
                             android:paddingStart="@dimen/_10sdp"
-                            android:id="@+id/postal_code"
+                            android:id="@+id/postal_codee"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/butten"
                             android:gravity="top"
                             android:textColor="@color/black"
                             android:maxLines="1"
-                            android:text="54326"
                             android:textSize="28sp"
                             android:padding="5dp">
                         </EditText>
@@ -280,13 +277,12 @@
 
                         <EditText
                             android:paddingStart="@dimen/_10sdp"
-                            android:id="@+id/address"
+                            android:id="@+id/addresss"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/butten"
                             android:gravity="top"
                             android:textColor="@color/black"
-                            android:text="London"
                             android:maxLines="1"
                             android:textSize="28sp"
                             android:padding="5dp">
@@ -319,12 +315,11 @@
 
                         <EditText
                             android:paddingStart="@dimen/_10sdp"
-                            android:id="@+id/gender"
+                            android:id="@+id/genderr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/butten"
                             android:gravity="top"
-                            android:text="Male"
                             android:maxLines="1"
                             android:textColor="@color/black"
                             android:textSize="28sp"
@@ -356,14 +351,13 @@
 
                         <EditText
                             android:paddingStart="@dimen/_10sdp"
-                            android:id="@+id/age"
+                            android:id="@+id/agee"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/butten"
                             android:gravity="top"
                             android:textColor="@color/black"
                             android:maxLines="1"
-                            android:text="28"
                             android:textSize="28sp"
                             android:padding="5dp">
                         </EditText>

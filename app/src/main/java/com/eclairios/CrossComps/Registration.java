@@ -177,8 +177,8 @@ public class Registration extends AppCompatActivity {
 
         String method = "register";
 
-        if (TextUtils.isEmpty(strFirstName) && TextUtils.isEmpty(strLastName) && TextUtils.isEmpty(strPhone) &&
-                TextUtils.isEmpty(strEmail) && TextUtils.isEmpty(strPassword)) {
+        if (TextUtils.isEmpty(strFirstName) || TextUtils.isEmpty(strLastName) || TextUtils.isEmpty(strPhone) ||
+                TextUtils.isEmpty(strEmail) || TextUtils.isEmpty(strPassword)) {
             progressDialog.dismiss();
             Toast.makeText(Registration.this, "All fields are required!", Toast.LENGTH_SHORT).show();
 

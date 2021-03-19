@@ -3,6 +3,7 @@ package com.eclairios.CrossComps.Teams;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,5 +59,11 @@ public class TeamsScoreActivity extends AppCompatActivity {
         android.app.AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(TeamsScoreActivity.this,AllTeamCategoryActivity.class));
     }
 }

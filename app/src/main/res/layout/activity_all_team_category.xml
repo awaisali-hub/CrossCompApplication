@@ -28,14 +28,48 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myCrossCompTeamList"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_below="@+id/appbar_layout"
-        android:layout_marginBottom="@dimen/_10sdp"/>
+        android:layout_below="@+id/appbar_layout">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/MyHomeTeam"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="My World Team"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:onClick="MyWorldTeam"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myCrossCompTeamList1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_below="@+id/MyHomeTeam"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myCrossCompTeamList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_below="@+id/myCrossCompTeamList1"
+                android:layout_marginBottom="@dimen/_10sdp"/>
+        </RelativeLayout>
+    </ScrollView>
+
+
+
 
 </RelativeLayout>

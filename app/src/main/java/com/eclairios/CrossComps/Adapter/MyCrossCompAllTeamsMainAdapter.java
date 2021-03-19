@@ -52,19 +52,23 @@ public class MyCrossCompAllTeamsMainAdapter extends RecyclerView.Adapter<MyCross
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.teamName.setText(crossCompAllTeamsMainModels.get(position).getTeamName());
+
+        if(crossCompAllTeamsMainModels.get(position).getTeamName().equals("My World Team")){
+            ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
+            params.height = 0;
+            params.width = 0;
+            holder.itemView.setLayoutParams(params);
+
+            holder.itemView.setVisibility(View.INVISIBLE);
+        }else{
+            holder.teamName.setText(crossCompAllTeamsMainModels.get(position).getTeamName());
+        }
 
         holder.teamName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(crossCompAllTeamsMainModels.get(position).getTeamID().equals("1")){
-                    context.startActivity(new Intent(context, TeamsScoreActivity.class));
-                }else{
-                    interfaceForSetTeams.TeamsPostalCode();
+                    interfaceForSetTeams.TeamsPostalCode(crossCompAllTeamsMainModels.get(position).getTeamID());
                 }
-
-            }
         });
     }
 
@@ -86,9 +90,6 @@ public class MyCrossCompAllTeamsMainAdapter extends RecyclerView.Adapter<MyCross
     public int getItemViewType(int position) {
         //  return super.getItemViewType(position);
 
-        if(crossCompAllTeamsMainModels.get(position).getTeamID().equals("1")){
-            return GreenType;
-        }
         return BlueType;
 
       //  return EditGreenType;

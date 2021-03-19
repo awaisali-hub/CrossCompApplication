@@ -1,5 +1,5 @@
 package com.eclairios.CrossComps.Interface;
 
 public interface InterfaceForSetTeams {
-    void TeamsPostalCode();
+    void TeamsPostalCode(String SelectedGeneralTeamID);
 }

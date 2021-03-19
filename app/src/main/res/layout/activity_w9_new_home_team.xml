@@ -30,17 +30,1274 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <WebView
 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/webview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/appbar_layout"
+
+
+    <ScrollView
         android:layout_above="@+id/submitF9"
-        />
+        android:layout_below="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_below="@+id/appbar_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
+            <LinearLayout
+                android:weightSum="4"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="86dp">
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:id="@+id/relative"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/linear_w_9heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:textSize="9sp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Form"/>
+
+                        <TextView
+                            android:onClick="sss"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="22sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  W-9"
+                            />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:textSize="9sp"
+                        android:layout_below="@+id/linear_w_9heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rev_october_2018_n_department_of_the_treasury_n_internal_revenue_service" />
+
+                    <View
+                        android:backgroundTint="@color/black"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="1dp"
+                        android:layout_height="141dp"
+                        android:background="#FF0000FF"
+                        android:layout_alignParentRight="true" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+
+
+                    <TextView
+                        android:paddingLeft="5dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/request_for_taxpayer_identification_number_and_certification"/>
+
+                    <TextView
+                        android:padding="2dp"
+                        android:paddingLeft="5dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/go_to_www_irs_gov_formw9_for_instructions_and_the_latest_information"
+                        android:textColor="@color/black"
+                        android:textSize="8sp"
+
+                        />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_alignParentStart="true"
+                        android:backgroundTint="@color/black"
+                        android:layout_width="1dp"
+                        android:layout_height="141dp"
+                        android:background="#FF0000FF"
+                        android:layout_alignParentLeft="true" />
+
+                    <TextView
+                        android:paddingLeft="5dp"
+                        android:layout_marginTop="22dp"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/give_form_to_the_requester_do_not_send_to_the_irs"
+                        android:textColor="@color/black"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"/>
+
+
+
+
+
+
+            <LinearLayout
+
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="25dp"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:textSize="12sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="231dp"
+                        android:textColor="@color/black"
+                        />
+
+                    <View
+                        android:layout_alignParentRight="true"
+                        android:backgroundTint="@color/black"
+                        android:layout_width="1dp"
+                        android:layout_height="fill_parent"
+                        android:background="#FF0000FF"
+                        />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:gravity="top"
+                            android:textSize="10sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text=" 1 "
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            />
+                        <TextView
+                            android:textSize="9sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name (as shown on your income tax return). Name is required on this line;  do not \n leave this line blank."
+                            android:textColor="@color/black"
+                            />
+                    </LinearLayout>
+
+                    <EditText
+                        android:background="@color/editTextColor"
+                        android:textSize="12sp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/black"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:gravity="top"
+                            android:textSize="10sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:text=" 2 "
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            />
+                        <TextView
+                            android:textSize="9sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Business name/disregarded entity name, if different from above"
+                            android:textColor="@color/black"
+                            />
+                    </LinearLayout>
+
+                    <EditText
+                        android:background="@color/editTextColor"
+                        android:textSize="12sp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/black"/>
+
+                    <LinearLayout
+                        android:weightSum="5"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_weight="3.5"
+                            android:orientation="vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:gravity="top"
+                                    android:textSize="10sp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:text=" 3 "
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black" />
+                                <TextView
+                                    android:textSize="9sp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_3_check_appropriate_box_for_federal_tax_classification_of_the_person_whose_name_is_entered_on_line_1_check_only_one_of_the_following_seven_boxes"
+                                    android:textColor="@color/black"
+                                    />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <CheckBox
+                                    android:textSize="6sp"
+                                    android:text="Individual/sole proprietor\n or  single-member LLC"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                                <CheckBox
+                                    android:text=" C Corporation"
+                                    android:textSize="6sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <CheckBox
+                                    android:textSize="6sp"
+                                    android:text="S Corporation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                                <CheckBox
+                                    android:text="Partnership"
+                                    android:gravity="center"
+                                    android:textSize="6sp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                                <CheckBox
+                                    android:gravity="center"
+                                    android:textSize="6sp"
+                                    android:text="Trust/estate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginBottom="5dp"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp">
+
+                                <CheckBox
+                                    android:textSize="7sp"
+                                    android:text="Limited liability company. Enter the tax \n  classification (C=C corporation, \n S=S corporation, P=Partnership) ▶"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"/>
+
+                                <EditText
+                                    android:background="@color/editTextColor"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content">
+
+                                </EditText>
+                                <LinearLayout
+                                    android:layout_gravity="center_vertical"
+                                    android:orientation="vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+
+                                    <EditText
+                                        android:background="@color/editTextColor"
+                                        android:textSize="12sp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/black"
+                                        android:textStyle="bold"
+                                        />
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:background="@android:color/darker_gray"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                            <TextView
+                                android:textColor="@color/black"
+                                android:textSize="7sp"
+                                android:text="@string/note_check_the_appropriate_box_in_the_line_above_for_the_tax_classification_of_the_single_member_owner_do_not_check_llc_if_the_llc_is_classified_as_a_single_member_llc_that_is_disregarded_from_the_owner_unless_the_owner_of_the_llc_is_another_llc_that_is_not_disregarded_from_the_owner_for_u_s_federal_tax_purposes_otherwise_a_single_member_llc_that_is_disregarded_from_the_owner_should_check_the_appropriate_box_for_the_tax_classification_of_its_owner"
+                                android:layout_marginStart="32dp"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="25dp">
+
+                            </TextView>
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.checkbox.MaterialCheckBox
+
+                                    android:textSize="7sp"
+                                    android:text="Other (see instructions) ▶"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="20dp" />
+
+
+                                <EditText
+                                    android:background="@color/editTextColor"
+                                    android:textSize="12sp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/black"
+                                    />
+
+                            </LinearLayout>
+
+
+
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_weight="1.5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_alignParentLeft="true"
+                                android:backgroundTint="@color/black"
+                                android:layout_width="1dp"
+                                android:layout_height="250dp"
+                                android:background="#FF0000FF"
+                                />
+
+                            <LinearLayout
+                                android:id="@+id/isa"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:gravity="top"
+                                    android:textSize="10sp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:text=" 4 "
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black"
+                                    />
+                                <TextView
+                                    android:textSize="9sp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Exemptions (codes apply only to
+certain entities, not individuals; see
+instructions on page 3):"
+                                    android:textColor="@color/black"
+                                    />
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:layout_marginLeft="7dp"
+                                android:textColor="@color/black"
+                                android:id="@+id/asdd"
+                                android:layout_marginTop="5dp"
+                                android:text=" Exempt payee code (if any)"
+                                android:textSize="7sp"
+                                android:layout_below="@+id/isa"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            </TextView>
+
+                            <EditText
+                                android:layout_marginLeft="7dp"
+                                android:layout_marginRight="7dp"
+                                android:id="@+id/abcc"
+                                android:background="@color/editTextColor"
+                                android:layout_below="@+id/asdd"
+                                android:layout_width="fill_parent"
+                                android:layout_height="20dp">
+                            </EditText>
+
+
+                            <TextView
+                                android:layout_marginLeft="7dp"
+                                android:textColor="@color/black"
+                                android:id="@+id/asdfdd"
+                                android:layout_marginTop="5dp"
+                                android:text="Exemption from FATCA \n reporting code (if any)"
+                                android:textSize="7sp"
+                                android:layout_below="@+id/abcc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            </TextView>
+
+                            <EditText
+                                android:layout_marginLeft="7dp"
+                                android:layout_marginRight="7dp"
+                                android:id="@+id/dsad"
+                                android:background="@color/editTextColor"
+                                android:layout_below="@+id/asdfdd"
+                                android:layout_width="fill_parent"
+                                android:layout_height="20dp">
+                            </EditText>
+
+
+                            <TextView
+                                android:textColor="@color/black"
+                                android:layout_marginLeft="7dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginTop="22dp"
+                                android:layout_below="@+id/asdfdd"
+                                android:text="(Applies to accounts maintained outside the U.S.)"
+                                android:textSize="5sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            </TextView>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/black"/>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+                                        <LinearLayout
+                                            android:orientation="horizontal"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+                                            <TextView
+                                                android:gravity="top"
+                                                android:textSize="10sp"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="fill_parent"
+                                                android:text=" 5 "
+                                                android:textStyle="bold"
+                                                android:textColor="@color/black"
+                                                />
+                                            <TextView
+                                                android:textSize="10sp"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="Address (number, street, and apt. or suite no.)\n See instructions."
+                                                android:textColor="@color/black"
+                                                />
+                                        </LinearLayout>
+                                        <EditText
+                                            android:background="@color/editTextColor"
+                                            android:textSize="12sp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/black"
+                                            />
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/black"/>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <LinearLayout
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+                                            <TextView
+                                                android:gravity="top"
+                                                android:textSize="10sp"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="fill_parent"
+                                                android:text=" 6 "
+                                                android:textStyle="bold"
+                                                android:textColor="@color/black"
+                                                />
+                                            <TextView
+                                                android:textSize="10sp"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text=" City, state, and ZIP code"
+                                                android:textColor="@color/black"
+                                                />
+                                        </LinearLayout>
+
+
+                                        <EditText
+                                            android:background="@color/editTextColor"
+                                            android:textSize="12sp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/black"
+                                            />
+
+
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_alignParentLeft="true"
+                                android:backgroundTint="@color/black"
+                                android:layout_width="1dp"
+                                android:layout_height="fill_parent"
+                                android:background="#FF0000FF"
+                                />
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:textSize="10sp"
+                                    android:text="Requester’s name and address (optional)"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+                                </TextView>
+
+                                <EditText
+                                    android:background="@color/editTextColor"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="60dp">
+
+                                </EditText>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/black"/>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:gravity="top"
+                                    android:textSize="10sp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:text=" 7 "
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black"
+                                    />
+                                <TextView
+                                    android:textSize="10sp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="List account number(s) here (optional)"
+                                    android:textColor="@color/black"
+                                    />
+                            </LinearLayout>
+
+
+                            <EditText
+                                android:background="@color/editTextColor"
+                                android:textSize="12sp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/black"/>
+
+                        </LinearLayout>
+
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:background="@color/black"
+                    android:textColor="@color/white"
+                    android:text="Part I"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="Taxpayer Identification Number (TIN)"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:paddingRight="10sp"
+                    android:textSize="7sp"
+                    android:textColor="@color/black"
+                    android:text="Enter your TIN in the appropriate box.  The TIN provided must match the name given on line 1 to avoid \n
+backup withholding. For individuals, this is generally your social security number (SSN). However, for a \n
+resident alien, sole proprietor, or disregarded entity, see the instructions for Part I, later. For other \n
+entities, it is your employer identification number (EIN). If you do not have a number, see How to get a \n
+TIN, later. \n
+Note: If the account is in more than one name, see the instructions for line 1. Also see What Name and \n
+Number To Give the Requester for guidelines on whose number to enter."
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:layout_marginTop="2dp"
+                        android:paddingLeft="4dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@drawable/edittext_background"
+                        android:textColor="@color/black"
+                        android:textSize="7sp"
+                        android:text="Social security number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </TextView>
+
+                    <LinearLayout
+                        android:weightSum="11"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/et1"
+                            android:maxLength="1"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:background="@drawable/edittext_background"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/et2"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/et3"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="20dp">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/et5"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/et6"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="20dp">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/et8"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/et9"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/et10"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/et11"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:paddingLeft="4dp"
+                        android:textColor="@color/black"
+                        android:textSize="7sp"
+                        android:text="Or"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </TextView>
+
+                    <TextView
+                        android:paddingLeft="4dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:background="@drawable/edittext_background"
+                        android:textColor="@color/black"
+                        android:textSize="7sp"
+                        android:text="Employer identification number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4dp">
+                    </TextView>
+
+                    <LinearLayout
+                        android:layout_marginRight="15dp"
+                        android:weightSum="10"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/ett1"
+                            android:maxLength="1"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:background="@drawable/edittext_background"
+
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/ett2"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+
+
+                        <EditText
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="20dp">
+                        </EditText>
+
+
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/ett4"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/ett5"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/ett6"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/ett7"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/ett8"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/ett9"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+                        <EditText
+                            android:gravity="center"
+                            android:id="@+id/ett10"
+                            android:maxLength="1"
+                            android:background="@drawable/edittext_background"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent">
+                        </EditText>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:background="@color/black"
+                    android:textColor="@color/white"
+                    android:text="Part II"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="Certification"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"/>
+
+            <TextView
+                android:textColor="@color/black"
+                android:textSize="7sp"
+                android:text="Under penalties of perjury, I certify that:\n
+1. The number shown on this form is my correct taxpayer identification number (or I am waiting for a number to be issued to me); and \n
+2. I am not subject to backup withholding because: (a) I am exempt from backup withholding, or (b) I have not been notified by the Internal Revenue \n
+Service (IRS) that I am subject to backup withholding as a result of a failure to report all interest or dividends, or (c) the IRS has notified me that I am \n
+no longer subject to backup withholding; and \n
+3. I am a U.S. citizen or other U.S. person (defined below); and\n
+4. The FATCA code(s) entered on this form (if any) indicating that I am exempt from FATCA reporting is correct. \n
+Certification instructions. You must cross out item 2 above if you have been notified by the IRS that you are currently subject to backup withholding because \n
+you have failed to report all interest and dividends on your tax return. For real estate transactions, item 2 does not apply. For mortgage interest paid, \n
+acquisition or abandonment of secured property, cancellation of debt, contributions to an individual retirement arrangement (IRA), and generally, payments \n
+other than interest and dividends, you are not required to sign the certification, but you must provide your correct TIN. See the instructions for Part II, later."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="Sign\nHere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <View
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="5sp"
+                    android:backgroundTint="@color/black"
+                    android:layout_width="1dp"
+                    android:layout_height="fill_parent"
+                    android:background="#FF0000FF"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="7sp"
+                        android:textStyle="bold"
+                        android:layout_alignParentLeft="true"
+                        android:text="Signature of U.S. person ▶"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </TextView>
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:layout_marginRight="30dp"
+                        android:textSize="7sp"
+                        android:textStyle="bold"
+                        android:layout_alignParentEnd="true"
+                        android:text="Date ▶"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true">
+                    </TextView>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"/>
+
+
+            <LinearLayout
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="@string/fgds"
+                    android:textSize="7sp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <TextView
+                    android:textSize="7sp"
+                    android:textColor="@color/black"
+                    android:text="@string/mgfzxtf"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#C9C3CF"/>
+
+
+            <LinearLayout
+
+                android:background="#C9C3CF"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:background="@drawable/p1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/p2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/pp3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/p4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/pp4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ppp4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+
+
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/p5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/pp5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/p6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+
+                <ImageView
+                    android:background="@drawable/pp6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ImageView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 
     <androidx.appcompat.widget.AppCompatButton

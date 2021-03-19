@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         String strPassword = password.getText().toString();
         String method = "login";
 
-        if(TextUtils.isEmpty(strEmail) && TextUtils.isEmpty(strPassword)){
+        if(TextUtils.isEmpty(strEmail) || TextUtils.isEmpty(strPassword)){
             Toast.makeText(this, "Email And Password Are Required", Toast.LENGTH_SHORT).show();
         }else{
 

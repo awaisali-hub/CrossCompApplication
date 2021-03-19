@@ -20,4 +20,8 @@ public class CoordinatorServicesScreenActivity extends AppCompatActivity {
     public void CoordinatorServiceEventRegistration(View view) {
         startActivity(new Intent(CoordinatorServicesScreenActivity.this,CoordinatorServiceOrRegistration1_4Activity.class));
     }
+
+    public void Summary(View view) {
+        startActivity(new Intent(CoordinatorServicesScreenActivity.this,CoordinatorServiceSummaryScreenActivity.class));
+    }
 }

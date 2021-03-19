@@ -190,7 +190,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_marginBottom="@dimen/_98sdp"
-        android:onClick="CheckIn3_7"
+        android:onClick="Registration4_4"
         />
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginTop="@dimen/_7sdp"

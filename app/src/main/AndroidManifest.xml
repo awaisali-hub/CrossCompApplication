@@ -22,7 +22,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ServiceCoordinator.CoordinatorRegistration3_4Activity"></activity>
+        <activity android:name=".Judge.Judge5bTestingScreen_Push_UpsActivity"></activity>
+        <activity android:name=".Judge.Judge5aPush_UpsActivity" />
+        <activity android:name=".Judge.Judge4bTestingScreen_Leg_RaisesActivity" />
+        <activity android:name=".Judge.Judge4aLeg_RaisesActivity" />
+        <activity android:name=".Judge.Judge3bTesting_Screen_SquatsActivity" />
+        <activity android:name=".Judge.Judge3a_SquatsActivity" />
+        <activity android:name=".Judge.Judge2bTestingScreenRun_WalkActivity" />
+        <activity android:name=".Judge.Judge2aRun_Walk_TestActivity" />
+        <activity android:name=".Judge.JudgeHomePageParticipantRegistrationActivity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorServiceSummaryScreenActivity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorRegistration4b_4EventActivity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorRegistration4a_4FacilityActivity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorRegistration3_4Activity" />
         <activity android:name=".ServiceCoordinator.CoordinatorRegistration2b_4EventActivity" />
         <activity android:name=".ServiceCoordinator.CoordinatorServiceOrEventRegistration2a_4Activity" />
         <activity android:name=".ServiceCoordinator.CoordinatorServiceOrRegistration1_4Activity" />
@@ -64,8 +76,7 @@
         <activity android:name=".AffiliteTeamManager.HomeTeamActivity" />
         <activity android:name=".AffiliteTeamManager.TeamManagerActivity" />
         <activity android:name=".CrossCompAffiliate.BecomeCrossCompAffiliateActivity" />
-        <activity android:name=".CrossCompAffiliate.AffiliateDashboardActivity"/>
-
+        <activity android:name=".CrossCompAffiliate.AffiliateDashboardActivity" />
         <activity android:name=".CrossCompAffiliate.OptiHealthPledgeActivity" />
         <activity android:name=".CrossCompAffiliate.CrossCompAffiliateAgreementActivity" />
         <activity android:name=".Profile.UpdateProfileActivity" />
