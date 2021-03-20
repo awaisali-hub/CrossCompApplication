@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="50"
+                        android:text="10"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textSize="22sp"
                         android:textColor="@color/black"/>
@@ -168,6 +168,7 @@
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:drawableRight="@drawable/card_img"
                         android:hint="Card number"
+                        android:maxLength="19"
                         android:inputType="phone"
                         android:padding="16dp"
                         android:textColor="@android:color/black"

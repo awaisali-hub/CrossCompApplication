@@ -2,9 +2,11 @@ package com.eclairios.CrossComps.Challenges;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.View;
 import android.widget.TextView;
 
 import com.eclairios.CrossComps.R;
@@ -25,5 +27,9 @@ public class IndividualTeamChallengesScreen1cActivity extends AppCompatActivity 
         SpannableString content = new SpannableString(text);
         content.setSpan(new UnderlineSpan(), 0, text.length(), 0);
         userScore.setText(content);
+    }
+
+    public void MoveToMyCrossCompChallenges(View view) {
+        startActivity(new Intent(IndividualTeamChallengesScreen1cActivity.this,ChallengeScreen0Activity.class));
     }
 }

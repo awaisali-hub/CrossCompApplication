@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.R;
+import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
 
 public class ChallengeScreen0Activity extends AppCompatActivity {
 
@@ -27,5 +29,11 @@ public class ChallengeScreen0Activity extends AppCompatActivity {
 
     public void MoveToIndividualChallenge(View view) {
         startActivity(new Intent(ChallengeScreen0Activity.this, IndividualTeamChallengesScreen1aActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ChallengeScreen0Activity.this, Participent.class));
     }
 }

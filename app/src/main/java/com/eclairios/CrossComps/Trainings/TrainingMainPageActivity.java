@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.R;
 
 public class TrainingMainPageActivity extends AppCompatActivity {
@@ -27,5 +29,11 @@ public class TrainingMainPageActivity extends AppCompatActivity {
 
     public void MoveToCertifiedGyms(View view) {
         startActivity(new Intent(TrainingMainPageActivity.this,GymsMapActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(TrainingMainPageActivity.this, Participent.class));
     }
 }

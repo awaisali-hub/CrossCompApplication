@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
 import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.R;
 
@@ -202,5 +203,11 @@ public class Profile extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         new BackgroundTasks().execute();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Profile.this, Participent.class));
     }
 }

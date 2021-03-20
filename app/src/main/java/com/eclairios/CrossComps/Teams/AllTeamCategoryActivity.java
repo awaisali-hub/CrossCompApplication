@@ -174,21 +174,87 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
                 String str_world_team = world_team.getText().toString();
 
 
-                if(TextUtils.isEmpty(postalCode) || TextUtils.isEmpty(str_city_team) || TextUtils.isEmpty(str_county_team)
+                if (TextUtils.isEmpty(postalCode) || TextUtils.isEmpty(str_city_team) || TextUtils.isEmpty(str_county_team)
                         || TextUtils.isEmpty(str_conference_team) || TextUtils.isEmpty(str_state_team) || TextUtils.isEmpty(str_union_team)
-                        || TextUtils.isEmpty(str_country_team) || TextUtils.isEmpty(str_division_team) || TextUtils.isEmpty(str_world_team) ){
+                        || TextUtils.isEmpty(str_country_team) || TextUtils.isEmpty(str_division_team) || TextUtils.isEmpty(str_world_team)) {
                     Toast.makeText(AllTeamCategoryActivity.this, "All fields Required", Toast.LENGTH_SHORT).show();
-                }else{
-                    BackgroundTask backgroundTask = new BackgroundTask(AllTeamCategoryActivity.this);
-                    backgroundTask.execute(method,SelectedTeamGeneralID,currentUserID,postalCode, str_city_team, str_county_team, str_conference_team, str_state_team, str_union_team, str_country_team, str_division_team, str_world_team);
+                } else {
 
-                    if(SelectedTeamGeneralID.equals("3")){
-                        startActivity(new Intent(AllTeamCategoryActivity.this, MyFundraisingTeamDetailActivity.class));
-                    }else{
-                        startActivity(new Intent(AllTeamCategoryActivity.this, TeamsScoreActivity.class));
-                    }
+
+                    BackgroundTask backgroundTask = new BackgroundTask(AllTeamCategoryActivity.this);
+                    backgroundTask.execute(method, SelectedTeamGeneralID, currentUserID, postalCode, str_city_team, str_county_team, str_conference_team, str_state_team, str_union_team, str_country_team, str_division_team, str_world_team);
 
                 }
+            }
+        });
+
+    }
+
+
+    public void TeamsChurch(String SelectedTeamID){
+
+        SelectedTeamGeneralID = SelectedTeamID;
+
+        Button saveTeam;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(AllTeamCategoryActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_church_auto_fill,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+
+        saveTeam = dialogView.findViewById(R.id.saveTeam);
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, postalCodeForTeams);
+        AutoCompleteTextView myFaithTeam = (AutoCompleteTextView) dialogView.findViewById(R.id.My_Faith_Team_team_church);
+        myFaithTeam.setThreshold(1);
+        myFaithTeam.setAdapter(adapter);
+
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, postalCodeForTeams);
+        AutoCompleteTextView myDivisionTeam = (AutoCompleteTextView) dialogView.findViewById(R.id.MyDivisionTeam_church);
+        myDivisionTeam.setThreshold(1);
+        myDivisionTeam.setAdapter(adapter1);
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, postalCodeForTeams);
+        AutoCompleteTextView myUnionTeam = (AutoCompleteTextView) dialogView.findViewById(R.id.MyUnionTeam_church);
+        myUnionTeam.setThreshold(1);
+        myUnionTeam.setAdapter(adapter2);
+
+
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, postalCodeForTeams);
+        AutoCompleteTextView myConferenceTeam = (AutoCompleteTextView) dialogView.findViewById(R.id.MyConferenceTeam_church);
+        myConferenceTeam.setThreshold(1);
+        myConferenceTeam.setAdapter(adapter3);
+
+
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
+
+
+        saveTeam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String method = "insertUserChurchTeamSelected";
+                String FaithTeam = myFaithTeam.getText().toString();
+                String DivisionTeam = myDivisionTeam.getText().toString();
+                String UnionTeam = myUnionTeam.getText().toString();
+                String ConferenceTeam = myConferenceTeam.getText().toString();
+
+                if(TextUtils.isEmpty(FaithTeam) || TextUtils.isEmpty(DivisionTeam) || TextUtils.isEmpty(UnionTeam)
+                        || TextUtils.isEmpty(ConferenceTeam) ){
+                    Toast.makeText(AllTeamCategoryActivity.this, "All fields Required", Toast.LENGTH_SHORT).show();
+                }else{
+
+
+                        BackgroundTask backgroundTask = new BackgroundTask(AllTeamCategoryActivity.this);
+                        backgroundTask.execute(method,SelectedTeamGeneralID,currentUserID,FaithTeam, DivisionTeam, UnionTeam, ConferenceTeam);
+
+
+                }
+
             }
         });
 

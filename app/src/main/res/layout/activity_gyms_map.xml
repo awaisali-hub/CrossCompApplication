@@ -42,7 +42,7 @@ tools:context=".Trainings.GymsMapActivity">
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:onClick="MoveToGymPurchaseActivity"/>
+        />
 
     <fragment
         android:layout_marginTop="@dimen/_5sdp"

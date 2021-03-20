@@ -67,7 +67,11 @@ public class MyCrossCompAllTeamsMainAdapter extends RecyclerView.Adapter<MyCross
         holder.teamName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(crossCompAllTeamsMainModels.get(position).getTeamID().equals("8")){
+                    interfaceForSetTeams.TeamsChurch(crossCompAllTeamsMainModels.get(position).getTeamID());
+                }else{
                     interfaceForSetTeams.TeamsPostalCode(crossCompAllTeamsMainModels.get(position).getTeamID());
+                }
                 }
         });
     }

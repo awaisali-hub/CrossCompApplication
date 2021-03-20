@@ -12,6 +12,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.Model.ModelHorizontal;
+import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
+import com.eclairios.CrossComps.Teams.MyFundraisingTeamDetailActivity;
+import com.eclairios.CrossComps.Teams.TeamsScoreActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +45,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
     JSONArray jsonArray;
 
     String latt,lngg,CurrentUserID;
-    String First_Name,Last_Name;
+    String First_Name,Last_Name,SelectedTeamGeneral_ID;
 
     Context ctx;
     File file;
@@ -79,6 +82,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         String request_change_event_reservation_url = "http://edevz.com/cross_comp/change_event_reservation.php";
         String request_change_service_reservation_url = "http://edevz.com/cross_comp/change_service_reservation.php";
         String insertUserTeamSelected_url = "http://edevz.com/cross_comp/set_new_user_teams.php";
+        String insertUserChurchTeam_url = "http://edevz.com/cross_comp/set_new_user_church_teams.php";
 
         String method = params[0];
 
@@ -860,10 +864,6 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             String str_world_team = params[11];
 
 
-            Log.e("dshgjasda", "doInBackground: "+SelectedTeamGeneralID+','+currentUserID+','+SelectedPostalCode+','+
-            str_city_team+','+str_county_team+','+str_conference_team+','+str_state_team+','+str_union_team+','+str_country_team+','+str_division_team+','+str_world_team);
-
-
             try {
                 URL url = new URL(insertUserTeamSelected_url);
 
@@ -886,6 +886,60 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                         URLEncoder.encode("str_country_team","UTF-8") + "=" + URLEncoder.encode(str_country_team,"UTF-8") + "&"+
                         URLEncoder.encode("str_division_team","UTF-8") + "=" + URLEncoder.encode(str_division_team,"UTF-8") + "&"+
                         URLEncoder.encode("str_world_team","UTF-8") + "=" + URLEncoder.encode(str_world_team,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else if (method.equals("insertUserChurchTeamSelected")){
+
+            String SelectedTeamGeneralID = params[1];
+            String currentUserID  = params[2];
+            String str_faith_team = params[3];
+            String str_division_team  = params[4];
+            String str_union_team = params[5];
+            String str_conference_team = params[6];
+
+
+
+            try {
+                URL url = new URL(insertUserChurchTeam_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("SelectedTeamGeneralID","UTF-8") + "=" + URLEncoder.encode(SelectedTeamGeneralID,"UTF-8") + "&"+
+                        URLEncoder.encode("currentUserID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8") + "&"+
+                        URLEncoder.encode("str_faith_team","UTF-8") + "=" + URLEncoder.encode(str_faith_team,"UTF-8") + "&"+
+                        URLEncoder.encode("str_division_team","UTF-8") + "=" + URLEncoder.encode(str_division_team,"UTF-8") + "&"+
+                        URLEncoder.encode("str_union_team","UTF-8") + "=" + URLEncoder.encode(str_union_team,"UTF-8") + "&"+
+                        URLEncoder.encode("str_conference_team","UTF-8") + "=" + URLEncoder.encode(str_conference_team,"UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -1171,11 +1225,25 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             }else if(result.equals("You already Reserve this Service")){
                 Toast.makeText(ctx, "You already Reserve this Service", Toast.LENGTH_SHORT).show();
             }
-            else if(result.equals("User new Team Success")){
+            else if(result.contains("User new Team Success")){
                 Toast.makeText(ctx, "Team inserted", Toast.LENGTH_SHORT).show();
+
+                if (result.equals("User new Team Success3")) {
+                    ctx.startActivity(new Intent(ctx, MyFundraisingTeamDetailActivity.class));
+                } else {
+                    ctx.startActivity(new Intent(ctx, TeamsScoreActivity.class));
+                }
             }else if(result.equals("User new Team UnSuccess")){
                 Toast.makeText(ctx, "Team not inserted", Toast.LENGTH_SHORT).show();
-            }else{
+            }
+            else if(result.equals("User new church Team Success")){
+                Toast.makeText(ctx, "Team inserted", Toast.LENGTH_SHORT).show();
+                ctx.startActivity(new Intent(ctx, TeamsScoreActivity.class));
+            }else if(result.equals("User new church Team UnSuccess")){
+                Toast.makeText(ctx, "Team not inserted", Toast.LENGTH_SHORT).show();
+            }
+
+            else{
                 Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();
                     }
                 }catch (Exception e){

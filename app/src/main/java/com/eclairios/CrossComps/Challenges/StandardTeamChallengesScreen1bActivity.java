@@ -2,7 +2,9 @@ package com.eclairios.CrossComps.Challenges;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.eclairios.CrossComps.R;
 
@@ -13,5 +15,9 @@ public class StandardTeamChallengesScreen1bActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_standard_team_challenges_screen1b);
         getSupportActionBar().hide();
+    }
+
+    public void MoveToScores(View view) {
+        startActivity(new Intent(StandardTeamChallengesScreen1bActivity.this,StandardTeamChallengesScreen1cActivity.class));
     }
 }

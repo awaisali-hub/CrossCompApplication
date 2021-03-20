@@ -328,6 +328,7 @@
             android:text="My CrossComp Challenges"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:onClick="MoveToMyCrossCompChallenges"
             />
 
     </LinearLayout>

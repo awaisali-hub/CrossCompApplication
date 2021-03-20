@@ -20,4 +20,8 @@ public class IndividualTeamChallengesScreen1aActivity extends AppCompatActivity 
     public void MoveToChallenger(View view) {
         startActivity(new Intent(IndividualTeamChallengesScreen1aActivity.this,IndividualTeamChallengesScreen1bActivity.class));
     }
+
+    public void MoveToScoreIndividual(View view) {
+        startActivity(new Intent(IndividualTeamChallengesScreen1aActivity.this,IndividualTeamChallengesScreen1cActivity.class));
+    }
 }

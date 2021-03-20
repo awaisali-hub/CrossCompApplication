@@ -227,6 +227,7 @@
             android:text="My Individual Challenges"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:onClick="MoveToMyCrossCompChallenges"
             />
 
     </LinearLayout>

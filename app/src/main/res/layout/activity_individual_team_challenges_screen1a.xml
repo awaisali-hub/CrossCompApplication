@@ -54,7 +54,7 @@
             android:text="Carol Barton"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:onClick="MoveToChallenger"
+            android:onClick="MoveToScoreIndividual"
             />
 
         <androidx.appcompat.widget.AppCompatButton

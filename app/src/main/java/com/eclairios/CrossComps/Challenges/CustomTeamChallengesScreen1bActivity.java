@@ -20,4 +20,8 @@ public class CustomTeamChallengesScreen1bActivity extends AppCompatActivity {
     public void MoveToCustomizeGenderAgeRange(View view) {
         startActivity(new Intent(CustomTeamChallengesScreen1bActivity.this,CustomTeamChallengesScreen1cActivity.class));
     }
+
+    public void MoveToMyCrossCompChallenges(View view) {
+        startActivity(new Intent(CustomTeamChallengesScreen1bActivity.this,ChallengeScreen0Activity.class));
+    }
 }

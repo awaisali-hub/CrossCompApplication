@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.R;
 
 public class CrossCompAffiliateAgreementActivity extends AppCompatActivity {
@@ -19,5 +20,10 @@ public class CrossCompAffiliateAgreementActivity extends AppCompatActivity {
 
     public void MoveToPledge(View view) {
         startActivity(new Intent(CrossCompAffiliateAgreementActivity.this,OptiHealthPledgeActivity.class));
+    }
+
+    public void MoveToMainHomePage(View view) {
+        startActivity(new Intent(CrossCompAffiliateAgreementActivity.this, Participent.class));
+
     }
 }

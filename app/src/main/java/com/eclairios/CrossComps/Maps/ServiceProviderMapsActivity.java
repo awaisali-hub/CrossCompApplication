@@ -47,17 +47,19 @@ public class ServiceProviderMapsActivity extends FragmentActivity implements OnM
     public void onMapReady(GoogleMap googleMap) {
 
         map = googleMap;
+        map.setMinZoomPreference(6.0f);
 //        LatLng userLocation = new LatLng(33.6844, 73.0479);
 //        map.addMarker(new MarkerOptions().position(userLocation).title("Islamabad"));
 //        map.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
 
 
+
         latlngs.add(new LatLng(11.334343, 33.43434));
-        latlngs.add(new LatLng(12.334343, 13.43434));
-        latlngs.add(new LatLng(13.334343, 10.43434));
-        latlngs.add(new LatLng(14.334343, 5.43434));
-        latlngs.add(new LatLng(15.334343, 20.43434));
-        latlngs.add(new LatLng(16.334343, 25.43434));
+        latlngs.add(new LatLng(11.334343, 34.43434));
+        latlngs.add(new LatLng(11.204343, 33.59434));
+        latlngs.add(new LatLng(10.934343, 33.45434));
+        latlngs.add(new LatLng(11.334343, 33.90434));
+        latlngs.add(new LatLng(12.000000, 33.43434));
 
 
         for (LatLng point : latlngs) {

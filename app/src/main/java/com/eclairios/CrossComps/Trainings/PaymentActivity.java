@@ -6,17 +6,26 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eclairios.CrossComps.Dashboard;
+import com.eclairios.CrossComps.MainActivity;
 import com.eclairios.CrossComps.R;
+import com.eclairios.CrossComps.Registration;
+import com.eclairios.CrossComps.SplashActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -56,6 +65,7 @@ public class PaymentActivity extends AppCompatActivity {
     EditText card_number,cvc,month,year;
     Button payButton;
 
+    private int keyDel = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +83,43 @@ public class PaymentActivity extends AppCompatActivity {
         month = findViewById(R.id.cardDateEditText);
         year = findViewById(R.id.cardDateyear);
         payButton  = findViewById(R.id.payButton);
+
+        card_number.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                card_number.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if (keyCode == KeyEvent.KEYCODE_DEL)
+                            keyDel = 1;
+                        return false;
+                    }
+                });
+                if (keyDel == 0) {
+                    int len = card_number.getText().length();
+                    if(len == 4) {
+                        card_number.setText(card_number.getText() + " ");
+                        card_number.setSelection(card_number.getText().length());
+                    }else if(len == 9){
+                        card_number.setText(card_number.getText() + " ");
+                        card_number.setSelection(card_number.getText().length());
+                    }else if(len == 14){
+                        card_number.setText(card_number.getText() + " ");
+                        card_number.setSelection(card_number.getText().length());
+                    }
+                } else {
+                    keyDel = 0;
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+        });
 
         stripe = new Stripe(
                 getApplicationContext(),
@@ -119,32 +166,33 @@ public class PaymentActivity extends AppCompatActivity {
         // Hook up the pay button to the card widget and stripe instance
 
         payButton.setOnClickListener((View view) -> {
-            //     CardInputWidget cardInputWidget = findViewById(R.id.cardInputWidget);
-            //        PaymentMethodCreateParams params = cardInputWidget.getPaymentMethodCreateParams();
-            ////////////////////////////
-            CardInputWidget cardInputWidget = new CardInputWidget(this);
-//            cardInputWidget.setCardNumber(card_number.getText().toString());
-//            cardInputWidget.setCvcCode(cvc.getText().toString());
-//            cardInputWidget.setExpiryDate(Integer.parseInt(month.getText().toString()), Integer.parseInt(year.getText().toString()));
 
-            cardInputWidget.setCardNumber("424242424242424242");
-            cardInputWidget.setCvcCode("123");
-            cardInputWidget.setExpiryDate(5, 25);
-            cardInputWidget.setPostalCodeRequired(false);
+            if(TextUtils.isEmpty(card_number.getText().toString()) || TextUtils.isEmpty(cvc.getText().toString()) || TextUtils.isEmpty(month.getText().toString()) || TextUtils.isEmpty(year.getText().toString())){
 
-            PaymentMethodCreateParams params = cardInputWidget.getPaymentMethodCreateParams();
+                Toast.makeText(this, "All Fields are Required!!!", Toast.LENGTH_SHORT).show();
+            }else{
+                //     CardInputWidget cardInputWidget = findViewById(R.id.cardInputWidget);
+                //        PaymentMethodCreateParams params = cardInputWidget.getPaymentMethodCreateParams();
+                ////////////////////////////
+                CardInputWidget cardInputWidget = new CardInputWidget(this);
+                cardInputWidget.setCardNumber(card_number.getText().toString());
+                cardInputWidget.setCvcCode(cvc.getText().toString());
+                cardInputWidget.setExpiryDate(Integer.parseInt(month.getText().toString()), Integer.parseInt(year.getText().toString()));
+                cardInputWidget.setPostalCodeRequired(false);
 
-            ///////////////////////////////
+                PaymentMethodCreateParams params = cardInputWidget.getPaymentMethodCreateParams();
 
-
-            if (params != null) {
-                ConfirmPaymentIntentParams confirmParams = ConfirmPaymentIntentParams
-                        .createWithPaymentMethodCreateParams(params, paymentIntentClientSecret);
-
-                stripe.confirmPayment(this, confirmParams);
+                ///////////////////////////////
 
 
+                if (params != null) {
+                    ConfirmPaymentIntentParams confirmParams = ConfirmPaymentIntentParams
+                            .createWithPaymentMethodCreateParams(params, paymentIntentClientSecret);
+
+                    stripe.confirmPayment(this, confirmParams);
+                }
             }
+
         });
     }
     private void displayAlert(@NonNull String title,
@@ -152,15 +200,19 @@ public class PaymentActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(message);
-        builder.setPositiveButton("Ok", null);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(PaymentActivity.this,HelperChatActivity.class));
+            }
+        });
+
+        card_number.setText("");
+        cvc.setText("");
+        month.setText("");
+        year.setText("");
         builder.create().show();
 
-//        card_number.setText("");
-//        cvc.setText("");
-//        month.setText("");
-//        year.setText("");
-
-        startActivity(new Intent(PaymentActivity.this,HelperChatActivity.class));
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -3,9 +3,11 @@ package com.eclairios.CrossComps.CrossCompAffiliate;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Region;
 import android.os.Bundle;
 import android.view.View;
 
+import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.R;
 
 public class OptiHealthPledgeActivity extends AppCompatActivity {
@@ -19,5 +21,9 @@ public class OptiHealthPledgeActivity extends AppCompatActivity {
 
     public void MoveToAffiliateDashboard(View view) {
         startActivity(new Intent(OptiHealthPledgeActivity.this,AffiliateDashboardActivity.class));
+    }
+
+    public void MoveToMainHomePage(View view) {
+        startActivity(new Intent(OptiHealthPledgeActivity.this, Participent.class));
     }
 }
