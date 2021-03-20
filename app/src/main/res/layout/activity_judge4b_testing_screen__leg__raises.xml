@@ -118,21 +118,22 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 />
         </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="@dimen/_7sdp"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="@dimen/_7sdp"
             android:background="@drawable/res"
+            android:onClick="moveTo4a"
             android:text="Complete"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:onClick="Judge5a"
-            />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:onClick="moveToJudege"
         android:layout_marginTop="@dimen/_7sdp"
         android:id="@+id/MoveToScore"
         android:layout_width="200dp"

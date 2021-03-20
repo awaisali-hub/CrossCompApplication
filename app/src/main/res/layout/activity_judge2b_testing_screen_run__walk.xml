@@ -54,9 +54,6 @@
             app:backgroundWidth="8"
             app:isClockwise="true"
             app:textSize="18sp"
-            app:prefix="Time Left "
-            app:suffix=" sec"
-            app:progressText="Time Remaining..."
             app:maxValue="100"
             app:startingPoint="bottom"
             app:progressTextColor="#e76130"
@@ -142,6 +139,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:onClick="MoveToJudge"
         android:layout_marginTop="@dimen/_7sdp"
         android:id="@+id/MoveToScore"
         android:layout_width="200dp"

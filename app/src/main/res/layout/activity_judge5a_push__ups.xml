@@ -82,6 +82,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:onClick="jjduee"
         android:layout_marginTop="@dimen/_7sdp"
         android:id="@+id/MoveToScore"
         android:layout_width="200dp"

@@ -81,6 +81,12 @@ public class Judge2bTestingScreenRun_WalkActivity extends AppCompatActivity {
     }
 
     public void Judge3a(View view) {
-        startActivity(new Intent(Judge2bTestingScreenRun_WalkActivity.this,Judge3a_SquatsActivity.class));
+        startActivity(new Intent(Judge2bTestingScreenRun_WalkActivity.this,Judge2aRun_Walk_TestActivity.class));
+        finish();
+    }
+
+    public void MoveToJudge(View view) {
+        startActivity(new Intent(Judge2bTestingScreenRun_WalkActivity.this,JudgeHomePageParticipantRegistrationActivity.class));
+        finish();
     }
 }

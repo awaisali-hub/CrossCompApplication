@@ -44,11 +44,12 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phoneNumber"
+                android:id="@+id/participant_phone1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:hint="Phone"
+                android:maxLength="13"
                 android:paddingStart="30dp"
                 android:inputType="number"
                 android:paddingTop="12dp"
@@ -78,6 +79,8 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
+                android:maxLength="13"
+                android:id="@+id/participant_phone2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
@@ -104,19 +107,21 @@
             />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginTop="@dimen/_7sdp"
+            android:enabled="false"
+            android:clickable="false"
+            android:id="@+id/judge_StrBtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="@dimen/_7sdp"
             android:background="@drawable/res"
             android:backgroundTint="@color/colorRed"
+            android:onClick="RunWalkScreen"
             android:text="Start"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:onClick="RunWalkScreen"
-            />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton

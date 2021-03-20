@@ -30,7 +30,13 @@
         <activity android:name=".Judge.Judge3a_SquatsActivity" />
         <activity android:name=".Judge.Judge2bTestingScreenRun_WalkActivity" />
         <activity android:name=".Judge.Judge2aRun_Walk_TestActivity" />
-        <activity android:name=".Judge.JudgeHomePageParticipantRegistrationActivity" />
+        <activity android:name=".Judge.JudgeHomePageParticipantRegistrationActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".ServiceCoordinator.CoordinatorServiceSummaryScreenActivity" />
         <activity android:name=".ServiceCoordinator.CoordinatorRegistration4b_4EventActivity" />
         <activity android:name=".ServiceCoordinator.CoordinatorRegistration4a_4FacilityActivity" />
@@ -137,11 +143,8 @@
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppFullScreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".CrossComp" />
         <activity android:name=".Dashboard" />

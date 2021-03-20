@@ -18,6 +18,10 @@ public class Judge3bTesting_Screen_SquatsActivity extends AppCompatActivity {
     }
 
     public void Judge4a(View view) {
-        startActivity(new Intent(Judge3bTesting_Screen_SquatsActivity.this,Judge4aLeg_RaisesActivity.class));
+        startActivity(new Intent(Judge3bTesting_Screen_SquatsActivity.this,Judge3a_SquatsActivity.class));
+    }
+
+    public void moveToJudge(View view) {
+        startActivity(new Intent(Judge3bTesting_Screen_SquatsActivity.this,JudgeHomePageParticipantRegistrationActivity.class));
     }
 }

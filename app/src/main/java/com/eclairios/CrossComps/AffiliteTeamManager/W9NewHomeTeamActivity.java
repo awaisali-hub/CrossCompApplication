@@ -44,13 +44,7 @@ public class W9NewHomeTeamActivity extends AppCompatActivity {
         ett9= (EditText) findViewById(R.id.ett9);
         ett10= (EditText) findViewById(R.id.ett10);
 
-//        WebView browser = (WebView) findViewById(R.id.webview);
-//
-//        browser.getSettings().setJavaScriptEnabled(true);
-//        browser.getSettings().setLoadWithOverviewMode(true);
-//        browser.getSettings().setUseWideViewPort(true);
-//        String pdf = "https://www.irs.gov/pub/irs-pdf/fw9.pdf";
-//        browser.loadUrl("https://docs.google.com/gview?embedded=true&url=" + pdf);
+
 
         et1.addTextChangedListener(new TextWatcher() {
 

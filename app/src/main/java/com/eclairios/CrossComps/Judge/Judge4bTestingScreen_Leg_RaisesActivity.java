@@ -17,7 +17,15 @@ public class Judge4bTestingScreen_Leg_RaisesActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
-    public void Judge5a(View view) {
-        startActivity(new Intent(Judge4bTestingScreen_Leg_RaisesActivity.this,Judge5aPush_UpsActivity.class));
+    public void moveTo4a(View view) {
+        startActivity(new Intent(Judge4bTestingScreen_Leg_RaisesActivity.this,Judge4aLeg_RaisesActivity.class));
     }
+
+    public void moveToJudege(View view) {
+        startActivity(new Intent(Judge4bTestingScreen_Leg_RaisesActivity.this,JudgeHomePageParticipantRegistrationActivity.class));
+    }
+
+//    public void Judge5a(View view) {
+//        startActivity(new Intent(Judge4bTestingScreen_Leg_RaisesActivity.this,Judge5aPush_UpsActivity.class));
+//    }
 }

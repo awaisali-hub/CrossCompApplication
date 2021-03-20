@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="listViewSelected">@android:color/holo_blue_light</drawable>
+    <drawable name="listViewPressed">#FB0707</drawable>
+    <drawable name="pagerTabStrip">#2B3333</drawable>
+    <!--<drawable name="pagerTabStrip">#353F3E</drawable>-->
+    <drawable name="tableHead">#FF444444</drawable>
+
+</resources>

@@ -14,8 +14,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorAccent">#B8B7AF</color>
     <color name="colorRed">#FF0000</color>
+    <color name="colorRedd">#ff0006</color>
     <color name="skyBlue">#000afd</color>
-
     <color name="actionbar_text_colour">#FFFFFFFF</color>
     <color name="button_text_colour1">#FFFFFFFF</color>
     <color name="button_text_colour2">#000000</color>

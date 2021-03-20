@@ -17,7 +17,23 @@ public class Judge3a_SquatsActivity extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
-    public void MoveTo3bTestingSquats(View view) {
+//    public void MoveTo3bTestingSquats(View view) {
+//        startActivity(new Intent(Judge3a_SquatsActivity.this,Judge3bTesting_Screen_SquatsActivity.class));
+//    }
+
+    public void moveTo3aTest(View view) {
         startActivity(new Intent(Judge3a_SquatsActivity.this,Judge3bTesting_Screen_SquatsActivity.class));
+    }
+
+    public void moveTo3aTestt(View view) {
+        startActivity(new Intent(Judge3a_SquatsActivity.this,Judge3bTesting_Screen_SquatsActivity.class));
+    }
+
+    public void MoveTo4bSquats(View view) {
+        startActivity(new Intent(Judge3a_SquatsActivity.this,Judge4aLeg_RaisesActivity.class));
+    }
+
+    public void jusge(View view) {
+        startActivity(new Intent(Judge3a_SquatsActivity.this,JudgeHomePageParticipantRegistrationActivity.class));
     }
 }
