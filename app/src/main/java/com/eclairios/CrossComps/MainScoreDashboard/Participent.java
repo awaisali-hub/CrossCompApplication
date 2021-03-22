@@ -178,10 +178,18 @@ public class Participent extends AppCompatActivity {
         protected void onPostExecute(String result) {
             String json_string = result;
 
-                Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
+
+
+                Log.e("bcjknjkksdjcabcdsdsd", "onCreate: "+json_string );
                 try {
                     JSONObject jsonObject = new JSONObject(json_string);
-                    JSONArray     jsonArray = jsonObject.getJSONArray("server_response");
+                    JSONArray jsonArray = jsonObject.getJSONArray("server_response");
+
+                    if(jsonArray.length() == 0) {
+                        Log.e("ffffffssssdds", "onPostExecute: " );
+                        fragmentParent.addPage("0","4","00 0000","0","0","_","0","_","0","_","0","_","0.0");
+                        viewPager.setCurrentItem(viewPager.getAdapter().getCount());
+                    }
 
                     int count = 0;
                     String Score_ID,userId,Date,Age,Meters,MetersGrade,Squats,SquatsGrade,Leg_raises,Leg_raisesGrade,PushUps,PushUpsGrade,Total_Score;
@@ -206,7 +214,12 @@ public class Participent extends AppCompatActivity {
                         double number = Double.parseDouble(Total_Score);
                         String score = String.format("%.1f", number);
 
+                        Log.e("values", "onPostExecute: "+Meters);
+
+
                         fragmentParent.addPage(Score_ID,userId,Date,Age,Meters,MetersGrade,Squats,SquatsGrade,Leg_raises,Leg_raisesGrade,PushUps,PushUpsGrade,score);
+
+
                         count++;
                     }
 
@@ -227,6 +240,8 @@ public class Participent extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+
         }
     }
 }

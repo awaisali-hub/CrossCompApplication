@@ -55,6 +55,8 @@ public class FragmentChild extends Fragment {
         PushUpsGrade = bundle.getString("PushUpsGrade");
         totalScore = bundle.getString("totalScore");
 
+
+
         try {
             getIDs(view);
         } catch (ParseException e) {
@@ -85,16 +87,20 @@ public class FragmentChild extends Fragment {
         Date date = inputFormat.parse(inputText);
         String outputText = outputFormat.format(date);
 
-        tvDate.setText(outputText);
-        tvMeters.setText(Meters);
-        tvMetersGrade.setText("("+MetersGrade+")");
-        tvSquats.setText(Squats);
-        tvSquatsGrade.setText("("+SquatsGrade+")");
-        tvLeg_raises.setText(leg_raises);
-        tvLeg_raisesGrade.setText("("+Leg_raisesGrade+")");
-        tvPushUps.setText(PushUps);
-        tvPushUpsGrade.setText("("+PushUpsGrade+")");
-        tvTotalScore.setText(totalScore);
+            tvDate.setText(outputText);
+            tvMeters.setText(Meters);
+            tvMetersGrade.setText("("+MetersGrade+")");
+            tvSquats.setText(Squats);
+            tvSquatsGrade.setText("("+SquatsGrade+")");
+            tvLeg_raises.setText(leg_raises);
+            tvLeg_raisesGrade.setText("("+Leg_raisesGrade+")");
+            tvPushUps.setText(PushUps);
+            tvPushUpsGrade.setText("("+PushUpsGrade+")");
+            tvTotalScore.setText(totalScore);
+
+
+
+
         tvTotalScore.setPaintFlags(tvTotalScore.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
 
@@ -108,7 +114,12 @@ public class FragmentChild extends Fragment {
         Calendar cal2 = Calendar.getInstance();
         cal2.add(Calendar.MONTH, -2);
 
-        if(Dates.contains(format.format(cal.getTime()))){
+        if(tvDate.getText().toString().equals("00 0000")){
+            tvStatus.setText("Status: ");
+            tvStatus.setBackgroundDrawable( getResources().getDrawable(R.drawable.servicenameitems) );
+            tvStatus.setBackgroundTintList(getResources().getColorStateList(R.color.yellow));
+        }
+        else if(Dates.contains(format.format(cal.getTime()))){
             tvStatus.setText("Status: "+Current);
             tvStatus.setBackgroundDrawable( getResources().getDrawable(R.drawable.servicenameitems) );
             tvStatus.setBackgroundTintList(getResources().getColorStateList(R.color.yellow));

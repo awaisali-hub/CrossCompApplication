@@ -18,11 +18,11 @@ public class Judge5aPush_UpsActivity extends AppCompatActivity {
     }
 
     public void MoveTo5bTestingPushUps(View view) {
-        startActivity(new Intent(Judge5aPush_UpsActivity.this,JudgeHomePageParticipantRegistrationActivity.class));
+        startActivity(new Intent(Judge5aPush_UpsActivity.this,Judge5bTestingScreen_Push_UpsActivity.class));
     }
 
-    public void jjduee(View view) {
+
+    public void judgeHomePage(View view) {
         startActivity(new Intent(Judge5aPush_UpsActivity.this,JudgeHomePageParticipantRegistrationActivity.class));
-        finish();
     }
 }

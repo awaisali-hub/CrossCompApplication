@@ -295,6 +295,7 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
                 String data = URLEncoder.encode("userID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8");
+                Log.e("fjdsfdfdasfdsf", "doInBackground: "+currentUserID );
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
