@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,14 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
-import com.eclairios.CrossComps.CoordinatorServicePage;
-import com.eclairios.CrossComps.CrossComp;
 import com.eclairios.CrossComps.CrossCompAffiliate.BecomeCrossCompAffiliateActivity;
-import com.eclairios.CrossComps.CrossCompAffiliate.CrossCompAffiliateAgreementActivity;
-import com.eclairios.CrossComps.Dashboard;
+import com.eclairios.CrossComps.EventAndServices.Dashboard;
 import com.eclairios.CrossComps.Profile.Profile;
 import com.eclairios.CrossComps.R;
 import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;

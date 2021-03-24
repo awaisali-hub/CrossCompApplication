@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.EventAndServices;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,15 +14,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.eclairios.CrossComps.Adapter.AdapterCoordinaterServicePage;
+import com.eclairios.CrossComps.BackgroundTask;
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.Interface.MyInterface;
 import com.eclairios.CrossComps.Model.ModelCoordinaterServicePage;
+import com.eclairios.CrossComps.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +48,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class       CoordinatorServicePage extends AppCompatActivity implements MyInterface {
+public class CoordinatorServicePage extends AppCompatActivity implements MyInterface {
     String json_string;
     JSONObject jsonObject;
     JSONArray jsonArray;
@@ -254,7 +255,7 @@ public class       CoordinatorServicePage extends AppCompatActivity implements M
                 BackgroundTask backgroundTask = new BackgroundTask(CoordinatorServicePage.this);
                 backgroundTask.execute(method,Facility_ID,formatServiceDate,currentUserID);
 
-                Intent intent = new Intent(CoordinatorServicePage.this,CrossComp.class);
+                Intent intent = new Intent(CoordinatorServicePage.this, CrossComp.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 coordinator_name.setText(CoordinatorName);
                 coordinator_address.setText(CoordinatorAddress);
@@ -457,7 +458,7 @@ public class       CoordinatorServicePage extends AppCompatActivity implements M
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(CoordinatorServicePage.this);
                 String lat = preferences.getString("lat", "");
                 String lng = preferences.getString("lng", "");
-                Intent intent = new Intent(CoordinatorServicePage.this,Dashboard.class);
+                Intent intent = new Intent(CoordinatorServicePage.this, Dashboard.class);
                 intent.putExtra("lat",lat);
                 intent.putExtra("lng",lng);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

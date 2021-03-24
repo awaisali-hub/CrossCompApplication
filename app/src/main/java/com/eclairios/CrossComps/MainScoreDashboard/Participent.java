@@ -4,32 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
-import com.eclairios.CrossComps.CrossComp;
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
-import com.eclairios.CrossComps.Dashboard;
-import com.eclairios.CrossComps.MainActivity;
-import com.eclairios.CrossComps.MorePages;
-import com.eclairios.CrossComps.Profile.Profile;
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.Registration;
-import com.eclairios.CrossComps.Scores;
-import com.eclairios.CrossComps.Services;
-import com.eclairios.CrossComps.SplashActivity;
-import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
-import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,12 +1,9 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.EventAndServices;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
@@ -14,21 +11,17 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
+import com.eclairios.CrossComps.BackgroundTask;
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
-import com.eclairios.CrossComps.Model.ModelCoordinaterServicePage;
+import com.eclairios.CrossComps.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,11 +39,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.ParseException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class EventDetailActivity extends AppCompatActivity {
     String json_string;
@@ -213,7 +202,7 @@ public class EventDetailActivity extends AppCompatActivity {
                 BackgroundTask backgroundTask = new BackgroundTask(EventDetailActivity.this);
                 backgroundTask.execute(method,Send_Event_Time_ID,currentUserID);
 
-                Intent intent = new Intent(EventDetailActivity.this,EventCrossCompActivity.class);
+                Intent intent = new Intent(EventDetailActivity.this, EventCrossCompActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("Send_Event_Time_ID",Send_Event_Time_ID);
                 intent.putExtra("eventName",event_name.getText());

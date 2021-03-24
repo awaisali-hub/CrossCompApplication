@@ -15,7 +15,6 @@ import android.widget.EditText;
 
 import com.eclairios.CrossComps.Adapter.ChatAdapter;
 import com.eclairios.CrossComps.BackgroundTask;
-import com.eclairios.CrossComps.EventDetailActivity;
 import com.eclairios.CrossComps.Model.Chat_Model;
 import com.eclairios.CrossComps.R;
 

@@ -4,15 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,23 +18,15 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.eclairios.CrossComps.Adapter.AdapterHorizontal;
 import com.eclairios.CrossComps.Adapter.MyCrossCompAllTeamsMainAdapter;
 import com.eclairios.CrossComps.Adapter.MyCrossCompUserSelectedTeamAdapter;
 import com.eclairios.CrossComps.BackgroundTask;
-import com.eclairios.CrossComps.CrossComp;
-import com.eclairios.CrossComps.Dashboard;
 import com.eclairios.CrossComps.Interface.InterfaceForSetTeams;
-import com.eclairios.CrossComps.Interface.MyInterface;
 import com.eclairios.CrossComps.MainScoreDashboard.Participent;
-import com.eclairios.CrossComps.Model.ModelHorizontal;
 import com.eclairios.CrossComps.Model.MyCrossCompAllTeamsMainModel;
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.Registration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,8 +44,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class AllTeamCategoryActivity extends AppCompatActivity implements InterfaceForSetTeams {
 

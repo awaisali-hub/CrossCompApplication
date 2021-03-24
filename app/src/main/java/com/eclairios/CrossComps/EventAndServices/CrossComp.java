@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.EventAndServices;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,9 +22,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.eclairios.CrossComps.BackgroundTask;
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.Maps.ServiceProviderMapsActivity;
+import com.eclairios.CrossComps.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;

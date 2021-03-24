@@ -30,7 +30,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="00 0000"/>
+                android:text="-- ----"/>
 
             <LinearLayout
                 android:layout_marginTop="@dimen/_6sdp"
@@ -105,7 +105,7 @@
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(_)"
+                    android:text="(-)"
                     android:layout_gravity="center"
                     android:textSize="19sp"
                     android:textColor="@color/black"
@@ -145,7 +145,7 @@
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(_)"
+                    android:text="(-)"
                     android:layout_gravity="center"
                     android:textSize="19sp"
                     android:textColor="@color/black"
@@ -185,7 +185,7 @@
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(_)"
+                    android:text="(-)"
                     android:layout_gravity="center"
                     android:textSize="19sp"
                     android:textColor="@color/black"
@@ -227,7 +227,7 @@
                     android:paddingBottom="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(_)"
+                    android:text="(-)"
                     android:layout_gravity="center"
                     android:textSize="19sp"
                     android:textColor="@color/black"

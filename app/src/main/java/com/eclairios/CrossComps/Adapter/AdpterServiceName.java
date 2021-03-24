@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.eclairios.CrossComps.CrossComp;
+import com.eclairios.CrossComps.EventAndServices.CrossComp;
 import com.eclairios.CrossComps.Model.ModelServiceName;
 import com.eclairios.CrossComps.R;
 

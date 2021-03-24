@@ -23,6 +23,7 @@ public class Judge3a_SquatsActivity extends AppCompatActivity {
     String squats1,squats2,squatGrade1,squatGrade2;
 
     Button submitBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,7 @@ public class Judge3a_SquatsActivity extends AppCompatActivity {
             participant2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    moveTo3a2Test(v);
+                    moveTo3b2Test(v);
                 }
             });
         }
@@ -76,7 +77,7 @@ public class Judge3a_SquatsActivity extends AppCompatActivity {
         participant1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveTo3a1Test(v);
+                moveTo3b1Test(v);
             }
         });
 
@@ -85,22 +86,9 @@ public class Judge3a_SquatsActivity extends AppCompatActivity {
         squatGrade1 = preferences.getString("squatGrade1", null);
         check_user = preferences.getInt("check_user",0);
 
-
         squats2 = preferences.getString("squats2", null);
         squatGrade2 = preferences.getString("squatGrade2", null);
         check_user1 = preferences.getInt("check_user1",0);
-
-
-        Log.e("jdsajfadsf", "onCreate: "+squats1 );
-        Log.e("jdsajfadsf", "onCreate: "+squatGrade1 );
-        Log.e("jdsajfadsf", "onCreate: "+check_user );
-        Log.e("jdsajfadsf", "onCreate: "+squats2 );
-        Log.e("jdsajfadsf", "onCreate: "+squatGrade2 );
-        Log.e("jdsajfadsf", "onCreate: "+check_user1 );
-
-
-
-
 
 
         if(squats1 != null && squatGrade1 != null && check_user == 1 && squats2 != null && squatGrade2 != null && check_user1 == 2){
@@ -127,12 +115,16 @@ public class Judge3a_SquatsActivity extends AppCompatActivity {
         }
 
 
+
+
+
+
     
     }
 
 
 
-    public void moveTo3a1Test(View view) {
+    public void moveTo3b1Test(View view) {
 
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -145,7 +137,7 @@ public class Judge3a_SquatsActivity extends AppCompatActivity {
         intent.putExtra("check1","1");
         startActivity(intent);
     }
-    public void moveTo3a2Test(View view) {
+    public void moveTo3b2Test(View view) {
 
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("squats2",null);
@@ -159,11 +151,24 @@ public class Judge3a_SquatsActivity extends AppCompatActivity {
     }
 
 
-    public void MoveTo4bSquats(View view) {
-        startActivity(new Intent(Judge3a_SquatsActivity.this,Judge4aLeg_RaisesActivity.class));
+    public void MoveTo4aSquats(View view) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("LegRaises1",null);
+        editor.putString("LegRaisesGrade1",null);
+        editor.putInt("check_user",0);
+        editor.putString("LegRaises2",null);
+        editor.putString("LegRaisesGrade2",null);
+        editor.putInt("check_user1",0);
+        editor.apply();
+
+        Intent intent = new Intent(Judge3a_SquatsActivity.this,Judge4aLeg_RaisesActivity.class);
+        intent.putExtra("User1Name",user1Name);
+        intent.putExtra("User2Name",user2Name);
+        startActivity(intent);
+
     }
 
-    public void jusge(View view) {
+    public void judge(View view) {
         startActivity(new Intent(Judge3a_SquatsActivity.this,JudgeHomePageParticipantRegistrationActivity.class));
     }
 }

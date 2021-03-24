@@ -11,7 +11,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.WindowManager;
 
-import com.eclairios.CrossComps.CustomLoader.WaitDialog;
+import com.eclairios.CrossComps.Authentication.MainActivity;
+import com.eclairios.CrossComps.Authentication.Registration;
+import com.eclairios.CrossComps.EventAndServices.Dashboard;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -49,14 +51,14 @@ public class SplashActivity extends AppCompatActivity {
 
                 if (isItFirestTime()) {
                     Log.e("text", "onCreate: First Time" );
-                    startActivity(new Intent(SplashActivity.this,Registration.class));
+                    startActivity(new Intent(SplashActivity.this, Registration.class));
                 } else {
                     Log.e("text", "onCreate: Not a First Time" );
                     if(rememberEmail.isEmpty() && rememberPassword.isEmpty()){
-                        startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     }else if(rememberEmail != null && rememberPassword !=null && lat != null && lng != null){
 
-                        Intent intent = new Intent(SplashActivity.this,Dashboard.class);
+                        Intent intent = new Intent(SplashActivity.this, Dashboard.class);
                         intent.putExtra("lat",lat);
                         intent.putExtra("lng",lng);
                         startActivity(intent);

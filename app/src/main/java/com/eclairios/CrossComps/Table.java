@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.eclairios.CrossComps.Adapter.AdapterTable;
+import com.eclairios.CrossComps.EventAndServices.Dashboard;
 import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.Model.ModelTable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -83,7 +84,7 @@ public class Table extends Fragment {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 String lat = preferences.getString("lat", "");
                 String lng = preferences.getString("lng", "");
-                Intent intent = new Intent(getContext(),Dashboard.class);
+                Intent intent = new Intent(getContext(), Dashboard.class);
                 intent.putExtra("lat",lat);
                 intent.putExtra("lng",lng);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

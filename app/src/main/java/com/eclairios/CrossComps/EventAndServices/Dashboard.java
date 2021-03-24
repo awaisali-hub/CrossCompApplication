@@ -1,25 +1,20 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.EventAndServices;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.AdapterHorizontal;
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.Model.ModelHorizontal;
+import com.eclairios.CrossComps.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

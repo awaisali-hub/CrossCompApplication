@@ -3,20 +3,10 @@ package com.eclairios.CrossComps.Judge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.core.view.ViewCompat;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,8 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.CrossCompAffiliate.AffiliateDashboardActivity;
-import com.eclairios.CrossComps.Dashboard;
-import com.eclairios.CrossComps.Model.ModelHorizontal;
 import com.eclairios.CrossComps.R;
 
 import org.json.JSONArray;
@@ -52,11 +40,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import static android.view.View.VISIBLE;
-import static androidx.constraintlayout.solver.widgets.ConstraintWidget.INVISIBLE;
-import static com.eclairios.CrossComps.R.color.colorRed;
-import static com.eclairios.CrossComps.R.color.green;
-
 public class JudgeHomePageParticipantRegistrationActivity extends AppCompatActivity {
 
     int keyDel;
@@ -67,7 +50,7 @@ public class JudgeHomePageParticipantRegistrationActivity extends AppCompatActiv
     JSONObject jsonObject;
     JSONArray jsonArray;
 
-    String selectedUserPhone;
+    String selectedUserPhone,User1ID,User2ID;
     TextView participant1Name,participant2Name;
     int textViewCheck = 0;
 
@@ -299,42 +282,54 @@ public class JudgeHomePageParticipantRegistrationActivity extends AppCompatActiv
             json_string = result;
 
 
-                Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
+            Log.e("bcjknjkksdjc ", "onCreate: " + json_string);
+
+            if (json_string != null) {
 
 
-                try {
+            try {
 
-                    jsonObject = new JSONObject(json_string);
-                    jsonArray = jsonObject.getJSONArray("server_response");
+                jsonObject = new JSONObject(json_string);
+                jsonArray = jsonObject.getJSONArray("server_response");
 
 
-                    ////////////////////////////////////////
+                ////////////////////////////////////////
 
-                    int count = 0;
+                int count = 0;
 
-                    String firstName,lastName;
-                    while(count < jsonArray.length())
-                    {
-                        JSONObject JO = jsonArray.getJSONObject(count);
-                        firstName = JO.getString("First_Name");
-                        lastName = JO.getString("Last_Name");
+                String userID, firstName, lastName;
+                while (count < jsonArray.length()) {
+                    JSONObject JO = jsonArray.getJSONObject(count);
+                    userID = JO.getString("User_ID");
+                    firstName = JO.getString("First_Name");
+                    lastName = JO.getString("Last_Name");
 
-                        Log.e("namessdsadsds", "onPostExecute: "+firstName +"_"+lastName );
 
-                        if(textViewCheck == 0){
-                            participant1Name.setText(firstName + " " +lastName);
-                        }else{
-                            participant2Name.setText(firstName + " " +lastName);
-                        }
+                    if (textViewCheck == 0) {
+                        participant1Name.setText(firstName + " " + lastName);
+                        User1ID = userID;
 
-                        count++;
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("User1ID", userID);
+                        editor.apply();
+                    } else {
+                        participant2Name.setText(firstName + " " + lastName);
+                        User2ID = userID;
 
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("User2ID", userID);
+                        editor.apply();
                     }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    count++;
+
                 }
 
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
         }
     }
 }

@@ -11,8 +11,10 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.eclairios.CrossComps.Model.ModelHorizontal;
-import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
+import com.eclairios.CrossComps.EventAndServices.CoordinatorServicePage;
+import com.eclairios.CrossComps.EventAndServices.CrossComp;
+import com.eclairios.CrossComps.EventAndServices.Dashboard;
+import com.eclairios.CrossComps.Judge.JudgeHomePageParticipantRegistrationActivity;
 import com.eclairios.CrossComps.Teams.MyFundraisingTeamDetailActivity;
 import com.eclairios.CrossComps.Teams.TeamsScoreActivity;
 
@@ -33,7 +35,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -83,6 +84,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         String request_change_service_reservation_url = "http://edevz.com/cross_comp/change_service_reservation.php";
         String insertUserTeamSelected_url = "http://edevz.com/cross_comp/set_new_user_teams.php";
         String insertUserChurchTeam_url = "http://edevz.com/cross_comp/set_new_user_church_teams.php";
+        String insert_user_score_url = "http://edevz.com/cross_comp/score.php";
 
         String method = params[0];
 
@@ -965,7 +967,71 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else if (method.equals("judgeInsertUserScore")){
 
+
+            String UserID  = params[1];
+            String date = params[2];
+            String walk_meters = params[3];
+            String walk_meters_grade = params[4];
+            String squats = params[5];
+            String squats_grade = params[6];
+            String leg_raises = params[7];
+            String leg_raises_grade = params[8];
+            String push_ups = params[9];
+            String push_ups_grade = params[10];
+            String total_score = params[11];
+
+
+
+
+            try {
+                URL url = new URL(insert_user_score_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("userId","UTF-8") + "=" + URLEncoder.encode(UserID,"UTF-8") + "&"+
+                        URLEncoder.encode("date","UTF-8") + "=" + URLEncoder.encode(date,"UTF-8") + "&"+
+                        URLEncoder.encode("meters","UTF-8") + "=" + URLEncoder.encode(walk_meters,"UTF-8") + "&"+
+                        URLEncoder.encode("meters_grade","UTF-8") + "=" + URLEncoder.encode(walk_meters_grade,"UTF-8") + "&"+
+                        URLEncoder.encode("squats","UTF-8") + "=" + URLEncoder.encode(squats,"UTF-8") + "&"+
+                        URLEncoder.encode("squats_grade","UTF-8") + "=" + URLEncoder.encode(squats_grade,"UTF-8") + "&"+
+                        URLEncoder.encode("leg_raises","UTF-8") + "=" + URLEncoder.encode(leg_raises,"UTF-8") + "&"+
+                        URLEncoder.encode("leg_raises_grade","UTF-8") + "=" + URLEncoder.encode(leg_raises_grade,"UTF-8") + "&"+
+                        URLEncoder.encode("push_ups","UTF-8") + "=" + URLEncoder.encode(push_ups,"UTF-8") + "&"+
+                        URLEncoder.encode("push_ups_grade","UTF-8") + "=" + URLEncoder.encode(push_ups_grade,"UTF-8") + "&"+
+                        URLEncoder.encode("total_score","UTF-8") + "=" + URLEncoder.encode(total_score,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -1030,7 +1096,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                         editor.apply();
 
                         Log.e("sddududu", "run: "+latt+"\n"+lngg );
-                        intent = new Intent(ctx,Dashboard.class);
+                        intent = new Intent(ctx, Dashboard.class);
                         intent.putExtra("lat",latt);
                         intent.putExtra("lng",lngg);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -1112,7 +1178,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        intent = new Intent(ctx,CoordinatorServicePage.class);
+                        intent = new Intent(ctx, CoordinatorServicePage.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         ctx.startActivity(intent);
                         Toast.makeText(ctx, "Appointment Request Send Successful", Toast.LENGTH_SHORT).show();
@@ -1130,7 +1196,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        intent = new Intent(ctx,CrossComp.class);
+                        intent = new Intent(ctx, CrossComp.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         ctx.startActivity(intent);
                         Toast.makeText(ctx, "Reschedule Appointment Request Send Successful", Toast.LENGTH_SHORT).show();
@@ -1241,9 +1307,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 ctx.startActivity(new Intent(ctx, TeamsScoreActivity.class));
             }else if(result.equals("User new church Team UnSuccess")){
                 Toast.makeText(ctx, "Team not inserted", Toast.LENGTH_SHORT).show();
-            }
-
-            else{
+            }else if(result.equals("Score Insert Success")){
+                Toast.makeText(ctx, "Score inserted", Toast.LENGTH_SHORT).show();
+             //   ctx.startActivity(new Intent(ctx, JudgeHomePageParticipantRegistrationActivity.class));
+            }else if(result.equals("Score Insert UnSuccess")){
+                Toast.makeText(ctx, "Score not inserted", Toast.LENGTH_SHORT).show();
+            }else{
                 Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();
                     }
                 }catch (Exception e){

@@ -9,19 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.eclairios.CrossComps.CoordinatorServicePage;
+import com.eclairios.CrossComps.EventAndServices.CoordinatorServicePage;
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
-import com.eclairios.CrossComps.EventDetailActivity;
+import com.eclairios.CrossComps.EventAndServices.EventDetailActivity;
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.CrossComp;
 import com.eclairios.CrossComps.Model.ModelHorizontal;
 
-import java.io.IOException;
 import java.util.List;
 
 

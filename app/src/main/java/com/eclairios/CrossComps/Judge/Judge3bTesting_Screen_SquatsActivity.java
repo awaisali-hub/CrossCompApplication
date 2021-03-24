@@ -2,6 +2,8 @@ package com.eclairios.CrossComps.Judge;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
@@ -10,8 +12,10 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,12 +30,15 @@ public class Judge3bTesting_Screen_SquatsActivity extends AppCompatActivity {
     private boolean clicked = false;
     int squats_reps = 0;
 
-    Button squatsComplete;
+    Button squatsComplete,saveBtn;
     SharedPreferences preferences;
     Spinner squatsGradeSpinner;
     String squatsGrade;
 
     int check_user;
+    EditText editJudgeTest;
+
+    int gradePoint2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +123,20 @@ public class Judge3bTesting_Screen_SquatsActivity extends AppCompatActivity {
                             editor.putString("squats1",Squats.getText().toString());
                             editor.putString("squatGrade1",sGrade);
                             editor.putInt("check_user", check_user);
+
+
+                            if(sGrade.equals("A")){
+                                gradePoint2 = 0;
+                            }else if (sGrade.equals("B")){
+                                gradePoint2 = 10;
+                            }else if (sGrade.equals("C")){
+                                gradePoint2 = 20;
+                            }else if (sGrade.equals("D")){
+                                gradePoint2 = 30;
+                            }
+
+                            editor.putInt("gradePoint2", gradePoint2);
+                            editor.apply();
                         }
 
                     }else{
@@ -129,8 +150,23 @@ public class Judge3bTesting_Screen_SquatsActivity extends AppCompatActivity {
                     }
 
                     editor.apply();
-                    startActivity(new Intent(Judge3bTesting_Screen_SquatsActivity.this,Judge3a_SquatsActivity.class));
-                    finish();
+
+                    new AlertDialog.Builder(Judge3bTesting_Screen_SquatsActivity.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle("Test Complete")
+                            .setMessage("Are you sure you want to submit test result?")
+                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startActivity(new Intent(Judge3bTesting_Screen_SquatsActivity.this,Judge3a_SquatsActivity.class));
+                                    finish();
+                                }
+
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+
                 }
 
             }
@@ -146,5 +182,30 @@ public class Judge3bTesting_Screen_SquatsActivity extends AppCompatActivity {
 
     public void moveToJudge(View view) {
         startActivity(new Intent(Judge3bTesting_Screen_SquatsActivity.this,JudgeHomePageParticipantRegistrationActivity.class));
+    }
+
+    public void JudgeEditTest3a(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Judge3bTesting_Screen_SquatsActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_edit_judge_test,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+
+        editJudgeTest = dialogView.findViewById(R.id.judge_edit);
+        saveBtn = dialogView.findViewById(R.id.saveBtn);
+
+        editJudgeTest.setText(Squats.getText().toString());
+
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
+
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Squats.setText(editJudgeTest.getText().toString());
+                pickFileImage.dismiss();
+            }
+        });
     }
 }

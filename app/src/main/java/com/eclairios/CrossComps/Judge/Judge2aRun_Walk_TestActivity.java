@@ -169,7 +169,7 @@ public class Judge2aRun_Walk_TestActivity extends AppCompatActivity {
     }
 
 
-    public void moveToJudeee(View view) {
+    public void moveToJudge(View view) {
         startActivity(new Intent(Judge2aRun_Walk_TestActivity.this,JudgeHomePageParticipantRegistrationActivity.class));
     }
 

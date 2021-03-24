@@ -11,13 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
-import com.eclairios.CrossComps.Dashboard;
 import com.eclairios.CrossComps.Model.ModelCoordinaterServicePage;
 import com.eclairios.CrossComps.Interface.MyInterface;
-import com.eclairios.CrossComps.Model.ModelWeekDays;
 import com.eclairios.CrossComps.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterCoordinaterServicePage extends RecyclerView.Adapter<AdapterCoordinaterServicePage.ViewHolder> {
