@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.AdapterParticepantTeams;
-import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.eclairios.CrossComps.Model.ModelParticipentTeams;
 
 import org.json.JSONArray;

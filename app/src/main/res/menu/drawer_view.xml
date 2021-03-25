@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_dashboard_fragment"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_Reservation_fragment"
+            android:title="My Reservation"
+            />
+
+        <item
+            android:id="@+id/nav_Scores_fragment"
+            android:title="Scores" />
+        <item
+            android:id="@+id/nav_Teams_fragment"
+            android:title="Teams" />
+        <item
+            android:id="@+id/nav_Challenges_fragment"
+            android:title="Challenges" />
+
+        <item
+            android:id="@+id/nav_Training_fragment"
+            android:title="Training" />
+        <item
+            android:id="@+id/nav_Profile_fragment"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_More_fragment"
+            android:title="More" />
+    </group>
+</menu>

@@ -2,38 +2,15 @@ package com.eclairios.CrossComps.Profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
-import com.google.gson.JsonArray;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 
 public class UpdateProfileActivity extends AppCompatActivity {
 
@@ -94,7 +71,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     public void UpdateProfileDetail(View view) {
         Toast.makeText(this, "Profile updated", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(UpdateProfileActivity.this,Profile.class));
+   //     startActivity(new Intent(UpdateProfileActivity.this,Profile.class));
     }
 
 

@@ -1,7 +1,6 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,10 +9,10 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
-import com.eclairios.CrossComps.Adapter.AdapterParticepantTeams;
-import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
-import com.eclairios.CrossComps.Model.ModelParticipentTeams;
+import com.eclairios.CrossComps.Profile.UpdateProfileActivity;
+import com.eclairios.CrossComps.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,32 +29,37 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
-public class ShowAllTeams extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
+
     String json_string;
     JSONObject jsonObject;
     JSONArray jsonArray;
 
-    RecyclerView recyclerView2;
-    AdapterParticepantTeams particepantTeamsAdapter;
-    ArrayList<ModelParticipentTeams> chatitemm = new ArrayList<>();
-
+    TextView first_Name,last_Name,phone_number,email,postal_code,address,gender,age,promoter;
+    String str_first_Name,str_last_Name,str_phone_number,str_email,str_postal_code,str_address,str_gender,str_age,str_promoter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_all_teams);
+        setContentView(R.layout.activity_profile);
+        getSupportActionBar().hide();
 
-        recyclerView2 = findViewById(R.id.allTeamRecycle);
-        particepantTeamsAdapter = new AdapterParticepantTeams( chatitemm,ShowAllTeams.this );
-        recyclerView2.setAdapter(particepantTeamsAdapter);
+        first_Name = findViewById(R.id.first_Name);
+        last_Name = findViewById(R.id.last_Name);
+        phone_number = findViewById(R.id.phone_number);
+        email = findViewById(R.id.email);
+        postal_code = findViewById(R.id.postal_code);
+        address = findViewById(R.id.address);
+        gender = findViewById(R.id.gender);
+        age = findViewById(R.id.age);
+        promoter = findViewById(R.id.promoter);
     }
 
-    public void Home(View view) {
-
-        startActivity(new Intent(ShowAllTeams.this, Participent.class));
-
+    public void ToHome(View view) {
+        startActivity(new Intent(Profile.this, Participent.class));
     }
+
+
 
     class BackgroundTasks extends AsyncTask<String, Void, String>
     {
@@ -75,12 +79,12 @@ public class ShowAllTeams extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ShowAllTeams.this);
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Profile.this);
                 String currentUserID = preferences.getString("CurrentUserId", "");
 
-                Log.e("jhgg", "doInBackground: "+currentUserID );
 
-                String data = URLEncoder.encode("User_ID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8") ;
+                String data = URLEncoder.encode("currentUserID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8")  ;
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -111,7 +115,7 @@ public class ShowAllTeams extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            json_url = "http://edevz.com/cross_comp/joinAllteams.php";
+            json_url = "http://edevz.com/cross_comp/profile_get_data.php";
         }
 
 
@@ -125,43 +129,50 @@ public class ShowAllTeams extends AppCompatActivity {
 
             json_string = result;
 
-            Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
+            Log.e("abcd", "onCreate: "+json_string );
 
 
             try {
 
                 jsonObject = new JSONObject(json_string);
                 jsonArray = jsonObject.getJSONArray("server_response");
-                Log.e("dhdhdhgd", "onPostExecute: "+jsonArray);
 
+                int count =0;
 
-                int count = 0;
-
-
-                String teamID,teamName;
                 while(count < jsonArray.length())
                 {
                     JSONObject JO = jsonArray.getJSONObject(count);
-                    teamID = JO.getString("Team_ID");
-                    teamName = JO.getString("Team_Name");
+
+                    str_first_Name = JO.getString("First_Name");
+                    str_last_Name = JO.getString("Last_Name");
+                    str_phone_number = JO.getString("Phone");
+                    str_email = JO.getString("Email");
+                    str_postal_code = JO.getString("Postal_Code");
+                    str_address = JO.getString("Address");
+                    str_gender = JO.getString("Gender");
+                    str_age = JO.getString("Age");
+                    str_promoter = JO.getString("Name_Promoter");
+
+                    Log.e("profileTest", "onPostExecute: "+ str_first_Name);
 
 
-                    Log.e("jdjdudfgfgf", "onPostExecute: "+ teamName);
-                    Log.e("jdjdudfgfgf", "onPostExecute: "+ teamID);
 
 
-                    ModelParticipentTeams teams = new ModelParticipentTeams();
-                    teams.setTeamID(teamID);
-                    teams.setTeamName(teamName);
-                    teams.setActiveUserTeamOrAllTeams("allTeams");
+                    first_Name.setText(str_first_Name);
+                    last_Name.setText(str_last_Name);
+                    phone_number.setText(str_phone_number);
+                    email.setText(str_email);
+                    postal_code.setText(str_postal_code);
+                    address.setText(str_address);
+                    gender.setText(str_gender);
+                    age.setText(str_age);
+                    promoter.setText(str_promoter);
 
-                    chatitemm.add(teams);
                     count++;
 
                 }
 
-                Log.e("fhfhfhf", "onPostExecute: "+count);
-                particepantTeamsAdapter.notifyDataSetChanged();
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -169,17 +180,32 @@ public class ShowAllTeams extends AppCompatActivity {
 
         }
     }
+    public void moveToProfile(View view) {
+        Intent intent = new Intent(Profile.this, UpdateProfileActivity.class);
+        intent.putExtra("str_first_Name", str_first_Name);
+        intent.putExtra("str_last_Name", str_last_Name);
+        intent.putExtra("str_phone_number", str_phone_number);
+        intent.putExtra("str_email", str_email);
+        intent.putExtra("str_postal_code", str_postal_code);
+        intent.putExtra("str_address", str_address);
+        intent.putExtra("str_gender", str_gender);
+        intent.putExtra("str_age", str_age);
+        intent.putExtra("str_promoter", str_promoter);
+        startActivity(intent);
+
+       // startActivity(new Intent(Profile.this, UpdateProfileActivity.class));
+    }
+
 
     @Override
     protected void onStart() {
         super.onStart();
-        chatitemm.clear();
         new BackgroundTasks().execute();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ShowAllTeams.this,Participent.class));
+        startActivity(new Intent(Profile.this, Participent.class));
     }
 }

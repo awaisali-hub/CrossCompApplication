@@ -1,17 +1,23 @@
-package com.eclairios.CrossComps.MainScoreDashboard;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+package com.eclairios.CrossComps.MainFragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
+import com.eclairios.CrossComps.EventAndServices.Dashboard;
+import com.eclairios.CrossComps.MainScoreDashboard.FragmentParent;
 import com.eclairios.CrossComps.R;
 
 import org.json.JSONArray;
@@ -31,22 +37,25 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class Participent extends AppCompatActivity {
+
+public class ScoresFragment extends Fragment {
+
 
     ArrayList<String> values;
     FragmentParent fragmentParent;
     public static int current_card;
     ViewPager viewPager;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_participent);
-        getSupportActionBar().hide();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_scores, container, false);
 
 
         try{
-            WaitDialog.showDialog(Participent.this);
+            WaitDialog.showDialog(getContext());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,17 +64,19 @@ public class Participent extends AppCompatActivity {
         values = new ArrayList<>();
         fragmentParent = new FragmentParent();
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+
+        return view;
     }
 
-    @Override
-    public boolean onSupportNavigateUp(){
-        finish();
-        return true;
-    }
+//    @Override
+//    public boolean onSupportNavigateUp(){
+//       // finish();
+//        return true;
+//    }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
 
         if(fragmentParent.adapter!=null){
             if(fragmentParent.adapter.getCount()>0){
@@ -78,10 +89,10 @@ public class Participent extends AppCompatActivity {
             }}
 
         try {
-            String id = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("uid", "idNotFound");
+            String id = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("uid", "idNotFound");
 
             //   String aVoid = new BCTask(this).execute("http://app.itouchipay.com/api.php?get_cards=true&uid="+id).get();
-            Context context=this;
+            Context context=getContext();
             //  Log.d("asdf",aVoid);
 
             //=====================================
@@ -94,18 +105,18 @@ public class Participent extends AppCompatActivity {
         super.onResume();
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        Log.d("sss","onRestoreinstancestate");
-        super.onRestoreInstanceState(savedInstanceState);
-    }
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        Log.d("sss","onRestoreinstancestate");
+//        super.onRestoreInstanceState(savedInstanceState);
+//    }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finishAffinity();
-        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        finishAffinity();
+//        finish();
+//    }
 
 
     class BackgroundTask extends AsyncTask<String, Void, String>
@@ -122,7 +133,7 @@ public class Participent extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Participent.this);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 String currentUserID = preferences.getString("CurrentUserId", "");
 
                 String data = URLEncoder.encode("userID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8"); ;
@@ -163,66 +174,66 @@ public class Participent extends AppCompatActivity {
 
 
 
-                Log.e("bcjknjkksdjcabcdsdsd", "onCreate: "+json_string );
-                try {
-                    JSONObject jsonObject = new JSONObject(json_string);
-                    JSONArray jsonArray = jsonObject.getJSONArray("server_response");
+            Log.e("bcjknjkksdjcabcdsdsd", "onCreate: "+json_string );
+            try {
+                JSONObject jsonObject = new JSONObject(json_string);
+                JSONArray jsonArray = jsonObject.getJSONArray("server_response");
 
-                    if(jsonArray.length() == 0) {
-                        Log.e("ffffffssssdds", "onPostExecute: " );
-                        fragmentParent.addPage("0","4","00 0000","0","0","_","0","_","0","_","0","_","0.0");
-                        viewPager.setCurrentItem(viewPager.getAdapter().getCount());
-                    }
-
-                    int count = 0;
-                    String Score_ID,userId,Date,Age,Meters,MetersGrade,Squats,SquatsGrade,Leg_raises,Leg_raisesGrade,PushUps,PushUpsGrade,Total_Score;
-
-                    while(count < jsonArray.length())
-                    {
-                        JSONObject JO = jsonArray.getJSONObject(count);
-                        Score_ID = JO.getString("Score_ID");
-                        userId = JO.getString("User_ID");
-                        Date = JO.getString("Date");
-                        Age = JO.getString("Age");
-                        Meters = JO.getString("Meters");
-                        MetersGrade = JO.getString("Meters_Grade");
-                        Squats = JO.getString("Squats");
-                        SquatsGrade = JO.getString("Squats_Grade");
-                        Leg_raises = JO.getString("Leg_raises");
-                        Leg_raisesGrade = JO.getString("Leg_raises_Grade");
-                        PushUps = JO.getString("Pushups");
-                        PushUpsGrade = JO.getString("Pushup_Grade");
-                        Total_Score = JO.getString("Total_Score");
-
-                        double number = Double.parseDouble(Total_Score);
-                        String score = String.format("%.1f", number);
-
-                        Log.e("values", "onPostExecute: "+Meters);
-
-
-                        fragmentParent.addPage(Score_ID,userId,Date,Age,Meters,MetersGrade,Squats,SquatsGrade,Leg_raises,Leg_raisesGrade,PushUps,PushUpsGrade,score);
-
-
-                        count++;
-                    }
-
+                if(jsonArray.length() == 0) {
+                    Log.e("ffffffssssdds", "onPostExecute: " );
+                    fragmentParent.addPage("0","4","00 0000","0","0","_","0","_","0","_","0","_","0.0");
                     viewPager.setCurrentItem(viewPager.getAdapter().getCount());
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            try{
-                                WaitDialog.hideDialog();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    },500);
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+
+                int count = 0;
+                String Score_ID,userId,Date,Age,Meters,MetersGrade,Squats,SquatsGrade,Leg_raises,Leg_raisesGrade,PushUps,PushUpsGrade,Total_Score;
+
+                while(count < jsonArray.length())
+                {
+                    JSONObject JO = jsonArray.getJSONObject(count);
+                    Score_ID = JO.getString("Score_ID");
+                    userId = JO.getString("User_ID");
+                    Date = JO.getString("Date");
+                    Age = JO.getString("Age");
+                    Meters = JO.getString("Meters");
+                    MetersGrade = JO.getString("Meters_Grade");
+                    Squats = JO.getString("Squats");
+                    SquatsGrade = JO.getString("Squats_Grade");
+                    Leg_raises = JO.getString("Leg_raises");
+                    Leg_raisesGrade = JO.getString("Leg_raises_Grade");
+                    PushUps = JO.getString("Pushups");
+                    PushUpsGrade = JO.getString("Pushup_Grade");
+                    Total_Score = JO.getString("Total_Score");
+
+                    double number = Double.parseDouble(Total_Score);
+                    String score = String.format("%.1f", number);
+
+                    Log.e("values", "onPostExecute: "+Meters);
+
+
+                    fragmentParent.addPage(Score_ID,userId,Date,Age,Meters,MetersGrade,Squats,SquatsGrade,Leg_raises,Leg_raisesGrade,PushUps,PushUpsGrade,score);
+
+
+                    count++;
+                }
+
+                viewPager.setCurrentItem(viewPager.getAdapter().getCount());
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            WaitDialog.hideDialog();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },500);
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
         }

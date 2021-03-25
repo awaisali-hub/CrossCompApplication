@@ -11,7 +11,7 @@
 
 
     <com.google.android.material.tabs.TabLayout
-
+        android:visibility="gone"
         android:background="@color/purple_500"
         android:id="@+id/my_tab_layout"
         android:layout_width="match_parent"
@@ -23,6 +23,7 @@
         />
 
     <com.google.android.material.appbar.AppBarLayout
+        android:visibility="gone"
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="72dp">
@@ -139,6 +140,7 @@
 
 
     <com.github.clans.fab.FloatingActionMenu
+        android:visibility="gone"
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_43sdp"

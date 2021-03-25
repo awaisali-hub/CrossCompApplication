@@ -1,18 +1,20 @@
-package com.eclairios.CrossComps.Teams;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
+package com.eclairios.CrossComps.MainFragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -24,9 +26,10 @@ import com.eclairios.CrossComps.Adapter.MyCrossCompAllTeamsMainAdapter;
 import com.eclairios.CrossComps.Adapter.MyCrossCompUserSelectedTeamAdapter;
 import com.eclairios.CrossComps.BackgroundTask;
 import com.eclairios.CrossComps.Interface.InterfaceForSetTeams;
-import com.eclairios.CrossComps.MainScoreDashboard.Participent;
 import com.eclairios.CrossComps.Model.MyCrossCompAllTeamsMainModel;
 import com.eclairios.CrossComps.R;
+import com.eclairios.CrossComps.Teams.MyFundraisingTeamDetailActivity;
+import com.eclairios.CrossComps.Teams.TeamsScoreActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,7 +48,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class AllTeamCategoryActivity extends AppCompatActivity implements InterfaceForSetTeams {
+
+public class TeamsFragment extends Fragment  implements InterfaceForSetTeams {
 
     String json_string;
     JSONObject jsonObject;
@@ -68,28 +72,42 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
     String SelectedPostalCode;
     String SelectedTeamGeneralID;
     String currentUserID;
+    Button myWorldTeam;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_team_category);
-        getSupportActionBar().hide();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(AllTeamCategoryActivity.this);
+        View view = inflater.inflate(R.layout.fragment_teams, container, false);
+
+        myWorldTeam = view.findViewById(R.id.MyWorldTeam);
+        myWorldTeam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyWorldTeam(view);
+            }
+        });
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         currentUserID = preferences.getString("CurrentUserId", "");
 
-        allTeamRecyclerView = findViewById(R.id.myCrossCompTeamList);
-        myCrossCompAllTeamsMainAdapter = new MyCrossCompAllTeamsMainAdapter(AllTeamCategoryActivity.this,myCrossCompAllTeamsMainModels,this);
+        allTeamRecyclerView = view.findViewById(R.id.myCrossCompTeamList);
+        myCrossCompAllTeamsMainAdapter = new MyCrossCompAllTeamsMainAdapter(getContext(),myCrossCompAllTeamsMainModels,this);
         allTeamRecyclerView.setAdapter(myCrossCompAllTeamsMainAdapter);
 
 
-        myCrossCompTeamList1 = findViewById(R.id.myCrossCompTeamList1);
-        myCrossCompUserSelectedTeamAdapter = new MyCrossCompUserSelectedTeamAdapter(AllTeamCategoryActivity.this,myCrossCompAllTeamsMainModels2,this);
+        myCrossCompTeamList1 = view.findViewById(R.id.myCrossCompTeamList1);
+        myCrossCompUserSelectedTeamAdapter = new MyCrossCompUserSelectedTeamAdapter(getContext(),myCrossCompAllTeamsMainModels2,this);
         myCrossCompTeamList1.setAdapter(myCrossCompUserSelectedTeamAdapter);
 
 
         new BackgroundTaskMySelectedTeam().execute();
         new BackgroundTaskGetAllTeams().execute();
+
+
+        return view;
+
+
     }
 
     public void TeamsPostalCode(String SelectedTeamID) {
@@ -101,7 +119,7 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
         Button saveTeam;
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(AllTeamCategoryActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.alert_dialog_for_postal_team_auto_fill,null);
         builder.setCancelable(true);
@@ -121,14 +139,14 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
 
 
         postalCodeForTeams.clear();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, postalCodeForTeams);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, postalCodeForTeams);
         //Find TextView control
         AutoCompleteTextView acTextView = (AutoCompleteTextView) dialogView.findViewById(R.id.postal_code_for_team);
         //Set the number of characters the user must type before the drop down list is shown
         acTextView.setThreshold(1);
         //Set the adapter
         acTextView.setAdapter(adapter);
-        
+
 
 
         AlertDialog pickFileImage = builder.create();
@@ -164,11 +182,11 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
                 if (TextUtils.isEmpty(postalCode) || TextUtils.isEmpty(str_city_team) || TextUtils.isEmpty(str_county_team)
                         || TextUtils.isEmpty(str_conference_team) || TextUtils.isEmpty(str_state_team) || TextUtils.isEmpty(str_union_team)
                         || TextUtils.isEmpty(str_country_team) || TextUtils.isEmpty(str_division_team) || TextUtils.isEmpty(str_world_team)) {
-                    Toast.makeText(AllTeamCategoryActivity.this, "All fields Required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "All fields Required", Toast.LENGTH_SHORT).show();
                 } else {
 
 
-                    BackgroundTask backgroundTask = new BackgroundTask(AllTeamCategoryActivity.this);
+                    BackgroundTask backgroundTask = new BackgroundTask(getContext());
                     backgroundTask.execute(method, SelectedTeamGeneralID, currentUserID, postalCode, str_city_team, str_county_team, str_conference_team, str_state_team, str_union_team, str_country_team, str_division_team, str_world_team);
 
                 }
@@ -184,7 +202,7 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
 
         Button saveTeam;
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(AllTeamCategoryActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.alert_dialog_for_church_auto_fill,null);
         builder.setCancelable(true);
@@ -193,24 +211,24 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
         saveTeam = dialogView.findViewById(R.id.saveTeam);
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, postalCodeForTeams);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, postalCodeForTeams);
         AutoCompleteTextView myFaithTeam = (AutoCompleteTextView) dialogView.findViewById(R.id.My_Faith_Team_team_church);
         myFaithTeam.setThreshold(1);
         myFaithTeam.setAdapter(adapter);
 
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, postalCodeForTeams);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, postalCodeForTeams);
         AutoCompleteTextView myDivisionTeam = (AutoCompleteTextView) dialogView.findViewById(R.id.MyDivisionTeam_church);
         myDivisionTeam.setThreshold(1);
         myDivisionTeam.setAdapter(adapter1);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, postalCodeForTeams);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, postalCodeForTeams);
         AutoCompleteTextView myUnionTeam = (AutoCompleteTextView) dialogView.findViewById(R.id.MyUnionTeam_church);
         myUnionTeam.setThreshold(1);
         myUnionTeam.setAdapter(adapter2);
 
 
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, postalCodeForTeams);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, postalCodeForTeams);
         AutoCompleteTextView myConferenceTeam = (AutoCompleteTextView) dialogView.findViewById(R.id.MyConferenceTeam_church);
         myConferenceTeam.setThreshold(1);
         myConferenceTeam.setAdapter(adapter3);
@@ -232,12 +250,12 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
 
                 if(TextUtils.isEmpty(FaithTeam) || TextUtils.isEmpty(DivisionTeam) || TextUtils.isEmpty(UnionTeam)
                         || TextUtils.isEmpty(ConferenceTeam) ){
-                    Toast.makeText(AllTeamCategoryActivity.this, "All fields Required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "All fields Required", Toast.LENGTH_SHORT).show();
                 }else{
 
 
-                        BackgroundTask backgroundTask = new BackgroundTask(AllTeamCategoryActivity.this);
-                        backgroundTask.execute(method,SelectedTeamGeneralID,currentUserID,FaithTeam, DivisionTeam, UnionTeam, ConferenceTeam);
+                    BackgroundTask backgroundTask = new BackgroundTask(getContext());
+                    backgroundTask.execute(method,SelectedTeamGeneralID,currentUserID,FaithTeam, DivisionTeam, UnionTeam, ConferenceTeam);
 
 
                 }
@@ -250,16 +268,16 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
 
 
     public void MoveToFundTeam(View view) {
-     startActivity(new Intent(AllTeamCategoryActivity.this, MyFundraisingTeamDetailActivity.class));
+        startActivity(new Intent(getContext(), MyFundraisingTeamDetailActivity.class));
     }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(AllTeamCategoryActivity.this, Participent.class));
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        startActivity(new Intent(AllTeamCategoryActivity.this, Participent.class));
+//    }
 
     public void MyWorldTeam(View view) {
-        startActivity(new Intent(AllTeamCategoryActivity.this, TeamsScoreActivity.class));
+        startActivity(new Intent(getContext(), TeamsScoreActivity.class));
     }
 
 
@@ -330,38 +348,38 @@ public class AllTeamCategoryActivity extends AppCompatActivity implements Interf
             json_string = result;
 
 
-                Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
+            Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
 
 
-                try {
+            try {
 
-                    jsonObject = new JSONObject(json_string);
-                    jsonArray = jsonObject.getJSONArray("server_response");
-
-
-                    int count = 0;
-                    String teamId,teamName;
-                    while(count < jsonArray.length())
-                    {
-                        JSONObject JO = jsonArray.getJSONObject(count);
-                        teamId = JO.getString("Team_ID");
-                        teamName = JO.getString("Team_Name");
+                jsonObject = new JSONObject(json_string);
+                jsonArray = jsonObject.getJSONArray("server_response");
 
 
-                        MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
-                        mainModel.setTeamID(teamId);
-                        mainModel.setTeamName(teamName);
-                        myCrossCompAllTeamsMainModels.add(mainModel);
+                int count = 0;
+                String teamId,teamName;
+                while(count < jsonArray.length())
+                {
+                    JSONObject JO = jsonArray.getJSONObject(count);
+                    teamId = JO.getString("Team_ID");
+                    teamName = JO.getString("Team_Name");
 
-                        count++;
 
-                    }
+                    MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                    mainModel.setTeamID(teamId);
+                    mainModel.setTeamName(teamName);
+                    myCrossCompAllTeamsMainModels.add(mainModel);
 
-                    myCrossCompAllTeamsMainAdapter.notifyDataSetChanged();
+                    count++;
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+
+                myCrossCompAllTeamsMainAdapter.notifyDataSetChanged();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
     }

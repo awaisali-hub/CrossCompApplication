@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
+import com.eclairios.CrossComps.ExtraUnusedClasses.AllTeamCategoryActivity;
 
 public class MyChurchTeamJoinCreateActivity extends AppCompatActivity {
 

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.eclairios.CrossComps.Interface.InterfaceForSetTeams;
 import com.eclairios.CrossComps.Model.MyCrossCompAllTeamsMainModel;
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
 import com.eclairios.CrossComps.Teams.MyFundraisingTeamDetailActivity;
 import com.eclairios.CrossComps.Teams.TeamsScoreActivity;
 

@@ -9,6 +9,7 @@ import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import com.eclairios.CrossComps.ExtraUnusedClasses.ChallengeScreen0Activity;
 import com.eclairios.CrossComps.R;
 
 public class IndividualTeamChallengesScreen1cActivity extends AppCompatActivity {
@@ -30,6 +31,6 @@ public class IndividualTeamChallengesScreen1cActivity extends AppCompatActivity 
     }
 
     public void MoveToMyCrossCompChallenges(View view) {
-        startActivity(new Intent(IndividualTeamChallengesScreen1cActivity.this,ChallengeScreen0Activity.class));
+        startActivity(new Intent(IndividualTeamChallengesScreen1cActivity.this, ChallengeScreen0Activity.class));
     }
 }

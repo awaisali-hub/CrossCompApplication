@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps.Challenges;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+import com.eclairios.CrossComps.Challenges.CustomTeamChallengesScreen1aActivity;
+import com.eclairios.CrossComps.Challenges.IndividualTeamChallengesScreen1aActivity;
+import com.eclairios.CrossComps.Challenges.StandardTeamChallengesScreen1aActivity;
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
 
 public class ChallengeScreen0Activity extends AppCompatActivity {
 

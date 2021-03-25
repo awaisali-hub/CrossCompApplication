@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/nav_dashboard_fragment">
+
+    <fragment
+        android:id="@+id/nav_dashboard_fragment"
+        android:name="com.eclairios.CrossComps.MainFragments.DashboardFragment"
+        android:label="Select a local service provider listed below to do your first CrossComps for Free!"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/nav_Reservation_fragment"
+        android:name="com.eclairios.CrossComps.MainFragments.MyReservationFragment"
+        android:label="My Reservation"
+        tools:layout="@layout/fragment_my_reservation" />
+    <fragment
+        android:id="@+id/nav_Scores_fragment"
+        android:name="com.eclairios.CrossComps.MainFragments.ScoresFragment"
+        android:label="My CrossComp Scores"
+        tools:layout="@layout/fragment_scores" />
+    <fragment
+        android:id="@+id/nav_Teams_fragment"
+        android:name="com.eclairios.CrossComps.MainFragments.TeamsFragment"
+        android:label="My CrossComp Teams"
+        tools:layout="@layout/fragment_teams" />
+    <fragment
+        android:id="@+id/nav_Challenges_fragment"
+        android:name="com.eclairios.CrossComps.MainFragments.ChallengesFragment"
+        android:label="My CrossComp Challenges"
+        tools:layout="@layout/fragment_challenges" />
+    <fragment
+        android:id="@+id/nav_Training_fragment"
+        android:name="com.eclairios.CrossComps.MainFragments.TrainingsFragment"
+        android:label="My CrossComp Training"
+        tools:layout="@layout/fragment_trainings" />
+    <fragment
+        android:id="@+id/nav_Profile_fragment"
+        android:name="com.eclairios.CrossComps.MainFragments.ProfileFragment"
+        android:label="My Profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/nav_More_fragment"
+        android:name="com.eclairios.CrossComps.MainFragments.MoreAffilitesFragment"
+        android:label="Become a CrossComp Affiliate"
+        tools:layout="@layout/fragment_more_affilites" />
+</navigation>

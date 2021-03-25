@@ -1,20 +1,22 @@
-package com.eclairios.CrossComps.Profile;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.eclairios.CrossComps.MainFragments;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
-import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+import com.eclairios.CrossComps.Profile.UpdateProfileActivity;
 import com.eclairios.CrossComps.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +34,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class Profile extends AppCompatActivity {
+
+public class ProfileFragment extends Fragment {
 
     String json_string;
     JSONObject jsonObject;
@@ -40,28 +43,35 @@ public class Profile extends AppCompatActivity {
 
     TextView first_Name,last_Name,phone_number,email,postal_code,address,gender,age,promoter;
     String str_first_Name,str_last_Name,str_phone_number,str_email,str_postal_code,str_address,str_gender,str_age,str_promoter;
+
+    FloatingActionButton fabUpdateProfile;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        getSupportActionBar().hide();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);;
 
-        first_Name = findViewById(R.id.first_Name);
-        last_Name = findViewById(R.id.last_Name);
-        phone_number = findViewById(R.id.phone_number);
-        email = findViewById(R.id.email);
-        postal_code = findViewById(R.id.postal_code);
-        address = findViewById(R.id.address);
-        gender = findViewById(R.id.gender);
-        age = findViewById(R.id.age);
-        promoter = findViewById(R.id.promoter);
+        first_Name = view.findViewById(R.id.first_Name);
+        last_Name = view.findViewById(R.id.last_Name);
+        phone_number = view.findViewById(R.id.phone_number);
+        email = view.findViewById(R.id.email);
+        postal_code = view.findViewById(R.id.postal_code);
+        address = view.findViewById(R.id.address);
+        gender = view.findViewById(R.id.gender);
+        age = view.findViewById(R.id.age);
+        promoter = view.findViewById(R.id.promoter);
+
+        fabUpdateProfile = view.findViewById(R.id.fabUpdateProfile);
+
+        fabUpdateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToProfile(view);
+            }
+        });
+
+
+        return view;
     }
-
-    public void ToHome(View view) {
-        startActivity(new Intent(Profile.this, Participent.class));
-    }
-
-
 
     class BackgroundTasks extends AsyncTask<String, Void, String>
     {
@@ -82,7 +92,7 @@ public class Profile extends AppCompatActivity {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
 
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Profile.this);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 String currentUserID = preferences.getString("CurrentUserId", "");
 
 
@@ -183,7 +193,7 @@ public class Profile extends AppCompatActivity {
         }
     }
     public void moveToProfile(View view) {
-        Intent intent = new Intent(Profile.this, UpdateProfileActivity.class);
+        Intent intent = new Intent(getContext(), UpdateProfileActivity.class);
         intent.putExtra("str_first_Name", str_first_Name);
         intent.putExtra("str_last_Name", str_last_Name);
         intent.putExtra("str_phone_number", str_phone_number);
@@ -195,19 +205,14 @@ public class Profile extends AppCompatActivity {
         intent.putExtra("str_promoter", str_promoter);
         startActivity(intent);
 
-       // startActivity(new Intent(Profile.this, UpdateProfileActivity.class));
+        // startActivity(new Intent(Profile.this, UpdateProfileActivity.class));
     }
 
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         new BackgroundTasks().execute();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(Profile.this, Participent.class));
-    }
 }

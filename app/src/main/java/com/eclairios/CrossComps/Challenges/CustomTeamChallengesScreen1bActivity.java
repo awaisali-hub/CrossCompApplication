@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.eclairios.CrossComps.ExtraUnusedClasses.ChallengeScreen0Activity;
 import com.eclairios.CrossComps.R;
 
 public class CustomTeamChallengesScreen1bActivity extends AppCompatActivity {
@@ -22,6 +23,6 @@ public class CustomTeamChallengesScreen1bActivity extends AppCompatActivity {
     }
 
     public void MoveToMyCrossCompChallenges(View view) {
-        startActivity(new Intent(CustomTeamChallengesScreen1bActivity.this,ChallengeScreen0Activity.class));
+        startActivity(new Intent(CustomTeamChallengesScreen1bActivity.this, ChallengeScreen0Activity.class));
     }
 }

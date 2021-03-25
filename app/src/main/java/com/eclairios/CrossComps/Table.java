@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.eclairios.CrossComps.Adapter.AdapterTable;
 import com.eclairios.CrossComps.EventAndServices.Dashboard;
-import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.eclairios.CrossComps.Model.ModelTable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

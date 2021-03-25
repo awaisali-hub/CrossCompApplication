@@ -294,6 +294,7 @@
 
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:visibility="gone"
                     android:id="@+id/homeCircleImage"
                     android:layout_width="@dimen/_43sdp"
                     android:layout_height="@dimen/_43sdp"

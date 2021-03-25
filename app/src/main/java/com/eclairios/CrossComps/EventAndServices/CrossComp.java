@@ -24,7 +24,7 @@ import android.widget.Toolbar;
 
 import com.eclairios.CrossComps.BackgroundTask;
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
-import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.eclairios.CrossComps.Maps.ServiceProviderMapsActivity;
 import com.eclairios.CrossComps.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

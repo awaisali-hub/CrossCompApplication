@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.eclairios.CrossComps.Adapter.ViewPagerAdapterC;
-import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.google.android.material.tabs.TabLayout;
 
 public class Challenge extends AppCompatActivity {

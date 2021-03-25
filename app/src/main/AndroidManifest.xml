@@ -77,7 +77,7 @@
         <activity android:name=".AffiliteTeamManager.CoManagersActivity" />
         <activity android:name=".AffiliteTeamManager.HomeTeamActivity" />
         <activity android:name=".AffiliteTeamManager.TeamManagerActivity" />
-        <activity android:name=".CrossCompAffiliate.BecomeCrossCompAffiliateActivity" />
+        <activity android:name=".ExtraUnusedClasses.BecomeCrossCompAffiliateActivity" />
         <activity android:name=".CrossCompAffiliate.AffiliateDashboardActivity" />
         <activity android:name=".CrossCompAffiliate.OptiHealthPledgeActivity" />
         <activity android:name=".CrossCompAffiliate.CrossCompAffiliateAgreementActivity" />
@@ -94,7 +94,7 @@
         <activity android:name=".Trainings.HelperChatActivity" />
         <activity android:name=".Trainings.TrainingPersonalizedActivity" />
         <activity android:name=".Trainings.TrainingRecommendationsActivity" />
-        <activity android:name=".Trainings.TrainingMainPageActivity" />
+        <activity android:name=".ExtraUnusedClasses.TrainingMainPageActivity" />
         <activity android:name=".Challenges.IndividualTeamChallengesScreen1cActivity" />
         <activity android:name=".Challenges.IndividualTeamChallengesScreen1bActivity" />
         <activity android:name=".Challenges.IndividualTeamChallengesScreen1aActivity" />
@@ -104,11 +104,11 @@
         <activity android:name=".Challenges.StandardTeamChallengesScreen1cActivity" />
         <activity android:name=".Challenges.StandardTeamChallengesScreen1bActivity" />
         <activity android:name=".Challenges.StandardTeamChallengesScreen1aActivity" />
-        <activity android:name=".Challenges.ChallengeScreen0Activity" />
+        <activity android:name=".ExtraUnusedClasses.ChallengeScreen0Activity" />
         <activity android:name=".Teams.MyFundraisingTeamDetailActivity" />
         <activity android:name=".Teams.TeamsScoreActivity" />
         <activity android:name=".Teams.TeamsAccordingPostalCodeActivity" />
-        <activity android:name=".Teams.AllTeamCategoryActivity" />
+        <activity android:name=".ExtraUnusedClasses.AllTeamCategoryActivity" />
         <activity android:name=".ShowTimeRangeForEventActivity" />
         <activity android:name=".ShowDateForReservationActivity" />
         <activity android:name=".EventAndServices.EventCrossCompActivity" />
@@ -127,16 +127,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDfzZIAt3V2ck7R46NJ3BsbJHpPFPt2rZ0" />
 
-        <activity android:name=".MainScoreDashboard.Participent">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".ExtraUnusedClasses.Participent">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".OneServiceCard" />
         <activity android:name=".MorePages" />
-        <activity android:name=".Profile.Profile" />
+        <activity android:name=".ExtraUnusedClasses.Profile" />
         <activity android:name=".Services" />
         <activity android:name=".Challenge" />
         <activity android:name=".TeamScore" />
@@ -145,7 +141,11 @@
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppFullScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".EventAndServices.CrossComp" />
         <activity android:name=".EventAndServices.Dashboard" />

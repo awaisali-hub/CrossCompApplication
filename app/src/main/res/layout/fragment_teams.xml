@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExtraUnusedClasses.AllTeamCategoryActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="72dp">
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/blue">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="My CrossComp Teams"
-                android:textSize="20sp"
-                android:layout_marginEnd="15dp"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textStyle="bold">
-            </TextView>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainFragments.TeamsFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,7 +15,7 @@
             android:layout_height="match_parent"
             >
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/MyHomeTeam"
+                android:id="@+id/MyWorldTeam"
                 android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:background="@drawable/res"
@@ -48,7 +26,6 @@
                 android:text="My World Team"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:onClick="MyWorldTeam"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -69,7 +46,4 @@
         </RelativeLayout>
     </ScrollView>
 
-
-
-
-</RelativeLayout>
+</FrameLayout>

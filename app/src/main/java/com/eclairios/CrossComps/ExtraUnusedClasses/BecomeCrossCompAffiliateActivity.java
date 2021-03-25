@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps.CrossCompAffiliate;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
-import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+import com.eclairios.CrossComps.CrossCompAffiliate.CrossCompAffiliateAgreementActivity;
 import com.eclairios.CrossComps.R;
 
 public class BecomeCrossCompAffiliateActivity extends AppCompatActivity {
@@ -20,7 +19,7 @@ public class BecomeCrossCompAffiliateActivity extends AppCompatActivity {
     }
 
     public void MoveToAgreement(View view) {
-        startActivity(new Intent(BecomeCrossCompAffiliateActivity.this,CrossCompAffiliateAgreementActivity.class));
+        startActivity(new Intent(BecomeCrossCompAffiliateActivity.this, CrossCompAffiliateAgreementActivity.class));
     }
 
     @Override

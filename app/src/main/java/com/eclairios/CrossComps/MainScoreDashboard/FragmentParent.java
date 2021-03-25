@@ -22,13 +22,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.eclairios.CrossComps.Challenges.ChallengeScreen0Activity;
-import com.eclairios.CrossComps.CrossCompAffiliate.BecomeCrossCompAffiliateActivity;
+import com.eclairios.CrossComps.ExtraUnusedClasses.ChallengeScreen0Activity;
+import com.eclairios.CrossComps.ExtraUnusedClasses.BecomeCrossCompAffiliateActivity;
 import com.eclairios.CrossComps.EventAndServices.Dashboard;
-import com.eclairios.CrossComps.Profile.Profile;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Profile;
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.Teams.AllTeamCategoryActivity;
-import com.eclairios.CrossComps.Trainings.TrainingMainPageActivity;
+import com.eclairios.CrossComps.ExtraUnusedClasses.AllTeamCategoryActivity;
+import com.eclairios.CrossComps.ExtraUnusedClasses.TrainingMainPageActivity;
 import com.google.android.material.tabs.TabLayout;
 
 public class FragmentParent  extends Fragment {

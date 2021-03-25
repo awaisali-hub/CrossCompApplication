@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.eclairios.CrossComps.Adapter.AdapterChallenge;
-import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.eclairios.CrossComps.Model.ModelChallenge;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

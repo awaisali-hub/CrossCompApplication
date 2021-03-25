@@ -3,11 +3,10 @@ package com.eclairios.CrossComps.CrossCompAffiliate;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Region;
 import android.os.Bundle;
 import android.view.View;
 
-import com.eclairios.CrossComps.MainScoreDashboard.Participent;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.eclairios.CrossComps.R;
 
 public class OptiHealthPledgeActivity extends AppCompatActivity {
