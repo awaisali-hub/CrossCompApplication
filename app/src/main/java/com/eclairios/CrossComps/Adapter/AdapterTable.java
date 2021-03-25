@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.eclairios.CrossComps.Model.ModelTable;
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.Table;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterTable extends RecyclerView.Adapter<AdapterTable.ViewHolder> {

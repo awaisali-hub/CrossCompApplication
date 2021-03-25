@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.eclairios.CrossComps.Graph;
-import com.eclairios.CrossComps.Scores;
-import com.eclairios.CrossComps.Table;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Graph;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Scores;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Table;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 

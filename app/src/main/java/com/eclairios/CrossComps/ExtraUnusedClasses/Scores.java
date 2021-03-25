@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -9,6 +9,7 @@ import android.text.Html;
 import android.text.Spanned;
 
 import com.eclairios.CrossComps.Adapter.ViewPagerAdapter;
+import com.eclairios.CrossComps.R;
 import com.google.android.material.tabs.TabLayout;
 
 import static java.lang.String.format;

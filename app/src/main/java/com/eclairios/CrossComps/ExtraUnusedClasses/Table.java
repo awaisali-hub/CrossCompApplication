@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +19,7 @@ import com.eclairios.CrossComps.Adapter.AdapterTable;
 import com.eclairios.CrossComps.EventAndServices.Dashboard;
 import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.eclairios.CrossComps.Model.ModelTable;
+import com.eclairios.CrossComps.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;

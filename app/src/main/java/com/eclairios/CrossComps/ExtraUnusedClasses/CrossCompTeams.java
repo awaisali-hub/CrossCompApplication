@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,8 +18,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.AdapterParticepantTeams;
-import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
+import com.eclairios.CrossComps.BackgroundTask;
 import com.eclairios.CrossComps.Model.ModelParticipentTeams;
+import com.eclairios.CrossComps.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,7 +63,7 @@ public class CrossCompTeams extends AppCompatActivity {
         if(count >= 99){
             Toast.makeText(this, "You cannot join more then 99 Teams", Toast.LENGTH_SHORT).show();
         }else{
-            startActivity(new Intent(CrossCompTeams.this,ShowAllTeams.class));
+            startActivity(new Intent(CrossCompTeams.this, ShowAllTeams.class));
         }
     }
 

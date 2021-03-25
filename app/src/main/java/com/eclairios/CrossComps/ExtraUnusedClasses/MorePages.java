@@ -1,7 +1,6 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,10 +9,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
-import com.eclairios.CrossComps.Adapter.AdapterParticepantTeams;
-import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
-import com.eclairios.CrossComps.Model.ModelParticipentTeams;
+import com.eclairios.CrossComps.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,30 +28,27 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
-public class ShowAllTeams extends AppCompatActivity {
+public class MorePages extends AppCompatActivity {
     String json_string;
     JSONObject jsonObject;
     JSONArray jsonArray;
-
-    RecyclerView recyclerView2;
-    AdapterParticepantTeams particepantTeamsAdapter;
-    ArrayList<ModelParticipentTeams> chatitemm = new ArrayList<>();
-
+    TextView OptiHealthNetwork,Med_FitClinics,OptiHealthSports,OptiHealthInstitute,OptiHealth_Pledge;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_all_teams);
+        setContentView(R.layout.activity_more_pages);
 
-        recyclerView2 = findViewById(R.id.allTeamRecycle);
-        particepantTeamsAdapter = new AdapterParticepantTeams( chatitemm,ShowAllTeams.this );
-        recyclerView2.setAdapter(particepantTeamsAdapter);
+        OptiHealthNetwork = findViewById(R.id.OptiHealthNetwork);
+        Med_FitClinics = findViewById(R.id.Med_FitClinics);
+        OptiHealthSports = findViewById(R.id.OptiHealthSports);
+        OptiHealthInstitute = findViewById(R.id.OptiHealthInstitute);
+        OptiHealth_Pledge = findViewById(R.id.OptiHealth_Pledge);
+
     }
 
-    public void Home(View view) {
-
-        startActivity(new Intent(ShowAllTeams.this, Participent.class));
+    public void TooHome(View view) {
+        startActivity(new Intent(MorePages.this, Participent.class));
 
     }
 
@@ -75,12 +70,12 @@ public class ShowAllTeams extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ShowAllTeams.this);
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MorePages.this);
                 String currentUserID = preferences.getString("CurrentUserId", "");
 
-                Log.e("jhgg", "doInBackground: "+currentUserID );
 
-                String data = URLEncoder.encode("User_ID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8") ;
+                String data = URLEncoder.encode("currentUserID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8")  ;
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -111,7 +106,7 @@ public class ShowAllTeams extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            json_url = "http://edevz.com/cross_comp/joinAllteams.php";
+            json_url = "http://edevz.com/cross_comp/getOptiHelathNetwork.php";
         }
 
 
@@ -125,43 +120,39 @@ public class ShowAllTeams extends AppCompatActivity {
 
             json_string = result;
 
-            Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
+            Log.e("abcd", "onCreate: "+json_string );
 
 
             try {
 
                 jsonObject = new JSONObject(json_string);
                 jsonArray = jsonObject.getJSONArray("server_response");
-                Log.e("dhdhdhgd", "onPostExecute: "+jsonArray);
 
-
-                int count = 0;
-
-
-                String teamID,teamName;
+                int count =0;
+                String str_OptiHealthNetwork,str_Med_FitClinics,str_OptiHealthSports,str_OptiHealthInstitute,str_OptiHealth_Pledge;
                 while(count < jsonArray.length())
                 {
                     JSONObject JO = jsonArray.getJSONObject(count);
-                    teamID = JO.getString("Team_ID");
-                    teamName = JO.getString("Team_Name");
+
+                    str_OptiHealthNetwork = JO.getString("OptiHealth_Network");
+                    str_Med_FitClinics = JO.getString("med_fit_clinics");
+                    str_OptiHealthSports = JO.getString("OptiHealth_Sports");
+                    str_OptiHealthInstitute = JO.getString("OptiHealth_Institute");
+                    str_OptiHealth_Pledge = JO.getString("OptiHealth_Pledge");
 
 
-                    Log.e("jdjdudfgfgf", "onPostExecute: "+ teamName);
-                    Log.e("jdjdudfgfgf", "onPostExecute: "+ teamID);
 
-
-                    ModelParticipentTeams teams = new ModelParticipentTeams();
-                    teams.setTeamID(teamID);
-                    teams.setTeamName(teamName);
-                    teams.setActiveUserTeamOrAllTeams("allTeams");
-
-                    chatitemm.add(teams);
+//                    OptiHealthNetwork.setText(str_OptiHealthNetwork);
+//                    Med_FitClinics.setText(str_Med_FitClinics);
+//                    OptiHealthSports.setText(str_OptiHealthSports);
+//                    OptiHealthInstitute.setText(str_OptiHealthInstitute);
+//                    OptiHealth_Pledge.setText(str_OptiHealth_Pledge);
                     count++;
 
                 }
 
-                Log.e("fhfhfhf", "onPostExecute: "+count);
-                particepantTeamsAdapter.notifyDataSetChanged();
+
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -173,13 +164,6 @@ public class ShowAllTeams extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        chatitemm.clear();
         new BackgroundTasks().execute();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(ShowAllTeams.this,Participent.class));
     }
 }

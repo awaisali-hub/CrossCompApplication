@@ -1,10 +1,12 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.eclairios.CrossComps.R;
 
 public class ShowDateForReservationActivity extends AppCompatActivity {
 

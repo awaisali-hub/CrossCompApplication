@@ -109,15 +109,15 @@
         <activity android:name=".Teams.TeamsScoreActivity" />
         <activity android:name=".Teams.TeamsAccordingPostalCodeActivity" />
         <activity android:name=".ExtraUnusedClasses.AllTeamCategoryActivity" />
-        <activity android:name=".ShowTimeRangeForEventActivity" />
-        <activity android:name=".ShowDateForReservationActivity" />
+        <activity android:name=".ExtraUnusedClasses.ShowTimeRangeForEventActivity" />
+        <activity android:name=".ExtraUnusedClasses.ShowDateForReservationActivity" />
         <activity android:name=".EventAndServices.EventCrossCompActivity" />
         <activity android:name=".EventAndServices.EventDetailActivity" />
-        <activity android:name=".Location_challengeActivity" />
-        <activity android:name=".Team_challengeActivity" />
-        <activity android:name=".Individual_challengeActivity" />
+        <activity android:name=".ExtraUnusedClasses.Location_challengeActivity" />
+        <activity android:name=".ExtraUnusedClasses.Team_challengeActivity" />
+        <activity android:name=".ExtraUnusedClasses.Individual_challengeActivity" />
         <activity android:name=".Adapter.ServiceName" />
-        <activity android:name=".ShowAllTeams" />
+        <activity android:name=".ExtraUnusedClasses.ShowAllTeams" />
         <activity android:name=".EventAndServices.CoordinatorServicePage" />
 
         <meta-data
@@ -130,14 +130,14 @@
         <activity android:name=".ExtraUnusedClasses.Participent">
 
         </activity>
-        <activity android:name=".OneServiceCard" />
-        <activity android:name=".MorePages" />
+        <activity android:name=".ExtraUnusedClasses.OneServiceCard" />
+        <activity android:name=".ExtraUnusedClasses.MorePages" />
         <activity android:name=".ExtraUnusedClasses.Profile" />
-        <activity android:name=".Services" />
-        <activity android:name=".Challenge" />
-        <activity android:name=".TeamScore" />
-        <activity android:name=".CrossCompTeams" />
-        <activity android:name=".Scores" />
+        <activity android:name=".ExtraUnusedClasses.Services" />
+        <activity android:name=".ExtraUnusedClasses.Challenge" />
+        <activity android:name=".ExtraUnusedClasses.TeamScore" />
+        <activity android:name=".ExtraUnusedClasses.CrossCompTeams" />
+        <activity android:name=".ExtraUnusedClasses.Scores" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppFullScreenTheme">

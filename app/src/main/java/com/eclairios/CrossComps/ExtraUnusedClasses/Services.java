@@ -1,8 +1,10 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.eclairios.CrossComps.R;
 
 public class Services extends AppCompatActivity {
 

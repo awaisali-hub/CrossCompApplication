@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.eclairios.CrossComps.Adapter.AdapterOneServiceCard;
 import com.eclairios.CrossComps.Model.ModelOneServiceCard;
+import com.eclairios.CrossComps.R;
 
 import java.util.ArrayList;
 

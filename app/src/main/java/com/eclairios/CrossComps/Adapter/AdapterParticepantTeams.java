@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.eclairios.CrossComps.Model.ModelParticipentTeams;
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.TeamScore;
+import com.eclairios.CrossComps.ExtraUnusedClasses.TeamScore;
 
 import java.util.List;
 

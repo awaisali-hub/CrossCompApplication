@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,8 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.AdapterAllUser;
+import com.eclairios.CrossComps.BackgroundTask;
 import com.eclairios.CrossComps.Interface.IndividualChallengeInterface;
 import com.eclairios.CrossComps.Model.ModelAllUser;
+import com.eclairios.CrossComps.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -249,6 +251,6 @@ public class Individual_challengeActivity extends AppCompatActivity implements I
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(Individual_challengeActivity.this,Challenge.class));
+        startActivity(new Intent(Individual_challengeActivity.this, Challenge.class));
     }
 }

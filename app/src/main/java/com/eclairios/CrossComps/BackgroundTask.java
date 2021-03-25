@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.eclairios.CrossComps.EventAndServices.CoordinatorServicePage;
 import com.eclairios.CrossComps.EventAndServices.CrossComp;
 import com.eclairios.CrossComps.EventAndServices.Dashboard;
-import com.eclairios.CrossComps.Judge.JudgeHomePageParticipantRegistrationActivity;
+import com.eclairios.CrossComps.ExtraUnusedClasses.Challenge;
 import com.eclairios.CrossComps.Teams.MyFundraisingTeamDetailActivity;
 import com.eclairios.CrossComps.Teams.TeamsScoreActivity;
 
@@ -1221,7 +1221,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             }else if(result.equals("Challenge Individual Registration Success")){
                 Toast.makeText(ctx, "Your challenge Send", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(ctx,Challenge.class);
+                Intent intent = new Intent(ctx, Challenge.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                ctx.startActivity(intent);
             }else if(result.equals("Challenge Individual Registration UnSuccess")){

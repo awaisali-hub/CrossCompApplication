@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,8 +13,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.eclairios.CrossComps.Adapter.AdapterCurrentTeams;
+import com.eclairios.CrossComps.BackgroundTask;
 import com.eclairios.CrossComps.Model.ModelCurrentTeams;
-import com.eclairios.CrossComps.Model.ModelParticipentTeams;
+import com.eclairios.CrossComps.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -88,7 +89,7 @@ public class TeamScore extends AppCompatActivity {
     }
 
     public void Teams(View view) {
-        startActivity(new Intent(TeamScore.this,CrossCompTeams.class));
+        startActivity(new Intent(TeamScore.this, CrossCompTeams.class));
     }
 
     public void joinTeamRequest(View view) {

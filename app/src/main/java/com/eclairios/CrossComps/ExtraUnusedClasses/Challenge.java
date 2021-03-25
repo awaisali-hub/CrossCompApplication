@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.eclairios.CrossComps.Adapter.ViewPagerAdapterC;
-import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
+import com.eclairios.CrossComps.R;
 import com.google.android.material.tabs.TabLayout;
 
 public class Challenge extends AppCompatActivity {

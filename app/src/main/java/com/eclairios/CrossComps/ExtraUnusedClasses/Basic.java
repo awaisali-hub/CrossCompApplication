@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.eclairios.CrossComps.Adapter.AdapterChallenge;
-import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.eclairios.CrossComps.Model.ModelChallenge;
+import com.eclairios.CrossComps.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -91,7 +91,7 @@ public class Basic extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent = new Intent(getContext(),Individual_challengeActivity.class);
+                        Intent intent = new Intent(getContext(), Individual_challengeActivity.class);
                         intent.putExtra("challengeType","Basic");
                         startActivity(intent);
                     }
@@ -99,7 +99,7 @@ public class Basic extends Fragment {
                 team.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getContext(),Team_challengeActivity.class);
+                        Intent intent = new Intent(getContext(), Team_challengeActivity.class);
                         intent.putExtra("challengeType","Basic");
                         startActivity(intent);
                     }
@@ -107,7 +107,7 @@ public class Basic extends Fragment {
                 location.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getContext(),Location_challengeActivity.class);
+                        Intent intent = new Intent(getContext(), Location_challengeActivity.class);
                         intent.putExtra("challengeType","Basic");
                         startActivity(intent);
                     }

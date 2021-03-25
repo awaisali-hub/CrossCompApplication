@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.ExtraUnusedClasses;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.eclairios.CrossComps.Adapter.AdapterAdvanceChallenge;
-import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.eclairios.CrossComps.Model.ModelChallenge;
+import com.eclairios.CrossComps.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -93,7 +93,7 @@ public class Advanced extends Fragment {
                 individual.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getContext(),Individual_challengeActivity.class);
+                        Intent intent = new Intent(getContext(), Individual_challengeActivity.class);
                         intent.putExtra("challengeType","Advance");
                         startActivity(intent);
                     }
@@ -102,7 +102,7 @@ public class Advanced extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent = new Intent(getContext(),Team_challengeActivity.class);
+                        Intent intent = new Intent(getContext(), Team_challengeActivity.class);
                         intent.putExtra("challengeType","Advance");
                         startActivity(intent);
                     }
@@ -111,7 +111,7 @@ public class Advanced extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent = new Intent(getContext(),Location_challengeActivity.class);
+                        Intent intent = new Intent(getContext(), Location_challengeActivity.class);
                         intent.putExtra("challengeType","Advance");
                         startActivity(intent);
 
