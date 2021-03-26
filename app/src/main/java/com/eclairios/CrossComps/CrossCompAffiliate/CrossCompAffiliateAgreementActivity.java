@@ -1,12 +1,15 @@
 package com.eclairios.CrossComps.CrossCompAffiliate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
+import com.eclairios.CrossComps.MainFragments.ScoresFragment;
 import com.eclairios.CrossComps.R;
 
 public class CrossCompAffiliateAgreementActivity extends AppCompatActivity {
@@ -23,7 +26,7 @@ public class CrossCompAffiliateAgreementActivity extends AppCompatActivity {
     }
 
     public void MoveToMainHomePage(View view) {
-        startActivity(new Intent(CrossCompAffiliateAgreementActivity.this, Participent.class));
-
+       // startActivity(new Intent(CrossCompAffiliateAgreementActivity.this, Participent.class));
     }
+
 }

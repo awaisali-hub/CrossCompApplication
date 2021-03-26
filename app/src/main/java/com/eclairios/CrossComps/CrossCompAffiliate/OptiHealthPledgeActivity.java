@@ -23,6 +23,6 @@ public class OptiHealthPledgeActivity extends AppCompatActivity {
     }
 
     public void MoveToMainHomePage(View view) {
-        startActivity(new Intent(OptiHealthPledgeActivity.this, Participent.class));
+      //  startActivity(new Intent(OptiHealthPledgeActivity.this, Participent.class));
     }
 }
