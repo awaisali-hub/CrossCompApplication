@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
+import com.eclairios.CrossComps.EventAndServices.Dashboard;
 import com.eclairios.CrossComps.MainScoreDashboard.FragmentParent;
 import com.eclairios.CrossComps.R;
 
@@ -104,8 +106,7 @@ public class Participent extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finishAffinity();
-        finish();
+        startActivity(new Intent(this, Dashboard.class));
     }
 
 

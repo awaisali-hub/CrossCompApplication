@@ -5,26 +5,44 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import com.eclairios.CrossComps.CrossCompAffiliate.AffiliateDashboardActivity;
+import com.eclairios.CrossComps.CustomLoader.WaitDialog;
+import com.eclairios.CrossComps.MainFragments.ChallengesFragment;
+import com.eclairios.CrossComps.MainFragments.DashboardFragment;
+import com.eclairios.CrossComps.MainFragments.MoreAffilitesFragment;
+import com.eclairios.CrossComps.MainFragments.ScoresFragment;
 import com.eclairios.CrossComps.R;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.List;
+import static com.eclairios.CrossComps.R.id.navHostFragment;
 
 public class Dashboard extends AppCompatActivity {
     String lat,lng;
 
-
+    int a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +83,10 @@ public class Dashboard extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setItemIconTintList(null);
 
-        NavController navController = Navigation.findNavController(this,R.id.navHostFragment);
+
+        NavController navController = Navigation.findNavController(this, navHostFragment);
+
+
         NavigationUI.setupWithNavController(navigationView,navController);
 
         final TextView textTitle = findViewById(R.id.textTitle);
@@ -77,6 +98,38 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+
+
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id=menuItem.getItemId();
+
+
+                if (id==R.id.nav_More_fragment){
+
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Dashboard.this);
+                    a = preferences.getInt("check_user_affiliate",0);
+
+                    if(a == 1){
+                        try{
+                            WaitDialog.showDialog( Dashboard.this);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        startActivity(new Intent(getApplicationContext(),AffiliateDashboardActivity.class));
+                    }
+
+
+                }
+
+                NavigationUI.onNavDestinationSelected(menuItem,navController);
+
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
 
 
     }

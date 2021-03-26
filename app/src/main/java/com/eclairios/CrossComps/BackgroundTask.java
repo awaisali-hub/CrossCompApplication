@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.eclairios.CrossComps.CrossCompAffiliate.AffiliateDashboardActivity;
 import com.eclairios.CrossComps.EventAndServices.CoordinatorServicePage;
 import com.eclairios.CrossComps.EventAndServices.CrossComp;
 import com.eclairios.CrossComps.EventAndServices.Dashboard;
@@ -85,6 +86,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         String insertUserTeamSelected_url = "http://edevz.com/cross_comp/set_new_user_teams.php";
         String insertUserChurchTeam_url = "http://edevz.com/cross_comp/set_new_user_church_teams.php";
         String insert_user_score_url = "http://edevz.com/cross_comp/score.php";
+        String insert_affiliate_url = "http://edevz.com/cross_comp/setCrossCompsAffiliates.php";
 
         String method = params[0];
 
@@ -1032,6 +1034,65 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else if (method.equals("AffiliatesRegister")){
+
+
+            String UserID  = params[1];
+            String firstName = params[2];
+            String lastName = params[3];
+            String date = params[4];
+            String lat = params[5];
+            String lng = params[6];
+            String affiliateType = params[7];
+            String balance = params[8];
+            String status = params[9];
+
+
+            try {
+                URL url = new URL(insert_affiliate_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("UserID","UTF-8") + "=" + URLEncoder.encode(UserID,"UTF-8") + "&"+
+                        URLEncoder.encode("firstName","UTF-8") + "=" + URLEncoder.encode(firstName,"UTF-8") + "&"+
+                        URLEncoder.encode("lastName","UTF-8") + "=" + URLEncoder.encode(lastName,"UTF-8") + "&"+
+                        URLEncoder.encode("date","UTF-8") + "=" + URLEncoder.encode(date,"UTF-8") + "&"+
+                        URLEncoder.encode("lat","UTF-8") + "=" + URLEncoder.encode(lat,"UTF-8") + "&"+
+                        URLEncoder.encode("lng","UTF-8") + "=" + URLEncoder.encode(lng,"UTF-8") + "&"+
+                        URLEncoder.encode("affiliateType","UTF-8") + "=" + URLEncoder.encode(affiliateType,"UTF-8") + "&"+
+                        URLEncoder.encode("balance","UTF-8") + "=" + URLEncoder.encode(balance,"UTF-8") + "&"+
+                        URLEncoder.encode("status","UTF-8") + "=" + URLEncoder.encode(status,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -1312,7 +1373,13 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
              //   ctx.startActivity(new Intent(ctx, JudgeHomePageParticipantRegistrationActivity.class));
             }else if(result.equals("Score Insert UnSuccess")){
                 Toast.makeText(ctx, "Score not inserted", Toast.LENGTH_SHORT).show();
-            }else{
+            }else if(result.equals("New Affiliate Success")){
+                Toast.makeText(ctx, "Now You are CrossComp Affiliate ", Toast.LENGTH_SHORT).show();
+                ctx.startActivity(new Intent(ctx, AffiliateDashboardActivity.class));
+            }else if(result.equals("New Affiliate UnSuccess")){
+                Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();
+            }
+            else{
                 Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();
                     }
                 }catch (Exception e){

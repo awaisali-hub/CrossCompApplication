@@ -92,13 +92,13 @@ public class MoreAffilitesFragment extends Fragment {
 
 
     public void MoveToMainHomePage(View view) {
-     //   startActivity(new Intent(getContext(), Participent.class));
+        startActivity(new Intent(getContext(), Dashboard.class));
 
-        Fragment mFragment = null;
-        mFragment = new ScoresFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.navHostFragment, mFragment).commit();
+//        Fragment mFragment = null;
+//        mFragment = new ScoresFragment();
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.navHostFragment, mFragment).commit();
     }
 
 
