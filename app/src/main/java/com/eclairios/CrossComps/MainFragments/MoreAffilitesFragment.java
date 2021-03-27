@@ -3,80 +3,94 @@ package com.eclairios.CrossComps.MainFragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.eclairios.CrossComps.AffiliteTeamCaptain.TeamCaptainsAllTeamsActivity;
+import com.eclairios.CrossComps.AffiliteTeamManager.HomeTeamActivity;
+import com.eclairios.CrossComps.CrossCompAffiliate.AffiliateDashboardActivity;
 import com.eclairios.CrossComps.CrossCompAffiliate.CrossCompAffiliateAgreementActivity;
+import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.EventAndServices.Dashboard;
 import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
+import com.eclairios.CrossComps.Judge.JudgeHomePageParticipantRegistrationActivity;
 import com.eclairios.CrossComps.R;
+import com.eclairios.CrossComps.ServiceCoordinator.ServiceCoordinatorHomePageActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MoreAffilitesFragment extends Fragment {
 
-
-    TextView ManagerAgreement,judgeAgreement,serviceCoordinatorAgreement,directorAgreement;
-    CircleImageView HomeFab;
-
-
-
+    Button Judge,TeamCaptain,serviceCoordinator,TeamManager,Store,Earnings;
+    CircleImageView fabHomeScore;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_more_affilites, container, false);
 
-        ManagerAgreement = view.findViewById(R.id.ManagerAgreement);
-        judgeAgreement = view.findViewById(R.id.judgeAgreement);
-        serviceCoordinatorAgreement = view.findViewById(R.id.serviceCoordinatorAgreement);
-        directorAgreement = view.findViewById(R.id.directorAgreement);
-
-        HomeFab = view.findViewById(R.id.MoveToMainHomePage);
-
+        try{
+            WaitDialog.hideDialog();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-        ManagerAgreement.setOnClickListener(new View.OnClickListener() {
+
+        Judge = view.findViewById(R.id.Judge);
+        TeamCaptain = view.findViewById(R.id.TeamCaptain);
+        serviceCoordinator = view.findViewById(R.id.ServiceCoordinator);
+        TeamManager = view.findViewById(R.id.TeamManager);
+        Store = view.findViewById(R.id.Store);
+        Earnings = view.findViewById(R.id.Earnings);
+        fabHomeScore = view.findViewById(R.id.fabHomeScore);
+
+
+        Judge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveToAgreement(view);
+                Judge(v);
             }
         });
 
-        judgeAgreement.setOnClickListener(new View.OnClickListener() {
+        TeamCaptain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveToAgreement(view);
+                MoveToTeamCaptain(v);
             }
         });
 
-        serviceCoordinatorAgreement.setOnClickListener(new View.OnClickListener() {
+        serviceCoordinator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveToAgreement(view);
+                ServiceCoordinator(v);
             }
         });
 
-        directorAgreement.setOnClickListener(new View.OnClickListener() {
+        TeamManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveToAgreement(view);
+                MoveToTeamManager(v);
             }
         });
 
-        HomeFab.setOnClickListener(new View.OnClickListener() {
+
+        fabHomeScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MoveToMainHomePage(view);
+                HomeScore(v);
             }
         });
 
@@ -85,21 +99,29 @@ public class MoreAffilitesFragment extends Fragment {
     }
 
 
-    public void MoveToAgreement(View view) {
-        startActivity(new Intent(getContext(), CrossCompAffiliateAgreementActivity.class));
+    public void MoveToTeamManager(View view) {
+        startActivity(new Intent(getContext(), HomeTeamActivity.class));
+    }
+
+    public void MoveToTeamCaptain(View view) {
+        startActivity(new Intent(getContext(), TeamCaptainsAllTeamsActivity.class));
+
+    }
+
+    public void ServiceCoordinator(View view) {
+        startActivity(new Intent(getContext(), ServiceCoordinatorHomePageActivity.class));
+    }
+
+    public void Judge(View view) {
+        startActivity(new Intent(getContext(), JudgeHomePageParticipantRegistrationActivity.class));
     }
 
 
 
-    public void MoveToMainHomePage(View view) {
+    public void HomeScore(View view) {
         startActivity(new Intent(getContext(), Dashboard.class));
-
-//        Fragment mFragment = null;
-//        mFragment = new ScoresFragment();
-//        FragmentManager fragmentManager = getFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.navHostFragment, mFragment).commit();
     }
+
 
 
     @Override

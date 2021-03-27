@@ -60,19 +60,19 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/firstName"
+
+            <AutoCompleteTextView
+                android:id="@+id/service_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:paddingStart="30dp"
                 android:inputType="textCapSentences"
-                android:paddingTop="12dp"
+                android:padding="15dp"
                 android:textColorHint="@color/white"
-                android:textSize="14sp">
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:textSize="14sp"/>
 
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
@@ -87,7 +87,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_marginBottom="@dimen/_108sdp"
-        android:onClick="ServiceRegistration3_4"
+        android:onClick="Registration3_4"
         />
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginTop="@dimen/_7sdp"

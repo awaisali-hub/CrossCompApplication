@@ -40,24 +40,30 @@
         android:layout_marginTop="@dimen/_10sdp">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/team1"
+            android:id="@+id/registerNewService"
             android:layout_marginTop="25dp"
             android:gravity="center"
             android:textAllCaps="false"
-            android:layout_below="@+id/worldTeam"
             android:background="@drawable/res"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:text="Register a New Service"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:onClick="CoordinatorServiceEventRegistration"
             />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/registerServiceList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
         <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
             android:id="@+id/team5"
             android:layout_marginTop="5dp"
             android:gravity="center"
@@ -76,6 +82,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
             android:id="@+id/team2"
             android:layout_marginTop="5dp"
             android:gravity="center"

@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.eclairios.CrossComps.AffiliteTeamCaptain.TeamCaptainsAllTeamsActivity;
 import com.eclairios.CrossComps.AffiliteTeamManager.HomeTeamActivity;
@@ -20,42 +22,81 @@ import com.eclairios.CrossComps.MainFragments.ScoresFragment;
 import com.eclairios.CrossComps.R;
 import com.eclairios.CrossComps.ServiceCoordinator.ServiceCoordinatorHomePageActivity;
 
-public class AffiliateDashboardActivity extends AppCompatActivity {
+import de.hdodenhof.circleimageview.CircleImageView;
 
+public class AffiliateDashboardActivity extends AppCompatActivity {
+    TextView ManagerAgreement,judgeAgreement,serviceCoordinatorAgreement,directorAgreement;
+    CircleImageView HomeFab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affiliate_dashboard);
         getSupportActionBar().hide();
-        try{
-            WaitDialog.hideDialog();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("check_user_affiliate", 1);
-        editor.apply();
+        ManagerAgreement = findViewById(R.id.ManagerAgreement);
+        judgeAgreement = findViewById(R.id.judgeAgreement);
+        serviceCoordinatorAgreement = findViewById(R.id.serviceCoordinatorAgreement);
+        directorAgreement = findViewById(R.id.directorAgreement);
+
+        HomeFab = findViewById(R.id.MoveToMainHomePage);
+
+
+
+        ManagerAgreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoveToAgreement(v);
+            }
+        });
+
+        judgeAgreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoveToAgreement(v);
+            }
+        });
+
+        serviceCoordinatorAgreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoveToAgreement(v);
+            }
+        });
+
+        directorAgreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoveToAgreement(v);
+            }
+        });
+
+        HomeFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoveToMainHomePage(v);
+            }
+        });
+
 
     }
 
-    public void MoveToTeamManager(View view) {
-        startActivity(new Intent(AffiliateDashboardActivity.this, HomeTeamActivity.class));
+
+    public void MoveToAgreement(View view) {
+        startActivity(new Intent(AffiliateDashboardActivity.this, CrossCompAffiliateAgreementActivity.class));
     }
 
-    public void MoveToTeamCaptain(View view) {
-        startActivity(new Intent(AffiliateDashboardActivity.this, TeamCaptainsAllTeamsActivity.class));
 
+
+    public void MoveToMainHomePage(View view) {
+        startActivity(new Intent(AffiliateDashboardActivity.this, Dashboard.class));
+
+//        Fragment mFragment = null;
+//        mFragment = new ScoresFragment();
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.navHostFragment, mFragment).commit();
     }
 
-    public void ServiceCoordinator(View view) {
-        startActivity(new Intent(AffiliateDashboardActivity.this, ServiceCoordinatorHomePageActivity.class));
-    }
-
-    public void Judge(View view) {
-        startActivity(new Intent(AffiliateDashboardActivity.this, JudgeHomePageParticipantRegistrationActivity.class));
-    }
 
     @Override
     public void onBackPressed() {
@@ -63,7 +104,29 @@ public class AffiliateDashboardActivity extends AppCompatActivity {
         startActivity(new Intent(AffiliateDashboardActivity.this, Dashboard.class));
     }
 
-    public void HomeScore(View view) {
-        startActivity(new Intent(AffiliateDashboardActivity.this, Dashboard.class));
-    }
+//    @Override
+//    public void onResume() {
+//
+//        super.onResume();
+//
+//        getView().setFocusableInTouchMode(true);
+//        getView().requestFocus();
+//        getView().setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+//                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+//
+//                    // handle back button
+//
+//                    startActivity(new Intent(getContext(), Dashboard.class));
+//
+//                    return true;
+//
+//                }
+//
+//                return false;
+//            }
+//        });
+//    }
 }

@@ -73,7 +73,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/firstName"
+                android:id="@+id/street"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
@@ -104,6 +104,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
@@ -135,6 +136,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
@@ -165,6 +167,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/postalCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"

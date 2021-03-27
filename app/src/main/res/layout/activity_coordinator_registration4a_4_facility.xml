@@ -120,11 +120,11 @@
                         android:orientation="horizontal"
                         android:layout_weight="4">
                         <TextView
+                            android:id="@+id/sundayCheck"
                             android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="20sp"
-                            android:text="X"
                             android:layout_gravity="center_vertical"
                             android:textColor="@color/black"
                             android:textStyle="bold"
@@ -163,10 +163,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/sundayStartAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -181,11 +184,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/sundayEndAM"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -206,10 +212,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/sundayStartPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -224,11 +233,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/sundayEndPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -258,6 +270,7 @@
                         android:orientation="horizontal"
                         android:layout_weight="4">
                         <TextView
+                            android:id="@+id/mondayCheck"
                             android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -300,10 +313,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/mondayStartAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -318,11 +334,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/mondayEndAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -343,10 +362,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/mondayStartPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -361,11 +383,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/mondayEndPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -395,6 +420,7 @@
                         android:orientation="horizontal"
                         android:layout_weight="4">
                         <TextView
+                            android:id="@+id/tuesdayCheck"
                             android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -437,10 +463,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/tuesdayStartAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -455,11 +484,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/tuesdayEndAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -480,10 +512,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/tuesdayStartPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -498,11 +533,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/tuedasyEndPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -531,6 +569,7 @@
                         android:orientation="horizontal"
                         android:layout_weight="4">
                         <TextView
+                            android:id="@+id/wednesdayCheck"
                             android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -573,10 +612,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/wednesdayStartAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -591,11 +633,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/wednesdayEndAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -616,10 +661,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/wednesdayStartPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -634,11 +682,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/wednesdayEndPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -667,6 +718,7 @@
                         android:orientation="horizontal"
                         android:layout_weight="4">
                         <TextView
+                            android:id="@+id/thursdayCheck"
                             android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -674,7 +726,6 @@
                             android:layout_gravity="center_vertical"
                             android:textColor="@color/black"
                             android:textStyle="bold"
-                            android:text="X"
                             android:textAlignment="center"
                             tools:ignore="RtlCompat" />
                         <TextView
@@ -710,10 +761,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/thursdayStartAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -728,11 +782,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/thursdayEndAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -753,10 +810,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/thursdayStartPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -771,11 +831,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/thursdayEndPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -805,6 +868,7 @@
                         android:orientation="horizontal"
                         android:layout_weight="4">
                         <TextView
+                            android:id="@+id/fridayCheck"
                             android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -847,10 +911,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/fridayStartAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -865,11 +932,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/fridayEndAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -890,10 +960,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/fridayStartPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -908,11 +981,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/fridayEndPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -942,6 +1018,7 @@
                         android:orientation="horizontal"
                         android:layout_weight="4">
                         <TextView
+                            android:id="@+id/saturdayCheck"
                             android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -984,10 +1061,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/saturdayStartAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -1002,11 +1082,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/saturdayEndAm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -1027,10 +1110,13 @@
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/saturdayStartPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"
@@ -1045,11 +1131,14 @@
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/saturdayEndPm"
                                     android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
+                                    android:inputType="number"
+                                    android:maxLength="5"
+                                    android:maxLines="1"
                                     android:paddingTop="12dp"
                                     android:textColorHint="@color/white"
                                     android:textSize="14sp"

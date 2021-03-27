@@ -1375,7 +1375,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 Toast.makeText(ctx, "Score not inserted", Toast.LENGTH_SHORT).show();
             }else if(result.equals("New Affiliate Success")){
                 Toast.makeText(ctx, "Now You are CrossComp Affiliate ", Toast.LENGTH_SHORT).show();
-                ctx.startActivity(new Intent(ctx, AffiliateDashboardActivity.class));
+            //    ctx.startActivity(new Intent(ctx, AffiliateDashboardActivity.class));
+
+                Intent intent = new Intent(ctx,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                ctx.startActivity(intent);
+
             }else if(result.equals("New Affiliate UnSuccess")){
                 Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();
             }

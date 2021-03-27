@@ -6,105 +6,127 @@
 
     tools:context=".MainFragments.MoreAffilitesFragment">
 
+
     <RelativeLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
-            android:layout_below="@+id/appbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/_10sdp">
 
-            <TextView
-                android:id="@+id/one"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Judge"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:layout_below="@+id/worldTeam"
+                android:background="@drawable/res"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="We need more Affiliates to provide\nCrossComp services in your community!\nWe will train you for FREE, and\nyou can EARN as much as you want!"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="18sp"/>
-
-            <TextView
-                android:id="@+id/ManagerAgreement"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Team Manager"
-                android:textAlignment="center"
-                android:textColor="@color/green"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="Judge"
+                android:textColor="@color/white"
+                android:textSize="18sp"
                 />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/TeamCaptain"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/worldTeam"
+                android:background="@drawable/res"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Promote CrossComps as a Teambuilder and\n Fundraiser for your organization!"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="18sp"/>
+                android:layout_height="50dp"
+                android:textAllCaps="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="Team Captain"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
 
-            <TextView
-                android:id="@+id/judgeAgreement"
-                android:layout_marginTop="@dimen/_10sdp"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/ServiceCoordinator"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team1"
+                android:background="@drawable/res"
+                android:textAllCaps="false"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Judge"
-                android:textAlignment="center"
-                android:textColor="@color/green"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Officiate CrossComps\nfor participants in your area!"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="18sp"/>
-            <TextView
-                android:id="@+id/serviceCoordinatorAgreement"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
                 android:text="Service Coordinator"
-                android:textAlignment="center"
-                android:textColor="@color/green"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/TeamManager"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team2"
+                android:background="@drawable/res"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Provide CrossComp Services at your facility\nand/or host special events!"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="18sp"/>
-            <TextView
-                android:id="@+id/directorAgreement"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Director"
-                android:textAlignment="center"
-                android:textColor="@color/green"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_height="50dp"
+                android:textAllCaps="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="Team Manager"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:onClick="MoveToTeamManager"
+                />
 
-            <TextView
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Store"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team1"
+                android:background="@drawable/res"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Recruit more CrossComp Affiliates to help\nbuild our network for optimal health!"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="18sp"/>
+                android:layout_height="50dp"
+                android:textAllCaps="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="Store"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/Earnings"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/team2"
+                android:background="@drawable/res"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textAllCaps="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="Earnings"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                />
+
         </LinearLayout>
 
+
+
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/MoveToMainHomePage"
+            android:id="@+id/fabHomeScore"
             android:layout_width="@dimen/_43sdp"
             android:layout_height="@dimen/_43sdp"
             android:src="@drawable/crosscompicon2"
@@ -113,7 +135,13 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="24dp"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="24dp" />
     </RelativeLayout>
+
+
+
+
+
+
 
 </FrameLayout>

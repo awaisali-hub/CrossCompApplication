@@ -10,9 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/appbar_layout">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             >
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/MyWorldTeam"
@@ -43,7 +44,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_below="@+id/myCrossCompTeamList1"
                 android:layout_marginBottom="@dimen/_10sdp"/>
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 
 </FrameLayout>
