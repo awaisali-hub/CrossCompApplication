@@ -179,22 +179,23 @@
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/res"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_98sdp"
+            android:onClick="Registration4_4"
+            />
 
     </LinearLayout>
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_marginTop="@dimen/_7sdp"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal|bottom"
-        android:background="@drawable/res"
-        android:text="Submit"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginBottom="@dimen/_98sdp"
-        android:onClick="Registration4_4"
-        />
+
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginTop="@dimen/_7sdp"
         android:id="@+id/MoveToScore"

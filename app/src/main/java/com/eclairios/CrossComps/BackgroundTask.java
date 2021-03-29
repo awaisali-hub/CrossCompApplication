@@ -1154,6 +1154,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                         editor.putString("CurrentUserId",CurrentUserID);
                         editor.putString("First_Name",First_Name);
                         editor.putString("Last_Name",Last_Name);
+                        editor.putString("lat",latt);
+                        editor.putString("lng",lngg);
                         editor.apply();
 
                         Log.e("sddududu", "run: "+latt+"\n"+lngg );
@@ -1214,6 +1216,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                                 editor.putString("CurrentUserId",CurrentUserID);
                                 editor.putString("First_Name",First_Name);
                                 editor.putString("Last_Name",Last_Name);
+                                editor.putString("lat",latt);
+                                editor.putString("lng",lngg);
                                 editor.apply();
 
 

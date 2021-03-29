@@ -67,8 +67,6 @@ public class CoordinatorServicesScreenActivity extends AppCompatActivity {
     }
 
 
-
-
     class BackgroundTaskServiceEvent extends AsyncTask<String, Void, String>
     {
         String json_url;
@@ -192,8 +190,12 @@ public class CoordinatorServicesScreenActivity extends AppCompatActivity {
                 }
             }
 
-
-
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(CoordinatorServicesScreenActivity.this,ServiceCoordinatorHomePageActivity.class));
     }
 }

@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.eclairios.CrossComps.EventAndServices.Dashboard;
@@ -23,7 +24,8 @@ public class CrossCompAffiliateAgreementActivity extends AppCompatActivity {
     }
 
     public void MoveToPledge(View view) {
-        startActivity(new Intent(CrossCompAffiliateAgreementActivity.this,OptiHealthPledgeActivity.class));
+    //    startActivity(new Intent(CrossCompAffiliateAgreementActivity.this,OptiHealthPledgeActivity.class));
+        Log.e("dsfdsf", "MoveToPledge: " );
     }
 
     public void MoveToMainHomePage(View view) {

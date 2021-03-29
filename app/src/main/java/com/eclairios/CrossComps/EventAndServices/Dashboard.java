@@ -89,6 +89,8 @@ public class Dashboard extends AppCompatActivity {
         }
 
 
+        Log.e("sdfafdsafds", "onCreate: "+lat+lng );
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("appVersion","2");

@@ -110,6 +110,5 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_marginBottom="@dimen/_58sdp"
-        android:onClick="MoveToPledge"
         />
 </RelativeLayout>

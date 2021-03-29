@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.eclairios.CrossComps.CrossCompAffiliate.AffiliateDashboardActivity;
+import com.eclairios.CrossComps.EventAndServices.Dashboard;
 import com.eclairios.CrossComps.R;
 
 public class ServiceCoordinatorHomePageActivity extends AppCompatActivity {
@@ -27,5 +29,12 @@ public class ServiceCoordinatorHomePageActivity extends AppCompatActivity {
 
     public void CoordinatorServices(View view) {
         startActivity(new Intent(ServiceCoordinatorHomePageActivity.this,CoordinatorServicesScreenActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ServiceCoordinatorHomePageActivity.this, Dashboard.class));
+
     }
 }
