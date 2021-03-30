@@ -61,6 +61,8 @@ public class DashboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
+        lat = preferences.getString("lat", null);
+        lng = preferences.getString("lng", null);
 
         recyclerView = view.findViewById(R.id.list);
         adapterHorizontal = new AdapterHorizontal( chatitem, getContext() );
@@ -249,10 +251,6 @@ public class DashboardFragment extends Fragment {
     public void onStart() {
         super.onStart();
         chatitem.clear();
-
-        lat = preferences.getString("lat", null);
-        lng = preferences.getString("lng", null);
-
         Log.e("hdhddh", "onStart: "+lat+lng );
         new BackgroundTask().execute();
     }

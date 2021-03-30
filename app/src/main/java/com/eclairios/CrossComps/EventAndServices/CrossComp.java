@@ -504,7 +504,9 @@ public class CrossComp extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        Intent intent = new Intent(CrossComp.this,Dashboard.class);
+        intent.putExtra("fragmentNumber",3);
+        startActivity(intent);
     }
 
 
@@ -531,9 +533,24 @@ public class CrossComp extends AppCompatActivity {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                 String currentUserID = preferences.getString("CurrentUserId", "");
 
-                String method = "Cancel_service_reservation";
-                BackgroundTask backgroundTask = new BackgroundTask(this);
-                backgroundTask.execute(method,FacilityIDStr,formatServiceDate,currentUserID);
+                new AlertDialog.Builder(CrossComp.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Confirm Cancel")
+                        .setMessage("Are you sure you want to cancel CrossComps Reservation?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                String method = "Cancel_service_reservation";
+                                BackgroundTask backgroundTask = new BackgroundTask(CrossComp.this);
+                                backgroundTask.execute(method,FacilityIDStr,formatServiceDate,currentUserID);
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

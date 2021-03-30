@@ -75,18 +75,18 @@ public class Dashboard extends AppCompatActivity {
 
 
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle!=null){
-            lat = bundle.getString("lat");
-            lng = bundle.getString("lng");
-
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("lat",lat);
-            editor.putString("lng",lng);
-            editor.apply();
-
-        }
+//        Bundle bundle = getIntent().getExtras();
+//        if(bundle!=null){
+//            lat = bundle.getString("lat");
+//            lng = bundle.getString("lng");
+//
+//            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//            SharedPreferences.Editor editor = preferences.edit();
+//            editor.putString("lat",lat);
+//            editor.putString("lng",lng);
+//            editor.apply();
+//
+//        }
 
 
         Log.e("sdfafdsafds", "onCreate: "+lat+lng );
@@ -113,6 +113,12 @@ public class Dashboard extends AppCompatActivity {
 
         if(getIntent().getIntExtra("fragmentNumber",0)==1){
             navController.navigate(R.id.nav_More_fragment);
+        }else if(getIntent().getIntExtra("fragmentNumber",0)==2){
+            navController.navigate(R.id.nav_Profile_fragment);
+        }else if(getIntent().getIntExtra("fragmentNumber",0)==3){
+            navController.navigate(R.id.nav_Reservation_fragment);
+        }else if(getIntent().getIntExtra("fragmentNumber",0)==4){
+            navController.navigate(R.id.nav_dashboard_fragment);
         }
 
 

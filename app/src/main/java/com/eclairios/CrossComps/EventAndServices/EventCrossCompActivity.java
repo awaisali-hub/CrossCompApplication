@@ -3,6 +3,7 @@ package com.eclairios.CrossComps.EventAndServices;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -162,16 +163,38 @@ public class EventCrossCompActivity extends AppCompatActivity {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(EventCrossCompActivity.this);
                 String currentUserID = preferences.getString("CurrentUserId", "");
 
-                String method = "Cancel_event_reservation";
-                BackgroundTask backgroundTask = new BackgroundTask(EventCrossCompActivity.this);
-                backgroundTask.execute(method,Send_Event_Time_ID,currentUserID);
+                new AlertDialog.Builder(EventCrossCompActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Confirm Cancel")
+                        .setMessage("Are you sure you want to cancel CrossComps Reservation?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                String method = "Cancel_event_reservation";
+                                BackgroundTask backgroundTask = new BackgroundTask(EventCrossCompActivity.this);
+                                backgroundTask.execute(method,Send_Event_Time_ID,currentUserID);
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(EventCrossCompActivity.this,Dashboard.class);
+        intent.putExtra("fragmentNumber",3);
+        startActivity(intent);
+    }
 
     public void MakeAppointment(String serviceID) {
 

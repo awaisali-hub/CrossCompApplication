@@ -10,7 +10,7 @@
             android:title="Dashboard" />
         <item
             android:id="@+id/nav_Reservation_fragment"
-            android:title="My Reservation"
+            android:title="Reservations"
             />
 
         <item

@@ -87,6 +87,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         String insertUserChurchTeam_url = "http://edevz.com/cross_comp/set_new_user_church_teams.php";
         String insert_user_score_url = "http://edevz.com/cross_comp/score.php";
         String insert_affiliate_url = "http://edevz.com/cross_comp/setCrossCompsAffiliates.php";
+        String insert_update_profile = "http://edevz.com/cross_comp/update_profile.php";
 
         String method = params[0];
 
@@ -1093,6 +1094,73 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else if (method.equals("updateUserProfile")){
+
+            String currentUserID  = params[1];
+            String firstName  = params[2];
+            String lastName  = params[3];
+            String phoneNumber  = params[4];
+            String email  = params[5];
+            String postalCode  = params[6];
+            String address  = params[7];
+            String gender  = params[8];
+            String age  = params[9];
+
+            Log.e("ghdshgfhgj", "doInBackground: "+ currentUserID);
+            Log.e("ghdshgfhgj", "doInBackground: "+ firstName);
+            Log.e("ghdshgfhgj", "doInBackground: "+ lastName);
+            Log.e("ghdshgfhgj", "doInBackground: "+ phoneNumber);
+            Log.e("ghdshgfhgj", "doInBackground: "+ email);
+            Log.e("ghdshgfhgj", "doInBackground: "+ postalCode);
+            Log.e("ghdshgfhgj", "doInBackground: "+ address);
+            Log.e("ghdshgfhgj", "doInBackground: "+ gender);
+            Log.e("ghdshgfhgj", "doInBackground: "+ age);
+
+            try {
+                URL url = new URL(insert_update_profile);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("currentUserID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8") + "&"+
+                        URLEncoder.encode("firstName","UTF-8") + "=" + URLEncoder.encode(firstName,"UTF-8") + "&"+
+                        URLEncoder.encode("lastName","UTF-8") + "=" + URLEncoder.encode(lastName,"UTF-8") + "&"+
+                        URLEncoder.encode("phoneNumber","UTF-8") + "=" + URLEncoder.encode(phoneNumber,"UTF-8") + "&"+
+                        URLEncoder.encode("email","UTF-8") + "=" + URLEncoder.encode(email,"UTF-8") + "&"+
+                        URLEncoder.encode("postalCode","UTF-8") + "=" + URLEncoder.encode(postalCode,"UTF-8") + "&"+
+                        URLEncoder.encode("address","UTF-8") + "=" + URLEncoder.encode(address,"UTF-8") + "&"+
+                        URLEncoder.encode("gender","UTF-8") + "=" + URLEncoder.encode(gender,"UTF-8") + "&"+
+                        URLEncoder.encode("age","UTF-8") + "=" + URLEncoder.encode(age,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -1160,8 +1228,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                         Log.e("sddududu", "run: "+latt+"\n"+lngg );
                         intent = new Intent(ctx, Dashboard.class);
-                        intent.putExtra("lat",latt);
-                        intent.putExtra("lng",lngg);
+                   //     intent.putExtra("lat",latt);
+                    //    intent.putExtra("lng",lngg);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         ctx.startActivity(intent);
 
@@ -1224,8 +1292,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                                 Log.e("sddududu", "run: "+latt+"\n"+lngg );
                                 intent = new Intent(ctx,Dashboard.class);
-                                intent.putExtra("lat",latt);
-                                intent.putExtra("lng",lngg);
+                            //    intent.putExtra("lat",latt);
+                            //    intent.putExtra("lng",lngg);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 ctx.startActivity(intent);
                             }
@@ -1324,6 +1392,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 Intent intent = new Intent(ctx,Dashboard.class);
                 intent.putExtra("lat",lat);
                 intent.putExtra("lng",lng);
+                intent.putExtra("fragmentNumber",3);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 ctx.startActivity(intent);
             }else if(result.equals("Event Reservation Cancel Fail")){
@@ -1338,6 +1407,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 Intent intent = new Intent(ctx,Dashboard.class);
                 intent.putExtra("lat",lat);
                 intent.putExtra("lng",lng);
+                intent.putExtra("fragmentNumber",3);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 ctx.startActivity(intent);
             }else if(result.equals("Service Reservation Cancel Fail")){
@@ -1386,6 +1456,13 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 ctx.startActivity(intent);
 
             }else if(result.equals("New Affiliate UnSuccess")){
+                Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();
+            }else if(result.equals("Update User Profile Success")){
+                Toast.makeText(ctx, "Profile Updated", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ctx,Dashboard.class);
+                intent.putExtra("fragmentNumber",2); //for example
+                ctx.startActivity(intent);
+            }else if(result.equals("Update User Profile UnSuccess")){
                 Toast.makeText(ctx, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();
             }
             else{

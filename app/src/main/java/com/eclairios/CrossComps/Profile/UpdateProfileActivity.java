@@ -10,12 +10,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.eclairios.CrossComps.Authentication.Registration;
+import com.eclairios.CrossComps.BackgroundTask;
 import com.eclairios.CrossComps.R;
 
 public class UpdateProfileActivity extends AppCompatActivity {
 
   private   EditText first_Name,last_Name,phone_number,email,postal_code,address,gender,age,promoter;
    private String str_first_Name,str_last_Name,str_phone_number,str_email,str_postal_code,str_address,str_gender,str_age,str_promoter;
+    String currentUserID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,35 +45,38 @@ public class UpdateProfileActivity extends AppCompatActivity {
 //        startActivity(intent);
 
 
-        String str_first_Name = getIntent().getStringExtra("str_first_Name");
-        String str_last_Name = getIntent().getStringExtra("str_last_Name");
-        String phone_numberr = getIntent().getStringExtra("str_phone_number");
-        String emaill = getIntent().getStringExtra("str_email");
-        String postal_codee = getIntent().getStringExtra("str_postal_code");
-        String addresss = getIntent().getStringExtra("str_address");
-        String genderr = getIntent().getStringExtra("str_gender");
-        String agee = getIntent().getStringExtra("str_age");
-        String str_promoter = getIntent().getStringExtra("str_promoter");
+        str_first_Name = getIntent().getStringExtra("str_first_Name");
+        str_last_Name = getIntent().getStringExtra("str_last_Name");
+        str_phone_number = getIntent().getStringExtra("str_phone_number");
+        str_email = getIntent().getStringExtra("str_email");
+        str_postal_code = getIntent().getStringExtra("str_postal_code");
+        str_address = getIntent().getStringExtra("str_address");
+        str_gender = getIntent().getStringExtra("str_gender");
+        str_age = getIntent().getStringExtra("str_age");
+        str_promoter = getIntent().getStringExtra("str_promoter");
 
-        Log.e("fdsfsd", "onCreate: "+str_first_Name);
+
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(UpdateProfileActivity.this);
-        String currentUserID = preferences.getString("CurrentUserId", "");
+        currentUserID = preferences.getString("CurrentUserId", "");
 
         first_Name.setText(str_first_Name);
         last_Name.setText(str_last_Name);
-        phone_number.setText(phone_numberr);
-        email.setText(emaill);
-        postal_code.setText(postal_codee);
-        address.setText(addresss);
-        gender.setText(genderr);
-        age.setText(agee);
+        phone_number.setText(str_phone_number);
+        email.setText(str_email);
+        postal_code.setText(str_postal_code);
+        address.setText(str_address);
+        gender.setText(str_gender);
+        age.setText(str_age);
 
 
     }
 
     public void UpdateProfileDetail(View view) {
-        Toast.makeText(this, "Profile updated", Toast.LENGTH_LONG).show();
+        String method = "updateUserProfile";
+
+        BackgroundTask backgroundTask = new BackgroundTask(UpdateProfileActivity.this);
+        backgroundTask.execute(method, currentUserID, first_Name.getText().toString(), last_Name.getText().toString(), phone_number.getText().toString(), email.getText().toString(), postal_code.getText().toString(), address.getText().toString(), gender.getText().toString(), age.getText().toString());
    //     startActivity(new Intent(UpdateProfileActivity.this,Profile.class));
     }
 

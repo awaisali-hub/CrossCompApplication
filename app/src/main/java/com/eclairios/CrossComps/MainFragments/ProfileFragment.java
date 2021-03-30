@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.Profile.UpdateProfileActivity;
 import com.eclairios.CrossComps.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -68,6 +69,8 @@ public class ProfileFragment extends Fragment {
                 moveToProfile(view);
             }
         });
+
+
 
 
         return view;
@@ -183,7 +186,11 @@ public class ProfileFragment extends Fragment {
                     count++;
 
                 }
-
+                try{
+                    WaitDialog.hideDialog();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
             } catch (JSONException e) {

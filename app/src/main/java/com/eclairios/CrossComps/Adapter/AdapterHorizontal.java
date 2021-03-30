@@ -47,6 +47,7 @@ public class AdapterHorizontal extends RecyclerView.Adapter<AdapterHorizontal.Vi
 
 
         WaitDialog.hideDialog();
+
         holder.Text11.setText(chatItem.get(position).getCoordinatorName());
         holder.Text22.setText(chatItem.get(position).getCoordinatorAddress());
 
