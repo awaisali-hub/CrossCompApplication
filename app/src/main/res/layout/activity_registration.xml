@@ -192,6 +192,95 @@
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <LinearLayout
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/edittext"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="horizontal"
+                android:padding="10dip"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                >
+
+                <Spinner
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/country_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/edittext"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="horizontal"
+                android:padding="10dip"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_gravity="center_horizontal">
+
+                <Spinner
+                    android:id="@+id/state_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:entries="@array/States"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/edittext"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="horizontal"
+                android:padding="10dip"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_gravity="center_horizontal">
+
+                <Spinner
+                    android:id="@+id/city_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:clickable="false"
+                    android:entries="@array/Cities"
+                    />
+            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="3dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/postal_Code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext"
+                    android:hint="Postal Code"
+                    android:paddingStart="30dp"
+                    android:inputType="textCapWords"
+                    android:paddingTop="12dp"
+                    android:textSize="14sp">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
             <CheckBox
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/rememberMe"

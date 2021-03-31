@@ -53,6 +53,14 @@
         <item>D</item>
     </string-array>
 
+    <string-array name="States">
+        <item>Select State</item>
+    </string-array>
+
+    <string-array name="Cities">
+        <item>Select City</item>
+    </string-array>
+
 
     <string name="rev_october_2018_n_department_of_the_treasury_n_internal_revenue_service">(Rev. October 2018)  Department of the Treasury Internal Revenue Service</string>
     <string name="request_for_taxpayer_identification_number_and_certification">Request for Taxpayer Identification Number and Certification</string>

@@ -235,31 +235,33 @@ public class Dashboard extends AppCompatActivity {
 
             json_string = result;
 
-            Log.e("abcd", "onCreate: "+json_string );
+            if(json_string!=null){
+                Log.e("abcd", "onCreate: "+json_string );
 
-            try {
+                try {
 
-                jsonObject = new JSONObject(json_string);
-                jsonArray = jsonObject.getJSONArray("server_response");
+                    jsonObject = new JSONObject(json_string);
+                    jsonArray = jsonObject.getJSONArray("server_response");
 
 
 
-                String User_ID;
-                while(count < jsonArray.length())
-                {
-                    JSONObject JO = jsonArray.getJSONObject(count);
+                    String User_ID;
+                    while(count < jsonArray.length())
+                    {
+                        JSONObject JO = jsonArray.getJSONObject(count);
 
-                    User_ID = JO.getString("User_ID");
-                    count++;
+                        User_ID = JO.getString("User_ID");
+                        count++;
 
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-
         }
     }
 

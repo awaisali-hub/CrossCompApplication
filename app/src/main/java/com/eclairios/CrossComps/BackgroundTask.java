@@ -98,9 +98,13 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             String strPhone  = params[3];
             String strEmail = params[4];
             String strPassword  = params[5];
-            String strLat = params[6];
-            String strLng = params[7];
-            String strAddress  = params[8];
+            String country = params[6];
+            String state = params[7];
+            String city = params[8];
+            String postalCode =params[9];
+            String strLat = params[10];
+            String strLng = params[11];
+            String strAddress  = params[12];
 
 
             try {
@@ -119,6 +123,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                         URLEncoder.encode("phone","UTF-8") + "=" + URLEncoder.encode(strPhone,"UTF-8") + "&"+
                         URLEncoder.encode("email","UTF-8") + "=" + URLEncoder.encode(strEmail,"UTF-8") + "&"+
                         URLEncoder.encode("password","UTF-8") + "=" + URLEncoder.encode(strPassword,"UTF-8") + "&"+
+
+                        URLEncoder.encode("country","UTF-8") + "=" + URLEncoder.encode(country,"UTF-8") + "&"+
+                        URLEncoder.encode("state","UTF-8") + "=" + URLEncoder.encode(state,"UTF-8") + "&"+
+                        URLEncoder.encode("city","UTF-8") + "=" + URLEncoder.encode(city,"UTF-8") + "&"+
+                        URLEncoder.encode("postalCode","UTF-8") + "=" + URLEncoder.encode(postalCode,"UTF-8") + "&"+
+
                         URLEncoder.encode("lat","UTF-8") + "=" + URLEncoder.encode(strLat,"UTF-8") + "&"+
                         URLEncoder.encode("lng","UTF-8") + "=" + URLEncoder.encode(strLng,"UTF-8") + "&"+
                         URLEncoder.encode("address","UTF-8") + "=" + URLEncoder.encode(strAddress,"UTF-8");

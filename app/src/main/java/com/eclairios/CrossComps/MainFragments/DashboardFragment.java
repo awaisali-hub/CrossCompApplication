@@ -157,7 +157,8 @@ public class DashboardFragment extends Fragment {
                 alertDialog.setCancelable(false);
                 alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                   //     finish();
+                        getActivity().finishAffinity();
+                        getActivity().finish();
                     }
                 });
 

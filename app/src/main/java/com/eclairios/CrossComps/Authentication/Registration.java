@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -19,24 +20,49 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.BackgroundTask;
+import com.eclairios.CrossComps.Model.CityModel;
+import com.eclairios.CrossComps.Model.CountryModel;
+import com.eclairios.CrossComps.Model.StateModel;
 import com.eclairios.CrossComps.R;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 
-public class Registration extends AppCompatActivity {
+public class Registration extends AppCompatActivity{
+
+    private String json_string;
+    private JSONObject jsonObject;
+    private JSONArray jsonArray;
 
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     private EditText firstName, lastName, phone, email, password;
@@ -45,7 +71,27 @@ public class Registration extends AppCompatActivity {
     private Button signUpButton, signInBtn;
     private int keyDel = 0;
     private CheckBox rememberMe;
+    private Spinner country,state,city;
+    private EditText postalCode;
 
+    private ArrayList<CountryModel> country_arrayList = new ArrayList();
+    private ArrayList<StateModel> state_arrayList = new ArrayList();
+    private ArrayList<CityModel> city_arrayList = new ArrayList();
+
+    private ArrayAdapter<CountryModel> country_adapter;
+    private ArrayAdapter<StateModel> state_adapter;
+    private ArrayAdapter<CityModel> city_adapter;
+
+    private int item_check = 0;
+
+    private String country_id,country_name;
+    private String state_id,state_name;
+    private String city_id,city_name;
+
+    Boolean temp = false;
+    Boolean check = false;
+
+    //String country_name,state_name,city_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +99,8 @@ public class Registration extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         getSupportActionBar().hide();
+
+        new BackgroundTasksForCountries().execute();
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -62,6 +110,119 @@ public class Registration extends AppCompatActivity {
         signUpButton = findViewById(R.id.signUpButton);
         signInBtn = findViewById(R.id.signInBtn);
         rememberMe = findViewById(R.id.rememberMe);
+
+        country = (Spinner) findViewById(R.id.country_spinner);
+        state = (Spinner) findViewById(R.id.state_spinner);
+        city = (Spinner) findViewById(R.id.city_spinner);
+        postalCode = findViewById(R.id.postal_Code);
+
+
+
+        country_adapter = new ArrayAdapter<CountryModel>(Registration.this, android.R.layout.simple_list_item_1, country_arrayList);
+        country.setAdapter(country_adapter);
+
+        country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+
+                    CountryModel selectedItem = (CountryModel) country.getSelectedItem(); // Object which was selected.
+                    Log.e("countryId", "onItemSelected: "+selectedItem.getCountry_id() );
+
+                    state_arrayList.clear();
+                    city_arrayList.clear();
+
+                String[] cities = getResources().getStringArray(R.array.Cities);
+
+                state_adapter = new ArrayAdapter<StateModel>(Registration.this, android.R.layout.simple_list_item_1, state_arrayList);
+                state.setAdapter(state_adapter);
+
+                city_adapter = new ArrayAdapter<CityModel>(Registration.this, android.R.layout.simple_list_item_1, city_arrayList);
+                city.setAdapter(city_adapter);
+
+
+//                    if(country_id.equals("1")){
+//                        new BackgroundTasksForStates().execute();
+//                        state.setClickable(true);
+//                    }
+
+
+                if(temp){
+
+                    if(!selectedItem.getCountry_name().equals("Select Country")) {
+                        country_id = selectedItem.getCountry_id();
+                        new BackgroundTasksForStates().execute();
+                    }
+                }
+
+                temp = true;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+
+
+
+        state_adapter = new ArrayAdapter<StateModel>(Registration.this, android.R.layout.simple_list_item_1, state_arrayList);
+        state.setAdapter(state_adapter);
+
+        state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+
+                StateModel selectedItem = (StateModel) state.getSelectedItem(); // Object which was selected.
+                Log.e("stateId", "onItemSelected: "+selectedItem.getState_id() );
+                Log.e("stateId", "onItemSelected: "+selectedItem.getState_name() );
+
+                city_arrayList.clear();
+                if(temp){
+                    city.setClickable(true);
+                    if(!selectedItem.getState_name().equals("Select State")) {
+                        state_id = selectedItem.getState_id();
+                        new BackgroundTasksForCities().execute();
+                    }
+                }
+
+                temp = true;
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+
+
+        city_adapter = new ArrayAdapter<CityModel>(Registration.this, android.R.layout.simple_list_item_1, city_arrayList);
+        city.setAdapter(city_adapter);
+
+        city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+
+                CityModel selectedItem = (CityModel) city.getSelectedItem(); // Object which was selected.
+                city_id = selectedItem.getCity_id();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
 
 
         phone.addTextChangedListener(new TextWatcher() {
@@ -115,28 +276,6 @@ public class Registration extends AppCompatActivity {
 
 
 
-//        signInBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Registration.this, MainActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(intent);
-//
-//            }
-//        });
-
-
-//        signUpButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                progressDialog = new ProgressDialog(Registration.this);
-//                progressDialog.setMessage("Please wait...");
-//                progressDialog.show();
-//
-//                registration();
-//            }
-//        });
-
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String rememberEmail = preferences.getString("Email","");
@@ -161,6 +300,24 @@ public class Registration extends AppCompatActivity {
 
         String method = "register";
 
+
+
+        if(country.getSelectedItem() !=null){
+            country_name = country.getSelectedItem().toString();
+        }
+
+
+        if(state.getSelectedItem() !=null){
+           state_name = state.getSelectedItem().toString();
+        }
+
+        if(city.getSelectedItem() !=null){
+           city_name = city.getSelectedItem().toString();
+        }
+
+
+
+
         if (TextUtils.isEmpty(strFirstName) || TextUtils.isEmpty(strLastName) || TextUtils.isEmpty(strPhone) ||
                 TextUtils.isEmpty(strEmail) || TextUtils.isEmpty(strPassword)) {
             progressDialog.dismiss();
@@ -169,7 +326,19 @@ public class Registration extends AppCompatActivity {
         } else if (strPassword.length() < 6) {
             progressDialog.dismiss();
             Toast.makeText(Registration.this, "Password must have 6 characters", Toast.LENGTH_SHORT).show();
-        } else {
+        }else if(country_name.equals("Select Country")){
+            Toast.makeText(Registration.this, "Select Country", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+        }else if(state_name.equals("Select State")){
+            Toast.makeText(Registration.this, "Select State", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+        }else if(city_name.equals("Select City")){
+            Toast.makeText(Registration.this, "Select City", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+        }else if(TextUtils.isEmpty(postalCode.getText().toString())){
+            Toast.makeText(Registration.this, "Enter Postal Code", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+        } else{
 
 
             SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(Registration.this);
@@ -187,7 +356,7 @@ public class Registration extends AppCompatActivity {
             Editor.apply();
 
             BackgroundTask backgroundTask = new BackgroundTask(Registration.this);
-            backgroundTask.execute(method, strFirstName, strLastName, strPhone, strEmail, strPassword, lat, lng, MainAddress);
+            backgroundTask.execute(method, strFirstName, strLastName, strPhone, strEmail, strPassword,country_id,state_id,city_id,postalCode.getText().toString(), lat, lng, MainAddress);
 
         }
 
@@ -294,5 +463,331 @@ public class Registration extends AppCompatActivity {
 
         registration();
     }
+
+
+    class BackgroundTasksForCountries extends AsyncTask<String, Void, String>
+    {
+        String json_url;
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                URL url = new URL(json_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            json_url = "http://edevz.com/cross_comp/getCountriesForRegistration.php";
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            json_string = result;
+
+            if(json_string!=null){
+                Log.e("abcd", "onCreate: "+json_string );
+
+                try {
+
+                    jsonObject = new JSONObject(json_string);
+                    jsonArray = jsonObject.getJSONArray("countries");
+
+
+                    int count = 0;
+              //      String country_id,country_name;
+                    while(count < jsonArray.length())
+                    {
+                        JSONObject JO = jsonArray.getJSONObject(count);
+
+                        country_id = JO.getString("Country_ID");
+                        country_name = JO.getString("Country_Name");
+
+
+                        CountryModel model = new CountryModel();
+                        model.setCountry_id(country_id);
+                        model.setCountry_name(country_name);
+                        country_arrayList.add(model);
+                        count++;
+                    }
+
+                    country_adapter.notifyDataSetChanged();
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
+    class BackgroundTasksForStates extends AsyncTask<String, Void, String>
+    {
+        String json_url;
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                URL url = new URL(json_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("country_id","UTF-8") + "=" + URLEncoder.encode(country_id,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            json_url = "http://edevz.com/cross_comp/getStatesForRegistration.php";
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            json_string = result;
+
+            if(json_string!=null){
+                Log.e("abcd", "onCreate: "+json_string );
+
+                try {
+
+                    jsonObject = new JSONObject(json_string);
+                    jsonArray = jsonObject.getJSONArray("states");
+
+
+                    int count = -1;
+
+
+                        //       String state_id,state_name;
+                        while(count < jsonArray.length())
+                        {
+                            if(count == -1){
+                                StateModel model = new StateModel();
+                                model.setState_id("");
+                                model.setState_name("Select State");
+                                state_arrayList.add(model);
+                                count++;
+                            }else{
+                            JSONObject JO = jsonArray.getJSONObject(count);
+
+                            state_id = JO.getString("State_ID");
+                            state_name = JO.getString("State_Name");
+
+                            Log.e("dfgfg", "onPostExecute: "+state_id );
+                            Log.e("dfgfg", "onPostExecute: "+state_name );
+
+                            StateModel model = new StateModel();
+                            model.setState_id(state_id);
+                            model.setState_name(state_name);
+                            state_arrayList.add(model);
+                            count++;
+                        }
+                    }
+
+                    state_adapter.notifyDataSetChanged();
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
+
+    class BackgroundTasksForCities extends AsyncTask<String, Void, String>
+    {
+        String json_url;
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                URL url = new URL(json_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("state_id","UTF-8") + "=" + URLEncoder.encode(state_id,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            json_url = "http://edevz.com/cross_comp/getCitiesForRegistration.php";
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            json_string = result;
+
+            if(json_string!=null){
+                Log.e("abcd", "onCreate: "+json_string );
+
+                try {
+
+                    jsonObject = new JSONObject(json_string);
+                    jsonArray = jsonObject.getJSONArray("cities");
+
+
+                    int count = -1;
+
+
+                        //       String state_id,state_name;
+                        while(count < jsonArray.length())
+                        {
+
+                            if(count == -1){
+                                CityModel model = new CityModel();
+                                model.setCity_id("");
+                                model.setCity_name("Select City");
+                                city_arrayList.add(model);
+                                count++;
+                            }else{
+
+                            JSONObject JO = jsonArray.getJSONObject(count);
+
+                            city_id = JO.getString("City_ID");
+                            city_name = JO.getString("City_Name");
+
+
+
+                            CityModel model = new CityModel();
+                            model.setCity_id(city_id);
+                            model.setCity_name(city_name);
+                            city_arrayList.add(model);
+                            count++;
+                        }
+                    }
+
+                    city_adapter.notifyDataSetChanged();
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
 }
 
