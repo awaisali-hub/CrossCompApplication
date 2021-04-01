@@ -57,6 +57,7 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
 
 
     JSONArray array = new JSONArray();
+
     TextView sundayCheck,mondayCheck,tuesdayCheck,wednesdayCheck,thursdayCheck,fridayCheck,saturdayCheck;
     EditText sundayStartAm,sundayEndAm,sundayStartPm,sundayEndPm,
             mondayStartAm,mondayEndAm,mondayStartPm,mondayEndPm,
@@ -1635,7 +1636,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
 
                     runOnUiThread(new Runnable() {
                         public void run() {
-
 
                             if(response.contains("Service Time inserted Success")){
                                 Toast.makeText(CoordinatorRegistration4a_4FacilityActivity.this, "Service Inserted", Toast.LENGTH_SHORT).show();

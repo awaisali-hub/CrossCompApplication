@@ -71,12 +71,13 @@ public class Registration extends AppCompatActivity{
     private Button signUpButton, signInBtn;
     private int keyDel = 0;
     private CheckBox rememberMe;
-    private Spinner country,state,city;
-    private EditText postalCode;
+    private Spinner country,state,city,postalCode;
+
 
     private ArrayList<CountryModel> country_arrayList = new ArrayList();
     private ArrayList<StateModel> state_arrayList = new ArrayList();
     private ArrayList<CityModel> city_arrayList = new ArrayList();
+
 
     private ArrayAdapter<CountryModel> country_adapter;
     private ArrayAdapter<StateModel> state_adapter;
@@ -114,7 +115,7 @@ public class Registration extends AppCompatActivity{
         country = (Spinner) findViewById(R.id.country_spinner);
         state = (Spinner) findViewById(R.id.state_spinner);
         city = (Spinner) findViewById(R.id.city_spinner);
-        postalCode = findViewById(R.id.postal_Code);
+        postalCode = findViewById(R.id.postalCode_spinner);
 
 
 
@@ -132,7 +133,7 @@ public class Registration extends AppCompatActivity{
                     state_arrayList.clear();
                     city_arrayList.clear();
 
-                String[] cities = getResources().getStringArray(R.array.Cities);
+          //      String[] cities = getResources().getStringArray(R.array.Cities);
 
                 state_adapter = new ArrayAdapter<StateModel>(Registration.this, android.R.layout.simple_list_item_1, state_arrayList);
                 state.setAdapter(state_adapter);
@@ -180,8 +181,10 @@ public class Registration extends AppCompatActivity{
                 StateModel selectedItem = (StateModel) state.getSelectedItem(); // Object which was selected.
                 Log.e("stateId", "onItemSelected: "+selectedItem.getState_id() );
                 Log.e("stateId", "onItemSelected: "+selectedItem.getState_name() );
-
                 city_arrayList.clear();
+                city_adapter = new ArrayAdapter<CityModel>(Registration.this, android.R.layout.simple_list_item_1, city_arrayList);
+                city.setAdapter(city_adapter);
+
                 if(temp){
                     city.setClickable(true);
                     if(!selectedItem.getState_name().equals("Select State")) {
@@ -335,9 +338,9 @@ public class Registration extends AppCompatActivity{
         }else if(city_name.equals("Select City")){
             Toast.makeText(Registration.this, "Select City", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
-        }else if(TextUtils.isEmpty(postalCode.getText().toString())){
-            Toast.makeText(Registration.this, "Enter Postal Code", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
+//        }else if(TextUtils.isEmpty(postalCode.getText().toString())){
+//            Toast.makeText(Registration.this, "Enter Postal Code", Toast.LENGTH_SHORT).show();
+//            progressDialog.dismiss();
         } else{
 
 
@@ -356,7 +359,7 @@ public class Registration extends AppCompatActivity{
             Editor.apply();
 
             BackgroundTask backgroundTask = new BackgroundTask(Registration.this);
-            backgroundTask.execute(method, strFirstName, strLastName, strPhone, strEmail, strPassword,country_id,state_id,city_id,postalCode.getText().toString(), lat, lng, MainAddress);
+            backgroundTask.execute(method, strFirstName, strLastName, strPhone, strEmail, strPassword,country_id,state_id,city_id, String.valueOf(postalCode), lat, lng, MainAddress);
 
         }
 

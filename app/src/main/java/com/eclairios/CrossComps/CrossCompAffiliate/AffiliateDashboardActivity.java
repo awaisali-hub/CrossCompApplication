@@ -27,11 +27,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AffiliateDashboardActivity extends AppCompatActivity {
     TextView ManagerAgreement,judgeAgreement,serviceCoordinatorAgreement,directorAgreement;
     CircleImageView HomeFab;
+
+    SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affiliate_dashboard);
         getSupportActionBar().hide();
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         ManagerAgreement = findViewById(R.id.ManagerAgreement);
         judgeAgreement = findViewById(R.id.judgeAgreement);
@@ -40,11 +44,14 @@ public class AffiliateDashboardActivity extends AppCompatActivity {
 
         HomeFab = findViewById(R.id.MoveToMainHomePage);
 
+        SharedPreferences.Editor editor = preferences.edit();
 
 
         ManagerAgreement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putString("affiliateType","Manager");
+                editor.apply();
                 MoveToAgreement(v);
             }
         });
@@ -52,6 +59,8 @@ public class AffiliateDashboardActivity extends AppCompatActivity {
         judgeAgreement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putString("affiliateType","Judge");
+                editor.apply();
                 MoveToAgreement(v);
             }
         });
@@ -59,6 +68,8 @@ public class AffiliateDashboardActivity extends AppCompatActivity {
         serviceCoordinatorAgreement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putString("affiliateType","ServiceCoordinator");
+                editor.apply();
                 MoveToAgreement(v);
             }
         });
@@ -66,6 +77,8 @@ public class AffiliateDashboardActivity extends AppCompatActivity {
         directorAgreement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putString("affiliateType","Director");
+                editor.apply();
                 MoveToAgreement(v);
             }
         });

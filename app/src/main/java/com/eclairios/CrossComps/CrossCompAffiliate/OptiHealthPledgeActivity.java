@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Path;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,13 +21,29 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.eclairios.CrossComps.Authentication.MainActivity;
 import com.eclairios.CrossComps.Authentication.Registration;
 import com.eclairios.CrossComps.BackgroundTask;
 import com.eclairios.CrossComps.EventAndServices.CrossComp;
 import com.eclairios.CrossComps.EventAndServices.Dashboard;
 import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.eclairios.CrossComps.R;
+import com.eclairios.CrossComps.ServiceCoordinator.CoordinatorRegistration4a_4FacilityActivity;
+import com.eclairios.CrossComps.ServiceCoordinator.CoordinatorServicesScreenActivity;
+import com.eclairios.CrossComps.SplashActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -42,12 +60,22 @@ public class OptiHealthPledgeActivity extends AppCompatActivity {
 
     String lat,lng;
 
+
+    JSONObject agreementObject = new JSONObject();
+    JSONArray agreementArray = new JSONArray();
+    String currentUserID;
+    String response;
+
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opti_health_pledge);
         getSupportActionBar().hide();
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(OptiHealthPledgeActivity.this);
+         currentUserID = preferences.getString("CurrentUserId", "");
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -111,18 +139,364 @@ public class OptiHealthPledgeActivity extends AppCompatActivity {
                     Toast.makeText(OptiHealthPledgeActivity.this, "Date required!!!", Toast.LENGTH_SHORT).show();
                 }else{
 
-                    String method = "AffiliatesRegister";
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(OptiHealthPledgeActivity.this);
-                    String currentUserID = preferences.getString("CurrentUserId", "");
-                    lat = preferences.getString("lat", null);
-                    lng = preferences.getString("lng", null);
 
-                    String AffiliateType = "Coordinator";
+                try {
+                    agreementObject.put("CurrentUserID",currentUserID);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-                    BackgroundTask backgroundTask = new BackgroundTask(OptiHealthPledgeActivity.this);
-                    backgroundTask.execute(method, currentUserID, firstName.getText().toString(), lastName.getText().toString(), ET_date.getText().toString(), lat, lng, AffiliateType,"0","0");
+                for(int i = 0; i<30;i++){
 
-              //      MoveToAffiliateDashboard(v);
+                        if(i==0){
+                            if(three.isChecked()){
+                                try {
+                                    agreementObject.put("Parent",three.getText().toString());
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==1){
+                            if(four.isChecked()){
+                                try {
+                                    agreementObject.put("Teacher",four.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==2){
+                            if(five.isChecked()){
+                                try {
+                                    agreementObject.put("Coach",five.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==3){
+                            if(six.isChecked()){
+                                try {
+                                    agreementObject.put("Pastor",six.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==4){
+                            if(seven.isChecked()){
+                                try {
+                                    agreementObject.put("Employer",seven.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==5){
+                            if(eight.isChecked()){
+                                try {
+                                    agreementObject.put("Neighbor",eight.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==6){
+                            if(nine.isChecked()){
+                                try {
+                                    agreementObject.put("Friend",nine.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==7){
+                            if(ten.isChecked()){
+                                try {
+                                    agreementObject.put("Health Professional",ten.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==8){
+                            if(eleven.isChecked()){
+                                try {
+                                    agreementObject.put("Citizen",eleven.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==9){
+                            if(t13.isChecked()){
+                                try {
+                                    agreementObject.put("Rule 1",t13.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==10){
+                            if(t14.isChecked()){
+                                try {
+                                    agreementObject.put("Rule 2",t14.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==11){
+                            if(t15.isChecked()){
+                                try {
+                                    agreementObject.put("Rule 3",t15.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==12){
+                            if(t16.isChecked()){
+                                try {
+                                    agreementObject.put("Rule 4",t16.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==13){
+                            if(t18.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 1",t18.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==14){
+                            if(t19.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 2",t19.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==15){
+                            if(t20.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 3",t20.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==16){
+                            if(t21.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 4",t21.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==17){
+                            if(t22.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 5",t22.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==18){
+                            if(t23.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 6",t23.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==19){
+                            if(t24.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 7",t24.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==20){
+                            if(t25.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 8",t25.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==21){
+                            if(t26.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 9",t26.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==22){
+                            if(t27.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 10",t27.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==23){
+                            if(t28.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 11",t28.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==24){
+                            if(t29.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 12",t29.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==25){
+                            if(t30.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 13",t30.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==26){
+                            if(t31.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 14",t31.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==27){
+                            if(t32.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 15",t32.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==28){
+                            if(t33.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 16",t33.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }else if(i==29){
+                            if(t34.isChecked()){
+                                try {
+                                    agreementObject.put("lifeStyle idea 17",t34.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+
+
+                    agreementArray.put(agreementObject);
+                    String agreements = agreementArray.toString();
+                    Log.e("sdjhghgfdgs", "onClick: "+agreements );
+
+
+
+                            new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OutputStream os = null;
+                InputStream is = null;
+                HttpURLConnection conn = null;
+                try {
+                    //constants
+                    URL url = new URL("http://edevz.com/cross_comp/affiliate_agreement.php");
+
+                    String message = agreementArray.toString();
+
+                    Log.e("fddfhjhh", "run: "+message);
+
+                    conn = (HttpURLConnection) url.openConnection();
+                    conn.setReadTimeout( 10000 /*milliseconds*/ );
+                    conn.setConnectTimeout( 15000 /* milliseconds */ );
+                    conn.setRequestMethod("POST");
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+                    conn.setFixedLengthStreamingMode(message.getBytes().length);
+
+                    //make some HTTP header nicety
+                    conn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
+                    conn.setRequestProperty("X-Requested-With", "XMLHttpRequest");
+
+                    //open
+                    conn.connect();
+
+                    //setup send
+                    os = new BufferedOutputStream(conn.getOutputStream());
+                    os.write(message.getBytes());
+                    //clean up
+                    os.flush();
+
+                    //do somehting with response
+                    is = conn.getInputStream();
+                    //String contentAsString = readIt(is,len);
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"));
+
+                    response = "";
+                    String line = "";
+                    while( (line = bufferedReader.readLine()) != null)
+                    {
+                        response += line;
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+
+                            if(response.equals("Insert your JSON record successfully")){
+                                String method = "AffiliatesRegister";
+
+                                lat = preferences.getString("lat", null);
+                                lng = preferences.getString("lng", null);
+
+                                String AffiliateType = preferences.getString("affiliateType", "");
+
+                                BackgroundTask backgroundTask = new BackgroundTask(OptiHealthPledgeActivity.this);
+                                backgroundTask.execute(method, currentUserID, firstName.getText().toString(), lastName.getText().toString(), ET_date.getText().toString(), lat, lng, AffiliateType,"0","0");
+
+
+                            }else{
+                                Toast.makeText(OptiHealthPledgeActivity.this, "Something went Wrong !!! Please Try Again", Toast.LENGTH_SHORT).show();
+                            }
+                            Log.e("hsadshjd", "run: "+response );
+                        }
+                    });
+
+
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    //clean up
+                    try {
+                        os.close();
+                        is.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    conn.disconnect();
+                }
+            }
+        }).start();
+
+
+
+
+
+//                    MoveToAffiliateDashboard(v);
+
+
+
+
+
                 }
             }
         });
