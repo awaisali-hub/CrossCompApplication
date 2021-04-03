@@ -21,7 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.eclairios.CrossComps.BackgroundTask;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.Maps.ServiceProviderMapsActivity;
 import com.eclairios.CrossComps.R;

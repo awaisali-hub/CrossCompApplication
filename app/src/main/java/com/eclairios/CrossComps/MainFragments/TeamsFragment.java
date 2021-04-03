@@ -10,8 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +27,18 @@ import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.MyCrossCompAllTeamsMainAdapter;
 import com.eclairios.CrossComps.Adapter.MyCrossCompUserSelectedTeamAdapter;
-import com.eclairios.CrossComps.BackgroundTask;
+import com.eclairios.CrossComps.Authentication.Registration;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
 import com.eclairios.CrossComps.Interface.InterfaceForSetTeams;
+import com.eclairios.CrossComps.Model.CityModel;
+import com.eclairios.CrossComps.Model.CountryModel;
+import com.eclairios.CrossComps.Model.JoinNewTeamModel;
 import com.eclairios.CrossComps.Model.MyCrossCompAllTeamsMainModel;
+import com.eclairios.CrossComps.Model.PostalCodeModel;
+import com.eclairios.CrossComps.Model.StateModel;
 import com.eclairios.CrossComps.R;
+import com.eclairios.CrossComps.ServiceCoordinator.CoordinatorRegistration4a_4FacilityActivity;
+import com.eclairios.CrossComps.ServiceCoordinator.CoordinatorServicesScreenActivity;
 import com.eclairios.CrossComps.Teams.MyFundraisingTeamDetailActivity;
 import com.eclairios.CrossComps.Teams.TeamsScoreActivity;
 
@@ -47,14 +58,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class TeamsFragment extends Fragment  implements InterfaceForSetTeams {
 
     String json_string;
     JSONObject jsonObject;
-    JSONArray jsonArray;
-
+    JSONArray jsonArray,jsonArray1,jsonArray2,jsonArray3,jsonArray4,jsonArray5,jsonArray6;
+    JSONArray jsonArray7,jsonArray8,jsonArray9,jsonArray10,jsonArray11,jsonArray12,jsonArray13,jsonArray14,jsonArray15;
 
     RecyclerView allTeamRecyclerView;
     MyCrossCompAllTeamsMainAdapter myCrossCompAllTeamsMainAdapter;
@@ -73,6 +88,29 @@ public class TeamsFragment extends Fragment  implements InterfaceForSetTeams {
     String SelectedTeamGeneralID;
     String currentUserID;
     Button myWorldTeam;
+
+
+
+    ArrayList<JoinNewTeamModel> highSchoolTeamsArray = new ArrayList();
+    private ArrayAdapter<JoinNewTeamModel> highSchoolTeam_adapter;
+
+    ArrayList collegeUniversityTeamsArray = new ArrayList();
+    ArrayList professionalSchoolTeamsArray = new ArrayList();
+    ArrayList militaryBranchTeamsArray = new ArrayList();
+    ArrayList occupationTeamsArray = new ArrayList();
+    ArrayList companyTeamsArray = new ArrayList();
+    ArrayList faithTeamsArray = new ArrayList();
+    ArrayList gymBrandTeamsArray = new ArrayList();
+    ArrayList friendFamilyTeamsArray = new ArrayList();
+
+
+    String highSchoolTeamID,highSchoolTeamName;
+    AutoCompleteTextView highSchoolTeamNameAutoText;
+    Button saveHighSchoolTeamBtn,becomeVolunteerBtn;
+
+    private int keyDel = 0;
+    String HighSchoolTeamID;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -101,8 +139,12 @@ public class TeamsFragment extends Fragment  implements InterfaceForSetTeams {
         myCrossCompTeamList1.setAdapter(myCrossCompUserSelectedTeamAdapter);
 
 
-        new BackgroundTaskMySelectedTeam().execute();
-        new BackgroundTaskGetAllTeams().execute();
+
+    //    new BackgroundTaskMySelectedTeam().execute();
+    //    new BackgroundTaskGetAllTeams().execute();
+
+        new BackgroundTaskForDefaultTeams().execute();
+        new BackgroundTaskForCustomTeamSelect().execute();
 
 
         return view;
@@ -195,7 +237,6 @@ public class TeamsFragment extends Fragment  implements InterfaceForSetTeams {
 
     }
 
-
     public void TeamsChurch(String SelectedTeamID){
 
         SelectedTeamGeneralID = SelectedTeamID;
@@ -265,19 +306,220 @@ public class TeamsFragment extends Fragment  implements InterfaceForSetTeams {
 
     }
 
-
-
     public void MoveToFundTeam(View view) {
         startActivity(new Intent(getContext(), MyFundraisingTeamDetailActivity.class));
     }
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        startActivity(new Intent(AllTeamCategoryActivity.this, Participent.class));
-//    }
 
     public void MyWorldTeam(View view) {
         startActivity(new Intent(getContext(), TeamsScoreActivity.class));
+    }
+
+
+    public void SelectHighSchool(){
+
+        new BackgroundTaskForAllHighSchoolTeams().execute();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_high_school_selection,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+
+        saveHighSchoolTeamBtn = dialogView.findViewById(R.id.saveHighSchoolTeam);
+        becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+
+
+        highSchoolTeamsArray.clear();
+    //    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, highSchoolTeamsArray);
+
+        highSchoolTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(getContext(),android.R.layout.simple_list_item_1, highSchoolTeamsArray);
+        highSchoolTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.high_school_team);
+        highSchoolTeamNameAutoText.setThreshold(1);
+        highSchoolTeamNameAutoText.setAdapter(highSchoolTeam_adapter);
+
+
+
+
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
+
+        highSchoolTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+
+                becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setText("Confirmation");
+
+
+                highSchoolTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) highSchoolTeamNameAutoText.getAdapter();
+                HighSchoolTeamID = highSchoolTeam_adapter.getItem(position).getTeamID();
+                Log.e("dsfdsfsd", "onItemClick: "+HighSchoolTeamID );
+
+
+            }
+        });
+
+        Log.e("dsfdsf", "SelectHighSchool: "+highSchoolTeamsArray.toString());
+        highSchoolTeamNameAutoText.addTextChangedListener(
+                new TextWatcher() {
+
+                    private Timer timer = new Timer();
+                    private final long DELAY = 2000; // Milliseconds
+
+                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        timer.cancel();
+                        timer = new Timer();
+                        timer.schedule(
+                                new TimerTask()
+                                {
+                                    @Override
+                                    public void run() {
+                                        // TODO: Do what you need here (refresh list).
+                                        // You will probably need to use
+                                        // runOnUiThread(Runnable action) for some
+                                        // specific actions (e.g., manipulating views).
+
+                                        getActivity().runOnUiThread(new Runnable() {
+                                            public void run(){
+
+
+
+                                                if(!TextUtils.isEmpty(highSchoolTeamNameAutoText.getText().toString())){
+
+                                                    String words = highSchoolTeamNameAutoText.getText().toString();
+
+                                                    int count = 0;
+                                                    while(count < highSchoolTeamsArray.size())
+                                                    {
+                                                        if(highSchoolTeamsArray.get(count).getTeamName().equals(words)){
+                                                            becomeVolunteerBtn.setText("Confirmation");
+                                                            break;
+                                                        }else{
+                                                            Toast.makeText(getContext(), "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your High School");
+                                                        }
+                                                        count++;
+
+                                                    }
+
+
+
+                                                }else{
+                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                }
+
+                                            }   //closes run(){}
+                                        });
+
+
+                                    }
+                                },
+                                DELAY
+                        ); }
+                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
+
+                    @Override
+                    public void afterTextChanged(final Editable s) {
+
+
+                    }
+                }
+        );
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+    public void CollegeUniversity(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_college_selection,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
+    }
+
+
+    public void ProfessionalSchool(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_professional_school_selection,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
+    }
+
+    public void MilitaryBranch(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_military_branch_selection,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
+    }
+
+    public void Occupation(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialg_for_occupation_selection,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
+    }
+
+    public void Company(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_company_selection,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
+    }
+
+    public void Faith(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_faith_selection,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
+    }
+
+    public void GymBrand(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_gym_brand_selection,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
+    }
+
+    public void FriendFamily(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_friend_family_team_selection,null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+        AlertDialog pickFileImage = builder.create();
+        pickFileImage.show();
     }
 
 
@@ -300,7 +542,6 @@ public class TeamsFragment extends Fragment  implements InterfaceForSetTeams {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
                 String data = URLEncoder.encode("userID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8");
-                Log.e("fjdsfdfdasfdsf", "doInBackground: "+currentUserID );
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -683,6 +924,607 @@ public class TeamsFragment extends Fragment  implements InterfaceForSetTeams {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+
+    class BackgroundTaskForDefaultTeams extends AsyncTask<String, Void, String>
+    {
+        String json_url;
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                URL url = new URL(json_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("userID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            json_url = "http://edevz.com/cross_comp/crossCompsDefaultTeams.php";
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            json_string = result;
+
+            if(json_string!=null){
+                Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
+
+
+                try {
+
+                    jsonObject = new JSONObject(json_string);
+                    jsonArray = jsonObject.getJSONArray("worldTeamMember");
+                    jsonArray1 = jsonObject.getJSONArray("homeTeamMember");
+                    jsonArray2 = jsonObject.getJSONArray("countryTeamMember");
+                    jsonArray3 = jsonObject.getJSONArray("stateTeamMember");
+                    jsonArray4 = jsonObject.getJSONArray("cityTeamMember");
+                    jsonArray5 = jsonObject.getJSONArray("communityTeamMember");
+
+                    jsonArray7 = jsonObject.getJSONArray("HighSchoolTeamMember");
+                    jsonArray8 = jsonObject.getJSONArray("CollegeClassTeamMember");
+                    jsonArray9 = jsonObject.getJSONArray("ProfessionalSchoolTeamMember");
+                    jsonArray10 = jsonObject.getJSONArray("FaithGroupTeamMember");
+                    jsonArray11 = jsonObject.getJSONArray("GymTeamMember");
+                    jsonArray12 = jsonObject.getJSONArray("CompanyTeamMember");
+                    jsonArray13 = jsonObject.getJSONArray("OccupationTeamMember");
+                    jsonArray14 = jsonObject.getJSONArray("MilitaryTeamMember");
+                    jsonArray15 = jsonObject.getJSONArray("FriendAndFamilyTeamMember");
+
+                    int count = 0;
+                    String teamId,teamName;
+                    if(jsonArray!=null){
+                        while(count < jsonArray.length())
+                        {
+                            JSONObject JO = jsonArray.getJSONObject(count);
+                            teamId = JO.getString("WorldTeamID");
+                            teamName = JO.getString("WorldTeamName");
+
+                            Log.e("hgjghrgheghf", "onPostExecute: "+teamId);
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("WorldTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count++;
+
+                        }
+                    }
+
+                    int count1 = 0;
+                    if(jsonArray1 != null){
+                        while(count1 < jsonArray1.length())
+                        {
+                            JSONObject JO = jsonArray1.getJSONObject(count1);
+                            teamId = JO.getString("Team_ID");
+                            teamName = JO.getString("HomeTeamName");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("HomeTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count1++;
+
+                        }
+                    }
+
+                    int count2 = 0;
+                    if(jsonArray2 != null){
+                        while(count2 < jsonArray2.length())
+                        {
+                            JSONObject JO = jsonArray2.getJSONObject(count2);
+                            teamId = JO.getString("CountryTeamID");
+                            teamName = JO.getString("CountryTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("CountryTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count2++;
+
+                        }
+                    }
+
+                    int count3 = 0;
+                    if(jsonArray3 != null){
+                        while(count3 < jsonArray3.length())
+                        {
+                            JSONObject JO = jsonArray3.getJSONObject(count3);
+                            teamId = JO.getString("StateTeamID");
+                            teamName = JO.getString("StateTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("StateTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count3++;
+
+                        }
+                    }
+
+                    int count4 = 0;
+                    if(jsonArray4 != null){
+                        while(count4 < jsonArray4.length())
+                        {
+                            JSONObject JO = jsonArray4.getJSONObject(count4);
+                            teamId = JO.getString("CityTeamID");
+                            teamName = JO.getString("CityTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("CityTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count4++;
+
+                        }
+                    }
+
+                    int count5 = 0;
+                    if(jsonArray5 != null){
+                        while(count5 < jsonArray5.length())
+                        {
+                            JSONObject JO = jsonArray5.getJSONObject(count5);
+                            teamId = JO.getString("CommunityTeam_ID");
+                            teamName = JO.getString("CommunityTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("CommunityTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count5++;
+
+                        }
+                    }
+
+                    int count7 = 0;
+                    if(jsonArray7 != null){
+                        while(count7 < jsonArray7.length())
+                        {
+                            JSONObject JO = jsonArray7.getJSONObject(count7);
+                            teamId = JO.getString("HighSchool_ID");
+                            teamName = JO.getString("HighSchoolTeamName");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("HighSchoolTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count7++;
+                        }
+                    }
+
+                    int count8 = 0;
+                    if(jsonArray8 != null){
+                        while(count8 < jsonArray8.length())
+                        {
+                            JSONObject JO = jsonArray8.getJSONObject(count8);
+                            teamId = JO.getString("CollegeClassTeam_ID");
+                            teamName = JO.getString("CollegeTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("CollegeTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count8++;
+                        }
+                    }
+
+                    int count9 = 0;
+                    if(jsonArray9 != null){
+                        while(count9 < jsonArray9.length())
+                        {
+                            JSONObject JO = jsonArray9.getJSONObject(count9);
+                            teamId = JO.getString("ProfessionalTeam_ID");
+                            teamName = JO.getString("ProfessionalTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("ProfessionalTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count9++;
+                        }
+                    }
+
+                    int count10 = 0;
+                    if(jsonArray10 != null){
+                        while(count10 < jsonArray10.length())
+                        {
+                            JSONObject JO = jsonArray10.getJSONObject(count10);
+                            teamId = JO.getString("FaithTeam_ID");
+                            teamName = JO.getString("FaithTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("FaithTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count10++;
+                        }
+                    }
+
+                    int count11 = 0;
+                    if(jsonArray11 != null){
+                        while(count11 < jsonArray11.length())
+                        {
+                            JSONObject JO = jsonArray11.getJSONObject(count11);
+                            teamId = JO.getString("GymTeam_ID");
+                            teamName = JO.getString("GymTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("GymTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count11++;
+                        }
+                    }
+
+                    int count12 = 0;
+                    if(jsonArray12 != null){
+                        while(count12 < jsonArray12.length())
+                        {
+                            JSONObject JO = jsonArray12.getJSONObject(count12);
+                            teamId = JO.getString("CompanyTeam_ID");
+                            teamName = JO.getString("CompanyTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("CompanyTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count12++;
+                        }
+                    }
+
+                    int count13 = 0;
+                    if(jsonArray13 != null){
+                        while(count13 < jsonArray13.length())
+                        {
+                            JSONObject JO = jsonArray13.getJSONObject(count13);
+                            teamId = JO.getString("OccupationTeam_ID");
+                            teamName = JO.getString("OccupationTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("OccupationTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count13++;
+                        }
+                    }
+
+                    int count14 = 0;
+                    if(jsonArray14 != null){
+                        while(count14 < jsonArray14.length())
+                        {
+                            JSONObject JO = jsonArray14.getJSONObject(count14);
+                            teamId = JO.getString("MilitaryGroupTeam_ID");
+                            teamName = JO.getString("MilitaryGroupTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("MilitaryTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count14++;
+                        }
+                    }
+
+                    int count15 = 0;
+                    if(jsonArray15 != null){
+                        while(count15 < jsonArray15.length())
+                        {
+                            JSONObject JO = jsonArray15.getJSONObject(count15);
+                            teamId = JO.getString("FriendTeamID");
+                            teamName = JO.getString("MyFriends&FamilyTeam_Name");
+
+
+                            MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                            mainModel.setSelectedTeamOpenType("FriendTeam");
+                            mainModel.setTeamType("Default");
+                            mainModel.setTeamID(teamId);
+                            mainModel.setTeamName(teamName);
+                            myCrossCompAllTeamsMainModels2.add(mainModel);
+                            count15++;
+                        }
+                    }
+
+                    myCrossCompUserSelectedTeamAdapter.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private class BackgroundTaskForCustomTeamSelect extends AsyncTask<String, Void, String>
+    {
+        String json_url;
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                URL url = new URL(json_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("userID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            json_url = "http://edevz.com/cross_comp/crossCompsNonDefaultTeams.php";
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            json_string = result;
+
+            if(json_string!=null){
+                Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
+
+
+                try {
+
+                    jsonObject = new JSONObject(json_string);
+                    jsonArray6 = jsonObject.getJSONArray("nonSelectedTeam");
+
+
+                    int count = 0;
+                    String teamId,teamName;
+                    while(count < jsonArray6.length())
+                    {
+                        JSONObject JO = jsonArray6.getJSONObject(count);
+                        teamId = JO.getString("TeamID");
+                        teamName = JO.getString("TeamName");
+
+
+                        MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
+                        mainModel.setSelectedTeamOpenType("NewJoinTeam");
+                        mainModel.setTeamType("Unselected");
+                        mainModel.setTeamID(teamId);
+                        mainModel.setTeamName(teamName);
+                        myCrossCompAllTeamsMainModels2.add(mainModel);
+
+                        count++;
+
+                    }
+
+                    myCrossCompUserSelectedTeamAdapter.notifyDataSetChanged();
+
+
+            } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private class BackgroundTaskForAllHighSchoolTeams extends AsyncTask<String, Void, String>
+    {
+        String json_url;
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                URL url = new URL(json_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("userID","UTF-8") + "=" + URLEncoder.encode(currentUserID,"UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            json_url = "http://edevz.com/cross_comp/get_all_HighSchool.php";
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            json_string = result;
+
+
+            Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
+
+
+            try {
+
+                jsonObject = new JSONObject(json_string);
+                jsonArray = jsonObject.getJSONArray("All_HighSchool_Teams");
+
+
+                int count = 0;
+                String teamId,teamName;
+                while(count < jsonArray.length())
+                {
+                    JSONObject JO = jsonArray.getJSONObject(count);
+                    teamId = JO.getString("HighSchool_ID");
+                    teamName = JO.getString("HighSchoolTeamName");
+
+                    Log.e("dsfsfdsf", "onPostExecute: "+teamId);
+
+//                    if(!highSchoolTeamsArray.contains(teamName)){
+//                        highSchoolTeamsArray.add(teamName);
+//                    }
+
+                    JoinNewTeamModel model = new JoinNewTeamModel();
+                    model.setTeamID(teamId);
+                    model.setTeamName(teamName);
+                    highSchoolTeamsArray.add(model);
+                    count++;
+
+                }
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }

@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.eclairios.CrossComps.Adapter.AdapterCurrentTeams;
-import com.eclairios.CrossComps.BackgroundTask;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
 import com.eclairios.CrossComps.Model.ModelCurrentTeams;
 import com.eclairios.CrossComps.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

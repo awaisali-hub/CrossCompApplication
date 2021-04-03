@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.AdapterAllTeams;
-import com.eclairios.CrossComps.BackgroundTask;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
 import com.eclairios.CrossComps.Interface.BasicTeamChallenge;
 import com.eclairios.CrossComps.Model.ModelAllTeams;
 import com.eclairios.CrossComps.R;

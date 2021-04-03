@@ -14,7 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.eclairios.CrossComps.BackgroundTask;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
 import com.eclairios.CrossComps.R;
 
 public class MainActivity extends AppCompatActivity {

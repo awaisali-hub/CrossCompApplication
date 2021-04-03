@@ -119,6 +119,8 @@ public class Dashboard extends AppCompatActivity {
             navController.navigate(R.id.nav_Reservation_fragment);
         }else if(getIntent().getIntExtra("fragmentNumber",0)==4){
             navController.navigate(R.id.nav_dashboard_fragment);
+        }else if(getIntent().getIntExtra("fragmentNumber",0)==5){
+            navController.navigate(R.id.nav_Teams_fragment);
         }
 
 

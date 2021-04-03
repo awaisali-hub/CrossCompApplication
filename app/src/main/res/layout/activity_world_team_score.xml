@@ -53,11 +53,12 @@
                 android:gravity="center"
                 android:paddingStart="50dp"
                 android:paddingEnd="50dp"
-                android:text="Team Name"
+                android:text="My World Team"
                 android:textColor="@color/green"
                 android:textSize="21sp"
                 android:textStyle="bold"/>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -72,7 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Address"
+                        android:text="92504"
                         android:textColor="@color/black"
                         android:textSize="35sp"
                         android:textStyle="bold"
@@ -97,7 +98,7 @@
                 android:gravity="center"
                 android:paddingStart="50dp"
                 android:paddingEnd="50dp"
-                android:text="Feb 2021"
+                android:text="April 2021"
                 android:textColor="@color/black"
                 android:textSize="21sp" />
             <LinearLayout
@@ -113,10 +114,9 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="150.7"
+                    android:text="120.3"
                     android:layout_weight="3"
                     android:textAlignment="center"/>
-
 
             </LinearLayout>
 
@@ -128,7 +128,7 @@
                 android:gravity="center"
                 android:paddingStart="50dp"
                 android:paddingEnd="50dp"
-                android:text="10"
+                android:text="1000"
                 android:textColor="@color/black"
                 android:textSize="21sp" />
 
@@ -139,7 +139,7 @@
                 android:gravity="center"
                 android:paddingStart="50dp"
                 android:paddingEnd="50dp"
-                android:text="35.5"
+                android:text="36.05"
                 android:textColor="@color/black"
                 android:textSize="21sp" />
 

@@ -6,26 +6,18 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.eclairios.CrossComps.Authentication.MainActivity;
-import com.eclairios.CrossComps.Authentication.Registration;
-import com.eclairios.CrossComps.BackgroundTask;
-import com.eclairios.CrossComps.EventAndServices.CrossComp;
-import com.eclairios.CrossComps.EventAndServices.Dashboard;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.SplashActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Judge5aPush_UpsActivity extends AppCompatActivity {
 

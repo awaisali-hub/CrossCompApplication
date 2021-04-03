@@ -19,7 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.eclairios.CrossComps.Adapter.AdapterCoordinaterServicePage;
-import com.eclairios.CrossComps.BackgroundTask;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.Interface.MyInterface;
 import com.eclairios.CrossComps.Model.ModelCoordinaterServicePage;

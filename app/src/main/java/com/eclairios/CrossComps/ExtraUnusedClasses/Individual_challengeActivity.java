@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.AdapterAllUser;
-import com.eclairios.CrossComps.BackgroundTask;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
 import com.eclairios.CrossComps.Interface.IndividualChallengeInterface;
 import com.eclairios.CrossComps.Model.ModelAllUser;
 import com.eclairios.CrossComps.R;

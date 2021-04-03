@@ -28,9 +28,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.eclairios.CrossComps.BackgroundTask;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
 import com.eclairios.CrossComps.Model.CityModel;
 import com.eclairios.CrossComps.Model.CountryModel;
+import com.eclairios.CrossComps.Model.PostalCodeModel;
 import com.eclairios.CrossComps.Model.StateModel;
 import com.eclairios.CrossComps.R;
 import com.google.android.gms.location.LocationCallback;
@@ -77,17 +78,20 @@ public class Registration extends AppCompatActivity{
     private ArrayList<CountryModel> country_arrayList = new ArrayList();
     private ArrayList<StateModel> state_arrayList = new ArrayList();
     private ArrayList<CityModel> city_arrayList = new ArrayList();
+    private ArrayList<PostalCodeModel> postalCode_arrayList = new ArrayList();
 
 
     private ArrayAdapter<CountryModel> country_adapter;
     private ArrayAdapter<StateModel> state_adapter;
     private ArrayAdapter<CityModel> city_adapter;
+    private ArrayAdapter<PostalCodeModel> postalCode_adapter;
 
     private int item_check = 0;
 
     private String country_id,country_name;
     private String state_id,state_name;
     private String city_id,city_name;
+    private String postalCode_id,postalCode_name;
 
     Boolean temp = false;
     Boolean check = false;
@@ -115,7 +119,7 @@ public class Registration extends AppCompatActivity{
         country = (Spinner) findViewById(R.id.country_spinner);
         state = (Spinner) findViewById(R.id.state_spinner);
         city = (Spinner) findViewById(R.id.city_spinner);
-        postalCode = findViewById(R.id.postalCode_spinner);
+        postalCode = (Spinner) findViewById(R.id.postalCode_spinner);
 
 
 
@@ -132,8 +136,8 @@ public class Registration extends AppCompatActivity{
 
                     state_arrayList.clear();
                     city_arrayList.clear();
+                    postalCode_arrayList.clear();
 
-          //      String[] cities = getResources().getStringArray(R.array.Cities);
 
                 state_adapter = new ArrayAdapter<StateModel>(Registration.this, android.R.layout.simple_list_item_1, state_arrayList);
                 state.setAdapter(state_adapter);
@@ -141,12 +145,8 @@ public class Registration extends AppCompatActivity{
                 city_adapter = new ArrayAdapter<CityModel>(Registration.this, android.R.layout.simple_list_item_1, city_arrayList);
                 city.setAdapter(city_adapter);
 
-
-//                    if(country_id.equals("1")){
-//                        new BackgroundTasksForStates().execute();
-//                        state.setClickable(true);
-//                    }
-
+                postalCode_adapter = new ArrayAdapter<PostalCodeModel>(Registration.this, android.R.layout.simple_list_item_1, postalCode_arrayList);
+                postalCode.setAdapter(postalCode_adapter);
 
                 if(temp){
 
@@ -182,8 +182,12 @@ public class Registration extends AppCompatActivity{
                 Log.e("stateId", "onItemSelected: "+selectedItem.getState_id() );
                 Log.e("stateId", "onItemSelected: "+selectedItem.getState_name() );
                 city_arrayList.clear();
+                postalCode_arrayList.clear();
                 city_adapter = new ArrayAdapter<CityModel>(Registration.this, android.R.layout.simple_list_item_1, city_arrayList);
                 city.setAdapter(city_adapter);
+
+                postalCode_adapter = new ArrayAdapter<PostalCodeModel>(Registration.this, android.R.layout.simple_list_item_1, postalCode_arrayList);
+                postalCode.setAdapter(postalCode_adapter);
 
                 if(temp){
                     city.setClickable(true);
@@ -214,9 +218,41 @@ public class Registration extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
+                postalCode_arrayList.clear();
+                postalCode_adapter = new ArrayAdapter<PostalCodeModel>(Registration.this, android.R.layout.simple_list_item_1, postalCode_arrayList);
+                postalCode.setAdapter(postalCode_adapter);
 
                 CityModel selectedItem = (CityModel) city.getSelectedItem(); // Object which was selected.
                 city_id = selectedItem.getCity_id();
+
+                if(temp){
+                    postalCode.setClickable(true);
+                    if(!selectedItem.getCity_name().equals("Select City")) {
+                        city_id = selectedItem.getCity_id();
+                        new BackgroundTasksForPostalCode().execute();
+                    }
+                }
+
+                temp = true;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+        postalCode_adapter = new ArrayAdapter<PostalCodeModel>(Registration.this, android.R.layout.simple_list_item_1, postalCode_arrayList);
+        postalCode.setAdapter(postalCode_adapter);
+
+        postalCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+
+                PostalCodeModel selectedItem = (PostalCodeModel) postalCode.getSelectedItem(); // Object which was selected.
+                postalCode_id = selectedItem.getPostalCode_id();
             }
 
             @Override
@@ -245,7 +281,7 @@ public class Registration extends AppCompatActivity{
                     if(len == 3) {
                         phone.setText(phone.getText() + "-");
                         phone.setSelection(phone.getText().length());
-                    }else if(len == 8){
+                    }else if(len == 7){
                         phone.setText(phone.getText() + "-");
                         phone.setSelection(phone.getText().length());
                     }
@@ -318,6 +354,10 @@ public class Registration extends AppCompatActivity{
            city_name = city.getSelectedItem().toString();
         }
 
+        if(postalCode.getSelectedItem() != null){
+            postalCode_name = postalCode.getSelectedItem().toString();
+        }
+
 
 
 
@@ -338,9 +378,9 @@ public class Registration extends AppCompatActivity{
         }else if(city_name.equals("Select City")){
             Toast.makeText(Registration.this, "Select City", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
-//        }else if(TextUtils.isEmpty(postalCode.getText().toString())){
-//            Toast.makeText(Registration.this, "Enter Postal Code", Toast.LENGTH_SHORT).show();
-//            progressDialog.dismiss();
+        }else if(postalCode_name.equals("Select PostalCode")){
+            Toast.makeText(Registration.this, "Select PostalCode", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         } else{
 
 
@@ -358,8 +398,14 @@ public class Registration extends AppCompatActivity{
             }
             Editor.apply();
 
+            Log.e("hfdfhjsdfhj", "registration: "+country_id);
+            Log.e("hfdfhjsdfhj", "registration: "+state_id);
+            Log.e("hfdfhjsdfhj", "registration: "+city_id);
+            Log.e("hfdfhjsdfhj", "registration: "+postalCode_id);
+
+
             BackgroundTask backgroundTask = new BackgroundTask(Registration.this);
-            backgroundTask.execute(method, strFirstName, strLastName, strPhone, strEmail, strPassword,country_id,state_id,city_id, String.valueOf(postalCode), lat, lng, MainAddress);
+            backgroundTask.execute(method, strFirstName, strLastName, strPhone, strEmail, strPassword,country_id,state_id,city_id, postalCode_id, lat, lng, MainAddress);
 
         }
 
@@ -792,5 +838,119 @@ public class Registration extends AppCompatActivity{
         }
     }
 
+
+    class BackgroundTasksForPostalCode extends AsyncTask<String, Void, String>
+    {
+        String json_url;
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                URL url = new URL(json_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String data = URLEncoder.encode("city_id","UTF-8") + "=" + URLEncoder.encode(city_id,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+
+                String response = "";
+                String line = "";
+                while( (line = bufferedReader.readLine()) != null)
+                {
+                    response += line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            json_url = "http://edevz.com/cross_comp/getPostalCodeForRegistration.php";
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            json_string = result;
+
+            if(json_string!=null){
+                Log.e("abcd", "onCreate: "+json_string );
+
+                try {
+
+                    jsonObject = new JSONObject(json_string);
+                    jsonArray = jsonObject.getJSONArray("postalCode");
+
+
+                    int count = -1;
+
+
+                    //       String state_id,state_name;
+                    while(count < jsonArray.length())
+                    {
+
+                        if(count == -1){
+                            PostalCodeModel model = new PostalCodeModel();
+                            model.setPostalCode_id("");
+                            model.setPostalCode("Select PostalCode");
+                            postalCode_arrayList.add(model);
+                            count++;
+                        }else{
+
+                            JSONObject JO = jsonArray.getJSONObject(count);
+
+                            postalCode_id = JO.getString("PostalCode_ID");
+                            postalCode_name = JO.getString("PostalCode");
+
+
+
+                            PostalCodeModel model = new PostalCodeModel();
+                            model.setPostalCode_id(postalCode_id);
+                            model.setPostalCode(postalCode_name);
+                            postalCode_arrayList.add(model);
+                            count++;
+                        }
+                    }
+
+                    postalCode_adapter.notifyDataSetChanged();
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
 }
 

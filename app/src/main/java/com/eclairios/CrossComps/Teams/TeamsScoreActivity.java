@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.eclairios.CrossComps.EventAndServices.Dashboard;
 import com.eclairios.CrossComps.ExtraUnusedClasses.AllTeamCategoryActivity;
 import com.eclairios.CrossComps.R;
 
@@ -65,6 +66,10 @@ public class TeamsScoreActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(TeamsScoreActivity.this, AllTeamCategoryActivity.class));
+      //  startActivity(new Intent(TeamsScoreActivity.this, AllTeamCategoryActivity.class));
+
+        Intent intent = new Intent(TeamsScoreActivity.this, Dashboard.class);
+        intent.putExtra("fragmentNumber",5); //for example
+        startActivity(intent);
     }
 }

@@ -16,6 +16,7 @@
             android:orientation="vertical"
             >
             <androidx.appcompat.widget.AppCompatButton
+                android:visibility="gone"
                 android:id="@+id/MyWorldTeam"
                 android:layout_marginTop="15dp"
                 android:gravity="center"
@@ -43,7 +44,8 @@
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_below="@+id/myCrossCompTeamList1"
-                android:layout_marginBottom="@dimen/_10sdp"/>
+                android:layout_marginBottom="@dimen/_10sdp"
+                />
         </LinearLayout>
     </ScrollView>
 

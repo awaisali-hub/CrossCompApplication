@@ -1,4 +1,4 @@
-package com.eclairios.CrossComps;
+package com.eclairios.CrossComps.BackgroundTaskClasses;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -16,6 +16,7 @@ import com.eclairios.CrossComps.EventAndServices.CoordinatorServicePage;
 import com.eclairios.CrossComps.EventAndServices.CrossComp;
 import com.eclairios.CrossComps.EventAndServices.Dashboard;
 import com.eclairios.CrossComps.ExtraUnusedClasses.Challenge;
+import com.eclairios.CrossComps.JavaMailAPI;
 import com.eclairios.CrossComps.Teams.MyFundraisingTeamDetailActivity;
 import com.eclairios.CrossComps.Teams.TeamsScoreActivity;
 
@@ -1051,12 +1052,13 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             String UserID  = params[1];
             String firstName = params[2];
             String lastName = params[3];
-            String date = params[4];
-            String lat = params[5];
-            String lng = params[6];
-            String affiliateType = params[7];
-            String balance = params[8];
-            String status = params[9];
+            String email = params[4];
+            String date = params[5];
+            String lat = params[6];
+            String lng = params[7];
+            String affiliateType = params[8];
+            String balance = params[9];
+            String status = params[10];
 
 
             try {
@@ -1073,6 +1075,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 String data = URLEncoder.encode("UserID","UTF-8") + "=" + URLEncoder.encode(UserID,"UTF-8") + "&"+
                         URLEncoder.encode("firstName","UTF-8") + "=" + URLEncoder.encode(firstName,"UTF-8") + "&"+
                         URLEncoder.encode("lastName","UTF-8") + "=" + URLEncoder.encode(lastName,"UTF-8") + "&"+
+                        URLEncoder.encode("email","UTF-8") + "=" + URLEncoder.encode(email,"UTF-8") + "&"+
                         URLEncoder.encode("date","UTF-8") + "=" + URLEncoder.encode(date,"UTF-8") + "&"+
                         URLEncoder.encode("lat","UTF-8") + "=" + URLEncoder.encode(lat,"UTF-8") + "&"+
                         URLEncoder.encode("lng","UTF-8") + "=" + URLEncoder.encode(lng,"UTF-8") + "&"+
@@ -1458,11 +1461,20 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             }else if(result.equals("Score Insert UnSuccess")){
                 Toast.makeText(ctx, "Score not inserted", Toast.LENGTH_SHORT).show();
             }else if(result.equals("New Affiliate Success")){
-                Toast.makeText(ctx, "Now You are CrossComp Affiliate ", Toast.LENGTH_SHORT).show();
-            //    ctx.startActivity(new Intent(ctx, AffiliateDashboardActivity.class));
+                Toast.makeText(ctx, "Hi! Welcome to CrossComps Affiliate. We will keep you informed about your request.", Toast.LENGTH_LONG).show();
+
+
+                String mail = "syedawais653@gmail.com";
+                String message = "Request Message";
+                String subject = "Affiliate";
+
+                //Send Mail
+                JavaMailAPI javaMailAPI = new JavaMailAPI(ctx,mail,subject,message);
+
+                javaMailAPI.execute();
 
                 Intent intent = new Intent(ctx,Dashboard.class);
-                intent.putExtra("fragmentNumber",1); //for example
+                intent.putExtra("fragmentNumber",4); //for example
                 ctx.startActivity(intent);
 
             }else if(result.equals("New Affiliate UnSuccess")){

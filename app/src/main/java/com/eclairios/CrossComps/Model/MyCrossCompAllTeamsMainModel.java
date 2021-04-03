@@ -2,7 +2,23 @@ package com.eclairios.CrossComps.Model;
 
 public class MyCrossCompAllTeamsMainModel {
 
-    private String teamID,teamName,teamStatus;
+    private String teamID,teamName,teamStatus,teamType,SelectedTeamOpenType;
+
+    public String getSelectedTeamOpenType() {
+        return SelectedTeamOpenType;
+    }
+
+    public void setSelectedTeamOpenType(String selectedTeamOpenType) {
+        SelectedTeamOpenType = selectedTeamOpenType;
+    }
+
+    public String getTeamType() {
+        return teamType;
+    }
+
+    public void setTeamType(String teamType) {
+        this.teamType = teamType;
+    }
 
     public MyCrossCompAllTeamsMainModel() {
     }

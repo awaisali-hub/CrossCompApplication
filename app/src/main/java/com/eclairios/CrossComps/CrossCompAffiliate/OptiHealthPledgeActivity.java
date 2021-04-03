@@ -4,12 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Path;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,16 +18,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.eclairios.CrossComps.Authentication.MainActivity;
-import com.eclairios.CrossComps.Authentication.Registration;
-import com.eclairios.CrossComps.BackgroundTask;
-import com.eclairios.CrossComps.EventAndServices.CrossComp;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
 import com.eclairios.CrossComps.EventAndServices.Dashboard;
-import com.eclairios.CrossComps.ExtraUnusedClasses.Participent;
 import com.eclairios.CrossComps.R;
-import com.eclairios.CrossComps.ServiceCoordinator.CoordinatorRegistration4a_4FacilityActivity;
-import com.eclairios.CrossComps.ServiceCoordinator.CoordinatorServicesScreenActivity;
-import com.eclairios.CrossComps.SplashActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -456,9 +446,12 @@ public class OptiHealthPledgeActivity extends AppCompatActivity {
                                 lng = preferences.getString("lng", null);
 
                                 String AffiliateType = preferences.getString("affiliateType", "");
+                                String email = preferences.getString("Email123","");
+
+                                Log.e("emailtest", "run: "+email);
 
                                 BackgroundTask backgroundTask = new BackgroundTask(OptiHealthPledgeActivity.this);
-                                backgroundTask.execute(method, currentUserID, firstName.getText().toString(), lastName.getText().toString(), ET_date.getText().toString(), lat, lng, AffiliateType,"0","0");
+                                backgroundTask.execute(method, currentUserID, firstName.getText().toString(), lastName.getText().toString(),email, ET_date.getText().toString(), lat, lng, AffiliateType,"0","0");
 
 
                             }else{

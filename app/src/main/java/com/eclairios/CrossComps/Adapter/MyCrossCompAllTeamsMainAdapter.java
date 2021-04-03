@@ -53,15 +53,8 @@ public class MyCrossCompAllTeamsMainAdapter extends RecyclerView.Adapter<MyCross
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        if(crossCompAllTeamsMainModels.get(position).getTeamID().equals("1")){
-            ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-            params.height = 0;
-            params.width = 0;
-            holder.itemView.setLayoutParams(params);
-            holder.itemView.setVisibility(View.INVISIBLE);
-        }else{
-            holder.teamName.setText(crossCompAllTeamsMainModels.get(position).getTeamName());
-        }
+        holder.teamName.setText(crossCompAllTeamsMainModels.get(position).getTeamName());
+
 
         holder.teamName.setOnClickListener(new View.OnClickListener() {
             @Override
