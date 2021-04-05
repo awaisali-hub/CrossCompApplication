@@ -13,6 +13,7 @@
         android:orientation="vertical"
         android:layout_margin="10dp"
         >
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -25,7 +26,6 @@
                 />
 
         </RelativeLayout>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:gravity="center"
             android:paddingStart="50dp"
             android:paddingEnd="50dp"
-            android:text="Military Branch"
+            android:text="College/University Class"
             android:textColor="@color/black"
             android:textSize="21sp"
             android:textStyle="bold"/>
@@ -47,11 +47,11 @@
             android:layout_marginBottom="3dp"
             android:layout_marginTop="@dimen/_10sdp">
             <AutoCompleteTextView
-                android:id="@+id/militaryBranchAutoText"
+                android:id="@+id/companyTeamNameAutoText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
-                android:hint="Military"
+                android:hint="College/University Class"
                 android:paddingStart="30dp"
                 android:inputType="textCapSentences"
                 android:padding="15dp"

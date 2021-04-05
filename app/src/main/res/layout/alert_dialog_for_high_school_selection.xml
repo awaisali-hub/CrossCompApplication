@@ -14,6 +14,19 @@
         android:layout_margin="10dp"
         >
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/cross_red_close"
+                android:layout_alignParentRight="true"
+                />
+
+        </RelativeLayout>
+
 
         <TextView
             android:layout_width="match_parent"
