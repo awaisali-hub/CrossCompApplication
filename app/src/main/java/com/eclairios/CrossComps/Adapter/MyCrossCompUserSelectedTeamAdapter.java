@@ -41,6 +41,7 @@ public class MyCrossCompUserSelectedTeamAdapter extends RecyclerView.Adapter<MyC
     public MyCrossCompUserSelectedTeamAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == GreenType){
             View view = inflater.inflate(R.layout.my_crosscomp_teams_main_row_green,parent,false);
+          //  View view = inflater.inflate(R.layout.team_sub_class_row,parent,false);
             return new MyCrossCompUserSelectedTeamAdapter.ViewHolder(view);
         }else if(viewType == EditGreenType){
             View view = inflater.inflate(R.layout.my_crosscomp_teams_main_row_green_edit,parent,false);

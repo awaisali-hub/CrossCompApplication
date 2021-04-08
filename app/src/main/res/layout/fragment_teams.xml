@@ -6,47 +6,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainFragments.TeamsFragment">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/appbar_layout">
-        <LinearLayout
+        android:layout_height="match_parent">
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-            <androidx.appcompat.widget.AppCompatButton
-                android:visibility="gone"
-                android:id="@+id/MyWorldTeam"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:background="@drawable/res"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:text="My World Team"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/myCrossCompTeamList1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_below="@+id/MyHomeTeam"
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/myCrossCompTeamList"
+            android:layout_below="@+id/appbar_layout">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_below="@+id/myCrossCompTeamList1"
-                android:layout_marginBottom="@dimen/_10sdp"
-                />
-        </LinearLayout>
-    </ScrollView>
+                android:orientation="vertical"
+                >
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/myCrossCompTeamList1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_below="@+id/MyHomeTeam"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/myCrossCompTeamList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_below="@+id/myCrossCompTeamList1"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    />
+            </LinearLayout>
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/JoinATeam"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/res"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="50dp"
+            android:text="Join a Team"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </RelativeLayout>
 
 </FrameLayout>

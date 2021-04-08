@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Teams.WorldTeamScoreActivity"></activity>
+        <activity android:name=".Teams.JoinTeamsActivity"></activity>
+        <activity android:name=".Teams.WorldTeamScoreActivity" />
         <activity android:name=".Judge.Judge5bTestingScreen_Push_UpsActivity" />
         <activity android:name=".Judge.Judge5aPush_UpsActivity" />
         <activity android:name=".Judge.Judge4bTestingScreen_Leg_RaisesActivity" />
@@ -31,7 +32,7 @@
         <activity android:name=".Judge.Judge3a_SquatsActivity" />
         <activity android:name=".Judge.Judge2bTestingScreenRun_WalkActivity" />
         <activity android:name=".Judge.Judge2aRun_Walk_TestActivity" />
-        <activity android:name=".Judge.JudgeHomePageParticipantRegistrationActivity"></activity>
+        <activity android:name=".Judge.JudgeHomePageParticipantRegistrationActivity" />
         <activity android:name=".ServiceCoordinator.CoordinatorServiceSummaryScreenActivity" />
         <activity android:name=".ServiceCoordinator.CoordinatorRegistration4b_4EventActivity" />
         <activity android:name=".ServiceCoordinator.CoordinatorRegistration4a_4FacilityActivity" />
@@ -126,7 +127,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDfzZIAt3V2ck7R46NJ3BsbJHpPFPt2rZ0" />
 
-        <activity android:name=".ExtraUnusedClasses.Participent"></activity>
+        <activity android:name=".ExtraUnusedClasses.Participent" />
         <activity android:name=".ExtraUnusedClasses.OneServiceCard" />
         <activity android:name=".ExtraUnusedClasses.MorePages" />
         <activity android:name=".ExtraUnusedClasses.Profile" />
