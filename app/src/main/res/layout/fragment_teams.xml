@@ -18,24 +18,25 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 >
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/myCrossCompTeamList1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:layout_below="@+id/MyHomeTeam"
+                            />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/myCrossCompTeamList"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:layout_below="@+id/myCrossCompTeamList1"
+                            android:layout_marginBottom="@dimen/_70sdp"
+                            />
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/myCrossCompTeamList1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_below="@+id/MyHomeTeam"
-                    />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/myCrossCompTeamList"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_below="@+id/myCrossCompTeamList1"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    />
             </LinearLayout>
         </ScrollView>
 
@@ -50,6 +51,7 @@
             android:layout_width="@dimen/_150sdp"
             android:layout_height="50dp"
             android:text="Join a Team"
+            android:fontFamily="@font/ubuntu_medium"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="18sp"/>

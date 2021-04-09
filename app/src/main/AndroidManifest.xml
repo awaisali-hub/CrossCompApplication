@@ -126,6 +126,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDfzZIAt3V2ck7R46NJ3BsbJHpPFPt2rZ0" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".ExtraUnusedClasses.Participent" />
         <activity android:name=".ExtraUnusedClasses.OneServiceCard" />
