@@ -197,7 +197,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         sundayStartPm.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -270,7 +269,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         mondayStartAm.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -308,7 +306,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
             }
         });
         mondayEndAm.addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
                 mondayEndAm.setOnKeyListener(new View.OnKeyListener() {
                     @Override
@@ -343,7 +340,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         mondayStartPm.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -381,7 +377,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
             }
         });
         mondayEndPm.addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
                 mondayEndPm.setOnKeyListener(new View.OnKeyListener() {
                     @Override
@@ -416,9 +411,7 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         tuesdayStartAm.addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
                 tuesdayStartAm.setOnKeyListener(new View.OnKeyListener() {
                     @Override
@@ -489,7 +482,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         tuesdayStartPm.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -562,7 +554,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         wednesdayStartAm.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -635,7 +626,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         wednesdayStartPm.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -708,7 +698,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         thursdayStartAm.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -781,7 +770,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         thursdayStartPm.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -854,9 +842,7 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         fridayStartAm.addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
                 fridayStartAm.setOnKeyListener(new View.OnKeyListener() {
                     @Override
@@ -892,7 +878,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
             }
         });
         fridayEndAm.addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
                 fridayEndAm.setOnKeyListener(new View.OnKeyListener() {
                     @Override
@@ -927,7 +912,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         fridayStartPm.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -1000,7 +984,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         saturdayStartAm.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -1073,9 +1056,7 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
         saturdayStartPm.addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
                 saturdayStartPm.setOnKeyListener(new View.OnKeyListener() {
                     @Override
@@ -1146,10 +1127,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 }
             }
         });
-
-
-
-
     }
 
     public void Registration4b4(View view) {
@@ -1222,8 +1199,6 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
             int saturdayPm = 0;
             int sundayAm = 0;
             int sundayPm = 0;
-
-
 
             for (int i = 0; i<14; i++){
                 if(i == 0){
@@ -1405,13 +1380,15 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                     }
                 }
             }
+
+
         }
 
 
 
 
 
-        //        startActivity(new Intent(CoordinatorRegistration4a_4FacilityActivity.this,CoordinatorRegistration4b_4EventActivity.class));
+        //startActivity(new Intent(CoordinatorRegistration4a_4FacilityActivity.this,CoordinatorRegistration4b_4EventActivity.class));
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(CoordinatorRegistration4a_4FacilityActivity.this);
         currentUserID = preferences.getString("CurrentUserId", "");
@@ -1427,77 +1404,25 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
         Address = street+", "+city+", "+state+", "+postalCode;
         type = "service";
 
-
         new BackgroundTaskServiceInsert().execute();
 
-
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                OutputStream os = null;
-//                InputStream is = null;
-//                HttpURLConnection conn = null;
-//                try {
-//                    //constants
-//                    URL url = new URL("http://edevz.com/cross_comp/insertAffiliateServices.php");
-//
-//                    String message = array.toString();
-//
-//                    Log.e("fddfhjhh", "run: "+message);
-//
-//                    conn = (HttpURLConnection) url.openConnection();
-//                    conn.setReadTimeout( 10000 /*milliseconds*/ );
-//                    conn.setConnectTimeout( 15000 /* milliseconds */ );
-//                    conn.setRequestMethod("POST");
-//                    conn.setDoInput(true);
-//                    conn.setDoOutput(true);
-//                    conn.setFixedLengthStreamingMode(message.getBytes().length);
-//
-//                    //make some HTTP header nicety
-//                    conn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-//                    conn.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-//
-//                    //open
-//                    conn.connect();
-//
-//                    //setup send
-//                    os = new BufferedOutputStream(conn.getOutputStream());
-//                    os.write(message.getBytes());
-//                    //clean up
-//                    os.flush();
-//
-//                    //do somehting with response
-//                    is = conn.getInputStream();
-//                    //String contentAsString = readIt(is,len);
-//                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"));
-//
-//                    String response = "";
-//                    String line = "";
-//                    while( (line = bufferedReader.readLine()) != null)
-//                    {
-//                        response += line;
-//                    }
-//
-//                    Log.e("hsadshjd", "run: "+line );
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } finally {
-//                    //clean up
-//                    try {
-//                        os.close();
-//                        is.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    conn.disconnect();
-//                }
-//            }
-//        }).start();
+        data();
     }
 
+    private void data() {
 
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String EventOrService = preferences.getString("serviceOrEvent", null);
+        String organizationName = preferences.getString("organizationName", null);
+        String serviceName = preferences.getString("serviceName", null);
+        String street = preferences.getString("street", null);
+        String city = preferences.getString("city", null);
+        String state = preferences.getString("state", null);
+        String postalCode = preferences.getString("postalCode", null);
+        Log.d("abc", "moverToSummery: " + serviceName);
+        Log.d("abcd", "moverToSummery: " + state);
+    }
 
     class BackgroundTaskServiceInsert extends AsyncTask<String, Void, String>
     {
@@ -1665,9 +1590,7 @@ public class CoordinatorRegistration4a_4FacilityActivity extends AppCompatActivi
                 Toast.makeText(CoordinatorRegistration4a_4FacilityActivity.this, "Something went Wrong !!! Please Try Again ", Toast.LENGTH_SHORT).show();
             }
 
-
-
-
         }
     }
+
 }

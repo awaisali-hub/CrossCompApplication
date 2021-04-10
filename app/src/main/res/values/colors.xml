@@ -13,6 +13,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorAccent">#B8B7AF</color>
+    <color name="gray">#D3D2CF</color>
     <color name="colorRed">#FF0000</color>
     <color name="colorRedd">#ff0006</color>
     <color name="skyBlue">#000afd</color>

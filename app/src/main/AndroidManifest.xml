@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.eclairios.CrossComps">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,8 +22,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Task"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".Teams.WorldTeamScoreActivity"></activity>
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+        <activity android:name=".Teams.WorldTeamScoreActivity" />
         <activity android:name=".Judge.Judge5bTestingScreen_Push_UpsActivity" />
         <activity android:name=".Judge.Judge5aPush_UpsActivity" />
         <activity android:name=".Judge.Judge4bTestingScreen_Leg_RaisesActivity" />
@@ -31,9 +33,10 @@
         <activity android:name=".Judge.Judge3a_SquatsActivity" />
         <activity android:name=".Judge.Judge2bTestingScreenRun_WalkActivity" />
         <activity android:name=".Judge.Judge2aRun_Walk_TestActivity" />
-        <activity android:name=".Judge.JudgeHomePageParticipantRegistrationActivity"></activity>
+        <activity android:name=".Judge.JudgeHomePageParticipantRegistrationActivity" />
         <activity android:name=".ServiceCoordinator.CoordinatorServiceSummaryScreenActivity" />
-        <activity android:name=".ServiceCoordinator.CoordinatorRegistration4b_4EventActivity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorRegistration4b_4EventActivity">
+        </activity>
         <activity android:name=".ServiceCoordinator.CoordinatorRegistration4a_4FacilityActivity" />
         <activity android:name=".ServiceCoordinator.CoordinatorRegistration3_4Activity" />
         <activity android:name=".ServiceCoordinator.CoordinatorRegistration2b_4EventActivity" />
@@ -49,8 +52,15 @@
         <activity android:name=".ServiceCoordinator.CoordinatorInformedConsentScreen1b_7Activity" />
         <activity android:name=".ServiceCoordinator.CoordinatorMedicalClearanceScreen1a_7Activity" />
         <activity android:name=".ServiceCoordinator.CoordinatorCheck_InScreen1_7Activity" />
-        <activity android:name=".ServiceCoordinator.CoordinatorReservationsScreenActivity" />
-        <activity android:name=".ServiceCoordinator.ServiceCoordinatorHomePageActivity" />
+        <activity android:name=".ServiceCoordinator.CoordinatorReservationsScreenActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ServiceCoordinator.ServiceCoordinatorHomePageActivity" >
+
+        </activity>
         <activity android:name=".AffiliteTeamCaptain.CategoryTeamAlreadyMemberActivity" />
         <activity android:name=".AffiliteTeamCaptain.MembersScreenOfTeamCaptainActivity" />
         <activity android:name=".AffiliteTeamCaptain.MembersScreenOfCoCaptainsActivity" />
@@ -126,7 +136,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDfzZIAt3V2ck7R46NJ3BsbJHpPFPt2rZ0" />
 
-        <activity android:name=".ExtraUnusedClasses.Participent"></activity>
+        <activity android:name=".ExtraUnusedClasses.Participent" />
         <activity android:name=".ExtraUnusedClasses.OneServiceCard" />
         <activity android:name=".ExtraUnusedClasses.MorePages" />
         <activity android:name=".ExtraUnusedClasses.Profile" />
@@ -138,16 +148,14 @@
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppFullScreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".EventAndServices.CrossComp" />
         <activity android:name=".EventAndServices.Dashboard" />
         <activity android:name=".Authentication.Registration" />
-        <activity android:name=".Authentication.MainActivity" />
+        <activity android:name=".Authentication.MainActivity" >
+
+            </activity>
 
         <uses-library
             android:name="org.apache.http.legacy"

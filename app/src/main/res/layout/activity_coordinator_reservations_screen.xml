@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
@@ -30,260 +35,28 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    
-        <LinearLayout
-            android:layout_below="@+id/appbar_layout"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_parent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/grey">
-
-            <androidx.cardview.widget.CardView
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:cardCornerRadius="@dimen/_12sdp"
-                >
+            android:layout_height="@dimen/_450sdp"/>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="@dimen/_7sdp"
+            android:id="@+id/MoveToScore"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/res"
+            android:backgroundTint="@color/blue"
+            android:text="SERVICE COORDINATER"
+            android:onClick="moveToServiceCoordinater"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_5sdp"
+            />
+    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Sun, Sep 23, 1-4 pm"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="BreckenFit Gym"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Richard Garcia"
-                        android:textColor="@color/colorRed"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"
-                        android:drawableRight="@drawable/message_icon_img"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:cardCornerRadius="@dimen/_12sdp"
-                >
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Tue, Oct 6, 5-7 pm"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="BreckenFit Gym"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Glen Holloway"
-                        android:textColor="@color/green"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"
-                        android:drawableRight="@drawable/message_icon_img"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:cardCornerRadius="@dimen/_12sdp"
-                >
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Thu, Oct 8, 7-9 am"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="BreckenFit Gym"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Patricia Madison"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"
-                        android:drawableRight="@drawable/message_icon_img"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Amy Brooks"
-                        android:textColor="@color/green"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"
-                        android:drawableRight="@drawable/message_icon_img"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:cardCornerRadius="@dimen/_12sdp"
-                >
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Sat, Oct 10, 9am – 12noon"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Bordwell Park Fitness Days"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Richard Brown"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingStart="@dimen/_30sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_30sdp"
-                        android:drawableRight="@drawable/message_icon_img"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_marginTop="@dimen/_7sdp"
-        android:id="@+id/MoveToScore"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal|bottom"
-        android:background="@drawable/res"
-        android:backgroundTint="@color/blue"
-        android:text="Service Coordinator"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginBottom="@dimen/_28sdp"
-        />
-</RelativeLayout>
+</LinearLayout>

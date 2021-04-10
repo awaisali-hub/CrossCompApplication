@@ -66,14 +66,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="4">
+                    android:weightSum="2">
 
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:layout_weight="5">
+                        android:layout_weight="1.1">
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -84,82 +84,91 @@
                             android:layout_gravity="center_vertical"
                             >
                             <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="100dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/edittext"
                                 android:inputType="textCapSentences"
                                 android:paddingTop="12dp"
+                                android:maxLength="13"
+                                android:maxLines="1"
+                                android:text="April 10,2021"
                                 android:textColorHint="@color/white"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 android:textAlignment="center">
                             </com.google.android.material.textfield.TextInputEditText>
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="70dp"
+                            android:layout_width="80dp"
                             android:layout_height="50dp"
                             android:layout_marginBottom="3dp"
-                            android:layout_marginLeft="@dimen/_1sdp"
+                            android:layout_marginStart="@dimen/_3sdp"
                             android:layout_gravity="center_vertical"
                             >
                             <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="70dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/edittext"
                                 android:inputType="textCapSentences"
                                 android:paddingTop="12dp"
+                                android:text="Sat"
                                 android:textColorHint="@color/white"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 android:textAlignment="center">
                             </com.google.android.material.textfield.TextInputEditText>
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_weight="2">
+                        android:layout_weight=".9">
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/event1_session1StartAm"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:maxLength="5"
+                                    android:paddingTop="12dp"
+                                    android:textAlignment="center"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp">
+                                </com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
+
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:id="@+id/event1_session1EndAm"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:inputType="textCapSentences"
+                                    android:maxLength="5"
                                     android:paddingTop="12dp"
+                                    android:textAlignment="center"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
-                            </com.google.android.material.textfield.TextInputLayout>
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
-                                android:layout_height="50dp"
-                                android:layout_marginBottom="3dp"
-                                android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp">
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/edittext"
-                                    android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
-                                    android:paddingTop="12dp"
-                                    android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
+                                    android:textSize="12sp">
                                 </com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -169,41 +178,47 @@
                             android:orientation="horizontal">
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/event1_session2Startpm"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
+                                    android:paddingTop="12dp"
+                                    android:textAlignment="center"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp">
+                                </com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
+
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:id="@+id/event1_session2Endpm"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
                                     android:paddingTop="12dp"
+                                    android:textAlignment="center"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
-                            </com.google.android.material.textfield.TextInputLayout>
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
-                                android:layout_height="50dp"
-                                android:layout_marginBottom="3dp"
-                                android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp">
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/edittext"
-                                    android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
-                                    android:paddingTop="12dp"
-                                    android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -219,14 +234,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="4">
+                    android:weightSum="2">
 
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:layout_weight="5">
+                        android:layout_weight="1.1">
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -237,83 +252,93 @@
                             android:layout_gravity="center_vertical"
                             >
                             <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="100dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/edittext"
                                 android:inputType="textCapSentences"
                                 android:paddingTop="12dp"
+                                android:maxLength="13"
+                                android:maxLines="1"
+                                android:text="April 10,2021"
                                 android:textColorHint="@color/white"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 android:textAlignment="center">
                             </com.google.android.material.textfield.TextInputEditText>
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="70dp"
+                            android:layout_width="80dp"
                             android:layout_height="50dp"
                             android:layout_marginBottom="3dp"
-                            android:layout_marginLeft="@dimen/_1sdp"
+                            android:layout_marginStart="@dimen/_3sdp"
                             android:layout_gravity="center_vertical"
                             >
                             <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="70dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/edittext"
                                 android:inputType="textCapSentences"
                                 android:paddingTop="12dp"
+                                android:text="Sat"
                                 android:textColorHint="@color/white"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 android:textAlignment="center">
                             </com.google.android.material.textfield.TextInputEditText>
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_weight="2">
+                        android:layout_weight=".9">
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
+
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:id="@+id/event2_session1StartAm"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
                                     android:paddingTop="12dp"
+                                    android:textAlignment="center"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp">
+                                android:paddingEnd="@dimen/_5sdp"
+                                >
+
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:id="@+id/event2_session1EndAm"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:paddingStart="30dp"
                                     android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
                                     android:paddingTop="12dp"
+                                    android:textAlignment="center"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                         <LinearLayout
@@ -322,41 +347,217 @@
                             android:orientation="horizontal">
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
+
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:id="@+id/event2_session2Startpm"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
                                     android:paddingTop="12dp"
+                                    android:textAlignment="center"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp">
+                                android:paddingEnd="@dimen/_5sdp"
+                                >
+
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:id="@+id/event2_session2Endpm"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:paddingStart="30dp"
                                     android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
                                     android:paddingTop="12dp"
+                                    android:textAlignment="center"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/black" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1.1">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="110dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="3dp"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:layout_gravity="center_vertical"
+                            >
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext"
+                                android:inputType="textCapSentences"
+                                android:paddingTop="12dp"
+                                android:maxLength="13"
+                                android:maxLines="1"
+                                android:text="April 10,2021"
+                                android:textColorHint="@color/white"
+                                android:textSize="12sp"
+                                android:textAlignment="center">
+                            </com.google.android.material.textfield.TextInputEditText>
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="80dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_gravity="center_vertical"
+                            >
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext"
+                                android:inputType="textCapSentences"
+                                android:paddingTop="12dp"
+                                android:text="Sat"
+                                android:textColorHint="@color/white"
+                                android:textSize="12sp"
+                                android:textAlignment="center">
+                            </com.google.android.material.textfield.TextInputEditText>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight=".9">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="80dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                >
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/event3_session1StartAm"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
+                                    android:paddingTop="12dp"
+                                    android:textAlignment="center"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="80dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                >
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/event3_session1EndAm"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
+                                    android:paddingTop="12dp"
+                                    android:textAlignment="center"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="80dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                >
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/event3_session2Startpm"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
+                                    android:paddingTop="12dp"
+                                    android:textAlignment="center"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="80dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                >
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/event3_session2Endpm"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
+                                    android:paddingTop="12dp"
+                                    android:textAlignment="center"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -372,14 +573,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="4">
+                    android:weightSum="2">
 
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:layout_weight="5">
+                        android:layout_weight="1.1">
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -390,83 +591,93 @@
                             android:layout_gravity="center_vertical"
                             >
                             <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="100dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/edittext"
                                 android:inputType="textCapSentences"
                                 android:paddingTop="12dp"
+                                android:maxLength="13"
+                                android:maxLines="1"
+                                android:text="April 10,2021"
                                 android:textColorHint="@color/white"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 android:textAlignment="center">
                             </com.google.android.material.textfield.TextInputEditText>
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="70dp"
+                            android:layout_width="80dp"
                             android:layout_height="50dp"
                             android:layout_marginBottom="3dp"
-                            android:layout_marginLeft="@dimen/_1sdp"
+                            android:layout_marginStart="@dimen/_3sdp"
                             android:layout_gravity="center_vertical"
                             >
                             <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="70dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/edittext"
                                 android:inputType="textCapSentences"
                                 android:paddingTop="12dp"
+                                android:text="Sat"
                                 android:textColorHint="@color/white"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 android:textAlignment="center">
                             </com.google.android.material.textfield.TextInputEditText>
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_weight="2">
+                        android:layout_weight=".9">
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
+
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:id="@+id/event4_session1Startam"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
                                     android:paddingTop="12dp"
+                                    android:textAlignment="center"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp">
+                                android:paddingEnd="@dimen/_5sdp"
+                                >
+
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:id="@+id/event4_session1Endam"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:paddingStart="30dp"
                                     android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
                                     android:paddingTop="12dp"
+                                    android:textAlignment="center"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                         <LinearLayout
@@ -475,41 +686,47 @@
                             android:orientation="horizontal">
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
                                 android:paddingEnd="@dimen/_5sdp"
                                 >
+
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:id="@+id/event4_session2Startpm"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
                                     android:paddingTop="12dp"
+                                    android:textAlignment="center"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp">
+                                android:paddingEnd="@dimen/_5sdp"
+                                >
+
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:id="@+id/event4_session2Endpm"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:paddingStart="30dp"
                                     android:inputType="textCapSentences"
+                                    android:maxLength="5"
+
                                     android:paddingTop="12dp"
+                                    android:textAlignment="center"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
+                                    android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -520,161 +737,870 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@android:color/black" />
+<LinearLayout
+    android:id="@+id/layout1"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-                <LinearLayout
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1.1">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="3dp"
+                android:paddingStart="@dimen/_5sdp"
+                android:layout_gravity="center_vertical"
+                >
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="4">
+                    android:background="@drawable/edittext"
+                    android:inputType="textCapSentences"
+                    android:paddingTop="12dp"
+                    android:maxLength="13"
+                    android:maxLines="1"
+                    android:text="April 10,2021"
+                    android:textColorHint="@color/white"
+                    android:textSize="12sp"
+                    android:textAlignment="center">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_gravity="center_vertical"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext"
+                    android:inputType="textCapSentences"
+                    android:paddingTop="12dp"
+                    android:text="Sat"
+                    android:textColorHint="@color/white"
+                    android:textSize="12sp"
+                    android:textAlignment="center">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight=".9">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="3dp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    >
 
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_weight="5">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="110dp"
-                            android:layout_height="50dp"
-                            android:layout_marginBottom="3dp"
-                            android:paddingStart="@dimen/_5sdp"
-                            android:layout_gravity="center_vertical"
-                            >
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="100dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/edittext"
-                                android:inputType="textCapSentences"
-                                android:paddingTop="12dp"
-                                android:textColorHint="@color/white"
-                                android:textSize="14sp"
-                                android:textAlignment="center">
-                            </com.google.android.material.textfield.TextInputEditText>
-                        </com.google.android.material.textfield.TextInputLayout>
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="70dp"
-                            android:layout_height="50dp"
-                            android:layout_marginBottom="3dp"
-                            android:layout_marginLeft="@dimen/_1sdp"
-                            android:layout_gravity="center_vertical"
-                            >
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="70dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/edittext"
-                                android:inputType="textCapSentences"
-                                android:paddingTop="12dp"
-                                android:textColorHint="@color/white"
-                                android:textSize="14sp"
-                                android:textAlignment="center">
-                            </com.google.android.material.textfield.TextInputEditText>
-                        </com.google.android.material.textfield.TextInputLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event6_session1Startam"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="2">
+                        android:background="@drawable/edittext"
+                        android:inputType="textCapSentences"
+                        android:maxLength="5"
+
+                        android:paddingTop="12dp"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/white"
+                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="3dp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event6_session1Endam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext"
+                        android:inputType="textCapSentences"
+                        android:maxLength="5"
+
+                        android:paddingTop="12dp"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/white"
+                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="3dp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event6_session2Startpm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext"
+                        android:inputType="textCapSentences"
+                        android:maxLength="5"
+
+                        android:paddingTop="12dp"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/white"
+                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="3dp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/event6_session2Endpm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext"
+                        android:inputType="textCapSentences"
+                        android:maxLength="5"
+
+                        android:paddingTop="12dp"
+                        android:textAlignment="center"
+                        android:textColorHint="@color/white"
+                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black" />
+</LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_weight="1.1">
+
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="110dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
                                 android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp"
+                                android:layout_gravity="center_vertical"
                                 >
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
                                     android:inputType="textCapSentences"
                                     android:paddingTop="12dp"
+                                    android:maxLength="13"
+                                    android:maxLines="1"
+                                    android:text="April 10,2021"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
+                                    android:textSize="12sp"
                                     android:textAlignment="center">
                                 </com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
+                                android:layout_width="80dp"
                                 android:layout_height="50dp"
                                 android:layout_marginBottom="3dp"
-                                android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp">
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:layout_gravity="center_vertical"
+                                >
                                 <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/edittext"
-                                    android:paddingStart="30dp"
                                     android:inputType="textCapSentences"
                                     android:paddingTop="12dp"
+                                    android:text="Sat"
                                     android:textColorHint="@color/white"
-                                    android:textSize="14sp"
+                                    android:textSize="12sp"
                                     android:textAlignment="center">
                                 </com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
-                                android:layout_height="50dp"
-                                android:layout_marginBottom="3dp"
-                                android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp"
-                                >
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/edittext"
-                                    android:inputType="textCapSentences"
-                                    android:paddingTop="12dp"
-                                    android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
-                            </com.google.android.material.textfield.TextInputLayout>
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="115dp"
-                                android:layout_height="50dp"
-                                android:layout_marginBottom="3dp"
-                                android:paddingStart="@dimen/_5sdp"
-                                android:paddingEnd="@dimen/_5sdp">
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:layout_width="100dp"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/edittext"
-                                    android:paddingStart="30dp"
-                                    android:inputType="textCapSentences"
-                                    android:paddingTop="12dp"
-                                    android:textColorHint="@color/white"
-                                    android:textSize="14sp"
-                                    android:textAlignment="center">
-                                </com.google.android.material.textfield.TextInputEditText>
-                            </com.google.android.material.textfield.TextInputLayout>
+                            android:orientation="vertical"
+                            android:layout_weight=".9">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event5_session1Startam"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event5_session1Endam"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event5_session2Startpm"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event5_session2Endpm"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
                         </LinearLayout>
+
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout3"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_weight="1.1">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="110dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:layout_gravity="center_vertical"
+                                >
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:paddingTop="12dp"
+                                    android:maxLength="13"
+                                    android:maxLines="1"
+                                    android:text="April 10,2021"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp"
+                                    android:textAlignment="center">
+                                </com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="80dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:layout_gravity="center_vertical"
+                                >
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:paddingTop="12dp"
+                                    android:text="Sat"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp"
+                                    android:textAlignment="center">
+                                </com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight=".9">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event7_session1Startam"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event7_session1Endam"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event7_session2Startpm"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event7_session2Endpm"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout4"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_weight="1.1">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="110dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:layout_gravity="center_vertical"
+                                >
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:paddingTop="12dp"
+                                    android:maxLength="13"
+                                    android:maxLines="1"
+                                    android:text="April 10,2021"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp"
+                                    android:textAlignment="center">
+                                </com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="80dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:layout_gravity="center_vertical"
+                                >
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:paddingTop="12dp"
+                                    android:text="Sat"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp"
+                                    android:textAlignment="center">
+                                </com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight=".9">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event8_session1Startam"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event8_session1Endam"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event8_session2Startpm"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event8_session2Endpm"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout5"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_weight="1.1">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="110dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:layout_gravity="center_vertical"
+                                >
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:paddingTop="12dp"
+                                    android:maxLength="13"
+                                    android:maxLines="1"
+                                    android:text="April 10,2021"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp"
+                                    android:textAlignment="center">
+                                </com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="80dp"
+                                android:layout_height="50dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:layout_gravity="center_vertical"
+                                >
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext"
+                                    android:inputType="textCapSentences"
+                                    android:paddingTop="12dp"
+                                    android:text="Sat"
+                                    android:textColorHint="@color/white"
+                                    android:textSize="12sp"
+                                    android:textAlignment="center">
+                                </com.google.android.material.textfield.TextInputEditText>
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight=".9">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event9_session1Startam"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event9_session1Endam"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event9_session2Startpm"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingEnd="@dimen/_5sdp"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/event9_session2Endpm"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edittext"
+                                        android:inputType="textCapSentences"
+                                        android:maxLength="5"
+
+                                        android:paddingTop="12dp"
+                                        android:textAlignment="center"
+                                        android:textColorHint="@color/white"
+                                        android:textSize="12sp"></com.google.android.material.textfield.TextInputEditText>
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/black" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/black" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:onClick="addNewEvent"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -688,6 +1614,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:onClick="moverToSummery"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"

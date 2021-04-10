@@ -80,6 +80,7 @@ public class CoordinatorRegistration2b_4EventActivity extends AppCompatActivity 
             Toast.makeText(this, "Event Name Required", Toast.LENGTH_SHORT).show();
         }else{
             editor.putString("serviceOrEvent",acTextView.getText().toString());
+            editor.putString("organizationName",organizationName.getText().toString());
             editor.apply();
             startActivity(new Intent(CoordinatorRegistration2b_4EventActivity.this,CoordinatorRegistration3_4Activity.class));
         }

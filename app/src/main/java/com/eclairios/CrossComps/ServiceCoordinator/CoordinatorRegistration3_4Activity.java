@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,12 +28,21 @@ public class CoordinatorRegistration3_4Activity extends AppCompatActivity {
         state = findViewById(R.id.state);
         postalCode = findViewById(R.id.postalCode);
 
+
     }
 
     public void Registration4_4(View view) {
-
+        Log.d("organizationName", "Registration4_4: ");
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String EventOrService = preferences.getString("serviceOrEvent", null);
+        String organizationName = preferences.getString("organizationName", null);
+        String serviceName = preferences.getString("serviceName", null);
+
+             preferences.edit().putString("street",street.getText().toString()).apply();
+             preferences.edit().putString("city",city.getText().toString()).apply();
+             preferences.edit().putString("state",state.getText().toString()).apply();
+             preferences.edit().putString("postalCode",postalCode.getText().toString()).apply();
+
 
         if(TextUtils.isEmpty(street.getText().toString())){
             Toast.makeText(this, "Street Name Required", Toast.LENGTH_SHORT).show();

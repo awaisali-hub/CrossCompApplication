@@ -1157,6 +1157,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
+
                     android:layout_marginTop="@dimen/_7sdp"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -1169,6 +1170,7 @@
                     android:onClick="Registration4b4"
                     />
                 <androidx.appcompat.widget.AppCompatButton
+
                     android:layout_marginTop="@dimen/_7sdp"
                     android:id="@+id/MoveToScore"
                     android:layout_width="200dp"
