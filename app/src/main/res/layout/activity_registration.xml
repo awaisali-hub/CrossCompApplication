@@ -49,7 +49,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 app:boxCornerRadiusTopEnd="@dimen/_18sdp"
                 app:boxCornerRadiusBottomStart="@dimen/_18sdp"
@@ -73,7 +73,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 app:boxCornerRadiusTopEnd="@dimen/_18sdp"
                 app:boxCornerRadiusBottomStart="@dimen/_18sdp"
@@ -98,7 +98,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 app:boxCornerRadiusTopEnd="@dimen/_18sdp"
                 app:boxCornerRadiusBottomStart="@dimen/_18sdp"
                 app:boxCornerRadiusTopStart="@dimen/_18sdp"
@@ -124,7 +124,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 app:boxCornerRadiusTopEnd="@dimen/_18sdp"
                 app:boxCornerRadiusBottomStart="@dimen/_18sdp"
                 app:boxCornerRadiusTopStart="@dimen/_18sdp"
@@ -148,7 +148,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 app:boxCornerRadiusTopEnd="@dimen/_18sdp"
                 app:boxCornerRadiusBottomStart="@dimen/_18sdp"
@@ -160,7 +160,6 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:hint="Password"
                     android:maxLines="1"
                     android:inputType="textEmailAddress"
@@ -213,13 +212,16 @@
 
             <LinearLayout
                 android:layout_marginBottom="3dp"
-                android:background="@drawable/edittext"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:orientation="horizontal"
-                android:padding="10dip"
+                android:paddingRight="10dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 >
 
@@ -227,7 +229,7 @@
                     android:layout_gravity="center_vertical"
                     android:id="@+id/country_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:paddingStart="8dp"
                     android:paddingEnd="@dimen/_10sdp"
                     />
@@ -235,20 +237,22 @@
 
             <LinearLayout
                 android:layout_marginBottom="3dp"
-                android:background="@drawable/edittext"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:orientation="horizontal"
-                android:padding="10dip"
+                android:paddingRight="10dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_gravity="center_horizontal">
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp">
 
                 <Spinner
                     android:id="@+id/state_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:paddingStart="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:entries="@array/States"
@@ -257,20 +261,22 @@
 
             <LinearLayout
                 android:layout_marginBottom="3dp"
-                android:background="@drawable/edittext"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:orientation="horizontal"
-                android:padding="10dip"
+                android:paddingRight="10dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_gravity="center_horizontal">
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp">
 
                 <Spinner
                     android:id="@+id/city_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:paddingStart="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:clickable="false"
@@ -281,20 +287,22 @@
 
             <LinearLayout
                 android:layout_marginBottom="3dp"
-                android:background="@drawable/edittext"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:orientation="horizontal"
-                android:padding="10dip"
+                android:paddingRight="10dip"
+                android:paddingLeft="10dip"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_gravity="center_horizontal">
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp">
 
                 <Spinner
                     android:id="@+id/postalCode_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:paddingStart="@dimen/_8sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:clickable="false"

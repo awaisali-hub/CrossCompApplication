@@ -53,7 +53,7 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginEnd="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     app:boxCornerRadiusTopEnd="@dimen/_18sdp"
                 app:boxCornerRadiusBottomStart="@dimen/_18sdp"
                 app:boxCornerRadiusTopStart="@dimen/_18sdp"
@@ -84,7 +84,7 @@
                     app:boxCornerRadiusTopStart="@dimen/_18sdp"
                     app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password"
