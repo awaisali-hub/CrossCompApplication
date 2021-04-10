@@ -16,4 +16,6 @@ public interface InterfaceForSetTeams {
     void Faith();
     void GymBrand();
     void FriendFamily();
+
+    void SelectCommunity();
 }

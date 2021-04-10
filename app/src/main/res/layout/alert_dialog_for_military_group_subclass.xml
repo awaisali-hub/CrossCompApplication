@@ -47,7 +47,7 @@
             android:layout_marginBottom="3dp"
             android:layout_marginTop="@dimen/_10sdp">
             <AutoCompleteTextView
-                android:id="@+id/companyTeamNameAutoText"
+                android:id="@+id/militaryLocalTeamNameAutoText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
