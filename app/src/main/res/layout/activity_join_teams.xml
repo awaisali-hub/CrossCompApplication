@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Join Teams"
+                android:text="Teams Categories"
                 android:textSize="20sp"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
@@ -33,6 +33,7 @@
 
 
     <LinearLayout
+        android:id="@+id/linear_layout_"
         android:layout_marginTop="@dimen/_2sdp"
         android:layout_below="@+id/appbar_layout"
         android:layout_width="match_parent"

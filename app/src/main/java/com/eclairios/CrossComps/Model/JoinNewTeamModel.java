@@ -2,6 +2,47 @@ package com.eclairios.CrossComps.Model;
 
 public class JoinNewTeamModel {
     String TeamID,TeamName,ParentTeamID,teamStatus,teamType,SelectedTeamOpenType,teamCategory;
+    String countryTeamID,stateTeamID,cityTeamID,postalCodeID,communityTeamID;
+
+    public String getPostalCodeID() {
+        return postalCodeID;
+    }
+
+    public void setPostalCodeID(String postalCodeID) {
+        this.postalCodeID = postalCodeID;
+    }
+
+    public String getCountryTeamID() {
+        return countryTeamID;
+    }
+
+    public void setCountryTeamID(String countryTeamID) {
+        this.countryTeamID = countryTeamID;
+    }
+
+    public String getStateTeamID() {
+        return stateTeamID;
+    }
+
+    public void setStateTeamID(String stateTeamID) {
+        this.stateTeamID = stateTeamID;
+    }
+
+    public String getCityTeamID() {
+        return cityTeamID;
+    }
+
+    public void setCityTeamID(String cityTeamID) {
+        this.cityTeamID = cityTeamID;
+    }
+
+    public String getCommunityTeamID() {
+        return communityTeamID;
+    }
+
+    public void setCommunityTeamID(String communityTeamID) {
+        this.communityTeamID = communityTeamID;
+    }
 
     public JoinNewTeamModel() {
     }

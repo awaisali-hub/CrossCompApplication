@@ -53,10 +53,7 @@
         <activity android:name=".ServiceCoordinator.CoordinatorMedicalClearanceScreen1a_7Activity" />
         <activity android:name=".ServiceCoordinator.CoordinatorCheck_InScreen1_7Activity" />
         <activity android:name=".ServiceCoordinator.CoordinatorReservationsScreenActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".ServiceCoordinator.ServiceCoordinatorHomePageActivity" >
 
@@ -117,6 +114,8 @@
         <activity android:name=".Teams.MyFundraisingTeamDetailActivity" />
         <activity android:name=".Teams.TeamsScoreActivity" />
         <activity android:name=".Teams.TeamsAccordingPostalCodeActivity" />
+        <activity android:name=".Teams.JoinTeamsActivity" />
+
         <activity android:name=".ExtraUnusedClasses.AllTeamCategoryActivity" />
         <activity android:name=".ExtraUnusedClasses.ShowTimeRangeForEventActivity" />
         <activity android:name=".ExtraUnusedClasses.ShowDateForReservationActivity" />
@@ -148,6 +147,11 @@
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppFullScreenTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".EventAndServices.CrossComp" />

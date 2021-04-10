@@ -19,10 +19,15 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.eclairios.CrossComps.Adapter.MyCrossCompUserSelectedTeamAdapter;
 import com.eclairios.CrossComps.Adapter.UnSelectedTeamAdapter;
+import com.eclairios.CrossComps.Authentication.Registration;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTask;
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTaskForJoinTeams;
+import com.eclairios.CrossComps.EventAndServices.Dashboard;
 import com.eclairios.CrossComps.Interface.InterfaceForSetTeams;
 import com.eclairios.CrossComps.MainFragments.TeamsFragment;
 import com.eclairios.CrossComps.Model.JoinNewTeamModel;
@@ -66,7 +71,7 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
     String SelectedPostalCode;
     String SelectedTeamGeneralID;
-    Button joinTeamBtn;
+    Button joinTeamBtn,confirmBtn,addTeamButton;
 
 
     ArrayList<JoinNewTeamModel> communityTeamsArray = new ArrayList();
@@ -89,9 +94,9 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
     ArrayList<JoinNewTeamModel> professionalSchoolClassTeamsArray = new ArrayList();
     private ArrayAdapter<JoinNewTeamModel> professionalSchoolClassTeam_adapter;
+    private ArrayAdapter<JoinNewTeamModel> militaryBranchTeam_adapter;
 
     ArrayList<JoinNewTeamModel> militaryBranchTeamsArray = new ArrayList();
-    private ArrayAdapter<JoinNewTeamModel> militaryBranchTeam_adapter;
 
     ArrayList<JoinNewTeamModel> militaryBranchLocalTeamsArray = new ArrayList();
     private ArrayAdapter<JoinNewTeamModel> militaryBranchLocalTeam_adapter;
@@ -170,16 +175,18 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
         LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.alert_dialog_for_high_school_subclass,null);
+        View dialogView = inflater.inflate(R.layout.alert_dialog_for_community,null);
         builder.setCancelable(true);
         builder.setView(dialogView);
 
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+        confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
+        addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
         communityTeamsArray.clear();
 
         communityTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, communityTeamsArray);
-        communityTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.highSchoolClassTeamNameAutoText);
+        communityTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.communityTeamNameAutoText);
         communityTeamNameAutoText.setThreshold(1);
         communityTeamNameAutoText.setAdapter(communityTeam_adapter);
 
@@ -190,16 +197,24 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                becomeVolunteerBtn.getLayoutParams().width=500;
-                becomeVolunteerBtn.setText("Add Team");
+                addTeamButton.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setVisibility(View.GONE);
 
 
                 communityTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) communityTeamNameAutoText.getAdapter();
-                CommunityID = communityTeam_adapter.getItem(position).getTeamID();
-                CityID = communityTeam_adapter.getItem(position).getParentTeamID();
-                Log.e("dsfdsfsd", "onItemClick: "+CommunityID );
+
+                CountryID = communityTeam_adapter.getItem(position).getCountryTeamID();
+                StateID = communityTeam_adapter.getItem(position).getStateTeamID();
+                CityID = communityTeam_adapter.getItem(position).getCityTeamID();
+                PostalCodeID = communityTeam_adapter.getItem(position).getPostalCodeID();
+                CommunityID = communityTeam_adapter.getItem(position).getCommunityTeamID();
+
+
+                Log.e("dsfdsfsd", "onItemClick: "+CountryID );
+                Log.e("dsfdsfsd", "onItemClick: "+StateID );
                 Log.e("dsfdsfsd", "onItemClick: "+CityID );
+                Log.e("dsfdsfsd", "onItemClick: "+PostalCodeID );
+                Log.e("dsfdsfsd", "onItemClick: "+CommunityID );
 
             }
         });
@@ -237,21 +252,22 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                                                     while(count < communityTeamsArray.size())
                                                     {
                                                         if(communityTeamsArray.get(count).getTeamName().equals(words)){
-                                                            becomeVolunteerBtn.setText("Add Team");
-                                                            becomeVolunteerBtn.getLayoutParams().width=500;
+                                                            addTeamButton.setVisibility(View.VISIBLE);
                                                             break;
                                                         }else{
                                                             Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
                                                             becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Community");
                                                         }
                                                         count++;
 
                                                     }
 
                                                 }else{
-                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                    becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    addTeamButton.setVisibility(View.GONE);
+                                                    confirmBtn.setVisibility(View.GONE);
                                                 }
 
                                             }   //closes run(){}
@@ -273,6 +289,27 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     }
                 }
         );
+
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTeamButton.getText().toString().equals("Add Team")){
+                    confirmBtn.setVisibility(View.VISIBLE);
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                            String currentUserID = preferences.getString("CurrentUserId", "");
+
+                            String method = "joinCommunityTeams";
+
+                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                            backgroundTask.execute(method,currentUserID,CountryID,StateID,CityID,PostalCodeID,CommunityID);
+                        }
+                    });
+                }
+            }
+        });
     }
 
     public void SelectHighSchool(){
@@ -285,8 +322,11 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         builder.setView(dialogView);
 
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+        confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
+        addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
         highSchoolClassTeamsArray.clear();
+
 
         highSchoolClassTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, highSchoolClassTeamsArray);
         highSchoolClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.highSchoolClassTeamNameAutoText);
@@ -300,10 +340,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                becomeVolunteerBtn.getLayoutParams().width=500;
-                becomeVolunteerBtn.setText("Add Team");
-
+                addTeamButton.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setVisibility(View.GONE);
 
                 highSchoolClassTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) highSchoolClassTeamNameAutoText.getAdapter();
                 HighSchoolClassTeamID = highSchoolClassTeam_adapter.getItem(position).getTeamID();
@@ -347,21 +385,22 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                                                     while(count < highSchoolClassTeamsArray.size())
                                                     {
                                                         if(highSchoolClassTeamsArray.get(count).getTeamName().equals(words)){
-                                                            becomeVolunteerBtn.setText("Add Team");
-                                                            becomeVolunteerBtn.getLayoutParams().width=500;
+                                                            addTeamButton.setVisibility(View.VISIBLE);
                                                             break;
                                                         }else{
                                                             Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
                                                             becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your High School Class");
                                                         }
                                                         count++;
 
                                                     }
 
                                                 }else{
-                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                    becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    addTeamButton.setVisibility(View.GONE);
+                                                    confirmBtn.setVisibility(View.GONE);
                                                 }
 
                                             }   //closes run(){}
@@ -383,6 +422,29 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     }
                 }
         );
+
+
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTeamButton.getText().toString().equals("Add Team")){
+                    confirmBtn.setVisibility(View.VISIBLE);
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                            String currentUserID = preferences.getString("CurrentUserId", "");
+
+                            String method = "joinTeams";
+                            String teamType = "HighSchool";
+
+                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                            backgroundTask.execute(method,currentUserID, teamType, HighSchoolTeamID,HighSchoolClassTeamID );
+                        }
+                    });
+                }
+            }
+        });
 //        new BackgroundTaskForAllHighSchoolTeams().execute();
 //
 //        AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
@@ -623,6 +685,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         builder.setView(dialogView);
 
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+        confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
+        addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
         collegeUniversityClassTeamsArray.clear();
 
@@ -638,9 +702,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                becomeVolunteerBtn.getLayoutParams().width=500;
-                becomeVolunteerBtn.setText("Add Team");
+                addTeamButton.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setVisibility(View.GONE);
 
 
                 collegeUniversityClassTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) collegeClassTeamNameAutoText.getAdapter();
@@ -684,21 +747,22 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                                                     while(count < collegeUniversityClassTeamsArray.size())
                                                     {
                                                         if(collegeUniversityClassTeamsArray.get(count).getTeamName().equals(words)){
-                                                            becomeVolunteerBtn.setText("Add Team");
-                                                            becomeVolunteerBtn.getLayoutParams().width=500;
+                                                            addTeamButton.setVisibility(View.VISIBLE);
                                                             break;
                                                         }else{
                                                             Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
                                                             becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your College/University Class");
                                                         }
                                                         count++;
 
                                                     }
 
                                                 }else{
-                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                    becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    addTeamButton.setVisibility(View.GONE);
+                                                    confirmBtn.setVisibility(View.GONE);
                                                 }
 
                                             }   //closes run(){}
@@ -721,7 +785,27 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 }
         );
 
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTeamButton.getText().toString().equals("Add Team")){
+                    confirmBtn.setVisibility(View.VISIBLE);
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                            String currentUserID = preferences.getString("CurrentUserId", "");
 
+                            String method = "joinTeams";
+                            String teamType = "CollegeUniversity";
+
+                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                            backgroundTask.execute(method,currentUserID, teamType, CollegeTeamID, CollegeClassTeamID);
+                        }
+                    });
+                }
+            }
+        });
 
 //               new BackgroundTaskForAllCollegeClass().execute();
 //
@@ -859,6 +943,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         builder.setView(dialogView);
 
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+        confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
+        addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
         professionalSchoolClassTeamsArray.clear();
 
@@ -874,9 +960,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                becomeVolunteerBtn.getLayoutParams().width=500;
-                becomeVolunteerBtn.setText("Add Team");
+                addTeamButton.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setVisibility(View.GONE);
 
 
                 professionalSchoolClassTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) professionalSchoolClassTeamNameAutoText.getAdapter();
@@ -921,21 +1006,22 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                                                     while(count < professionalSchoolClassTeamsArray.size())
                                                     {
                                                         if(professionalSchoolClassTeamsArray.get(count).getTeamName().equals(words)){
-                                                            becomeVolunteerBtn.setText("Add Team");
-                                                            becomeVolunteerBtn.getLayoutParams().width=500;
+                                                            addTeamButton.setVisibility(View.VISIBLE);
                                                             break;
                                                         }else{
                                                             Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
                                                             becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Professional School Class");
                                                         }
                                                         count++;
 
                                                     }
 
                                                 }else{
-                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                    becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    addTeamButton.setVisibility(View.GONE);
+                                                    confirmBtn.setVisibility(View.GONE);
                                                 }
 
                                             }   //closes run(){}
@@ -958,6 +1044,28 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 }
         );
 
+
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTeamButton.getText().toString().equals("Add Team")){
+                    confirmBtn.setVisibility(View.VISIBLE);
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                            String currentUserID = preferences.getString("CurrentUserId", "");
+
+                            String method = "joinTeams";
+                            String teamType = "ProfessionalSchool";
+
+                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                            backgroundTask.execute(method,currentUserID, teamType, ProfessionalSchoolID, ProfessionalSchoolClassID);
+                        }
+                    });
+                }
+            }
+        });
 
 //        new BackgroundTaskForProfessionalSchool().execute();
 //
@@ -1094,6 +1202,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         builder.setView(dialogView);
 
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+        confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
+        addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
         militaryBranchLocalTeamsArray.clear();
 
@@ -1109,9 +1219,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                becomeVolunteerBtn.getLayoutParams().width=500;
-                becomeVolunteerBtn.setText("Add Team");
+                addTeamButton.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setVisibility(View.GONE);
 
 
                 militaryBranchLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) militaryBranchLocalAutoText.getAdapter();
@@ -1156,21 +1265,22 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                                                     while(count < militaryBranchLocalTeamsArray.size())
                                                     {
                                                         if(militaryBranchLocalTeamsArray.get(count).getTeamName().equals(words)){
-                                                            becomeVolunteerBtn.setText("Add Team");
-                                                            becomeVolunteerBtn.getLayoutParams().width=500;
+                                                            addTeamButton.setVisibility(View.VISIBLE);
                                                             break;
                                                         }else{
                                                             Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
                                                             becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Local Military Group");
                                                         }
                                                         count++;
 
                                                     }
 
                                                 }else{
-                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                    becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    addTeamButton.setVisibility(View.GONE);
+                                                    confirmBtn.setVisibility(View.GONE);
                                                 }
 
                                             }   //closes run(){}
@@ -1192,6 +1302,28 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     }
                 }
         );
+
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTeamButton.getText().toString().equals("Add Team")){
+                    confirmBtn.setVisibility(View.VISIBLE);
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                            String currentUserID = preferences.getString("CurrentUserId", "");
+
+                            String method = "joinTeams";
+                            String teamType = "MilitaryBranch";
+
+                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                            backgroundTask.execute(method,currentUserID, teamType, MilitaryBranchID, MilitaryBranchLocalID);
+                        }
+                    });
+                }
+            }
+        });
 
 //        new BackgroundTaskForMilitaryBranch().execute();
 //
@@ -1329,6 +1461,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         builder.setView(dialogView);
 
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+        confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
+        addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
         occupationLocalTeamsArray.clear();
 
@@ -1344,9 +1478,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                becomeVolunteerBtn.getLayoutParams().width=500;
-                becomeVolunteerBtn.setText("Add Team");
+                addTeamButton.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setVisibility(View.GONE);
 
 
                 occupationLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) occupationTeamLocalNameAutoText.getAdapter();
@@ -1391,21 +1524,23 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                                                     while(count < occupationLocalTeamsArray.size())
                                                     {
                                                         if(occupationLocalTeamsArray.get(count).getTeamName().equals(words)){
-                                                            becomeVolunteerBtn.setText("Add Team");
-                                                            becomeVolunteerBtn.getLayoutParams().width=500;
+                                                            addTeamButton.setVisibility(View.VISIBLE);
+
                                                             break;
                                                         }else{
                                                             Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
                                                             becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Local Occupation Group");
                                                         }
                                                         count++;
 
                                                     }
 
                                                 }else{
-                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                    becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    addTeamButton.setVisibility(View.GONE);
+                                                    confirmBtn.setVisibility(View.GONE);
                                                 }
 
                                             }   //closes run(){}
@@ -1427,6 +1562,29 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     }
                 }
         );
+
+
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTeamButton.getText().toString().equals("Add Team")){
+                    confirmBtn.setVisibility(View.VISIBLE);
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                            String currentUserID = preferences.getString("CurrentUserId", "");
+
+                            String method = "joinTeams";
+                            String teamType = "OccupationGroup";
+
+                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                            backgroundTask.execute(method,currentUserID, teamType, OccupationID, OccupationLocalID);
+                        }
+                    });
+                }
+            }
+        });
 
 //        new BackgroundTaskForOccupation().execute();
 //
@@ -1561,6 +1719,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         builder.setView(dialogView);
 
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+        confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
+        addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
         companyLocalTeamsArray.clear();
 
@@ -1576,10 +1736,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                becomeVolunteerBtn.getLayoutParams().width=500;
-                becomeVolunteerBtn.setText("Add Team");
-
+                addTeamButton.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setVisibility(View.GONE);
 
                 companyLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) companyTeamLocalNameAutoText.getAdapter();
                 CompanyLocalID = companyLocalTeam_adapter.getItem(position).getTeamID();
@@ -1623,21 +1781,22 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                                                     while(count < companyLocalTeamsArray.size())
                                                     {
                                                         if(companyLocalTeamsArray.get(count).getTeamName().equals(words)){
-                                                            becomeVolunteerBtn.setText("Add Team");
-                                                            becomeVolunteerBtn.getLayoutParams().width=500;
+                                                            addTeamButton.setVisibility(View.VISIBLE);
                                                             break;
                                                         }else{
                                                             Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
                                                             becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Local Company Group");
                                                         }
                                                         count++;
 
                                                     }
 
                                                 }else{
-                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                    becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    addTeamButton.setVisibility(View.GONE);
+                                                    confirmBtn.setVisibility(View.GONE);
                                                 }
 
                                             }   //closes run(){}
@@ -1659,6 +1818,29 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     }
                 }
         );
+
+
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTeamButton.getText().toString().equals("Add Team")){
+                    confirmBtn.setVisibility(View.VISIBLE);
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                            String currentUserID = preferences.getString("CurrentUserId", "");
+
+                            String method = "joinTeams";
+                            String teamType = "CompanyGroup";
+
+                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                            backgroundTask.execute(method,currentUserID, teamType, CompanyID, CompanyLocalID);
+                        }
+                    });
+                }
+            }
+        });
 
 //        new BackgroundTaskForCompany().execute();
 //
@@ -1791,6 +1973,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         builder.setView(dialogView);
 
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+        confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
+        addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
         faithLocalTeamsArray.clear();
 
@@ -1806,10 +1990,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                becomeVolunteerBtn.getLayoutParams().width=500;
-                becomeVolunteerBtn.setText("Add Team");
-
+                addTeamButton.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setVisibility(View.GONE);
 
                 faithLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) faithTeamLocalNameAutoText.getAdapter();
                 FaithGroupLocalID = faithLocalTeam_adapter.getItem(position).getTeamID();
@@ -1852,21 +2034,22 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                                                     while(count < faithLocalTeamsArray.size())
                                                     {
                                                         if(faithLocalTeamsArray.get(count).getTeamName().equals(words)){
-                                                            becomeVolunteerBtn.setText("Add Team");
-                                                            becomeVolunteerBtn.getLayoutParams().width=500;
+                                                            addTeamButton.setVisibility(View.VISIBLE);
                                                             break;
                                                         }else{
                                                             Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
                                                             becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Local Faith Group");
                                                         }
                                                         count++;
 
                                                     }
 
                                                 }else{
-                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                    becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    addTeamButton.setVisibility(View.GONE);
+                                                    confirmBtn.setVisibility(View.GONE);
                                                 }
 
                                             }   //closes run(){}
@@ -1889,7 +2072,27 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 }
         );
 
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTeamButton.getText().toString().equals("Add Team")){
+                    confirmBtn.setVisibility(View.VISIBLE);
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                            String currentUserID = preferences.getString("CurrentUserId", "");
 
+                            String method = "joinTeams";
+                            String teamType = "FaithGroup";
+
+                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                            backgroundTask.execute(method,currentUserID, teamType, FaithGroupID, FaithGroupLocalID);
+                        }
+                    });
+                }
+            }
+        });
 //        new BackgroundTaskForFaithGroup().execute();
 //
 //        AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
@@ -2025,6 +2228,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         builder.setView(dialogView);
 
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+        confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
+        addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
         gymBrandLocalTeamsArray.clear();
 
@@ -2040,9 +2245,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                becomeVolunteerBtn.getLayoutParams().width=500;
-                becomeVolunteerBtn.setText("Add Team");
+                addTeamButton.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setVisibility(View.GONE);
 
 
                 gymBrandLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) gymBrandTeamLocalNameAutoText.getAdapter();
@@ -2087,21 +2291,22 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                                                     while(count < gymBrandLocalTeamsArray.size())
                                                     {
                                                         if(gymBrandLocalTeamsArray.get(count).getTeamName().equals(words)){
-                                                            becomeVolunteerBtn.setText("Add Team");
-                                                            becomeVolunteerBtn.getLayoutParams().width=500;
+                                                            addTeamButton.setVisibility(View.VISIBLE);
                                                             break;
                                                         }else{
                                                             Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
                                                             becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Local Gym");
                                                         }
                                                         count++;
 
                                                     }
 
                                                 }else{
-                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                    becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    addTeamButton.setVisibility(View.GONE);
+                                                    confirmBtn.setVisibility(View.GONE);
                                                 }
 
                                             }   //closes run(){}
@@ -2123,6 +2328,28 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     }
                 }
         );
+
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTeamButton.getText().toString().equals("Add Team")){
+                    confirmBtn.setVisibility(View.VISIBLE);
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                            String currentUserID = preferences.getString("CurrentUserId", "");
+
+                            String method = "joinTeams";
+                            String teamType = "GymBrand";
+
+                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                            backgroundTask.execute(method,currentUserID, teamType, GymBrandID, GymBrandLocalID);
+                        }
+                    });
+                }
+            }
+        });
 
 //        new BackgroundTaskForGymBrand().execute();
 //
@@ -2264,6 +2491,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
 
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
+        confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
+        addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
         friendFamilyTeamsArray.clear();
 
@@ -2279,9 +2508,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                becomeVolunteerBtn.getLayoutParams().width=500;
-                becomeVolunteerBtn.setText("Add Team");
+                addTeamButton.setVisibility(View.VISIBLE);
+                becomeVolunteerBtn.setVisibility(View.GONE);
 
 
                 friendFamilyTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) friendFamilyTeamNameAutoText.getAdapter();
@@ -2324,14 +2552,13 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                                                     while(count < friendFamilyTeamsArray.size())
                                                     {
                                                         if(friendFamilyTeamsArray.get(count).getTeamName().equals(words)){
-                                                            becomeVolunteerBtn.getLayoutParams().width=500;
-                                                            becomeVolunteerBtn.setText("Add Team");
+                                                            addTeamButton.setVisibility(View.VISIBLE);
                                                             break;
                                                         }else{
                                                             Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
                                                             becomeVolunteerBtn.setVisibility(View.VISIBLE);
-                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Personal Team of your own");
                                                         }
                                                         count++;
 
@@ -2340,7 +2567,9 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
 
                                                 }else{
-                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
+                                                    becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    addTeamButton.setVisibility(View.GONE);
+                                                    confirmBtn.setVisibility(View.GONE);
                                                 }
 
                                             }   //closes run(){}
@@ -2364,6 +2593,27 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         );
 
 
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addTeamButton.getText().toString().equals("Add Team")){
+                    confirmBtn.setVisibility(View.VISIBLE);
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                            String currentUserID = preferences.getString("CurrentUserId", "");
+
+                            String method = "joinTeams";
+                            String teamType = "PersonalTeams";
+
+                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                            backgroundTask.execute(method,currentUserID, teamType, "0", FriendFamilyID);
+                        }
+                    });
+                }
+            }
+        });
 
     }
 
@@ -4357,10 +4607,22 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     CommunityTeam_Name = JO.getString("CommunityTeam_Name");
 
 
+                    Log.e("fdsgsdfg", "onPostExecute: "+Country_ID );
+                    Log.e("fdsgsdfg", "onPostExecute: "+State_ID );
+                    Log.e("fdsgsdfg", "onPostExecute: "+City_ID );
+                    Log.e("fdsgsdfg", "onPostExecute: "+Postal_Code_ID );
+                    Log.e("fdsgsdfg", "onPostExecute: "+CommunityTeam_ID );
+                    Log.e("fdsgsdfg", "onPostExecute: "+CommunityTeam_Name );
 
 
                     JoinNewTeamModel model = new JoinNewTeamModel();
                     model.setTeamCategory("SubClass");
+                    model.setCountryTeamID(Country_ID);
+                    model.setStateTeamID(State_ID);
+                    model.setCityTeamID(City_ID);
+                    model.setPostalCodeID(Postal_Code_ID);
+                    model.setCommunityTeamID(CommunityTeam_ID);
+
                     model.setParentTeamID(City_ID);
                     model.setTeamID(CommunityTeam_ID);
                     model.setTeamName(CommunityTeam_Name);

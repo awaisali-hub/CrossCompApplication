@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +16,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.eclairios.CrossComps.BackgroundTaskClasses.BackgroundTaskForJoinTeams;
 import com.eclairios.CrossComps.CustomLoader.WaitDialog;
 import com.eclairios.CrossComps.Interface.InterfaceForSetTeams;
 import com.eclairios.CrossComps.Model.MyCrossCompAllTeamsMainModel;
 import com.eclairios.CrossComps.R;
+import com.eclairios.CrossComps.Teams.JoinTeamsActivity;
 import com.eclairios.CrossComps.Teams.MyFundraisingTeamDetailActivity;
 import com.eclairios.CrossComps.Teams.TeamsScoreActivity;
 import com.eclairios.CrossComps.Teams.WorldTeamScoreActivity;
@@ -99,7 +103,47 @@ public class MyCrossCompUserSelectedTeamAdapter extends RecyclerView.Adapter<MyC
                             {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(context, "Unjoin", Toast.LENGTH_SHORT).show();
+
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                                    String currentUserID = preferences.getString("CurrentUserId", "");
+
+                                    String method = "unJoinTeams";
+                                    String teamType;
+                                    BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(context);
+                                    if(crossCompAllTeamsMainModels.get(position).getSelectedTeamOpenType().equals("HighSchoolClassTeam")){
+                                        teamType = "HighSchool";
+                                        backgroundTask.execute(method,currentUserID, teamType,"0","0");
+                                    }else if(crossCompAllTeamsMainModels.get(position).getSelectedTeamOpenType().equals("CollegeSubTeam")){
+                                        teamType = "CollegeUniversity";
+                                        backgroundTask.execute(method,currentUserID, teamType,"0","0");
+                                    }else if(crossCompAllTeamsMainModels.get(position).getSelectedTeamOpenType().equals("ProfessionalClassTeam")){
+                                        teamType = "ProfessionalSchool";
+                                        backgroundTask.execute(method,currentUserID, teamType,"0","0");
+                                    }else if(crossCompAllTeamsMainModels.get(position).getSelectedTeamOpenType().equals("FaithLocalTeam")){
+                                        teamType = "FaithGroup";
+                                        backgroundTask.execute(method,currentUserID, teamType,"0","0");
+                                    }else if(crossCompAllTeamsMainModels.get(position).getSelectedTeamOpenType().equals("GymLocalTeam")){
+                                        teamType = "GymBrand";
+                                        backgroundTask.execute(method,currentUserID, teamType,"0","0");
+                                    }else if(crossCompAllTeamsMainModels.get(position).getSelectedTeamOpenType().equals("CompanyLocalTeam")){
+                                        teamType = "CompanyGroup";
+                                        backgroundTask.execute(method,currentUserID, teamType,"0","0");
+                                    }else if(crossCompAllTeamsMainModels.get(position).getSelectedTeamOpenType().equals("OccupationLocalTeam")){
+                                        teamType = "OccupationGroup";
+                                        backgroundTask.execute(method,currentUserID, teamType,"0","0");
+                                    }else if(crossCompAllTeamsMainModels.get(position).getSelectedTeamOpenType().equals("MilitaryLocalTeam")){
+                                        teamType = "MilitaryBranch";
+                                        backgroundTask.execute(method,currentUserID, teamType,"0","0");
+                                    }else if(crossCompAllTeamsMainModels.get(position).getSelectedTeamOpenType().equals("FriendTeam")){
+                                        teamType = "PersonalTeams";
+                                        backgroundTask.execute(method,currentUserID, teamType,"0","0");
+                                    }else if(crossCompAllTeamsMainModels.get(position).getSelectedTeamOpenType().equals("CommunityTeam")){
+                                        teamType = "CommunityTeams";
+                                        backgroundTask.execute(method,currentUserID, teamType,"0","0");
+                                    }
+
+
+
                                 }
 
                             })

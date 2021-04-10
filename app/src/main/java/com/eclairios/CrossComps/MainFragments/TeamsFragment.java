@@ -300,7 +300,7 @@ public class TeamsFragment extends Fragment implements InterfaceForSetTeams{
                     jsonArray23 = jsonObject.getJSONArray("MilitaryLocalTeamMember");
 
                     int count = 0;
-                    String teamId,teamName;
+                    String parentTeamID,teamId,teamName;
                     if(jsonArray!=null){
                         while(count < jsonArray.length())
                         {
@@ -462,12 +462,13 @@ public class TeamsFragment extends Fragment implements InterfaceForSetTeams{
                             JSONObject JO = jsonArray16.getJSONObject(count16);
                             teamId = JO.getString("HighSchoolClassTeamID");
                             teamName = JO.getString("HS_SubClassName");
-
+                            parentTeamID = JO.getString("HighSchoolID");
 
                             MyCrossCompAllTeamsMainModel mainModel = new MyCrossCompAllTeamsMainModel();
                             mainModel.setSelectedTeamOpenType("HighSchoolClassTeam");
                             mainModel.setTeamType("Default");
                             mainModel.setTeamCategory("SubClass");
+                            mainModel.setParentTeamID(parentTeamID);
                             mainModel.setTeamID(teamId);
                             mainModel.setTeamName(teamName);
                             myCrossCompAllTeamsMainModels2.add(mainModel);

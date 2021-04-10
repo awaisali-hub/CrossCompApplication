@@ -67,18 +67,20 @@
 
     </LinearLayout>
 
+
     <androidx.appcompat.widget.AppCompatButton
         android:visibility="gone"
-        android:id="@+id/saveTeam"
-        android:layout_width="160dp"
+        android:id="@+id/addTeamButton"
+        android:layout_width="146dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Confirmation"
+        android:text="Add Team"
         android:textColor="@color/white"
         android:layout_margin="15dp"
         android:textStyle="bold"
         android:background="@drawable/res"
         />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:visibility="gone"
@@ -89,7 +91,20 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginEnd="@dimen/_30sdp"
         android:padding="@dimen/_5sdp"
-        android:text="Become a CrossComp Volunteer to create a Team for your High School"
+        android:text="Become a CrossComp Volunteer to create a Team for your High School Class"
+        android:textColor="@color/white"
+        android:layout_margin="15dp"
+        android:textStyle="bold"
+        android:background="@drawable/res"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
+        android:id="@+id/confirmTeamBtn"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Confirm"
         android:textColor="@color/white"
         android:layout_margin="15dp"
         android:textStyle="bold"

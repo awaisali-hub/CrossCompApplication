@@ -3,6 +3,15 @@ package com.eclairios.CrossComps.Model;
 public class MyCrossCompAllTeamsMainModel {
 
     private String teamID,teamName,teamStatus,teamType,SelectedTeamOpenType,teamCategory;
+    private String ParentTeamID;
+
+    public String getParentTeamID() {
+        return ParentTeamID;
+    }
+
+    public void setParentTeamID(String parentTeamID) {
+        ParentTeamID = parentTeamID;
+    }
 
     public String getTeamCategory() {
         return teamCategory;
