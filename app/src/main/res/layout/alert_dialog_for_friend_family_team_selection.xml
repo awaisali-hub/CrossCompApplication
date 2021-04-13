@@ -100,7 +100,7 @@
         android:layout_marginStart="@dimen/_30sdp"
         android:layout_marginEnd="@dimen/_30sdp"
         android:padding="@dimen/_5sdp"
-        android:text="Become a CrossComp Volunteer to create a Team for your High School"
+        android:text="Become a CrossComp Volunteer to create a new Team"
         android:textColor="@color/white"
         android:layout_margin="15dp"
         android:textStyle="bold"

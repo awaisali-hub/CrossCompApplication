@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -82,6 +84,7 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
     ArrayList<JoinNewTeamModel> highSchoolClassTeamsArray = new ArrayList();
     private ArrayAdapter<JoinNewTeamModel> highSchoolClassTeam_adapter;
+
 
     ArrayList<JoinNewTeamModel> collegeUniversityTeamsArray = new ArrayList();
     private ArrayAdapter<JoinNewTeamModel> collegeUniversityTeam_adapter;
@@ -141,6 +144,15 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
     String CommunityID,CountryID,StateID,CityID,PostalCodeID,HighSchoolTeamID,HighSchoolClassTeamID,CollegeTeamID,CollegeClassTeamID,ProfessionalSchoolID,ProfessionalSchoolClassID,MilitaryBranchID,MilitaryBranchLocalID,
             OccupationID,OccupationLocalID,CompanyID,CompanyLocalID,FaithGroupID,FaithGroupLocalID,GymBrandID,GymBrandLocalID,FriendFamilyID;
 
+
+    String highSchoolSelected = "";
+    String collegeSelected = "";
+    String professionalSchoolSelected = "";
+    String militarySelected = "";
+    String occupationSelected = "";
+    String companySelected = "";
+    String faithSelected = "";
+    String gymSelected = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -248,23 +260,33 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
                                                     String words = communityTeamNameAutoText.getText().toString();
 
+
+                                                    int counter = 0;
+
                                                     int count = 0;
                                                     while(count < communityTeamsArray.size())
                                                     {
                                                         if(communityTeamsArray.get(count).getTeamName().equals(words)){
-                                                            addTeamButton.setVisibility(View.VISIBLE);
-                                                            break;
-                                                        }else{
-                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-                                                            confirmBtn.setVisibility(View.GONE);
-                                                            addTeamButton.setVisibility(View.GONE);
-                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
+
+                                                            counter++;
                                                         }
+//
                                                         count++;
 
                                                     }
 
-                                                }else{
+                                                    if(counter > 0){
+                                                        addTeamButton.setVisibility(View.VISIBLE);
+                                                        becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    }else{
+                                                        Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                        confirmBtn.setVisibility(View.GONE);
+                                                        addTeamButton.setVisibility(View.GONE);
+                                                        becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                    }
+
+
+                                                }else if(TextUtils.isEmpty(communityTeamNameAutoText.getText().toString())){
                                                     becomeVolunteerBtn.setVisibility(View.GONE);
                                                     addTeamButton.setVisibility(View.GONE);
                                                     confirmBtn.setVisibility(View.GONE);
@@ -310,10 +332,20 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 }
             }
         });
+
+        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JoinTeamsActivity.this,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                startActivity(intent);
+            }
+        });
     }
 
     public void SelectHighSchool(){
-        new BackgroundTaskForAllHighSchoolClassTeams().execute();
+
+        new BackgroundTaskForAllHighSchoolTeams().execute();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -325,35 +357,170 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
         addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
-        highSchoolClassTeamsArray.clear();
-
-
-        highSchoolClassTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, highSchoolClassTeamsArray);
-        highSchoolClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.highSchoolClassTeamNameAutoText);
-        highSchoolClassTeamNameAutoText.setThreshold(1);
-        highSchoolClassTeamNameAutoText.setAdapter(highSchoolClassTeam_adapter);
-
         AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
-        highSchoolClassTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        highSchoolTeamsArray.clear();
+
+        highSchoolTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, highSchoolTeamsArray);
+        highSchoolTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.highSchoolTeamNameAutoText);
+        highSchoolClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.highSchoolClassTeamNameAutoText);
+        highSchoolTeamNameAutoText.setThreshold(1);
+        highSchoolTeamNameAutoText.setAdapter(highSchoolTeam_adapter);
+
+
+        highSchoolTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                addTeamButton.setVisibility(View.VISIBLE);
+                highSchoolClassTeamNameAutoText.setFocusableInTouchMode(true);
                 becomeVolunteerBtn.setVisibility(View.GONE);
 
-                highSchoolClassTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) highSchoolClassTeamNameAutoText.getAdapter();
-                HighSchoolClassTeamID = highSchoolClassTeam_adapter.getItem(position).getTeamID();
-                HighSchoolTeamID = highSchoolClassTeam_adapter.getItem(position).getParentTeamID();
-                Log.e("dsfdsfsd", "onItemClick: "+HighSchoolClassTeamID );
+                highSchoolClassTeamsArray.clear();
+                highSchoolTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) highSchoolTeamNameAutoText.getAdapter();
+                HighSchoolTeamID = highSchoolTeam_adapter.getItem(position).getTeamID();
                 Log.e("dsfdsfsd", "onItemClick: "+HighSchoolTeamID );
 
+                new BackgroundTaskForAllHighSchoolClassTeams().execute();
+
+                highSchoolClassTeamsArray.clear();
+
+                highSchoolClassTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, highSchoolClassTeamsArray);
+//                highSchoolClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.highSchoolClassTeamNameAutoText);
+                highSchoolClassTeamNameAutoText.setThreshold(1);
+                highSchoolClassTeamNameAutoText.setAdapter(highSchoolClassTeam_adapter);
+
+                highSchoolClassTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+
+                        highSchoolSelected = "SchoolSelected";
+
+                        addTeamButton.setVisibility(View.VISIBLE);
+                        becomeVolunteerBtn.setVisibility(View.GONE);
+
+                        highSchoolClassTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) highSchoolClassTeamNameAutoText.getAdapter();
+                        HighSchoolClassTeamID = highSchoolClassTeam_adapter.getItem(position).getTeamID();
+                        HighSchoolTeamID = highSchoolClassTeam_adapter.getItem(position).getParentTeamID();
+                        Log.e("dsfdsfsd", "onItemClick: "+HighSchoolClassTeamID );
+                        Log.e("dsfdsfsd", "onItemClick: "+HighSchoolTeamID );
+
+                    }
+                });
+
+                Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
+                highSchoolClassTeamNameAutoText.addTextChangedListener(
+                        new TextWatcher() {
+
+                            private Timer timer = new Timer();
+                            private final long DELAY = 2000; // Milliseconds
+
+                            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                timer.cancel();
+                                timer = new Timer();
+                                timer.schedule(
+                                        new TimerTask()
+                                        {
+                                            @Override
+                                            public void run() {
+                                                // TODO: Do what you need here (refresh list).
+                                                // You will probably need to use
+                                                // runOnUiThread(Runnable action) for some
+                                                // specific actions (e.g., manipulating views).
+
+                                                runOnUiThread(new Runnable() {
+                                                    public void run(){
+
+
+
+                                                        if(!TextUtils.isEmpty(highSchoolClassTeamNameAutoText.getText().toString())){
+
+                                                            String words = highSchoolClassTeamNameAutoText.getText().toString();
+
+                                                            int counter = 0;
+
+
+                                                            int count = 0;
+                                                            while(count < highSchoolClassTeamsArray.size())
+                                                            {
+                                                                if(highSchoolClassTeamsArray.get(count).getTeamName().equals(words)){
+
+                                                                    counter++;
+                                                                }
+//
+                                                                count++;
+
+                                                            }
+
+
+                                                            if(counter > 0){
+                                                                addTeamButton.setVisibility(View.VISIBLE);
+                                                                becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            }else{
+                                                                Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_SHORT).show();
+                                                                confirmBtn.setVisibility(View.GONE);
+                                                                addTeamButton.setVisibility(View.GONE);
+                                                                becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                            }
+
+                                                        }else if(TextUtils.isEmpty(highSchoolTeamNameAutoText.getText().toString()) && TextUtils.isEmpty(highSchoolClassTeamNameAutoText.getText().toString())){
+
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }else if(highSchoolSelected.equals("SchoolSelected") && TextUtils.isEmpty(highSchoolClassTeamNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }
+
+                                                    }   //closes run(){}
+                                                });
+
+
+                                            }
+                                        },
+                                        DELAY
+                                ); }
+                            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
+
+                            @Override
+                            public void afterTextChanged(final Editable s) {
+
+
+                            }
+                        }
+                );
+
+
+                addTeamButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(addTeamButton.getText().toString().equals("Add Team")){
+                            confirmBtn.setVisibility(View.VISIBLE);
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                                    String currentUserID = preferences.getString("CurrentUserId", "");
+
+                                    String method = "joinTeams";
+                                    String teamType = "HighSchool";
+
+                                    BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                                    backgroundTask.execute(method,currentUserID, teamType, HighSchoolTeamID,HighSchoolClassTeamID );
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
 
-        Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
-        highSchoolClassTeamNameAutoText.addTextChangedListener(
+
+        highSchoolTeamNameAutoText.addTextChangedListener(
                 new TextWatcher() {
 
                     private Timer timer = new Timer();
@@ -377,30 +544,51 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
 
 
-                                                if(!TextUtils.isEmpty(highSchoolClassTeamNameAutoText.getText().toString())){
+                                                if(!TextUtils.isEmpty(highSchoolTeamNameAutoText.getText().toString())){
 
-                                                    String words = highSchoolClassTeamNameAutoText.getText().toString();
+                                                    String words = highSchoolTeamNameAutoText.getText().toString();
+
+                                                    int counter = 0;
+
 
                                                     int count = 0;
-                                                    while(count < highSchoolClassTeamsArray.size())
+                                                    while(count < highSchoolTeamsArray.size())
                                                     {
-                                                        if(highSchoolClassTeamsArray.get(count).getTeamName().equals(words)){
-                                                            addTeamButton.setVisibility(View.VISIBLE);
-                                                            break;
-                                                        }else{
-                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-                                                            confirmBtn.setVisibility(View.GONE);
-                                                            addTeamButton.setVisibility(View.GONE);
-                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                        if(highSchoolTeamsArray.get(count).getTeamName().equals(words)){
+
+                                                            counter ++;
                                                         }
+//
                                                         count++;
 
                                                     }
+
+                                                    if(counter > 0){
+                                                        addTeamButton.setVisibility(View.GONE);
+                                                        becomeVolunteerBtn.setVisibility(View.GONE);
+                                                    }else{
+                                                        Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_SHORT).show();
+                                                        confirmBtn.setVisibility(View.GONE);
+                                                        addTeamButton.setVisibility(View.GONE);
+                                                        becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                        highSchoolSelected = "SchoolUnSelected";
+
+                                                        highSchoolClassTeamsArray.clear();
+                                                        highSchoolClassTeamNameAutoText.setText("");
+                                                        highSchoolClassTeamNameAutoText.setFocusableInTouchMode(false);
+
+                                                    }
+
 
                                                 }else{
                                                     becomeVolunteerBtn.setVisibility(View.GONE);
                                                     addTeamButton.setVisibility(View.GONE);
                                                     confirmBtn.setVisibility(View.GONE);
+
+                                                    highSchoolSelected = "SchoolUnSelected";
+                                                    highSchoolClassTeamsArray.clear();
+                                                    highSchoolClassTeamNameAutoText.setText("");
+                                                    highSchoolClassTeamNameAutoText.setFocusableInTouchMode(false);
                                                 }
 
                                             }   //closes run(){}
@@ -423,260 +611,19 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 }
         );
 
-
-        addTeamButton.setOnClickListener(new View.OnClickListener() {
+        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(addTeamButton.getText().toString().equals("Add Team")){
-                    confirmBtn.setVisibility(View.VISIBLE);
-                    confirmBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
-                            String currentUserID = preferences.getString("CurrentUserId", "");
-
-                            String method = "joinTeams";
-                            String teamType = "HighSchool";
-
-                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
-                            backgroundTask.execute(method,currentUserID, teamType, HighSchoolTeamID,HighSchoolClassTeamID );
-                        }
-                    });
-                }
+                Intent intent = new Intent(JoinTeamsActivity.this,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                startActivity(intent);
             }
         });
-//        new BackgroundTaskForAllHighSchoolTeams().execute();
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View dialogView = inflater.inflate(R.layout.alert_dialog_for_high_school_selection,null);
-//        builder.setCancelable(true);
-//        builder.setView(dialogView);
-//
-//
-//        saveHighSchoolTeamBtn = dialogView.findViewById(R.id.saveHighSchoolTeam);
-//        becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
-//
-//
-//        highSchoolTeamsArray.clear();
-//
-//        highSchoolTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, highSchoolTeamsArray);
-//        highSchoolTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.high_school_team);
-//        highSchoolTeamNameAutoText.setThreshold(1);
-//        highSchoolTeamNameAutoText.setAdapter(highSchoolTeam_adapter);
-//
-//        AlertDialog pickFileImage = builder.create();
-//        pickFileImage.show();
-//
-//        highSchoolTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-//
-//                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                becomeVolunteerBtn.getLayoutParams().width=500;
-//                becomeVolunteerBtn.setText("Confirmation");
-//
-//
-//                highSchoolTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) highSchoolTeamNameAutoText.getAdapter();
-//                HighSchoolTeamID = highSchoolTeam_adapter.getItem(position).getTeamID();
-//                Log.e("dsfdsfsd", "onItemClick: "+HighSchoolTeamID );
-//
-//
-//            }
-//        });
-//
-//        Log.e("dsfdsf", "SelectHighSchool: "+highSchoolTeamsArray.toString());
-//        highSchoolTeamNameAutoText.addTextChangedListener(
-//                new TextWatcher() {
-//
-//                    private Timer timer = new Timer();
-//                    private final long DELAY = 2000; // Milliseconds
-//
-//                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                        timer.cancel();
-//                        timer = new Timer();
-//                        timer.schedule(
-//                                new TimerTask()
-//                                {
-//                                    @Override
-//                                    public void run() {
-//                                        // TODO: Do what you need here (refresh list).
-//                                        // You will probably need to use
-//                                        // runOnUiThread(Runnable action) for some
-//                                        // specific actions (e.g., manipulating views).
-//
-//                                        runOnUiThread(new Runnable() {
-//                                            public void run(){
-//
-//
-//
-//                                                if(!TextUtils.isEmpty(highSchoolTeamNameAutoText.getText().toString())){
-//
-//                                                    String words = highSchoolTeamNameAutoText.getText().toString();
-//
-//                                                    int count = 0;
-//                                                    while(count < highSchoolTeamsArray.size())
-//                                                    {
-//                                                        if(highSchoolTeamsArray.get(count).getTeamName().equals(words)){
-//                                                            becomeVolunteerBtn.setText("Confirmation");
-//                                                            becomeVolunteerBtn.getLayoutParams().width=500;
-//                                                            break;
-//                                                        }else{
-//                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-//                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-//                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your High School");
-//                                                        }
-//                                                        count++;
-//
-//                                                    }
-//
-//                                                }else{
-//                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
-//                                                }
-//
-//                                            }   //closes run(){}
-//                                        });
-//
-//
-//                                    }
-//                                },
-//                                DELAY
-//                        ); }
-//                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-//
-//
-//
-//                    @Override
-//                    public void afterTextChanged(final Editable s) {
-//
-//
-//                    }
-//                }
-//        );
-//
-//        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(becomeVolunteerBtn.getText().toString().equals("Confirmation")){
-//
-//                    new BackgroundTaskForAllHighSchoolClassTeams().execute();
-//
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
-//                    LayoutInflater inflater = getLayoutInflater();
-//                    View dialogView = inflater.inflate(R.layout.alert_dialog_for_high_school_subclass,null);
-//                    builder.setCancelable(true);
-//                    builder.setView(dialogView);
-//
-//                    becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
-//
-//                    highSchoolClassTeamsArray.clear();
-//
-//                    highSchoolClassTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, highSchoolClassTeamsArray);
-//                    highSchoolClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.highSchoolClassTeamNameAutoText);
-//                    highSchoolClassTeamNameAutoText.setThreshold(1);
-//                    highSchoolClassTeamNameAutoText.setAdapter(highSchoolClassTeam_adapter);
-//
-//                    AlertDialog pickFileImage = builder.create();
-//                    pickFileImage.show();
-//
-//                    highSchoolClassTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-//
-//                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                            becomeVolunteerBtn.getLayoutParams().width=500;
-//                            becomeVolunteerBtn.setText("Confirmation");
-//
-//
-//                            highSchoolClassTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) highSchoolClassTeamNameAutoText.getAdapter();
-//                            HighSchoolClassTeamID = highSchoolClassTeam_adapter.getItem(position).getTeamID();
-//                            Log.e("dsfdsfsd", "onItemClick: "+HighSchoolClassTeamID );
-//
-//
-//                        }
-//                    });
-//
-//                    Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
-//                    highSchoolClassTeamNameAutoText.addTextChangedListener(
-//                            new TextWatcher() {
-//
-//                                private Timer timer = new Timer();
-//                                private final long DELAY = 2000; // Milliseconds
-//
-//                                @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                                    timer.cancel();
-//                                    timer = new Timer();
-//                                    timer.schedule(
-//                                            new TimerTask()
-//                                            {
-//                                                @Override
-//                                                public void run() {
-//                                                    // TODO: Do what you need here (refresh list).
-//                                                    // You will probably need to use
-//                                                    // runOnUiThread(Runnable action) for some
-//                                                    // specific actions (e.g., manipulating views).
-//
-//                                                    runOnUiThread(new Runnable() {
-//                                                        public void run(){
-//
-//
-//
-//                                                            if(!TextUtils.isEmpty(highSchoolClassTeamNameAutoText.getText().toString())){
-//
-//                                                                String words = highSchoolClassTeamNameAutoText.getText().toString();
-//
-//                                                                int count = 0;
-//                                                                while(count < highSchoolClassTeamsArray.size())
-//                                                                {
-//                                                                    if(highSchoolClassTeamsArray.get(count).getTeamName().equals(words)){
-//                                                                        becomeVolunteerBtn.setText("Confirmation");
-//                                                                        becomeVolunteerBtn.getLayoutParams().width=500;
-//                                                                        break;
-//                                                                    }else{
-//                                                                        Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-//                                                                        becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                                                                        becomeVolunteerBtn.getLayoutParams().width=1200;
-//                                                                        becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your High School Class");
-//                                                                    }
-//                                                                    count++;
-//
-//                                                                }
-//
-//                                                            }else{
-//                                                                becomeVolunteerBtn.setVisibility(View.INVISIBLE);
-//                                                            }
-//
-//                                                        }   //closes run(){}
-//                                                    });
-//
-//
-//                                                }
-//                                            },
-//                                            DELAY
-//                                    ); }
-//                                @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-//
-//
-//
-//                                @Override
-//                                public void afterTextChanged(final Editable s) {
-//
-//
-//                                }
-//                            }
-//                    );
-//                }
-//            }
-//        });
-//
-
     }
 
     public void CollegeUniversity(){
 
-        new BackgroundTaskForAllCollegeClassTeams().execute();
-
+        new BackgroundTaskForAllCollegeClass().execute();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -688,34 +635,168 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
         addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
-        collegeUniversityClassTeamsArray.clear();
-
-        collegeUniversityClassTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, collegeUniversityClassTeamsArray);
-        collegeClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.collegeUniversityClassTeamNameAutoText);
-        collegeClassTeamNameAutoText.setThreshold(1);
-        collegeClassTeamNameAutoText.setAdapter(collegeUniversityClassTeam_adapter);
-
         AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
-        collegeClassTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        collegeUniversityTeamsArray.clear();
+
+        collegeUniversityTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, collegeUniversityTeamsArray);
+        collegeTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.collegeUniversityTeamNameAutoText);
+        collegeClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.collegeUniversityClassTeamNameAutoText);
+        collegeTeamNameAutoText.setThreshold(1);
+        collegeTeamNameAutoText.setAdapter(collegeUniversityTeam_adapter);
+
+        collegeTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                addTeamButton.setVisibility(View.VISIBLE);
+                collegeClassTeamNameAutoText.setFocusableInTouchMode(true);
                 becomeVolunteerBtn.setVisibility(View.GONE);
+                collegeSelected = "collegeSelected";
 
-
-                collegeUniversityClassTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) collegeClassTeamNameAutoText.getAdapter();
-                CollegeClassTeamID = collegeUniversityClassTeam_adapter.getItem(position).getTeamID();
-                CollegeTeamID = collegeUniversityClassTeam_adapter.getItem(position).getParentTeamID();
-                Log.e("dsfdsfsd", "onItemClick: "+CollegeClassTeamID );
+                collegeUniversityTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) collegeTeamNameAutoText.getAdapter();
+                CollegeTeamID = collegeUniversityTeam_adapter.getItem(position).getTeamID();
                 Log.e("dsfdsfsd", "onItemClick: "+CollegeTeamID );
 
+                new BackgroundTaskForAllCollegeClassTeams().execute();
+
+                collegeUniversityClassTeamsArray.clear();
+
+                collegeUniversityClassTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, collegeUniversityClassTeamsArray);
+//                collegeClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.collegeUniversityClassTeamNameAutoText);
+                collegeClassTeamNameAutoText.setThreshold(1);
+                collegeClassTeamNameAutoText.setAdapter(collegeUniversityClassTeam_adapter);
+
+
+
+                collegeClassTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+
+                        addTeamButton.setVisibility(View.VISIBLE);
+                        becomeVolunteerBtn.setVisibility(View.GONE);
+
+
+                        collegeUniversityClassTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) collegeClassTeamNameAutoText.getAdapter();
+                        CollegeClassTeamID = collegeUniversityClassTeam_adapter.getItem(position).getTeamID();
+                        CollegeTeamID = collegeUniversityClassTeam_adapter.getItem(position).getParentTeamID();
+                        Log.e("dsfdsfsd", "onItemClick: "+CollegeClassTeamID );
+                        Log.e("dsfdsfsd", "onItemClick: "+CollegeTeamID );
+
+                    }
+                });
+
+                collegeClassTeamNameAutoText.addTextChangedListener(
+                        new TextWatcher() {
+
+                            private Timer timer = new Timer();
+                            private final long DELAY = 2000; // Milliseconds
+
+                            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                timer.cancel();
+                                timer = new Timer();
+                                timer.schedule(
+                                        new TimerTask()
+                                        {
+                                            @Override
+                                            public void run() {
+                                                // TODO: Do what you need here (refresh list).
+                                                // You will probably need to use
+                                                // runOnUiThread(Runnable action) for some
+                                                // specific actions (e.g., manipulating views).
+
+                                                runOnUiThread(new Runnable() {
+                                                    public void run(){
+
+
+
+                                                        if(!TextUtils.isEmpty(collegeClassTeamNameAutoText.getText().toString())){
+
+                                                            String words = collegeClassTeamNameAutoText.getText().toString();
+
+
+                                                            int counter = 0;
+
+
+                                                            int count = 0;
+                                                            while(count < collegeUniversityClassTeamsArray.size())
+                                                            {
+                                                                if(collegeUniversityClassTeamsArray.get(count).getTeamName().equals(words)){
+
+                                                                    counter++;
+                                                                }
+//
+                                                                count++;
+
+                                                            }
+
+                                                            if(counter > 0){
+                                                                addTeamButton.setVisibility(View.VISIBLE);
+                                                                becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            }else{
+                                                                Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                                confirmBtn.setVisibility(View.GONE);
+                                                                addTeamButton.setVisibility(View.GONE);
+                                                                becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                            }
+
+
+                                                        }else if(TextUtils.isEmpty(collegeClassTeamNameAutoText.getText().toString()) && TextUtils.isEmpty(collegeTeamNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }else if (collegeSelected.equals("collegeSelected") && TextUtils.isEmpty(collegeClassTeamNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }
+
+                                                    }   //closes run(){}
+                                                });
+
+
+                                            }
+                                        },
+                                        DELAY
+                                ); }
+                            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
+
+                            @Override
+                            public void afterTextChanged(final Editable s) {
+
+
+                            }
+                        }
+                );
+
+                addTeamButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(addTeamButton.getText().toString().equals("Add Team")){
+                            confirmBtn.setVisibility(View.VISIBLE);
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                                    String currentUserID = preferences.getString("CurrentUserId", "");
+
+                                    String method = "joinTeams";
+                                    String teamType = "CollegeUniversity";
+
+                                    BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                                    backgroundTask.execute(method,currentUserID, teamType, CollegeTeamID, CollegeClassTeamID);
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
 
-        collegeClassTeamNameAutoText.addTextChangedListener(
+        collegeTeamNameAutoText.addTextChangedListener(
                 new TextWatcher() {
 
                     private Timer timer = new Timer();
@@ -739,30 +820,47 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
 
 
-                                                if(!TextUtils.isEmpty(collegeClassTeamNameAutoText.getText().toString())){
+                                                if(!TextUtils.isEmpty(collegeTeamNameAutoText.getText().toString())){
 
-                                                    String words = collegeClassTeamNameAutoText.getText().toString();
+                                                    String words = collegeTeamNameAutoText.getText().toString();
+
+                                                    int counter = 0;
+
 
                                                     int count = 0;
-                                                    while(count < collegeUniversityClassTeamsArray.size())
+                                                    while(count < collegeUniversityTeamsArray.size())
                                                     {
-                                                        if(collegeUniversityClassTeamsArray.get(count).getTeamName().equals(words)){
-                                                            addTeamButton.setVisibility(View.VISIBLE);
-                                                            break;
-                                                        }else{
-                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-                                                            confirmBtn.setVisibility(View.GONE);
-                                                            addTeamButton.setVisibility(View.GONE);
-                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                        if(collegeUniversityTeamsArray.get(count).getTeamName().equals(words)){
+                                                            counter++;
                                                         }
+//
                                                         count++;
 
+                                                    }
+
+
+                                                    if(counter > 0){
+                                                        Log.e("dfjsdfhsdf", "run: " );
+                                                    }else{
+                                                        Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_SHORT).show();
+                                                        confirmBtn.setVisibility(View.GONE);
+                                                        addTeamButton.setVisibility(View.GONE);
+                                                        becomeVolunteerBtn.setVisibility(View.VISIBLE);
+
+                                                        collegeSelected = "collegeUnSelected";
+                                                        collegeUniversityClassTeamsArray.clear();
+                                                        collegeClassTeamNameAutoText.setText("");
+                                                        collegeClassTeamNameAutoText.setFocusableInTouchMode(false);
                                                     }
 
                                                 }else{
                                                     becomeVolunteerBtn.setVisibility(View.GONE);
                                                     addTeamButton.setVisibility(View.GONE);
                                                     confirmBtn.setVisibility(View.GONE);
+                                                    collegeSelected = "collegeUnSelected";
+                                                    collegeUniversityClassTeamsArray.clear();
+                                                    collegeClassTeamNameAutoText.setText("");
+                                                    collegeClassTeamNameAutoText.setFocusableInTouchMode(false);
                                                 }
 
                                             }   //closes run(){}
@@ -785,155 +883,19 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 }
         );
 
-        addTeamButton.setOnClickListener(new View.OnClickListener() {
+        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(addTeamButton.getText().toString().equals("Add Team")){
-                    confirmBtn.setVisibility(View.VISIBLE);
-                    confirmBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
-                            String currentUserID = preferences.getString("CurrentUserId", "");
-
-                            String method = "joinTeams";
-                            String teamType = "CollegeUniversity";
-
-                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
-                            backgroundTask.execute(method,currentUserID, teamType, CollegeTeamID, CollegeClassTeamID);
-                        }
-                    });
-                }
+                Intent intent = new Intent(JoinTeamsActivity.this,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                startActivity(intent);
             }
         });
-
-//               new BackgroundTaskForAllCollegeClass().execute();
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View dialogView = inflater.inflate(R.layout.alert_dialog_for_college_selection,null);
-//        builder.setCancelable(true);
-//        builder.setView(dialogView);
-//
-//
-//        becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
-//
-//        collegeUniversityTeamsArray.clear();
-//
-//        collegeUniversityTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, collegeUniversityTeamsArray);
-//        collegeTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.collegeAutoText);
-//        collegeTeamNameAutoText.setThreshold(1);
-//        collegeTeamNameAutoText.setAdapter(collegeUniversityTeam_adapter);
-//
-//
-//        AlertDialog pickFileImage = builder.create();
-//        pickFileImage.show();
-//
-//        collegeTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-//
-//                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                becomeVolunteerBtn.getLayoutParams().width=500;
-//                becomeVolunteerBtn.setText("Confirmation");
-//
-//
-//                collegeUniversityTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) collegeTeamNameAutoText.getAdapter();
-//                CollegeTeamID = collegeUniversityTeam_adapter.getItem(position).getTeamID();
-//                Log.e("dsfdsfsd", "onItemClick: "+CollegeTeamID );
-//
-//
-//            }
-//        });
-//
-//        collegeTeamNameAutoText.addTextChangedListener(
-//                new TextWatcher() {
-//
-//                    private Timer timer = new Timer();
-//                    private final long DELAY = 2000; // Milliseconds
-//
-//                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                        timer.cancel();
-//                        timer = new Timer();
-//                        timer.schedule(
-//                                new TimerTask()
-//                                {
-//                                    @Override
-//                                    public void run() {
-//                                        // TODO: Do what you need here (refresh list).
-//                                        // You will probably need to use
-//                                        // runOnUiThread(Runnable action) for some
-//                                        // specific actions (e.g., manipulating views).
-//
-//                                        runOnUiThread(new Runnable() {
-//                                            public void run(){
-//
-//
-//
-//                                                if(!TextUtils.isEmpty(collegeTeamNameAutoText.getText().toString())){
-//
-//                                                    String words = collegeTeamNameAutoText.getText().toString();
-//
-//                                                    int count = 0;
-//                                                    while(count < collegeUniversityTeamsArray.size())
-//                                                    {
-//                                                        if(collegeUniversityTeamsArray.get(count).getTeamName().equals(words)){
-//                                                            becomeVolunteerBtn.setText("Confirmation");
-//                                                            becomeVolunteerBtn.getLayoutParams().width=500;
-//                                                            break;
-//                                                        }else{
-//                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-//                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-//                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your College/University");
-//                                                        }
-//                                                        count++;
-//
-//                                                    }
-//
-//
-//
-//                                                }else{
-//                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
-//                                                }
-//
-//                                            }   //closes run(){}
-//                                        });
-//
-//
-//                                    }
-//                                },
-//                                DELAY
-//                        ); }
-//                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-//
-//
-//
-//                    @Override
-//                    public void afterTextChanged(final Editable s) {
-//
-//
-//                    }
-//                }
-//        );
-//
-//
-//
-//        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(becomeVolunteerBtn.getText().toString().equals("Confirmation")){
-//
-//                }
-//            }
-//        });
-//
-
     }
 
     public void ProfessionalSchool(){
 
-        new BackgroundTaskForAllProfessionalSchoolClassTeams().execute();
+        new BackgroundTaskForProfessionalSchool().execute();
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
@@ -946,35 +908,171 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
         addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
-        professionalSchoolClassTeamsArray.clear();
-
-        professionalSchoolClassTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, professionalSchoolClassTeamsArray);
-        professionalSchoolClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.professionalClassTeamNameAutoText);
-        professionalSchoolClassTeamNameAutoText.setThreshold(1);
-        professionalSchoolClassTeamNameAutoText.setAdapter(professionalSchoolClassTeam_adapter);
 
         AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
-        professionalSchoolClassTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        professionalSchoolTeamsArray.clear();
+
+        professionalSchoolTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, professionalSchoolTeamsArray);
+        professionalSchoolTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.professionalTeamNameAutoText);
+        professionalSchoolClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.professionalClassTeamNameAutoText);
+        professionalSchoolTeamNameAutoText.setThreshold(1);
+        professionalSchoolTeamNameAutoText.setAdapter(professionalSchoolTeam_adapter);
+
+
+        professionalSchoolTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                addTeamButton.setVisibility(View.VISIBLE);
+                professionalSchoolClassTeamNameAutoText.setFocusableInTouchMode(true);
                 becomeVolunteerBtn.setVisibility(View.GONE);
+                professionalSchoolSelected = "professionalSchoolSelected";
 
 
-                professionalSchoolClassTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) professionalSchoolClassTeamNameAutoText.getAdapter();
-                ProfessionalSchoolClassID = professionalSchoolClassTeam_adapter.getItem(position).getTeamID();
-                ProfessionalSchoolID = professionalSchoolClassTeam_adapter.getItem(position).getParentTeamID();
-                Log.e("dsfdsfsd", "onItemClick: "+ProfessionalSchoolClassID );
+                professionalSchoolTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) professionalSchoolTeamNameAutoText.getAdapter();
+                ProfessionalSchoolID = professionalSchoolTeam_adapter.getItem(position).getTeamID();
                 Log.e("dsfdsfsd", "onItemClick: "+ProfessionalSchoolID );
 
+                new BackgroundTaskForAllProfessionalSchoolClassTeams().execute();
+
+                professionalSchoolClassTeamsArray.clear();
+
+                professionalSchoolClassTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, professionalSchoolClassTeamsArray);
+//        professionalSchoolClassTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.professionalClassTeamNameAutoText);
+                professionalSchoolClassTeamNameAutoText.setThreshold(1);
+                professionalSchoolClassTeamNameAutoText.setAdapter(professionalSchoolClassTeam_adapter);
+
+
+                professionalSchoolClassTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+
+                        addTeamButton.setVisibility(View.VISIBLE);
+                        becomeVolunteerBtn.setVisibility(View.GONE);
+
+
+                        professionalSchoolClassTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) professionalSchoolClassTeamNameAutoText.getAdapter();
+                        ProfessionalSchoolClassID = professionalSchoolClassTeam_adapter.getItem(position).getTeamID();
+                        ProfessionalSchoolID = professionalSchoolClassTeam_adapter.getItem(position).getParentTeamID();
+                        Log.e("dsfdsfsd", "onItemClick: "+ProfessionalSchoolClassID );
+                        Log.e("dsfdsfsd", "onItemClick: "+ProfessionalSchoolID );
+
+                    }
+                });
+
+                Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
+                professionalSchoolClassTeamNameAutoText.addTextChangedListener(
+                        new TextWatcher() {
+
+                            private Timer timer = new Timer();
+                            private final long DELAY = 2000; // Milliseconds
+
+                            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                timer.cancel();
+                                timer = new Timer();
+                                timer.schedule(
+                                        new TimerTask()
+                                        {
+                                            @Override
+                                            public void run() {
+                                                // TODO: Do what you need here (refresh list).
+                                                // You will probably need to use
+                                                // runOnUiThread(Runnable action) for some
+                                                // specific actions (e.g., manipulating views).
+
+                                                runOnUiThread(new Runnable() {
+                                                    public void run(){
+
+
+
+                                                        if(!TextUtils.isEmpty(professionalSchoolClassTeamNameAutoText.getText().toString())){
+
+                                                            String words = professionalSchoolClassTeamNameAutoText.getText().toString();
+
+                                                            int counter = 0;
+
+                                                            int count = 0;
+                                                            while(count < professionalSchoolClassTeamsArray.size())
+                                                            {
+                                                                if(professionalSchoolClassTeamsArray.get(count).getTeamName().equals(words)){
+
+                                                                    counter++;
+                                                                }
+//
+                                                                count++;
+
+                                                            }
+
+                                                            if(counter > 0){
+                                                                addTeamButton.setVisibility(View.VISIBLE);
+                                                                becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            }else{
+                                                                Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                                confirmBtn.setVisibility(View.GONE);
+                                                                addTeamButton.setVisibility(View.GONE);
+                                                                becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                            }
+
+
+                                                        }else if(TextUtils.isEmpty(professionalSchoolTeamNameAutoText.getText().toString()) && TextUtils.isEmpty(professionalSchoolClassTeamNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }else if (professionalSchoolSelected.equals("professionalSchoolSelected") && TextUtils.isEmpty(professionalSchoolClassTeamNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }
+
+                                                    }   //closes run(){}
+                                                });
+
+
+                                            }
+                                        },
+                                        DELAY
+                                ); }
+                            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
+
+                            @Override
+                            public void afterTextChanged(final Editable s) {
+
+
+                            }
+                        }
+                );
+
+
+                addTeamButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(addTeamButton.getText().toString().equals("Add Team")){
+                            confirmBtn.setVisibility(View.VISIBLE);
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                                    String currentUserID = preferences.getString("CurrentUserId", "");
+
+                                    String method = "joinTeams";
+                                    String teamType = "ProfessionalSchool";
+
+                                    BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                                    backgroundTask.execute(method,currentUserID, teamType, ProfessionalSchoolID, ProfessionalSchoolClassID);
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
 
-        Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
-        professionalSchoolClassTeamNameAutoText.addTextChangedListener(
+
+
+        professionalSchoolTeamNameAutoText.addTextChangedListener(
                 new TextWatcher() {
 
                     private Timer timer = new Timer();
@@ -998,30 +1096,47 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
 
 
-                                                if(!TextUtils.isEmpty(professionalSchoolClassTeamNameAutoText.getText().toString())){
+                                                if(!TextUtils.isEmpty(professionalSchoolTeamNameAutoText.getText().toString())){
 
-                                                    String words = professionalSchoolClassTeamNameAutoText.getText().toString();
+                                                    String words = professionalSchoolTeamNameAutoText.getText().toString();
+
+                                                    int counter = 0;
+
 
                                                     int count = 0;
-                                                    while(count < professionalSchoolClassTeamsArray.size())
+                                                    while(count < professionalSchoolTeamsArray.size())
                                                     {
-                                                        if(professionalSchoolClassTeamsArray.get(count).getTeamName().equals(words)){
-                                                            addTeamButton.setVisibility(View.VISIBLE);
-                                                            break;
-                                                        }else{
-                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-                                                            confirmBtn.setVisibility(View.GONE);
-                                                            addTeamButton.setVisibility(View.GONE);
-                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                        if(professionalSchoolTeamsArray.get(count).getTeamName().equals(words)){
+                                                            counter++;
                                                         }
+//
                                                         count++;
 
+                                                    }
+
+
+                                                    if(counter > 0){
+                                                        Log.e("dfjsdfhsdf", "run: " );
+                                                    }else{
+                                                        Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_SHORT).show();
+                                                        confirmBtn.setVisibility(View.GONE);
+                                                        addTeamButton.setVisibility(View.GONE);
+                                                        becomeVolunteerBtn.setVisibility(View.VISIBLE);
+
+                                                        professionalSchoolSelected = "professionalSchoolUnSelected";
+                                                        professionalSchoolClassTeamsArray.clear();
+                                                        professionalSchoolClassTeamNameAutoText.setText("");
+                                                        professionalSchoolClassTeamNameAutoText.setFocusableInTouchMode(false);
                                                     }
 
                                                 }else{
                                                     becomeVolunteerBtn.setVisibility(View.GONE);
                                                     addTeamButton.setVisibility(View.GONE);
                                                     confirmBtn.setVisibility(View.GONE);
+                                                    professionalSchoolSelected = "professionalSchoolUnSelected";
+                                                    professionalSchoolClassTeamsArray.clear();
+                                                    professionalSchoolClassTeamNameAutoText.setText("");
+                                                    professionalSchoolClassTeamNameAutoText.setFocusableInTouchMode(false);
                                                 }
 
                                             }   //closes run(){}
@@ -1044,156 +1159,21 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 }
         );
 
-
-        addTeamButton.setOnClickListener(new View.OnClickListener() {
+        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(addTeamButton.getText().toString().equals("Add Team")){
-                    confirmBtn.setVisibility(View.VISIBLE);
-                    confirmBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
-                            String currentUserID = preferences.getString("CurrentUserId", "");
-
-                            String method = "joinTeams";
-                            String teamType = "ProfessionalSchool";
-
-                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
-                            backgroundTask.execute(method,currentUserID, teamType, ProfessionalSchoolID, ProfessionalSchoolClassID);
-                        }
-                    });
-                }
+                Intent intent = new Intent(JoinTeamsActivity.this,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                startActivity(intent);
             }
         });
-
-//        new BackgroundTaskForProfessionalSchool().execute();
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View dialogView = inflater.inflate(R.layout.alert_dialog_for_professional_school_selection,null);
-//        builder.setCancelable(true);
-//        builder.setView(dialogView);
-//
-//
-//
-//        becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
-//
-//        professionalSchoolTeamsArray.clear();
-//
-//        professionalSchoolTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, professionalSchoolTeamsArray);
-//        professionalSchoolTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.professionalSchool_team);
-//        professionalSchoolTeamNameAutoText.setThreshold(1);
-//        professionalSchoolTeamNameAutoText.setAdapter(professionalSchoolTeam_adapter);
-//
-//
-//        AlertDialog pickFileImage = builder.create();
-//        pickFileImage.show();
-//
-//        professionalSchoolTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-//
-//                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                becomeVolunteerBtn.getLayoutParams().width=500;
-//                becomeVolunteerBtn.setText("Confirmation");
-//
-//
-//                professionalSchoolTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) professionalSchoolTeamNameAutoText.getAdapter();
-//                ProfessionalSchoolID = professionalSchoolTeam_adapter.getItem(position).getTeamID();
-//                Log.e("dsfdsfsd", "onItemClick: "+ProfessionalSchoolID );
-//
-//
-//            }
-//        });
-//
-//        professionalSchoolTeamNameAutoText.addTextChangedListener(
-//                new TextWatcher() {
-//
-//                    private Timer timer = new Timer();
-//                    private final long DELAY = 2000; // Milliseconds
-//
-//                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                        timer.cancel();
-//                        timer = new Timer();
-//                        timer.schedule(
-//                                new TimerTask()
-//                                {
-//                                    @Override
-//                                    public void run() {
-//                                        // TODO: Do what you need here (refresh list).
-//                                        // You will probably need to use
-//                                        // runOnUiThread(Runnable action) for some
-//                                        // specific actions (e.g., manipulating views).
-//
-//                                        runOnUiThread(new Runnable() {
-//                                            public void run(){
-//
-//
-//
-//                                                if(!TextUtils.isEmpty(professionalSchoolTeamNameAutoText.getText().toString())){
-//
-//                                                    String words = professionalSchoolTeamNameAutoText.getText().toString();
-//
-//                                                    int count = 0;
-//                                                    while(count < professionalSchoolTeamsArray.size())
-//                                                    {
-//                                                        if(professionalSchoolTeamsArray.get(count).getTeamName().equals(words)){
-//                                                            becomeVolunteerBtn.setText("Confirmation");
-//                                                            becomeVolunteerBtn.getLayoutParams().width=500;
-//                                                            break;
-//                                                        }else{
-//                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-//                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-//                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Professional School");
-//                                                        }
-//                                                        count++;
-//
-//                                                    }
-//
-//
-//
-//                                                }else{
-//                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
-//                                                }
-//
-//                                            }   //closes run(){}
-//                                        });
-//
-//
-//                                    }
-//                                },
-//                                DELAY
-//                        ); }
-//                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-//
-//
-//
-//                    @Override
-//                    public void afterTextChanged(final Editable s) {
-//
-//
-//                    }
-//                }
-//        );
-//
-//
-//        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(becomeVolunteerBtn.getText().toString().equals("Confirmation")){
-//
-//                }
-//            }
-//        });
-//
 
     }
 
     public void MilitaryBranch(){
 
-        new BackgroundTaskForAllMilitaryLocalTeams().execute();
+        new BackgroundTaskForMilitaryBranch().execute();
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -1205,35 +1185,169 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
         addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
-        militaryBranchLocalTeamsArray.clear();
-
-        militaryBranchLocalTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, militaryBranchLocalTeamsArray);
-        militaryBranchLocalAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.militaryLocalTeamNameAutoText);
-        militaryBranchLocalAutoText.setThreshold(1);
-        militaryBranchLocalAutoText.setAdapter(militaryBranchLocalTeam_adapter);
-
         AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
-        militaryBranchLocalAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        militaryBranchTeamsArray.clear();
+
+        militaryBranchTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, militaryBranchTeamsArray);
+        militaryBranchAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.militaryTeamNameAutoText);
+        militaryBranchLocalAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.militaryLocalTeamNameAutoText);
+        militaryBranchAutoText.setThreshold(1);
+        militaryBranchAutoText.setAdapter(militaryBranchTeam_adapter);
+
+        militaryBranchAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                addTeamButton.setVisibility(View.VISIBLE);
+                militaryBranchLocalAutoText.setFocusableInTouchMode(true);
                 becomeVolunteerBtn.setVisibility(View.GONE);
+                militarySelected = "militarySelected";
 
-
-                militaryBranchLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) militaryBranchLocalAutoText.getAdapter();
-                MilitaryBranchLocalID = militaryBranchLocalTeam_adapter.getItem(position).getTeamID();
-                MilitaryBranchID = militaryBranchLocalTeam_adapter.getItem(position).getParentTeamID();
-                Log.e("dsfdsfsd", "onItemClick: "+MilitaryBranchLocalID );
+                militaryBranchTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) militaryBranchAutoText.getAdapter();
+                MilitaryBranchID = militaryBranchTeam_adapter.getItem(position).getTeamID();
                 Log.e("dsfdsfsd", "onItemClick: "+MilitaryBranchID );
+
+                new BackgroundTaskForAllMilitaryLocalTeams().execute();
+
+                militaryBranchLocalTeamsArray.clear();
+
+                militaryBranchLocalTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, militaryBranchLocalTeamsArray);
+//                militaryBranchLocalAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.militaryLocalTeamNameAutoText);
+                militaryBranchLocalAutoText.setThreshold(1);
+                militaryBranchLocalAutoText.setAdapter(militaryBranchLocalTeam_adapter);
+
+
+
+                militaryBranchLocalAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+
+                        addTeamButton.setVisibility(View.VISIBLE);
+                        becomeVolunteerBtn.setVisibility(View.GONE);
+
+
+                        militaryBranchLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) militaryBranchLocalAutoText.getAdapter();
+                        MilitaryBranchLocalID = militaryBranchLocalTeam_adapter.getItem(position).getTeamID();
+                        MilitaryBranchID = militaryBranchLocalTeam_adapter.getItem(position).getParentTeamID();
+                        Log.e("dsfdsfsd", "onItemClick: "+MilitaryBranchLocalID );
+                        Log.e("dsfdsfsd", "onItemClick: "+MilitaryBranchID );
+
+                    }
+                });
+
+
+                militaryBranchLocalAutoText.addTextChangedListener(
+                        new TextWatcher() {
+
+                            private Timer timer = new Timer();
+                            private final long DELAY = 2000; // Milliseconds
+
+                            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                timer.cancel();
+                                timer = new Timer();
+                                timer.schedule(
+                                        new TimerTask()
+                                        {
+                                            @Override
+                                            public void run() {
+                                                // TODO: Do what you need here (refresh list).
+                                                // You will probably need to use
+                                                // runOnUiThread(Runnable action) for some
+                                                // specific actions (e.g., manipulating views).
+
+                                                runOnUiThread(new Runnable() {
+                                                    public void run(){
+
+
+
+                                                        if(!TextUtils.isEmpty(militaryBranchLocalAutoText.getText().toString())){
+
+                                                            String words = militaryBranchLocalAutoText.getText().toString();
+
+                                                            int counter = 0;
+
+                                                            int count = 0;
+                                                            while(count < militaryBranchLocalTeamsArray.size())
+                                                            {
+                                                                if(militaryBranchLocalTeamsArray.get(count).getTeamName().equals(words)){
+
+                                                                    counter++;
+                                                                }
+//
+                                                                count++;
+
+                                                            }
+
+                                                            if(counter > 0){
+                                                                addTeamButton.setVisibility(View.VISIBLE);
+                                                                becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            }else{
+                                                                Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                                confirmBtn.setVisibility(View.GONE);
+                                                                addTeamButton.setVisibility(View.GONE);
+                                                                becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                            }
+
+
+                                                        }else if(TextUtils.isEmpty(militaryBranchAutoText.getText().toString()) && TextUtils.isEmpty(militaryBranchLocalAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }else if (militarySelected.equals("militarySelected") && TextUtils.isEmpty(militaryBranchLocalAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }
+
+
+                                                    }   //closes run(){}
+                                                });
+
+
+                                            }
+                                        },
+                                        DELAY
+                                ); }
+                            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
+
+                            @Override
+                            public void afterTextChanged(final Editable s) {
+
+
+                            }
+                        }
+                );
+
+                addTeamButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(addTeamButton.getText().toString().equals("Add Team")){
+                            confirmBtn.setVisibility(View.VISIBLE);
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                                    String currentUserID = preferences.getString("CurrentUserId", "");
+
+                                    String method = "joinTeams";
+                                    String teamType = "MilitaryBranch";
+
+                                    BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                                    backgroundTask.execute(method,currentUserID, teamType, MilitaryBranchID, MilitaryBranchLocalID);
+                                }
+                            });
+                        }
+                    }
+                });
 
             }
         });
 
 
-        militaryBranchLocalAutoText.addTextChangedListener(
+        militaryBranchAutoText.addTextChangedListener(
                 new TextWatcher() {
 
                     private Timer timer = new Timer();
@@ -1257,30 +1371,48 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
 
 
-                                                if(!TextUtils.isEmpty(militaryBranchLocalAutoText.getText().toString())){
+                                                if(!TextUtils.isEmpty(militaryBranchAutoText.getText().toString())){
 
-                                                    String words = militaryBranchLocalAutoText.getText().toString();
+                                                    String words = militaryBranchAutoText.getText().toString();
+
+                                                    int counter = 0;
+
 
                                                     int count = 0;
-                                                    while(count < militaryBranchLocalTeamsArray.size())
+                                                    while(count < militaryBranchTeamsArray.size())
                                                     {
-                                                        if(militaryBranchLocalTeamsArray.get(count).getTeamName().equals(words)){
-                                                            addTeamButton.setVisibility(View.VISIBLE);
-                                                            break;
-                                                        }else{
-                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-                                                            confirmBtn.setVisibility(View.GONE);
-                                                            addTeamButton.setVisibility(View.GONE);
-                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                        if(militaryBranchTeamsArray.get(count).getTeamName().equals(words)){
+                                                            counter++;
                                                         }
+//
                                                         count++;
 
+                                                    }
+
+
+                                                    if(counter > 0){
+                                                        Log.e("dfjsdfhsdf", "run: " );
+                                                    }else{
+                                                        Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_SHORT).show();
+                                                        confirmBtn.setVisibility(View.GONE);
+                                                        addTeamButton.setVisibility(View.GONE);
+                                                        becomeVolunteerBtn.setVisibility(View.VISIBLE);
+
+                                                        militarySelected = "militaryUnSelected";
+                                                        militaryBranchLocalTeamsArray.clear();
+                                                        militaryBranchLocalAutoText.setText("");
+                                                        militaryBranchLocalAutoText.setFocusableInTouchMode(false);
                                                     }
 
                                                 }else{
                                                     becomeVolunteerBtn.setVisibility(View.GONE);
                                                     addTeamButton.setVisibility(View.GONE);
                                                     confirmBtn.setVisibility(View.GONE);
+
+                                                    militarySelected = "militaryUnSelected";
+                                                    militaryBranchLocalTeamsArray.clear();
+                                                    militaryBranchLocalAutoText.setText("");
+                                                    militaryBranchLocalAutoText.setFocusableInTouchMode(false);
                                                 }
 
                                             }   //closes run(){}
@@ -1302,157 +1434,19 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     }
                 }
         );
-
-        addTeamButton.setOnClickListener(new View.OnClickListener() {
+        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(addTeamButton.getText().toString().equals("Add Team")){
-                    confirmBtn.setVisibility(View.VISIBLE);
-                    confirmBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
-                            String currentUserID = preferences.getString("CurrentUserId", "");
-
-                            String method = "joinTeams";
-                            String teamType = "MilitaryBranch";
-
-                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
-                            backgroundTask.execute(method,currentUserID, teamType, MilitaryBranchID, MilitaryBranchLocalID);
-                        }
-                    });
-                }
+                Intent intent = new Intent(JoinTeamsActivity.this,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                startActivity(intent);
             }
         });
-
-//        new BackgroundTaskForMilitaryBranch().execute();
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View dialogView = inflater.inflate(R.layout.alert_dialog_for_military_branch_selection,null);
-//        builder.setCancelable(true);
-//        builder.setView(dialogView);
-//
-//
-//        becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
-//
-//        militaryBranchTeamsArray.clear();
-//
-//        militaryBranchTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, militaryBranchTeamsArray);
-//        militaryBranchAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.militaryBranchAutoText);
-//        militaryBranchAutoText.setThreshold(1);
-//        militaryBranchAutoText.setAdapter(militaryBranchTeam_adapter);
-//
-//
-//        AlertDialog pickFileImage = builder.create();
-//        pickFileImage.show();
-//
-//
-//        militaryBranchAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-//
-//                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                becomeVolunteerBtn.getLayoutParams().width=500;
-//                becomeVolunteerBtn.setText("Confirmation");
-//
-//
-//                militaryBranchTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) militaryBranchAutoText.getAdapter();
-//                MilitaryBranchID = militaryBranchTeam_adapter.getItem(position).getTeamID();
-//                Log.e("dsfdsfsd", "onItemClick: "+MilitaryBranchID );
-//
-//
-//            }
-//        });
-//
-//        militaryBranchAutoText.addTextChangedListener(
-//                new TextWatcher() {
-//
-//                    private Timer timer = new Timer();
-//                    private final long DELAY = 2000; // Milliseconds
-//
-//                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                        timer.cancel();
-//                        timer = new Timer();
-//                        timer.schedule(
-//                                new TimerTask()
-//                                {
-//                                    @Override
-//                                    public void run() {
-//                                        // TODO: Do what you need here (refresh list).
-//                                        // You will probably need to use
-//                                        // runOnUiThread(Runnable action) for some
-//                                        // specific actions (e.g., manipulating views).
-//
-//                                        runOnUiThread(new Runnable() {
-//                                            public void run(){
-//
-//
-//
-//                                                if(!TextUtils.isEmpty(militaryBranchAutoText.getText().toString())){
-//
-//                                                    String words = militaryBranchAutoText.getText().toString();
-//
-//                                                    int count = 0;
-//                                                    while(count < militaryBranchTeamsArray.size())
-//                                                    {
-//                                                        if(militaryBranchTeamsArray.get(count).getTeamName().equals(words)){
-//                                                            becomeVolunteerBtn.setText("Confirmation");
-//                                                            becomeVolunteerBtn.getLayoutParams().width=500;
-//                                                            break;
-//                                                        }else{
-//                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-//                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-//                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Military Branch");
-//                                                        }
-//                                                        count++;
-//
-//                                                    }
-//
-//
-//
-//                                                }else{
-//                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
-//                                                }
-//
-//                                            }   //closes run(){}
-//                                        });
-//
-//
-//                                    }
-//                                },
-//                                DELAY
-//                        ); }
-//                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-//
-//
-//
-//                    @Override
-//                    public void afterTextChanged(final Editable s) {
-//
-//
-//                    }
-//                }
-//        );
-//
-//
-//        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(becomeVolunteerBtn.getText().toString().equals("Confirmation")){
-//
-//                }
-//            }
-//        });
-//
-
     }
 
     public void Occupation(){
 
-        new BackgroundTaskForAllOccupationLocalTeams().execute();
-
+        new BackgroundTaskForOccupation().execute();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -1464,35 +1458,171 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
         addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
-        occupationLocalTeamsArray.clear();
-
-        occupationLocalTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, occupationLocalTeamsArray);
-        occupationTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.occupationLocalTeamNameAutoText);
-        occupationTeamLocalNameAutoText.setThreshold(1);
-        occupationTeamLocalNameAutoText.setAdapter(occupationLocalTeam_adapter);
-
         AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
-        occupationTeamLocalNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        occupationTeamsArray.clear();
+
+        occupationTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, occupationTeamsArray);
+        occupationTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.occupationTeamNameAutoText);
+        occupationTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.occupationLocalTeamNameAutoText);
+        occupationTeamNameAutoText.setThreshold(1);
+        occupationTeamNameAutoText.setAdapter(occupationTeam_adapter);
+
+        occupationTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                addTeamButton.setVisibility(View.VISIBLE);
+                occupationTeamLocalNameAutoText.setFocusableInTouchMode(true);
                 becomeVolunteerBtn.setVisibility(View.GONE);
+                occupationSelected = "occupationSelected";
 
 
-                occupationLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) occupationTeamLocalNameAutoText.getAdapter();
-                OccupationLocalID = occupationLocalTeam_adapter.getItem(position).getTeamID();
-                OccupationID = occupationLocalTeam_adapter.getItem(position).getParentTeamID();
-                Log.e("dsfdsfsd", "onItemClick: "+OccupationLocalID );
+                occupationTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) occupationTeamNameAutoText.getAdapter();
+                OccupationID = occupationTeam_adapter.getItem(position).getTeamID();
                 Log.e("dsfdsfsd", "onItemClick: "+OccupationID );
+
+                new BackgroundTaskForAllOccupationLocalTeams().execute();
+
+                occupationLocalTeamsArray.clear();
+
+                occupationLocalTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, occupationLocalTeamsArray);
+//        occupationTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.occupationLocalTeamNameAutoText);
+                occupationTeamLocalNameAutoText.setThreshold(1);
+                occupationTeamLocalNameAutoText.setAdapter(occupationLocalTeam_adapter);
+
+
+
+                occupationTeamLocalNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+
+                        addTeamButton.setVisibility(View.VISIBLE);
+                        becomeVolunteerBtn.setVisibility(View.GONE);
+
+
+                        occupationLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) occupationTeamLocalNameAutoText.getAdapter();
+                        OccupationLocalID = occupationLocalTeam_adapter.getItem(position).getTeamID();
+                        OccupationID = occupationLocalTeam_adapter.getItem(position).getParentTeamID();
+                        Log.e("dsfdsfsd", "onItemClick: "+OccupationLocalID );
+                        Log.e("dsfdsfsd", "onItemClick: "+OccupationID );
+
+                    }
+                });
+
+                Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
+                occupationTeamLocalNameAutoText.addTextChangedListener(
+                        new TextWatcher() {
+
+                            private Timer timer = new Timer();
+                            private final long DELAY = 2000; // Milliseconds
+
+                            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                timer.cancel();
+                                timer = new Timer();
+                                timer.schedule(
+                                        new TimerTask()
+                                        {
+                                            @Override
+                                            public void run() {
+                                                // TODO: Do what you need here (refresh list).
+                                                // You will probably need to use
+                                                // runOnUiThread(Runnable action) for some
+                                                // specific actions (e.g., manipulating views).
+
+                                                runOnUiThread(new Runnable() {
+                                                    public void run(){
+
+
+
+                                                        if(!TextUtils.isEmpty(occupationTeamLocalNameAutoText.getText().toString())){
+
+                                                            String words = occupationTeamLocalNameAutoText.getText().toString();
+
+
+                                                            int counter = 0;
+
+                                                            int count = 0;
+                                                            while(count < occupationLocalTeamsArray.size())
+                                                            {
+                                                                if(occupationLocalTeamsArray.get(count).getTeamName().equals(words)){
+
+                                                                    counter++;
+                                                                }
+//
+                                                                count++;
+
+                                                            }
+
+                                                            if(counter > 0){
+                                                                addTeamButton.setVisibility(View.VISIBLE);
+                                                                becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            }else{
+                                                                Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                                confirmBtn.setVisibility(View.GONE);
+                                                                addTeamButton.setVisibility(View.GONE);
+                                                                becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                            }
+
+
+                                                        }else if(TextUtils.isEmpty(occupationTeamNameAutoText.getText().toString()) && TextUtils.isEmpty(occupationTeamLocalNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }else if (occupationSelected.equals("occupationSelected") && TextUtils.isEmpty(occupationTeamLocalNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }
+
+
+                                                    }   //closes run(){}
+                                                });
+
+
+                                            }
+                                        },
+                                        DELAY
+                                ); }
+                            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
+
+                            @Override
+                            public void afterTextChanged(final Editable s) {
+
+
+                            }
+                        }
+                );
+
+
+                addTeamButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(addTeamButton.getText().toString().equals("Add Team")){
+                            confirmBtn.setVisibility(View.VISIBLE);
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                                    String currentUserID = preferences.getString("CurrentUserId", "");
+
+                                    String method = "joinTeams";
+                                    String teamType = "OccupationGroup";
+
+                                    BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                                    backgroundTask.execute(method,currentUserID, teamType, OccupationID, OccupationLocalID);
+                                }
+                            });
+                        }
+                    }
+                });
 
             }
         });
 
-        Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
-        occupationTeamLocalNameAutoText.addTextChangedListener(
+        occupationTeamNameAutoText.addTextChangedListener(
                 new TextWatcher() {
 
                     private Timer timer = new Timer();
@@ -1516,31 +1646,48 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
 
 
-                                                if(!TextUtils.isEmpty(occupationTeamLocalNameAutoText.getText().toString())){
+                                                if(!TextUtils.isEmpty(occupationTeamNameAutoText.getText().toString())){
 
-                                                    String words = occupationTeamLocalNameAutoText.getText().toString();
+                                                    String words = occupationTeamNameAutoText.getText().toString();
+
+                                                    int counter = 0;
+
 
                                                     int count = 0;
-                                                    while(count < occupationLocalTeamsArray.size())
+                                                    while(count < occupationTeamsArray.size())
                                                     {
-                                                        if(occupationLocalTeamsArray.get(count).getTeamName().equals(words)){
-                                                            addTeamButton.setVisibility(View.VISIBLE);
-
-                                                            break;
-                                                        }else{
-                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-                                                            confirmBtn.setVisibility(View.GONE);
-                                                            addTeamButton.setVisibility(View.GONE);
-                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                        if(occupationTeamsArray.get(count).getTeamName().equals(words)){
+                                                            counter++;
                                                         }
+//
                                                         count++;
 
+                                                    }
+
+
+                                                    if(counter > 0){
+                                                        Log.e("dfjsdfhsdf", "run: " );
+                                                    }else{
+                                                        Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_SHORT).show();
+                                                        confirmBtn.setVisibility(View.GONE);
+                                                        addTeamButton.setVisibility(View.GONE);
+                                                        becomeVolunteerBtn.setVisibility(View.VISIBLE);
+
+                                                        occupationSelected = "occupationUnSelected";
+                                                        occupationLocalTeamsArray.clear();
+                                                        occupationTeamLocalNameAutoText.setText("");
+                                                        occupationTeamLocalNameAutoText.setFocusableInTouchMode(false);
                                                     }
 
                                                 }else{
                                                     becomeVolunteerBtn.setVisibility(View.GONE);
                                                     addTeamButton.setVisibility(View.GONE);
                                                     confirmBtn.setVisibility(View.GONE);
+
+                                                    occupationSelected = "occupationUnSelected";
+                                                    occupationLocalTeamsArray.clear();
+                                                    occupationTeamLocalNameAutoText.setText("");
+                                                    occupationTeamLocalNameAutoText.setFocusableInTouchMode(false);
                                                 }
 
                                             }   //closes run(){}
@@ -1563,154 +1710,21 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 }
         );
 
-
-        addTeamButton.setOnClickListener(new View.OnClickListener() {
+        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(addTeamButton.getText().toString().equals("Add Team")){
-                    confirmBtn.setVisibility(View.VISIBLE);
-                    confirmBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
-                            String currentUserID = preferences.getString("CurrentUserId", "");
-
-                            String method = "joinTeams";
-                            String teamType = "OccupationGroup";
-
-                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
-                            backgroundTask.execute(method,currentUserID, teamType, OccupationID, OccupationLocalID);
-                        }
-                    });
-                }
+                Intent intent = new Intent(JoinTeamsActivity.this,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                startActivity(intent);
             }
         });
-
-//        new BackgroundTaskForOccupation().execute();
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View dialogView = inflater.inflate(R.layout.alert_dialg_for_occupation_selection,null);
-//        builder.setCancelable(true);
-//        builder.setView(dialogView);
-//
-//        becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
-//
-//        occupationTeamsArray.clear();
-//
-//        occupationTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, occupationTeamsArray);
-//        occupationTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.occupationTeamNameAutoText);
-//        occupationTeamNameAutoText.setThreshold(1);
-//        occupationTeamNameAutoText.setAdapter(occupationTeam_adapter);
-//
-//        AlertDialog pickFileImage = builder.create();
-//        pickFileImage.show();
-//
-//        occupationTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-//
-//                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                becomeVolunteerBtn.getLayoutParams().width=500;
-//                becomeVolunteerBtn.setText("Confirmation");
-//
-//
-//                occupationTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) occupationTeamNameAutoText.getAdapter();
-//                OccupationID = occupationTeam_adapter.getItem(position).getTeamID();
-//                Log.e("dsfdsfsd", "onItemClick: "+OccupationID );
-//
-//
-//            }
-//        });
-//
-//        occupationTeamNameAutoText.addTextChangedListener(
-//                new TextWatcher() {
-//
-//                    private Timer timer = new Timer();
-//                    private final long DELAY = 2000; // Milliseconds
-//
-//                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                        timer.cancel();
-//                        timer = new Timer();
-//                        timer.schedule(
-//                                new TimerTask()
-//                                {
-//                                    @Override
-//                                    public void run() {
-//                                        // TODO: Do what you need here (refresh list).
-//                                        // You will probably need to use
-//                                        // runOnUiThread(Runnable action) for some
-//                                        // specific actions (e.g., manipulating views).
-//
-//                                        runOnUiThread(new Runnable() {
-//                                            public void run(){
-//
-//
-//
-//                                                if(!TextUtils.isEmpty(occupationTeamNameAutoText.getText().toString())){
-//
-//                                                    String words = occupationTeamNameAutoText.getText().toString();
-//
-//                                                    int count = 0;
-//                                                    while(count < occupationTeamsArray.size())
-//                                                    {
-//                                                        if(occupationTeamsArray.get(count).getTeamName().equals(words)){
-//                                                            becomeVolunteerBtn.setText("Confirmation");
-//                                                            becomeVolunteerBtn.getLayoutParams().width=500;
-//                                                            break;
-//                                                        }else{
-//                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-//                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-//                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Occupation");
-//                                                        }
-//                                                        count++;
-//
-//                                                    }
-//
-//
-//
-//                                                }else{
-//                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
-//                                                }
-//
-//                                            }   //closes run(){}
-//                                        });
-//
-//
-//                                    }
-//                                },
-//                                DELAY
-//                        ); }
-//                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-//
-//
-//
-//                    @Override
-//                    public void afterTextChanged(final Editable s) {
-//
-//
-//                    }
-//                }
-//        );
-//
-//
-//
-//        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(becomeVolunteerBtn.getText().toString().equals("Confirmation")){
-//
-//                }
-//            }
-//        });
-
-
     }
 
     public void Company(){
 
-        new BackgroundTaskForAllCompanyLocalTeams().execute();
+        new BackgroundTaskForCompany().execute();
+
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -1722,34 +1736,170 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
         addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
-        companyLocalTeamsArray.clear();
-
-        companyLocalTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, companyLocalTeamsArray);
-        companyTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.companyLocalTeamNameAutoText);
-        companyTeamLocalNameAutoText.setThreshold(1);
-        companyTeamLocalNameAutoText.setAdapter(companyLocalTeam_adapter);
-
         AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
-        companyTeamLocalNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        companyTeamsArray.clear();
+
+        companyTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, companyTeamsArray);
+        companyTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.companyTeamNameAutoText);
+        companyTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.companyLocalTeamNameAutoText);
+        companyTeamNameAutoText.setThreshold(1);
+        companyTeamNameAutoText.setAdapter(companyTeam_adapter);
+
+        companyTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-
-                addTeamButton.setVisibility(View.VISIBLE);
+                companyTeamLocalNameAutoText.setFocusableInTouchMode(true);
                 becomeVolunteerBtn.setVisibility(View.GONE);
+                companySelected = "companySelected";
 
-                companyLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) companyTeamLocalNameAutoText.getAdapter();
-                CompanyLocalID = companyLocalTeam_adapter.getItem(position).getTeamID();
-                CompanyID = companyLocalTeam_adapter.getItem(position).getParentTeamID();
-                Log.e("dsfdsfsd", "onItemClick: "+CompanyLocalID );
+
+                companyTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) companyTeamNameAutoText.getAdapter();
+                CompanyID = companyTeam_adapter.getItem(position).getTeamID();
                 Log.e("dsfdsfsd", "onItemClick: "+CompanyID );
+
+                new BackgroundTaskForAllCompanyLocalTeams().execute();
+
+                companyLocalTeamsArray.clear();
+
+                companyLocalTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, companyLocalTeamsArray);
+//        companyTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.companyLocalTeamNameAutoText);
+                companyTeamLocalNameAutoText.setThreshold(1);
+                companyTeamLocalNameAutoText.setAdapter(companyLocalTeam_adapter);
+
+
+
+                companyTeamLocalNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+
+                        addTeamButton.setVisibility(View.VISIBLE);
+                        becomeVolunteerBtn.setVisibility(View.GONE);
+
+                        companyLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) companyTeamLocalNameAutoText.getAdapter();
+                        CompanyLocalID = companyLocalTeam_adapter.getItem(position).getTeamID();
+                        CompanyID = companyLocalTeam_adapter.getItem(position).getParentTeamID();
+                        Log.e("dsfdsfsd", "onItemClick: "+CompanyLocalID );
+                        Log.e("dsfdsfsd", "onItemClick: "+CompanyID );
+
+                    }
+                });
+
+                Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
+                companyTeamLocalNameAutoText.addTextChangedListener(
+                        new TextWatcher() {
+
+                            private Timer timer = new Timer();
+                            private final long DELAY = 2000; // Milliseconds
+
+                            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                timer.cancel();
+                                timer = new Timer();
+                                timer.schedule(
+                                        new TimerTask()
+                                        {
+                                            @Override
+                                            public void run() {
+                                                // TODO: Do what you need here (refresh list).
+                                                // You will probably need to use
+                                                // runOnUiThread(Runnable action) for some
+                                                // specific actions (e.g., manipulating views).
+
+                                                runOnUiThread(new Runnable() {
+                                                    public void run(){
+
+
+
+                                                        if(!TextUtils.isEmpty(companyTeamLocalNameAutoText.getText().toString())){
+
+                                                            String words = companyTeamLocalNameAutoText.getText().toString();
+
+
+                                                            int counter = 0;
+
+                                                            int count = 0;
+                                                            while(count < companyLocalTeamsArray.size())
+                                                            {
+                                                                if(companyLocalTeamsArray.get(count).getTeamName().equals(words)){
+
+                                                                    counter++;
+                                                                }
+//
+                                                                count++;
+
+                                                            }
+
+                                                            if(counter > 0){
+                                                                addTeamButton.setVisibility(View.VISIBLE);
+                                                                becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            }else{
+                                                                Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                                confirmBtn.setVisibility(View.GONE);
+                                                                addTeamButton.setVisibility(View.GONE);
+                                                                becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                            }
+
+
+                                                        }else if(TextUtils.isEmpty(companyTeamNameAutoText.getText().toString()) && TextUtils.isEmpty(companyTeamLocalNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }else if (companySelected.equals("companySelected") && TextUtils.isEmpty(companyTeamLocalNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }
+
+
+                                                    }   //closes run(){}
+                                                });
+
+
+                                            }
+                                        },
+                                        DELAY
+                                ); }
+                            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
+
+                            @Override
+                            public void afterTextChanged(final Editable s) {
+
+
+                            }
+                        }
+                );
+
+
+                addTeamButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(addTeamButton.getText().toString().equals("Add Team")){
+                            confirmBtn.setVisibility(View.VISIBLE);
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                                    String currentUserID = preferences.getString("CurrentUserId", "");
+
+                                    String method = "joinTeams";
+                                    String teamType = "CompanyGroup";
+
+                                    BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                                    backgroundTask.execute(method,currentUserID, teamType, CompanyID, CompanyLocalID);
+                                }
+                            });
+                        }
+                    }
+                });
 
             }
         });
 
-        Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
-        companyTeamLocalNameAutoText.addTextChangedListener(
+
+        companyTeamNameAutoText.addTextChangedListener(
                 new TextWatcher() {
 
                     private Timer timer = new Timer();
@@ -1773,30 +1923,48 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
 
 
-                                                if(!TextUtils.isEmpty(companyTeamLocalNameAutoText.getText().toString())){
+                                                if(!TextUtils.isEmpty(companyTeamNameAutoText.getText().toString())){
 
-                                                    String words = companyTeamLocalNameAutoText.getText().toString();
+                                                    String words = companyTeamNameAutoText.getText().toString();
+
+                                                    int counter = 0;
+
 
                                                     int count = 0;
-                                                    while(count < companyLocalTeamsArray.size())
+                                                    while(count < companyTeamsArray.size())
                                                     {
-                                                        if(companyLocalTeamsArray.get(count).getTeamName().equals(words)){
-                                                            addTeamButton.setVisibility(View.VISIBLE);
-                                                            break;
-                                                        }else{
-                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-                                                            confirmBtn.setVisibility(View.GONE);
-                                                            addTeamButton.setVisibility(View.GONE);
-                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                        if(companyTeamsArray.get(count).getTeamName().equals(words)){
+                                                            counter++;
                                                         }
+//
                                                         count++;
 
+                                                    }
+
+
+                                                    if(counter > 0){
+                                                        Log.e("dfjsdfhsdf", "run: " );
+                                                    }else{
+                                                        Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_SHORT).show();
+                                                        confirmBtn.setVisibility(View.GONE);
+                                                        addTeamButton.setVisibility(View.GONE);
+                                                        becomeVolunteerBtn.setVisibility(View.VISIBLE);
+
+                                                        companySelected = "companyUnSelected";
+                                                        companyLocalTeamsArray.clear();
+                                                        companyTeamLocalNameAutoText.setText("");
+                                                        companyTeamLocalNameAutoText.setFocusableInTouchMode(false);
                                                     }
 
                                                 }else{
                                                     becomeVolunteerBtn.setVisibility(View.GONE);
                                                     addTeamButton.setVisibility(View.GONE);
                                                     confirmBtn.setVisibility(View.GONE);
+
+                                                    companySelected = "companyUnSelected";
+                                                    companyLocalTeamsArray.clear();
+                                                    companyTeamLocalNameAutoText.setText("");
+                                                    companyTeamLocalNameAutoText.setFocusableInTouchMode(false);
                                                 }
 
                                             }   //closes run(){}
@@ -1818,153 +1986,21 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     }
                 }
         );
-
-
-        addTeamButton.setOnClickListener(new View.OnClickListener() {
+        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(addTeamButton.getText().toString().equals("Add Team")){
-                    confirmBtn.setVisibility(View.VISIBLE);
-                    confirmBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
-                            String currentUserID = preferences.getString("CurrentUserId", "");
-
-                            String method = "joinTeams";
-                            String teamType = "CompanyGroup";
-
-                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
-                            backgroundTask.execute(method,currentUserID, teamType, CompanyID, CompanyLocalID);
-                        }
-                    });
-                }
+                Intent intent = new Intent(JoinTeamsActivity.this,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                startActivity(intent);
             }
         });
-
-//        new BackgroundTaskForCompany().execute();
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View dialogView = inflater.inflate(R.layout.alert_dialog_for_company_selection,null);
-//        builder.setCancelable(true);
-//        builder.setView(dialogView);
-//
-//        becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
-//
-//        companyTeamsArray.clear();
-//
-//        companyTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, companyTeamsArray);
-//        companyTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.companyTeamNameAutoText);
-//        companyTeamNameAutoText.setThreshold(1);
-//        companyTeamNameAutoText.setAdapter(companyTeam_adapter);
-//
-//        AlertDialog pickFileImage = builder.create();
-//        pickFileImage.show();
-//
-//        companyTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-//
-//                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                becomeVolunteerBtn.getLayoutParams().width=500;
-//                becomeVolunteerBtn.setText("Confirmation");
-//
-//
-//                companyTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) companyTeamNameAutoText.getAdapter();
-//                CompanyID = companyTeam_adapter.getItem(position).getTeamID();
-//                Log.e("dsfdsfsd", "onItemClick: "+CompanyID );
-//
-//
-//            }
-//        });
-//
-//        companyTeamNameAutoText.addTextChangedListener(
-//                new TextWatcher() {
-//
-//                    private Timer timer = new Timer();
-//                    private final long DELAY = 2000; // Milliseconds
-//
-//                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                        timer.cancel();
-//                        timer = new Timer();
-//                        timer.schedule(
-//                                new TimerTask()
-//                                {
-//                                    @Override
-//                                    public void run() {
-//                                        // TODO: Do what you need here (refresh list).
-//                                        // You will probably need to use
-//                                        // runOnUiThread(Runnable action) for some
-//                                        // specific actions (e.g., manipulating views).
-//
-//                                        runOnUiThread(new Runnable() {
-//                                            public void run(){
-//
-//
-//
-//                                                if(!TextUtils.isEmpty(companyTeamNameAutoText.getText().toString())){
-//
-//                                                    String words = companyTeamNameAutoText.getText().toString();
-//
-//                                                    int count = 0;
-//                                                    while(count < companyTeamsArray.size())
-//                                                    {
-//                                                        if(companyTeamsArray.get(count).getTeamName().equals(words)){
-//                                                            becomeVolunteerBtn.getLayoutParams().width=500;
-//                                                            becomeVolunteerBtn.setText("Confirmation");
-//                                                            break;
-//                                                        }else{
-//                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-//                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-//                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Company");
-//                                                        }
-//                                                        count++;
-//
-//                                                    }
-//
-//
-//
-//                                                }else{
-//                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
-//                                                }
-//
-//                                            }   //closes run(){}
-//                                        });
-//
-//
-//                                    }
-//                                },
-//                                DELAY
-//                        ); }
-//                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-//
-//
-//
-//                    @Override
-//                    public void afterTextChanged(final Editable s) {
-//
-//
-//                    }
-//                }
-//        );
-//
-//
-//        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(becomeVolunteerBtn.getText().toString().equals("Confirmation")){
-//
-//                }
-//            }
-//        });
-
     }
 
     public void Faith(){
 
-        new BackgroundTaskForAllFaithLocalTeams().execute();
+        new BackgroundTaskForFaithGroup().execute();
+
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -1975,34 +2011,167 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
         confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
         addTeamButton = dialogView.findViewById(R.id.addTeamButton);
-
-        faithLocalTeamsArray.clear();
-
-        faithLocalTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, faithLocalTeamsArray);
-        faithTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.faithLocalTeamNameAutoText);
-        faithTeamLocalNameAutoText.setThreshold(1);
-        faithTeamLocalNameAutoText.setAdapter(faithLocalTeam_adapter);
-
         AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
-        faithTeamLocalNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        faithTeamsArray.clear();
+
+        faithTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, faithTeamsArray);
+        faithTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.faithTeamNameAutoText);
+        faithTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.faithLocalTeamNameAutoText);
+        faithTeamNameAutoText.setThreshold(1);
+        faithTeamNameAutoText.setAdapter(faithTeam_adapter);
+
+        faithTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                addTeamButton.setVisibility(View.VISIBLE);
+                faithTeamLocalNameAutoText.setFocusableInTouchMode(true);
                 becomeVolunteerBtn.setVisibility(View.GONE);
+                faithSelected = "faithSelected";
 
-                faithLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) faithTeamLocalNameAutoText.getAdapter();
-                FaithGroupLocalID = faithLocalTeam_adapter.getItem(position).getTeamID();
-                FaithGroupID = faithLocalTeam_adapter.getItem(position).getParentTeamID();
-                Log.e("dsfdsfsd", "onItemClick: "+FaithGroupLocalID );
+
+                faithTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) faithTeamNameAutoText.getAdapter();
+                FaithGroupID = faithTeam_adapter.getItem(position).getTeamID();
                 Log.e("dsfdsfsd", "onItemClick: "+FaithGroupID );
 
+                new BackgroundTaskForAllFaithLocalTeams().execute();
+
+                faithLocalTeamsArray.clear();
+
+                faithLocalTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, faithLocalTeamsArray);
+//        faithTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.faithLocalTeamNameAutoText);
+                faithTeamLocalNameAutoText.setThreshold(1);
+                faithTeamLocalNameAutoText.setAdapter(faithLocalTeam_adapter);
+
+
+
+                faithTeamLocalNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+
+                        addTeamButton.setVisibility(View.VISIBLE);
+                        becomeVolunteerBtn.setVisibility(View.GONE);
+
+                        faithLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) faithTeamLocalNameAutoText.getAdapter();
+                        FaithGroupLocalID = faithLocalTeam_adapter.getItem(position).getTeamID();
+                        FaithGroupID = faithLocalTeam_adapter.getItem(position).getParentTeamID();
+                        Log.e("dsfdsfsd", "onItemClick: "+FaithGroupLocalID );
+                        Log.e("dsfdsfsd", "onItemClick: "+FaithGroupID );
+
+                    }
+                });
+                Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
+                faithTeamLocalNameAutoText.addTextChangedListener(
+                        new TextWatcher() {
+
+                            private Timer timer = new Timer();
+                            private final long DELAY = 2000; // Milliseconds
+
+                            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                timer.cancel();
+                                timer = new Timer();
+                                timer.schedule(
+                                        new TimerTask()
+                                        {
+                                            @Override
+                                            public void run() {
+                                                // TODO: Do what you need here (refresh list).
+                                                // You will probably need to use
+                                                // runOnUiThread(Runnable action) for some
+                                                // specific actions (e.g., manipulating views).
+
+                                                runOnUiThread(new Runnable() {
+                                                    public void run(){
+
+
+
+                                                        if(!TextUtils.isEmpty(faithTeamLocalNameAutoText.getText().toString())){
+
+                                                            String words = faithTeamLocalNameAutoText.getText().toString();
+
+
+                                                            int counter = 0;
+
+                                                            int count = 0;
+                                                            while(count < faithLocalTeamsArray.size())
+                                                            {
+                                                                if(faithLocalTeamsArray.get(count).getTeamName().equals(words)){
+
+                                                                    counter++;
+                                                                }
+//
+                                                                count++;
+
+                                                            }
+
+                                                            if(counter > 0){
+                                                                addTeamButton.setVisibility(View.VISIBLE);
+                                                                becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            }else{
+                                                                Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                                confirmBtn.setVisibility(View.GONE);
+                                                                addTeamButton.setVisibility(View.GONE);
+                                                                becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                            }
+
+
+                                                        }else if(TextUtils.isEmpty(faithTeamNameAutoText.getText().toString()) && TextUtils.isEmpty(faithTeamLocalNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }else if (faithSelected.equals("faithSelected") && TextUtils.isEmpty(faithTeamLocalNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }
+
+                                                    }   //closes run(){}
+                                                });
+
+
+                                            }
+                                        },
+                                        DELAY
+                                ); }
+                            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
+
+                            @Override
+                            public void afterTextChanged(final Editable s) {
+
+
+                            }
+                        }
+                );
+
+                addTeamButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(addTeamButton.getText().toString().equals("Add Team")){
+                            confirmBtn.setVisibility(View.VISIBLE);
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                                    String currentUserID = preferences.getString("CurrentUserId", "");
+
+                                    String method = "joinTeams";
+                                    String teamType = "FaithGroup";
+
+                                    BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                                    backgroundTask.execute(method,currentUserID, teamType, FaithGroupID, FaithGroupLocalID);
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
-        Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
-        faithTeamLocalNameAutoText.addTextChangedListener(
+
+        faithTeamNameAutoText.addTextChangedListener(
                 new TextWatcher() {
 
                     private Timer timer = new Timer();
@@ -2026,30 +2195,48 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
 
 
-                                                if(!TextUtils.isEmpty(faithTeamLocalNameAutoText.getText().toString())){
+                                                if(!TextUtils.isEmpty(faithTeamNameAutoText.getText().toString())){
 
-                                                    String words = faithTeamLocalNameAutoText.getText().toString();
+                                                    String words = faithTeamNameAutoText.getText().toString();
+
+                                                    int counter = 0;
+
 
                                                     int count = 0;
-                                                    while(count < faithLocalTeamsArray.size())
+                                                    while(count < faithTeamsArray.size())
                                                     {
-                                                        if(faithLocalTeamsArray.get(count).getTeamName().equals(words)){
-                                                            addTeamButton.setVisibility(View.VISIBLE);
-                                                            break;
-                                                        }else{
-                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-                                                            confirmBtn.setVisibility(View.GONE);
-                                                            addTeamButton.setVisibility(View.GONE);
-                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                        if(faithTeamsArray.get(count).getTeamName().equals(words)){
+                                                            counter++;
                                                         }
+//
                                                         count++;
 
+                                                    }
+
+
+                                                    if(counter > 0){
+                                                        Log.e("dfjsdfhsdf", "run: " );
+                                                    }else{
+                                                        Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_SHORT).show();
+                                                        confirmBtn.setVisibility(View.GONE);
+                                                        addTeamButton.setVisibility(View.GONE);
+                                                        becomeVolunteerBtn.setVisibility(View.VISIBLE);
+
+                                                        faithSelected = "faithUnSelected";
+                                                        faithLocalTeamsArray.clear();
+                                                        faithTeamLocalNameAutoText.setText("");
+                                                        faithTeamLocalNameAutoText.setFocusableInTouchMode(false);
                                                     }
 
                                                 }else{
                                                     becomeVolunteerBtn.setVisibility(View.GONE);
                                                     addTeamButton.setVisibility(View.GONE);
                                                     confirmBtn.setVisibility(View.GONE);
+
+                                                    faithSelected = "faithUnSelected";
+                                                    faithLocalTeamsArray.clear();
+                                                    faithTeamLocalNameAutoText.setText("");
+                                                    faithTeamLocalNameAutoText.setFocusableInTouchMode(false);
                                                 }
 
                                             }   //closes run(){}
@@ -2071,154 +2258,21 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     }
                 }
         );
-
-        addTeamButton.setOnClickListener(new View.OnClickListener() {
+        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(addTeamButton.getText().toString().equals("Add Team")){
-                    confirmBtn.setVisibility(View.VISIBLE);
-                    confirmBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
-                            String currentUserID = preferences.getString("CurrentUserId", "");
-
-                            String method = "joinTeams";
-                            String teamType = "FaithGroup";
-
-                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
-                            backgroundTask.execute(method,currentUserID, teamType, FaithGroupID, FaithGroupLocalID);
-                        }
-                    });
-                }
+                Intent intent = new Intent(JoinTeamsActivity.this,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                startActivity(intent);
             }
         });
-//        new BackgroundTaskForFaithGroup().execute();
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View dialogView = inflater.inflate(R.layout.alert_dialog_for_faith_selection,null);
-//        builder.setCancelable(true);
-//        builder.setView(dialogView);
-//
-//
-//        becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
-//
-//        faithTeamsArray.clear();
-//
-//        faithTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, faithTeamsArray);
-//        faithTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.faithTeamNameAutoText);
-//        faithTeamNameAutoText.setThreshold(1);
-//        faithTeamNameAutoText.setAdapter(faithTeam_adapter);
-//
-//        AlertDialog pickFileImage = builder.create();
-//        pickFileImage.show();
-//
-//
-//        faithTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-//
-//                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                becomeVolunteerBtn.getLayoutParams().width=500;
-//                becomeVolunteerBtn.setText("Confirmation");
-//
-//
-//                faithTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) faithTeamNameAutoText.getAdapter();
-//                FaithGroupID = faithTeam_adapter.getItem(position).getTeamID();
-//                Log.e("dsfdsfsd", "onItemClick: "+FaithGroupID );
-//
-//
-//            }
-//        });
-//
-//        faithTeamNameAutoText.addTextChangedListener(
-//                new TextWatcher() {
-//
-//                    private Timer timer = new Timer();
-//                    private final long DELAY = 2000; // Milliseconds
-//
-//                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                        timer.cancel();
-//                        timer = new Timer();
-//                        timer.schedule(
-//                                new TimerTask()
-//                                {
-//                                    @Override
-//                                    public void run() {
-//                                        // TODO: Do what you need here (refresh list).
-//                                        // You will probably need to use
-//                                        // runOnUiThread(Runnable action) for some
-//                                        // specific actions (e.g., manipulating views).
-//
-//                                        runOnUiThread(new Runnable() {
-//                                            public void run(){
-//
-//
-//
-//                                                if(!TextUtils.isEmpty(faithTeamNameAutoText.getText().toString())){
-//
-//                                                    String words = faithTeamNameAutoText.getText().toString();
-//
-//                                                    int count = 0;
-//                                                    while(count < faithTeamsArray.size())
-//                                                    {
-//                                                        if(faithTeamsArray.get(count).getTeamName().equals(words)){
-//                                                            becomeVolunteerBtn.getLayoutParams().width=500;
-//                                                            becomeVolunteerBtn.setText("Confirmation");
-//                                                            break;
-//                                                        }else{
-//                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-//                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-//                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Faith");
-//                                                        }
-//                                                        count++;
-//
-//                                                    }
-//
-//
-//
-//                                                }else{
-//                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
-//                                                }
-//
-//                                            }   //closes run(){}
-//                                        });
-//
-//
-//                                    }
-//                                },
-//                                DELAY
-//                        ); }
-//                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-//
-//
-//
-//                    @Override
-//                    public void afterTextChanged(final Editable s) {
-//
-//
-//                    }
-//                }
-//        );
-//
-//
-//
-//        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(becomeVolunteerBtn.getText().toString().equals("Confirmation")){
-//
-//                }
-//            }
-//        });
-
     }
 
     public void GymBrand(){
 
-        new BackgroundTaskForAllGymLocalTeams().execute();
+        new BackgroundTaskForGymBrand().execute();
+
+
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
@@ -2231,35 +2285,169 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
         confirmBtn = dialogView.findViewById(R.id.confirmTeamBtn);
         addTeamButton = dialogView.findViewById(R.id.addTeamButton);
 
-        gymBrandLocalTeamsArray.clear();
-
-        gymBrandLocalTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, gymBrandLocalTeamsArray);
-        gymBrandTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.gymLocalTeamNameAutoText);
-        gymBrandTeamLocalNameAutoText.setThreshold(1);
-        gymBrandTeamLocalNameAutoText.setAdapter(gymBrandLocalTeam_adapter);
-
         AlertDialog pickFileImage = builder.create();
         pickFileImage.show();
 
-        gymBrandTeamLocalNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gymBrandTeamsArray.clear();
+
+        gymBrandTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, gymBrandTeamsArray);
+        gymBrandTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.gymTeamNameAutoText);
+        gymBrandTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.gymLocalTeamNameAutoText);
+        gymBrandTeamNameAutoText.setThreshold(1);
+        gymBrandTeamNameAutoText.setAdapter(gymBrandTeam_adapter);
+
+        gymBrandTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
 
-                addTeamButton.setVisibility(View.VISIBLE);
+
+                gymBrandTeamLocalNameAutoText.setFocusableInTouchMode(true);
                 becomeVolunteerBtn.setVisibility(View.GONE);
+                gymSelected = "gymSelected";
 
 
-                gymBrandLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) gymBrandTeamLocalNameAutoText.getAdapter();
-                GymBrandLocalID = gymBrandLocalTeam_adapter.getItem(position).getTeamID();
-                GymBrandID = gymBrandLocalTeam_adapter.getItem(position).getParentTeamID();
-                Log.e("dsfdsfsd", "onItemClick: "+GymBrandLocalID );
+                gymBrandTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) gymBrandTeamNameAutoText.getAdapter();
+                GymBrandID = gymBrandTeam_adapter.getItem(position).getTeamID();
                 Log.e("dsfdsfsd", "onItemClick: "+GymBrandID );
 
+                new BackgroundTaskForAllGymLocalTeams().execute();
+
+                gymBrandLocalTeamsArray.clear();
+
+                gymBrandLocalTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, gymBrandLocalTeamsArray);
+//        gymBrandTeamLocalNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.gymLocalTeamNameAutoText);
+                gymBrandTeamLocalNameAutoText.setThreshold(1);
+                gymBrandTeamLocalNameAutoText.setAdapter(gymBrandLocalTeam_adapter);
+
+
+
+                gymBrandTeamLocalNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+
+                        addTeamButton.setVisibility(View.VISIBLE);
+                        becomeVolunteerBtn.setVisibility(View.GONE);
+
+
+                        gymBrandLocalTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) gymBrandTeamLocalNameAutoText.getAdapter();
+                        GymBrandLocalID = gymBrandLocalTeam_adapter.getItem(position).getTeamID();
+                        GymBrandID = gymBrandLocalTeam_adapter.getItem(position).getParentTeamID();
+                        Log.e("dsfdsfsd", "onItemClick: "+GymBrandLocalID );
+                        Log.e("dsfdsfsd", "onItemClick: "+GymBrandID );
+
+                    }
+                });
+
+                Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
+                gymBrandTeamLocalNameAutoText.addTextChangedListener(
+                        new TextWatcher() {
+
+                            private Timer timer = new Timer();
+                            private final long DELAY = 2000; // Milliseconds
+
+                            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                timer.cancel();
+                                timer = new Timer();
+                                timer.schedule(
+                                        new TimerTask()
+                                        {
+                                            @Override
+                                            public void run() {
+                                                // TODO: Do what you need here (refresh list).
+                                                // You will probably need to use
+                                                // runOnUiThread(Runnable action) for some
+                                                // specific actions (e.g., manipulating views).
+
+                                                runOnUiThread(new Runnable() {
+                                                    public void run(){
+
+
+
+                                                        if(!TextUtils.isEmpty(gymBrandTeamLocalNameAutoText.getText().toString())){
+
+                                                            String words = gymBrandTeamLocalNameAutoText.getText().toString();
+
+                                                            int counter = 0;
+
+                                                            int count = 0;
+                                                            while(count < gymBrandLocalTeamsArray.size())
+                                                            {
+                                                                if(gymBrandLocalTeamsArray.get(count).getTeamName().equals(words)){
+
+                                                                    counter++;
+                                                                }
+//
+                                                                count++;
+
+                                                            }
+
+                                                            if(counter > 0){
+                                                                addTeamButton.setVisibility(View.VISIBLE);
+                                                                becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            }else{
+                                                                Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
+                                                                confirmBtn.setVisibility(View.GONE);
+                                                                addTeamButton.setVisibility(View.GONE);
+                                                                becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                            }
+
+
+                                                        }else if(TextUtils.isEmpty(gymBrandTeamNameAutoText.getText().toString()) && TextUtils.isEmpty(gymBrandTeamLocalNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }else if (gymSelected.equals("gymSelected") && TextUtils.isEmpty(gymBrandTeamLocalNameAutoText.getText().toString())){
+                                                            becomeVolunteerBtn.setVisibility(View.GONE);
+                                                            addTeamButton.setVisibility(View.GONE);
+                                                            confirmBtn.setVisibility(View.GONE);
+                                                        }
+
+                                                    }   //closes run(){}
+                                                });
+
+
+                                            }
+                                        },
+                                        DELAY
+                                ); }
+                            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
+
+                            @Override
+                            public void afterTextChanged(final Editable s) {
+
+
+                            }
+                        }
+                );
+
+                addTeamButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(addTeamButton.getText().toString().equals("Add Team")){
+                            confirmBtn.setVisibility(View.VISIBLE);
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
+                                    String currentUserID = preferences.getString("CurrentUserId", "");
+
+                                    String method = "joinTeams";
+                                    String teamType = "GymBrand";
+
+                                    BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
+                                    backgroundTask.execute(method,currentUserID, teamType, GymBrandID, GymBrandLocalID);
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
 
-        Log.e("dsfdsf", "SelectHighSchool: "+highSchoolClassTeamsArray.toString());
-        gymBrandTeamLocalNameAutoText.addTextChangedListener(
+
+        gymBrandTeamNameAutoText.addTextChangedListener(
                 new TextWatcher() {
 
                     private Timer timer = new Timer();
@@ -2283,30 +2471,48 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
 
 
-                                                if(!TextUtils.isEmpty(gymBrandTeamLocalNameAutoText.getText().toString())){
+                                                if(!TextUtils.isEmpty(gymBrandTeamNameAutoText.getText().toString())){
 
-                                                    String words = gymBrandTeamLocalNameAutoText.getText().toString();
+                                                    String words = gymBrandTeamNameAutoText.getText().toString();
+
+                                                    int counter = 0;
+
 
                                                     int count = 0;
-                                                    while(count < gymBrandLocalTeamsArray.size())
+                                                    while(count < gymBrandTeamsArray.size())
                                                     {
-                                                        if(gymBrandLocalTeamsArray.get(count).getTeamName().equals(words)){
-                                                            addTeamButton.setVisibility(View.VISIBLE);
-                                                            break;
-                                                        }else{
-                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-                                                            confirmBtn.setVisibility(View.GONE);
-                                                            addTeamButton.setVisibility(View.GONE);
-                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
+                                                        if(gymBrandTeamsArray.get(count).getTeamName().equals(words)){
+                                                            counter++;
                                                         }
+//
                                                         count++;
 
+                                                    }
+
+
+                                                    if(counter > 0){
+                                                        Log.e("dfjsdfhsdf", "run: " );
+                                                    }else{
+                                                        Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_SHORT).show();
+                                                        confirmBtn.setVisibility(View.GONE);
+                                                        addTeamButton.setVisibility(View.GONE);
+                                                        becomeVolunteerBtn.setVisibility(View.VISIBLE);
+
+                                                        gymSelected = "gymUnSelected";
+                                                        gymBrandLocalTeamsArray.clear();
+                                                        gymBrandTeamLocalNameAutoText.setText("");
+                                                        gymBrandTeamLocalNameAutoText.setFocusableInTouchMode(false);
                                                     }
 
                                                 }else{
                                                     becomeVolunteerBtn.setVisibility(View.GONE);
                                                     addTeamButton.setVisibility(View.GONE);
                                                     confirmBtn.setVisibility(View.GONE);
+
+                                                    gymSelected = "gymUnSelected";
+                                                    gymBrandLocalTeamsArray.clear();
+                                                    gymBrandTeamLocalNameAutoText.setText("");
+                                                    gymBrandTeamLocalNameAutoText.setFocusableInTouchMode(false);
                                                 }
 
                                             }   //closes run(){}
@@ -2329,154 +2535,14 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 }
         );
 
-        addTeamButton.setOnClickListener(new View.OnClickListener() {
+        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(addTeamButton.getText().toString().equals("Add Team")){
-                    confirmBtn.setVisibility(View.VISIBLE);
-                    confirmBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JoinTeamsActivity.this);
-                            String currentUserID = preferences.getString("CurrentUserId", "");
-
-                            String method = "joinTeams";
-                            String teamType = "GymBrand";
-
-                            BackgroundTaskForJoinTeams backgroundTask = new BackgroundTaskForJoinTeams(JoinTeamsActivity.this);
-                            backgroundTask.execute(method,currentUserID, teamType, GymBrandID, GymBrandLocalID);
-                        }
-                    });
-                }
+                Intent intent = new Intent(JoinTeamsActivity.this,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                startActivity(intent);
             }
         });
-
-//        new BackgroundTaskForGymBrand().execute();
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View dialogView = inflater.inflate(R.layout.alert_dialog_for_gym_brand_selection,null);
-//        builder.setCancelable(true);
-//        builder.setView(dialogView);
-//
-//        becomeVolunteerBtn = dialogView.findViewById(R.id.becomeVolunteer);
-//
-//        gymBrandTeamsArray.clear();
-//
-//        gymBrandTeam_adapter = new ArrayAdapter<JoinNewTeamModel>(JoinTeamsActivity.this,android.R.layout.simple_list_item_1, gymBrandTeamsArray);
-//        gymBrandTeamNameAutoText = (AutoCompleteTextView) dialogView.findViewById(R.id.gymBrandTeamNameAutoText);
-//        gymBrandTeamNameAutoText.setThreshold(1);
-//        gymBrandTeamNameAutoText.setAdapter(gymBrandTeam_adapter);
-//
-//        AlertDialog pickFileImage = builder.create();
-//        pickFileImage.show();
-//
-//        gymBrandTeamNameAutoText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-//
-//                becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                becomeVolunteerBtn.getLayoutParams().width=500;
-//                becomeVolunteerBtn.setText("Confirmation");
-//
-//
-//                gymBrandTeam_adapter = (ArrayAdapter<JoinNewTeamModel>) gymBrandTeamNameAutoText.getAdapter();
-//                GymBrandID = gymBrandTeam_adapter.getItem(position).getTeamID();
-//                Log.e("dsfdsfsd", "onItemClick: "+GymBrandID );
-//
-//
-//            }
-//        });
-//
-//        gymBrandTeamNameAutoText.addTextChangedListener(
-//                new TextWatcher() {
-//
-//                    private Timer timer = new Timer();
-//                    private final long DELAY = 2000; // Milliseconds
-//
-//                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                        timer.cancel();
-//                        timer = new Timer();
-//                        timer.schedule(
-//                                new TimerTask()
-//                                {
-//                                    @Override
-//                                    public void run() {
-//                                        // TODO: Do what you need here (refresh list).
-//                                        // You will probably need to use
-//                                        // runOnUiThread(Runnable action) for some
-//                                        // specific actions (e.g., manipulating views).
-//
-//                                        runOnUiThread(new Runnable() {
-//                                            public void run(){
-//
-//
-//
-//                                                if(!TextUtils.isEmpty(gymBrandTeamNameAutoText.getText().toString())){
-//
-//                                                    String words = gymBrandTeamNameAutoText.getText().toString();
-//
-//                                                    int count = 0;
-//                                                    while(count < gymBrandTeamsArray.size())
-//                                                    {
-//                                                        if(gymBrandTeamsArray.get(count).getTeamName().equals(words)){
-//                                                            becomeVolunteerBtn.getLayoutParams().width=500;
-//                                                            becomeVolunteerBtn.setText("Confirmation");
-//                                                            break;
-//                                                        }else{
-//                                                            Toast.makeText(JoinTeamsActivity.this, "NOT LISTED - INVALID ENTRY", Toast.LENGTH_LONG).show();
-//                                                            becomeVolunteerBtn.setVisibility(View.VISIBLE);
-//                                                            becomeVolunteerBtn.getLayoutParams().width=1200;
-//                                                            becomeVolunteerBtn.setText("Become a CrossComp Volunteer to create a Team for your Gym Brand");
-//                                                        }
-//                                                        count++;
-//
-//                                                    }
-//
-//
-//
-//                                                }else{
-//                                                    becomeVolunteerBtn.setVisibility(View.INVISIBLE);
-//                                                }
-//
-//                                            }   //closes run(){}
-//                                        });
-//
-//
-//                                    }
-//                                },
-//                                DELAY
-//                        ); }
-//                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-//
-//
-//
-//                    @Override
-//                    public void afterTextChanged(final Editable s) {
-//
-//
-//                    }
-//                }
-//        );
-//
-//
-//        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(becomeVolunteerBtn.getText().toString().equals("Confirmation")){
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(JoinTeamsActivity.this);
-//                    LayoutInflater inflater = getLayoutInflater();
-//                    View dialogView = inflater.inflate(R.layout.alert_dialog_for_gym_subclass,null);
-//                    builder.setCancelable(true);
-//                    builder.setView(dialogView);
-//
-//                    AlertDialog pickFileImage = builder.create();
-//                    pickFileImage.show();
-//                }
-//            }
-//        });
-//
-
     }
 
     public void FriendFamily(){
@@ -2615,6 +2681,14 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             }
         });
 
+        becomeVolunteerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JoinTeamsActivity.this,Dashboard.class);
+                intent.putExtra("fragmentNumber",1); //for example
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -3669,6 +3743,7 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
 
         @Override
         protected String doInBackground(String... strings) {
+            Log.e("jkskhsd", "doInBackground: " );
 
             try {
                 URL url = new URL(json_url);
@@ -3681,7 +3756,9 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String data = URLEncoder.encode("highSchoolID","UTF-8") + "=" + URLEncoder.encode("HighSchoolTeamID","UTF-8");
+                Log.e("djdjsdkkjds", "doInBackground: "+HighSchoolTeamID );
+
+                String data = URLEncoder.encode("highSchoolID","UTF-8") + "=" + URLEncoder.encode(HighSchoolTeamID,"UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -3732,41 +3809,41 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
 
 
-            try {
+            if(json_string != null) {
 
-                jsonObject = new JSONObject(json_string);
-                jsonArray = jsonObject.getJSONArray("All_HighSchoolClass_Teams");
-
-
-                int count = 0;
-                String teamId,parentTeamUD,teamName;
-                while(count < jsonArray.length())
-                {
-                    JSONObject JO = jsonArray.getJSONObject(count);
-                    teamId = JO.getString("HS_SubClassID");
-                    parentTeamUD = JO.getString("HighSchoolID");
-                    teamName = JO.getString("HS_SubClassName");
-
-                    Log.e("dsfsfdsf", "onPostExecute: "+teamId);
-                    Log.e("dsfsfdsf", "onPostExecute: "+teamName);
+                try {
+                    highSchoolClassTeamsArray.clear();
+                    jsonObject = new JSONObject(json_string);
+                    jsonArray = jsonObject.getJSONArray("All_HighSchoolClass_Teams");
 
 
-                    JoinNewTeamModel model = new JoinNewTeamModel();
-                    model.setTeamCategory("SubClass");
-                    model.setParentTeamID(parentTeamUD);
-                    model.setTeamID(teamId);
-                    model.setTeamName(teamName);
-                    highSchoolClassTeamsArray.add(model);
-                    count++;
+                    int count = 0;
+                    String teamId, parentTeamUD, teamName;
+                    while (count < jsonArray.length()) {
+                        JSONObject JO = jsonArray.getJSONObject(count);
+                        teamId = JO.getString("HS_SubClassID");
+                        parentTeamUD = JO.getString("HighSchoolID");
+                        teamName = JO.getString("HS_SubClassName");
 
+                        Log.e("dsfsfdsf", "onPostExecute: " + teamId);
+                        Log.e("dsfsfdsf", "onPostExecute: " + teamName);
+
+
+                        JoinNewTeamModel model = new JoinNewTeamModel();
+                        model.setTeamCategory("SubClass");
+                        model.setParentTeamID(parentTeamUD);
+                        model.setTeamID(teamId);
+                        model.setTeamName(teamName);
+                        highSchoolClassTeamsArray.add(model);
+                        count++;
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-
         }
     }
 
@@ -3788,7 +3865,7 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String data = URLEncoder.encode("highSchoolID","UTF-8") + "=" + URLEncoder.encode("HighSchoolTeamID","UTF-8");
+                String data = URLEncoder.encode("collegeUniversityID","UTF-8") + "=" + URLEncoder.encode(CollegeTeamID,"UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -3839,41 +3916,41 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
             Log.e("bcjknjkksdjc ", "onCreate: "+json_string );
 
 
-            try {
+            if(json_string != null) {
 
-                jsonObject = new JSONObject(json_string);
-                jsonArray = jsonObject.getJSONArray("All_CollegeUniversityClass_Teams");
+                try {
 
-
-                int count = 0;
-                String teamId,parentTeamUD,teamName;
-                while(count < jsonArray.length())
-                {
-                    JSONObject JO = jsonArray.getJSONObject(count);
-                    teamId = JO.getString("CU_SubClassID");
-                    parentTeamUD = JO.getString("CollegeUniversityID");
-                    teamName = JO.getString("CU_SubClassName");
-
-                    Log.e("dsfsfdsf", "onPostExecute: "+teamId);
-                    Log.e("dsfsfdsf", "onPostExecute: "+teamName);
+                    jsonObject = new JSONObject(json_string);
+                    jsonArray = jsonObject.getJSONArray("All_CollegeUniversityClass_Teams");
 
 
-                    JoinNewTeamModel model = new JoinNewTeamModel();
-                    model.setTeamCategory("SubClass");
-                    model.setParentTeamID(parentTeamUD);
-                    model.setTeamID(teamId);
-                    model.setTeamName(teamName);
-                    collegeUniversityClassTeamsArray.add(model);
-                    count++;
+                    int count = 0;
+                    String teamId, parentTeamUD, teamName;
+                    while (count < jsonArray.length()) {
+                        JSONObject JO = jsonArray.getJSONObject(count);
+                        teamId = JO.getString("CU_SubClassID");
+                        parentTeamUD = JO.getString("CollegeUniversityID");
+                        teamName = JO.getString("CU_SubClassName");
 
+                        Log.e("dsfsfdsf", "onPostExecute: " + teamId);
+                        Log.e("dsfsfdsf", "onPostExecute: " + teamName);
+
+
+                        JoinNewTeamModel model = new JoinNewTeamModel();
+                        model.setTeamCategory("SubClass");
+                        model.setParentTeamID(parentTeamUD);
+                        model.setTeamID(teamId);
+                        model.setTeamName(teamName);
+                        collegeUniversityClassTeamsArray.add(model);
+                        count++;
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-
         }
     }
 
@@ -3895,7 +3972,7 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String data = URLEncoder.encode("highSchoolID","UTF-8") + "=" + URLEncoder.encode("HighSchoolTeamID","UTF-8");
+                String data = URLEncoder.encode("professionalSchoolID","UTF-8") + "=" + URLEncoder.encode(ProfessionalSchoolID,"UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -4002,7 +4079,7 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String data = URLEncoder.encode("highSchoolID","UTF-8") + "=" + URLEncoder.encode("HighSchoolTeamID","UTF-8");
+                String data = URLEncoder.encode("militaryID","UTF-8") + "=" + URLEncoder.encode(MilitaryBranchID,"UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -4109,7 +4186,7 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String data = URLEncoder.encode("highSchoolID","UTF-8") + "=" + URLEncoder.encode("HighSchoolTeamID","UTF-8");
+                String data = URLEncoder.encode("occupationID","UTF-8") + "=" + URLEncoder.encode(OccupationID,"UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -4216,7 +4293,7 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String data = URLEncoder.encode("highSchoolID","UTF-8") + "=" + URLEncoder.encode("HighSchoolTeamID","UTF-8");
+                String data = URLEncoder.encode("companyID","UTF-8") + "=" + URLEncoder.encode(CompanyID,"UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -4323,7 +4400,7 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String data = URLEncoder.encode("highSchoolID","UTF-8") + "=" + URLEncoder.encode("HighSchoolTeamID","UTF-8");
+                String data = URLEncoder.encode("faithGroupID","UTF-8") + "=" + URLEncoder.encode(FaithGroupID,"UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -4430,7 +4507,7 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String data = URLEncoder.encode("highSchoolID","UTF-8") + "=" + URLEncoder.encode("HighSchoolTeamID","UTF-8");
+                String data = URLEncoder.encode("gymBrandID","UTF-8") + "=" + URLEncoder.encode(GymBrandID,"UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -4604,7 +4681,8 @@ public class JoinTeamsActivity extends AppCompatActivity implements InterfaceFor
                     State_ID = JO.getString("State_ID");
                     City_ID = JO.getString("City_ID");
                     Postal_Code_ID = JO.getString("Postal_Code_ID");
-                    CommunityTeam_Name = JO.getString("CommunityTeam_Name");
+//                    CommunityTeam_Name = JO.getString("CommunityTeam_Name");
+                    CommunityTeam_Name = JO.getString("PostalCode");
 
 
                     Log.e("fdsgsdfg", "onPostExecute: "+Country_ID );
