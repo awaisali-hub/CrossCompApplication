@@ -46,6 +46,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
+            app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+            app:boxCornerRadiusTopStart="@dimen/_18sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+            app:endIconMode="clear_text"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp"
             android:layout_marginTop="@dimen/_10sdp">
@@ -53,7 +58,7 @@
                 android:id="@+id/highSchoolTeamNameAutoText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
+
                 android:hint="High School"
                 android:paddingStart="30dp"
                 android:inputType="textCapSentences"
@@ -68,6 +73,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
+            app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+            app:boxCornerRadiusTopStart="@dimen/_18sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+            app:endIconMode="clear_text"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp"
             android:layout_marginTop="@dimen/_10sdp">
@@ -76,7 +86,7 @@
                 android:id="@+id/highSchoolClassTeamNameAutoText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
+
                 android:hint="High School Class"
                 android:paddingStart="30dp"
                 android:inputType="textCapSentences"

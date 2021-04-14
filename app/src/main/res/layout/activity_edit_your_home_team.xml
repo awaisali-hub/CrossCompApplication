@@ -29,9 +29,6 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-
-
     <LinearLayout
         android:layout_below="@+id/appbar_layout"
         android:layout_width="match_parent"
@@ -57,6 +54,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
+            app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+            app:boxCornerRadiusTopStart="@dimen/_18sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+            app:endIconMode="clear_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
@@ -65,7 +67,7 @@
                 android:textColorHint="#e0e0e0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
+
                 android:text="BreckenFit"
                 android:textStyle="bold"
                 android:textSize="18sp"
@@ -123,6 +125,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
+            app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+            app:boxCornerRadiusTopStart="@dimen/_18sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+            app:endIconMode="clear_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
@@ -130,7 +137,7 @@
                 android:textColorHint="#e0e0e0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
+
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textAlignment="center"
@@ -161,8 +168,6 @@
 
 
     </LinearLayout>
-
-
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginTop="@dimen/_7sdp"
         android:id="@+id/MoveToScore"

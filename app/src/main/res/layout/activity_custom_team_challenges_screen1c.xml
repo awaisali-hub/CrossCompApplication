@@ -84,12 +84,17 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="50dp"
+                app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+                app:boxCornerRadiusTopStart="@dimen/_18sdp"
+                app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+                app:endIconMode="clear_text"
                 android:layout_marginBottom="3dp"
                 android:layout_marginRight="@dimen/_5sdp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edittext"
+
                     android:hint="Start Age"
                     android:textAlignment="center"
                     android:inputType="textCapSentences"
@@ -103,13 +108,18 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="50dp"
+                app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+                app:boxCornerRadiusTopStart="@dimen/_18sdp"
+                app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+                app:endIconMode="clear_text"
                 android:layout_marginBottom="3dp"
                 android:layout_marginLeft="@dimen/_5sdp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/firstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edittext"
+
                     android:hint="Stop Age"
                     android:textAlignment="center"
                     android:inputType="textCapSentences"

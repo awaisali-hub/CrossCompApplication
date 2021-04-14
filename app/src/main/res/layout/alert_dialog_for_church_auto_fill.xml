@@ -20,6 +20,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+            app:boxCornerRadiusTopStart="@dimen/_18sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+            app:endIconMode="clear_text"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
@@ -28,7 +33,7 @@
                 android:id="@+id/My_Faith_Team_team_church"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
+
                 android:hint="My Faith Team"
                 android:paddingStart="30dp"
                 android:inputType="textCapSentences"
@@ -42,6 +47,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+            app:boxCornerRadiusTopStart="@dimen/_18sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+            app:endIconMode="clear_text"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
@@ -49,7 +59,7 @@
                 android:id="@+id/MyDivisionTeam_church"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
+
                 android:hint="My Division Team"
                 android:paddingStart="30dp"
                 android:inputType="textCapSentences"
@@ -61,6 +71,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+            app:boxCornerRadiusTopStart="@dimen/_18sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+            app:endIconMode="clear_text"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
@@ -68,7 +83,7 @@
                 android:id="@+id/MyUnionTeam_church"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
+
                 android:hint="My Union Team"
                 android:paddingStart="30dp"
                 android:inputType="textCapSentences"
@@ -80,6 +95,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+            app:boxCornerRadiusTopStart="@dimen/_18sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+            app:endIconMode="clear_text"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp">
@@ -87,7 +107,7 @@
                 android:id="@+id/MyConferenceTeam_church"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
+
                 android:hint="My Conference Team"
                 android:paddingStart="30dp"
                 android:inputType="textCapSentences"

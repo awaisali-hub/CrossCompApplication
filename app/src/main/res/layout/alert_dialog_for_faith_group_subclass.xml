@@ -43,22 +43,28 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+            app:boxCornerRadiusTopStart="@dimen/_18sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+            app:endIconMode="clear_text"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp"
             android:layout_marginTop="@dimen/_10sdp">
+
             <AutoCompleteTextView
                 android:id="@+id/faithTeamNameAutoText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
+                android:layout_height="50dp"
+
                 android:hint="Faith Group"
-                android:paddingStart="30dp"
                 android:inputType="textCapSentences"
                 android:padding="15dp"
+                android:paddingStart="30dp"
 
                 android:textColorHint="@color/white"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -66,6 +72,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            app:boxCornerRadiusTopEnd="@dimen/_18sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_18sdp"
+            app:boxCornerRadiusTopStart="@dimen/_18sdp"
+            app:boxCornerRadiusBottomEnd="@dimen/_18sdp"
+            app:endIconMode="clear_text"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="3dp"
@@ -74,7 +85,7 @@
                 android:id="@+id/faithLocalTeamNameAutoText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
+
                 android:hint="Local Faith Group"
                 android:paddingStart="30dp"
                 android:inputType="textCapSentences"
