@@ -33,6 +33,7 @@ public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
 
     //Constructor
     public JavaMailAPI(Context mContext, String mEmail, String mSubject, String mMessage) {
+        Toast.makeText( mContext, "ffsdfs", Toast.LENGTH_SHORT ).show();
         this.mContext = mContext;
         this.mEmail = mEmail;
         this.mSubject = mSubject;
